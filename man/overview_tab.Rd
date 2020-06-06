@@ -2,7 +2,7 @@
 % Please edit documentation in R/overview_tab.R
 \name{overview_tab}
 \alias{overview_tab}
-\title{Gives you a nice overview table for time and scope conditions}
+\title{overview_tab}
 \usage{
 overview_tab(dat, id, time)
 }
@@ -17,7 +17,7 @@ overview_tab(dat, id, time)
 A data frame that contains a summary of your sample and that can be easily converted to a LaTeX output
 }
 \description{
-Gives you a nice overview table for time and scope conditions
+This function gives you a nice overview table for time and scope conditions
 }
 \examples{
 overview_tab(dat = dataset, id = country_code, time = year)

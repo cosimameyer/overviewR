@@ -1,9 +1,11 @@
-#
+# #
 # tab <- function(obj, type, timeframe){
 #   colnames(obj) <- c(type, timeframe)
 #   table <- flextable::flextable(obj)
 #   return(table)
 # }
+#
+# function(dat, cond1true = "Above female XX", cond1false = "Below", cond2true = "")
 #
 # tab(obj, type = "Country", timeframe="Years")
 # print.table <-  function(obj, type, timeframe, caption) {

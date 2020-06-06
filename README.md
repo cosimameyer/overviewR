@@ -1,29 +1,25 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # overviewR <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
+
+[![Travis build
+status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
 <!-- badges: end -->
 
-The goal of overviewR makes it easy to get an overview of your data by displaying your sample information. At the moment, you have two functions (```overview_tab``` and ```overview_crosstab```) that allow you to generate  a tabular overview of your general sample and conditional sample. ```overview_print``` then converts this output to nicely usable tex code.
+The goal of overviewR makes it easy to get an overview of your data by
+displaying your sample information. At the moment, you have two
+functions (`overview_tab` and `overview_crosstab`) that allow you to
+generate a tabular overview of your general sample and conditional
+sample. `overview_print` then converts this output to nicely usable tex
+code.
 
 ## Installation
 
-You can install the released version of overviewR from [github](https://github.com/cosimameyer/overviewR) with: 
+You can install the released version of overviewR from
+[github](https://github.com/cosimameyer/overviewR) with:
 
 ``` r
 library(devtools)
@@ -40,7 +36,7 @@ install.packages("overviewR")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example, eval=FALSE}
+``` r
 # Generate some data
 countries <-
   c(rep("RWA", 4), rep("AGO", 8), rep("BEN", 2), rep("UK", 5)) # This vector is consists of characters
@@ -58,28 +54,35 @@ df_combined <-
   data.frame(countries, years, gdp, population, stringsAsFactors = FALSE)
 ```
 
-Let's have a first look at the data:
-```{r, eval=FALSE}
+Let’s have a first look at the data:
+
+``` r
 head(df_combined)
 ```
 
 Load the package
-```{r}
+
+``` r
 library(overviewR)
 ```
 
-### ```overview_tab```
-Generate some general overview using ```overview_tab```.
-```{r, eval=FALSE}
+### `overview_tab`
+
+Generate some general overview using `overview_tab`.
+
+``` r
 overview_tab(dat = df_combined, id = countries, time = years)
 ```
 
-This function automatically generates an object and stores it in your environment so that you can access it later.
+This function automatically generates an object and stores it in your
+environment so that you can access it later.
 
-### ```overview_crosstab```
-If you want to generate a cross table that divides our data conditionally on two factors, this can be done with ```overview_crosstab```. 
+### `overview_crosstab`
 
-```{r, eval=FALSE}
+If you want to generate a cross table that divides our data
+conditionally on two factors, this can be done with `overview_crosstab`.
+
+``` r
 overview_crosstab(
     dat = df_combined,
     cond1 = gdp,
@@ -91,30 +94,34 @@ overview_crosstab(
   )
 ```
 
-The resulting data frame is again stored as an object in your environment so that you can access it later.
+The resulting data frame is again stored as an object in your
+environment so that you can access it later.
 
-### ```overview_print```
+### `overview_print`
 
-To generate an easily usable \LaTeX output, ```overviewR``` offers the function ```overview_print```. 
-
-```{r}
-
-```
+To generate an easily usable output, `overviewR` offers the function
+`overview_print`.
 
 <!--
 What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
+
+```r
 summary(cars)
+#>      speed           dist       
+#>  Min.   : 4.0   Min.   :  2.00  
+#>  1st Qu.:12.0   1st Qu.: 26.00  
+#>  Median :15.0   Median : 36.00  
+#>  Mean   :15.4   Mean   : 42.98  
+#>  3rd Qu.:19.0   3rd Qu.: 56.00  
+#>  Max.   :25.0   Max.   :120.00
 ```
 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
 
 You can also embed plots, for example:
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
+<img src="man/figures/README-pressure-1.png" width="100%" />
 
 In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
 -->
