@@ -46,10 +46,10 @@ overview_print <-
             colnames(obj[, 1]),
             " & ",
             colnames(obj[, 2]),
-            " \\",
+            " \\\\ ",
             "\\hline \n"
           )
-        out <- paste0(obj[, 1], " & ", obj[, 2], " \\", "\\\\")
+        out <- paste0(obj[, 1], " & ", obj[, 2], " \\\\")
         end_tab <-
           paste0("\\hline \n \\end{tabular} \n \\end{table} \n")
         output <- cat(begin_tab, out, end_tab)

@@ -102,6 +102,13 @@ Generate some general overview using `overview_tab`.
 output_table <- overview_tab(dat = df_combined, id = countries, time = years)
 ```
 
+    countries   time_frame
+    RWA         1990 - 1993
+    AGO         1994 - 1995, 1990 - 1992, 1996 - 1997
+    BEN         1998 - 1999
+    GBR         1991, 1993, 1995, 1997, 1999
+    FRA         1993, 1996, 1999
+
 We store the output in the object `output_table` to access it later.
 <!-- This function automatically generates an object and stores it in your environment so that you can access it later. -->
 
@@ -122,6 +129,9 @@ output_crosstab <- overview_crosstab(
   )
 ```
 
+``` 
+```
+
 We also store the output in the object, this time in `output_crosstab`,
 to access it later.
 
@@ -139,12 +149,46 @@ We will start with our general sample overview, stored in
 overview_print(obj = output_table)
 ```
 
+<details>
+
+<summary>TeX output</summary>
+
+    % Overview table generated in R version 3.6.3 (2020-02-29) using overviewR 
+     \begin{table}[ht] 
+     \centering 
+     \caption{Time and scope of the sample} 
+     \begin{tabular}{ll} 
+     \hline 
+     &  \\ \hline 
+     RWA & 1990 - 1993 \\ AGO & 1994 - 1995, 1990 - 1992, 1996 - 1997 \\ BEN & 1998 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
+     \end{tabular} 
+     \end{table} 
+
+</details>
+
 The default already gives us a nice title (“Time and scope of the
 sample”) but can be modified in the argument `title = ...`.
 
 ``` r
 overview_print(obj = output_table, title = "Cool new title for our awesome table")
 ```
+
+<details>
+
+<summary>TeX output</summary>
+
+    % Overview table generated in R version 3.6.3 (2020-02-29) using overviewR 
+     \begin{table}[ht] 
+     \centering 
+     \caption{Cool new title for our awesome table} 
+     \begin{tabular}{ll} 
+     \hline 
+     &  \\ \hline 
+     RWA & 1990 - 1993 \\ AGO & 1994 - 1995, 1990 - 1992, 1996 - 1997 \\ BEN & 1998 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
+     \end{tabular} 
+     \end{table} 
+
+</details>
 
 The same function also text formatted cross tables, using the argument
 `crosstab = TRUE`. We will do this by using the object `output_crosstab`
@@ -161,6 +205,27 @@ overview_print(
   cond2 = "Population"
 )
 ```
+
+<details>
+
+<summary>TeX output</summary>
+
+    % Overview table generated in R version 3.6.3 (2020-02-29) using overviewR 
+     % Please add the following required packages to your document preamble: 
+     % \usepackage{multirow} 
+     % \usepackage{tabularx} 
+     % \newcolumntype{b}{X} 
+     % \newcolumntype{s}{>{\hsize=.5\hsize}X} 
+     
+     \begin{table}[] 
+     \begin{tabularx}{\textwidth}{ssbb} 
+     \hline & & 
+     \multicolumn{2}{c}{\textbf{GDP}} \\  & & \textbf{Fulfilled} & 
+     \textbf{Not fulfilled} \\ \hline \\ \multirow{2}{*}{\textbf{Population}} & \textbf{Fulfilled} & 
+     RWA (1990 - 1991), AGO (1990), GBR (1993, 1997), FRA (1996) & AGO (1994, 1991 - 1992), GBR (1991), FRA (1993, 1999)\\  \\ \hline \\ & \textbf{Not fulfilled} &  RWA (1992 - 1993), AGO (1996), GBR (1999) & AGO (1995, 1997), BEN (1998 - 1999), GBR (1995)\\  \hline \\ \end{tabularx} 
+     \end{table} 
+
+</details>
 
 With `save_out = TRUE` you can also export both outputs as .tex files
 and store them on your device.
