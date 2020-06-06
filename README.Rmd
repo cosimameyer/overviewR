@@ -40,7 +40,7 @@ install.packages("overviewR")
 
 Before we delve into the functions, we need some data to showcase the magic that ```overviewR``` can perform. We have 19 observations for 4 countries (Rwanda, Angola, Benin, and UK) stored in the ```countries``` variable, over a time period between 1990 to 1999 (```years```). As you can tell, we have some gaps in the time frame. We also add randomly generated values for the GDP (```gdp```) and the population size (```population```).
 
-```{r example, eval=FALSE}
+```{r example}
 # Generate some data
 # Set a seed to make it reproducable
 set.seed(68163)
@@ -70,7 +70,7 @@ df_combined <-
 ```
 
 Let's have a first look at the data:
-```{r, eval=FALSE}
+```{r}
 head(df_combined)
 ```
 
