@@ -13,9 +13,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# overviewR
+# overviewR <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
 <!-- badges: end -->
 
 The goal of overviewR is to ...
@@ -33,7 +34,7 @@ install.packages("overviewR")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(overviewR)
+# library(overviewR)
 ## basic example code
 ```
 
