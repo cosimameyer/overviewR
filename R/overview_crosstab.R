@@ -47,7 +47,7 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
 
   quart1_1 <- overview_tab(quart1, !!id, !!time)
   quart1_1 <- as.data.frame(quart1_1)
-  part1 <- paste(paste0(quart1_1[,1], " (", as.character(quart1_1[,2]), ")"), collapse=",")
+  part1 <- paste(paste0(quart1_1[,1], " (", as.character(quart1_1[,2]), ")"), collapse=", ")
 
   quart2_1 <- overview_tab(quart2, !!id, !!time)
   quart2_1 <- as.data.frame(quart2_1)

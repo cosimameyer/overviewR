@@ -37,7 +37,6 @@
 # overview_print(test, title = "best table ever")
 # test3 <- test2[1:2,]
 # overview_print(test3)
-
 overview_print <-
   function(dat,
            title = "Time and scope of the sample",
@@ -85,12 +84,12 @@ overview_print <-
           "% Overview table generated in ",
           version[['version.string']],
           " using overviewR \n % Please add the following required packages to your document preamble: \n % \\usepackage{multirow} % \\usepackage{tabularx} \n
-% \\newcolumntype{b}{X} \n
-% \\newcolumntype{s}{>{\hsize=.5\hsize}X} \n \\begin{table}[] \n \\begin{tabularx}{\textwidth}{ssbb} \n \\hline & & \n \\multicolumn{2}{c}{\textbf{",
+% \\newcolumntype{b}{X} \n % \\newcolumntype{s}{>{\\hsize=.5\\hsize}X} \n \\begin{table}[] \n \\begin{tabularx}{\\textwidth}{ssbb} \n \\hline & & \n \\multicolumn{2}{c}{\\textbf{",
           cond1,
-          "}} \\\n & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled}",
+          "}}",
+          "\\\n & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled}",
           "\\\n",
-          "\hline \n \\multirow{2}{*}{\\textbf{",
+          "\\hline \n \\multirow{2}{*}{\\textbf{",
           cond2,
           "}} & \\textbf{Fulfilled} & \n"
         )
@@ -122,7 +121,6 @@ overview_print <-
       }
     }
   }
-
 
 
 
