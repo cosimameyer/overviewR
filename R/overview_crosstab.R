@@ -10,7 +10,9 @@
 #' @param time Your time (e.g., time periods given by years, months, ...)
 #' @return A data frame that contains a summary of your sample and that can be easily converted to a LaTeX output
 #' @examples
+#' \dontrun{
 #' overview_crosstab(dat = dataset, cond1 = var1, cond2 = var2, threshold1 = 50, threshold2 = 70, id = country_code, time = year)
+#' }
 
 
 overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, time){

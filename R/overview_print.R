@@ -10,8 +10,10 @@
 #' @param save_out This is an optional argument that exports your table as .tex file, default is FALSE
 #' @return A LaTeX output that you can copy and paste in your text document
 #' @examples
+#' \dontrun{
 #' overview_print(obj = overview_object, title = "Some nice title", crosstab = FALSE)
 #' overview_print(obj = overview_ct_object, title = "Some nice title for a cross tab", crosstab = TRUE, cond1 = "Name of first condition", cond2 = "Name of second condition")
+#' }
 
 overview_print <-
   function(obj,

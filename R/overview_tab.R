@@ -7,7 +7,9 @@
 #' @param time Your time (e.g., time periods given by years, months, ...)
 #' @return A data frame that contains a summary of your sample and that can be later easily converted to a LaTeX output
 #' @examples
+#' \dontrun{
 #' overview_tab(dat = dataset, id = country_code, time = year)
+#' }
 
 overview_tab <- function(dat, id, time) {
   # # Generate some error messages
