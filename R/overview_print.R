@@ -1,5 +1,3 @@
-library(tidyverse)
-
 # test <- overview_tab(final_prepared, ccode, year)
 # test2 <- as.matrix(test)
 #
@@ -54,13 +52,14 @@ overview_print <-
           "Data frame requires two columns that represent the time and scope dimension of the data"
         )
       }
+
+
+    if (crosstab == FALSE) {
       if (nrow(dat) == 2) {
         warning(
           "Are you sure you want a table for time and scope conditions? For a crosstab, set option crosstab = TRUE"
         )
       }
-
-    if (crosstab == TRUE) {
       for (i in length(dat)) {
         begin_tab <-
           paste0(
@@ -79,7 +78,7 @@ overview_print <-
         cat(begin_tab, out, end_tab)
       }
     }
-    if (crosstab == FALSE) {
+    if (crosstab == TRUE) {
       for (i in length(dat)) {
         begin_crosstab <- paste0("% Overview table generated in ",
           version[['version.string']],

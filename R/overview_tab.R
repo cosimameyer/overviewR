@@ -10,10 +10,10 @@
 #' overview_tab(dat = dataset, id = country_code, time = year)
 
 overview_tab <- function(dat, id, time) {
-  # Generate some error messages
-  if (is.null(dat)) stop('overview_tab requires a data frame')
-  if (is.null(id)) stop('overview_tab requires a scope condition (e.g., countries)')
-  if (is.null(time)) stop('overview_tab requires a time frame (e.g., a year variable)')
+  # # Generate some error messages
+  # if (is.null(dat)) stop('overview_tab requires a data frame')
+  # if (is.null(id)) stop('overview_tab requires a scope condition (e.g., countries)')
+  # if (is.null(time)) stop('overview_tab requires a time frame (e.g., a year variable)')
 
   # Check for consecutive numbers and collapse them with -
   # From here: https://stackoverflow.com/questions/16911773/collapse-runs-of-consecutive-numbers-to-ranges  findIntRuns <- function(run){
