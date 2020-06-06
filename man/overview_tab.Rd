@@ -20,5 +20,7 @@ A data frame that contains a summary of your sample and that can be later easily
 This function gives you a nice overview table for time and scope conditions
 }
 \examples{
+\dontrun{
 overview_tab(dat = dataset, id = country_code, time = year)
+}
 }

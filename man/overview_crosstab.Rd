@@ -28,5 +28,7 @@ A data frame that contains a summary of your sample and that can be easily conve
 This function allows you sort your sample conditionally in a nice cross table. This can be helpful if you want to get a first sense of your data before digging deeper.
 }
 \examples{
+\dontrun{
 overview_crosstab(dat = dataset, cond1 = var1, cond2 = var2, threshold1 = 50, threshold2 = 70, id = country_code, time = year)
+}
 }
