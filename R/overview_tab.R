@@ -34,11 +34,11 @@ overview_tab <- function(dat, id, time) {
   time <- dplyr::enquo(time)
 
   # Apply it to the data
-  obj <- dat %>%
+  tab <- dat %>%
     # Select important variables
     dplyr::select(!!id,!!time) %>%
     # # Group data
-    # dplyr::group_by(!!id,!!time) %>%
+    dplyr::group_by(!!id,!!time) %>%
     # Only get distinct IDs
     dplyr::distinct(!!id) %>%
     # Group by ID
@@ -48,6 +48,6 @@ overview_tab <- function(dat, id, time) {
     # Subset it to only one distint country
     dplyr::distinct(!!id, time_frame)
 
-  # Return obj
-  return(obj)
+  # Return object
+  return(tab)
 }

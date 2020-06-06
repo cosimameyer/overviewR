@@ -23,7 +23,6 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
   if (is.null(threshold1) | !is.numeric(threshold1)) stop('overview_crosstab requires a threshold (numeric)')
   if (is.null(threshold2) | !is.numeric(threshold2)) stop('overview_crosstab requires a threshold (numeric)')
 
-
   id <- dplyr::enquo(id)
   time <- dplyr::enquo(time)
   cond1 <- dplyr::enquo(cond1)
@@ -62,9 +61,9 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
   part4 <<- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
 
   # Bring it back in a data frame structure to make it easily convertible to a table
-  dat1 <- cbind("Cond1 fulfilled" = part1, "Cond1 not fulfilled" = part2)
+  dat1 <- cbind(part1, part2) #cbind("Cond1 fulfilled" = part1, "Cond1 not fulfilled" = part2)
   dat2 <- cbind(part3, part4)
-  crosstab <<- data.frame(rbind(dat1, dat2), row.names = c("Cond2 fulfilled", "Cond2 not fulfilled"))
+  crosstab <- data.frame(rbind(dat1, dat2)) #, row.names = c("Cond2 fulfilled", "Cond2 not fulfilled"))
 
   return(crosstab)
   # colnames(dat) <- c("Cond1 fulfilled", "Cond1 not fulfilled")
