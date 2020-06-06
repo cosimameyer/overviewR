@@ -87,9 +87,9 @@ overview_print <-
 % \\newcolumntype{b}{X} \n % \\newcolumntype{s}{>{\\hsize=.5\\hsize}X} \n \\begin{table}[] \n \\begin{tabularx}{\\textwidth}{ssbb} \n \\hline & & \n \\multicolumn{2}{c}{\\textbf{",
           cond1,
           "}}",
-          "\\\n & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled}",
-          "\\\n",
-          "\\hline \n \\multirow{2}{*}{\\textbf{",
+          "\\\n", " & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled}",
+          "\\\\n",
+          "\\hline \\\n \\multirow{2}{*}{\\textbf{",
           cond2,
           "}} & \\textbf{Fulfilled} & \n"
         )
@@ -109,10 +109,10 @@ overview_print <-
 
         mid_crosstab <- paste0(" & \\textbf{Not fulfilled} & ")
 
-        cross_out2 <- paste0(dat[2, 1], " & ", dat[2, 2], "\\\n")
+        cross_out2 <- paste0(dat[2, 1], " & ", dat[2, 2], "\\\\n")
 
         end_crosstab <-
-          paste0("\\hline \n \\end{tabular} \n \\end{table} \n")
+          paste0("\\hline \\\n \\end{tabularx} \n \\end{table} \n")
         cat(begin_crosstab,
             cross_out1,
             mid_crosstab,
