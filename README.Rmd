@@ -45,29 +45,32 @@ Before we delve into the functions, we need some data to showcase the magic that
 # Set a seed to make it reproducable
 set.seed(68163)
 
-# Countries
-countries <-
-  c(rep("RWA", 4), rep("AGO", 8), rep("BEN", 2), rep("GBR", 5), rep("FRA", 3)) 
-
-# Time frame 
-years <-
-  c(seq(1990, 1995),
-    seq(1990, 1992),
-    seq(1995, 1999),
-    seq(1991, 1999, by = 2),
-    seq(1993, 1999, by = 3))
-
-# GDP
-gdp <-
-  runif(22, 10000, 40000) # Add a numeric vector for additional data (randomly generated)
-
-# Population size
-population <-
-  runif(22, 100, 50000)# Add another numeric vector for additional data (randomly generated)
-
-# Combine vectors to a data frame
-df_combined <-
-  data.frame(countries, years, gdp, population, stringsAsFactors = FALSE)
+df_combined <- data.frame(
+  # Countries
+  countries  = c(
+    rep("RWA", 4),
+    rep("AGO", 8),
+    rep("BEN", 2),
+    rep("GBR", 5),
+    rep("FRA", 3)
+  ),
+  # Time frame
+  years =
+    c(
+      seq(1990, 1995),
+      seq(1990, 1992),
+      seq(1995, 1999),
+      seq(1991, 1999, by = 2),
+      seq(1993, 1999, by = 3)
+    ),
+  # GDP
+  gdp =
+    runif(22, 10000, 40000),
+  # Population
+  population =
+    runif(22, 100, 50000),
+  stringsAsFactors = FALSE
+) 
 ```
 
 Let's have a first look at the data:
