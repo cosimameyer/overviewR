@@ -21,7 +21,7 @@ code.
 ## Installation
 
 You can install the released version of overviewR from
-[github](https://github.com/cosimameyer/overviewR) with:
+[GitHub](https://github.com/cosimameyer/overviewR) with:
 
 ``` r
 library(devtools)
@@ -111,12 +111,12 @@ Generate some general overview using `overview_tab`.
 output_table <- overview_tab(dat = df_combined, id = countries, time = years)
 ```
 
-    countries   time_frame
-    RWA         1990 - 1993
-    AGO         1994 - 1995, 1990 - 1992, 1996 - 1997
-    BEN         1998 - 1999
-    GBR         1991, 1993, 1995, 1997, 1999
-    FRA         1993, 1996, 1999
+    # countries time_frame
+    # RWA           1990 - 1993
+    # AGO           1994 - 1995, 1990 - 1992, 1996 - 1997
+    # BEN           1998 - 1999
+    # GBR           1991, 1993, 1995, 1997, 1999
+    # FRA           1993, 1996, 1999
 
 We store the output in the object `output_table` to access it later.
 <!-- This function automatically generates an object and stores it in your environment so that you can access it later. -->

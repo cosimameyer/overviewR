@@ -24,7 +24,7 @@ The goal of overviewR is to make it easy to get an overview of your data by disp
 
 ## Installation
 
-You can install the released version of overviewR from [github](https://github.com/cosimameyer/overviewR) with: 
+You can install the released version of overviewR from [GitHub](https://github.com/cosimameyer/overviewR) with: 
 
 ``` r
 library(devtools)
@@ -93,12 +93,12 @@ output_table <- overview_tab(dat = df_combined, id = countries, time = years)
 ```
 
 ```
-countries	time_frame
-RWA	        1990 - 1993
-AGO	        1994 - 1995, 1990 - 1992, 1996 - 1997
-BEN	        1998 - 1999
-GBR	        1991, 1993, 1995, 1997, 1999
-FRA	        1993, 1996, 1999
+# countries	time_frame
+# RWA	        1990 - 1993
+# AGO	        1994 - 1995, 1990 - 1992, 1996 - 1997
+# BEN	        1998 - 1999
+# GBR	        1991, 1993, 1995, 1997, 1999
+# FRA	        1993, 1996, 1999
 ```
 
 We store the output in the object ```output_table``` to access it later.
