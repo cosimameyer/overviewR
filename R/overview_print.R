@@ -41,8 +41,8 @@ overview_print <-
   function(dat,
            title = "Time and scope of the sample",
            crosstab = FALSE,
-           cond1 = "XX",
-           cond2 = "XX") {
+           cond1 = "Condition 1",
+           cond2 = "Condition 2") {
     dat <- as.matrix(dat)
 
     if (ncol(dat) != 2) {
@@ -72,7 +72,7 @@ overview_print <-
             " \\",
             "\\hline \n"
           )
-        out <- paste0(dat[, 1], " & ", dat[, 2], " \\", "\\\n")
+        out <- paste0(dat[, 1], " & ", dat[, 2], " \\", "\\\\")
         end_tab <-
           paste0("\\hline \n \\end{tabular} \n \\end{table} \n")
         cat(begin_tab, out, end_tab)
@@ -86,8 +86,8 @@ overview_print <-
           " using overviewR \n % Please add the following required packages to your document preamble: \n % \\usepackage{multirow} % \\usepackage{tabularx} \n
 % \\newcolumntype{b}{X} \n % \\newcolumntype{s}{>{\\hsize=.5\\hsize}X} \n \\begin{table}[] \n \\begin{tabularx}{\\textwidth}{ssbb} \n \\hline & & \n \\multicolumn{2}{c}{\\textbf{",
           cond1,
-          "}} \\\ ", " & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled} \\\ ",
-          "\\hline \\\ \\multirow{2}{*}{\\textbf{",
+          "}} \\\\ ", " & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled} \\\\ ",
+          "\\hline \\\\ \\multirow{2}{*}{\\textbf{",
           cond2,
           "}} & \\textbf{Fulfilled} & \n"
         )
@@ -103,14 +103,14 @@ overview_print <-
         #   "}} & \\textbf{Fulfilled} & "
         # )
 
-        cross_out1 <- paste0(dat[1, 1], " & ", dat[1, 2], "\\\ ")
+        cross_out1 <- paste0(dat[1, 1], " & ", dat[1, 2], "\\\\ ")
 
-        mid_crosstab <- paste0(" & \\textbf{Not fulfilled} & ")
+        mid_crosstab <- paste0("\\\\ \\hline \\\\ & \\textbf{Not fulfilled} & ")
 
-        cross_out2 <- paste0(dat[2, 1], " & ", dat[2, 2], "\\\ ")
+        cross_out2 <- paste0(dat[2, 1], " & ", dat[2, 2], "\\\\ ")
 
         end_crosstab <-
-          paste0("\\hline \\\ \\end{tabularx} \n \\end{table} \n")
+          paste0("\\hline \\\\ \\end{tabularx} \n \\end{table} \n")
         cat(begin_crosstab,
             cross_out1,
             mid_crosstab,
