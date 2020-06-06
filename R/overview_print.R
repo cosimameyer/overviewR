@@ -43,7 +43,7 @@ library(tidyverse)
 overview_print <-
   function(dat,
            title = "Time and scope of the sample",
-           overview_tab = TRUE,
+           crosstab = FALSE,
            cond1 = "XX",
            cond2 = "XX") {
 
@@ -60,7 +60,7 @@ overview_print <-
         )
       }
 
-    if (overview_tab == TRUE) {
+    if (crosstab == TRUE) {
       for (i in length(dat)) {
         begin_tab <-
           paste0(
@@ -68,8 +68,8 @@ overview_print <-
             version[['version.string']],
             " using overviewR \n \\begin{table}[ht] \n \\centering \n \\caption{",
             title,
-            "} \n \\begin{tabular}{ll} \n \\hline \n" colnames(dat[, 1]),
-            " & " colnames(dat[, 2]),
+            "} \n \\begin{tabular}{ll} \n \\hline \n", colnames(dat[, 1]),
+            " & ", colnames(dat[, 2]),
             " \\",
             "\\hline \n"
           )
@@ -79,7 +79,7 @@ overview_print <-
         cat(begin_tab, out, end_tab)
       }
     }
-    if (overview_tab == FALSE) {
+    if (crosstab == FALSE) {
       for (i in length(dat)) {
         begin_crosstab <- paste0("% Overview table generated in ",
           version[['version.string']],
