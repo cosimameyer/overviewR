@@ -34,23 +34,38 @@ install.packages("overviewR")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Before we delve into the functions, we need some data to showcase the
+magic that `overviewR` can perform. We have 19 observations for 4
+countries (Rwanda, Angola, Benin, and UK) stored in the `countries`
+variable, over a time period between 1990 to 1999 (`years`). As you can
+tell, we have some gaps in the time frame. We also add randomly
+generated values for the GDP (`gdp`) and the population size
+(`population`).
 
 ``` r
 # Generate some data
+# Set a seed to make it reproducable
 set.seed(68163)
 
+# Countries
 countries <-
-  c(rep("RWA", 4), rep("AGO", 8), rep("BEN", 2), rep("UK", 5)) # This vector is consists of characters
+  c(rep("RWA", 4), rep("AGO", 8), rep("BEN", 2), rep("GBR", 5)) 
+
+# Time frame 
 years <-
   c(seq(1990, 1995),
     seq(1990, 1992),
     seq(1995, 1999),
-    seq(1991, 1999, by = 2)) # This vector is numeric
+    seq(1991, 1999, by = 2)) 
+
+# GDP
 gdp <-
   runif(19, 10000, 40000) # Add a numeric vector for additional data (randomly generated)
+
+# Population size
 population <-
   runif(19, 100, 50000)# Add another numeric vector for additional data (randomly generated)
+
 # Combine vectors to a data frame
 df_combined <-
   data.frame(countries, years, gdp, population, stringsAsFactors = FALSE)
