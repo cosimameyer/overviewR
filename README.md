@@ -9,8 +9,8 @@
 status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
 <!-- badges: end -->
 
-The goal of overviewR makes it easy to get an overview of your data by
-displaying your sample information. At the moment, you have two
+The goal of overviewR is to make it easy to get an overview of your data
+by displaying your sample information. At the moment, you have two
 functions (`overview_tab` and `overview_crosstab`) that allow you to
 generate a tabular overview of your general sample and conditional
 sample. `overview_print` then converts this output to nicely usable tex
