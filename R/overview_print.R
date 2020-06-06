@@ -44,14 +44,13 @@ overview_print <-
            crosstab = FALSE,
            cond1 = "XX",
            cond2 = "XX") {
-
     dat <- as.matrix(dat)
 
-      if (ncol(dat) != 2) {
-        stop(
-          "Data frame requires two columns that represent the time and scope dimension of the data"
-        )
-      }
+    if (ncol(dat) != 2) {
+      stop(
+        "Data frame requires two columns that represent the time and scope dimension of the data"
+      )
+    }
 
 
     if (crosstab == FALSE) {
@@ -67,8 +66,10 @@ overview_print <-
             version[['version.string']],
             " using overviewR \n \\begin{table}[ht] \n \\centering \n \\caption{",
             title,
-            "} \n \\begin{tabular}{ll} \n \\hline \n", colnames(dat[, 1]),
-            " & ", colnames(dat[, 2]),
+            "} \n \\begin{tabular}{ll} \n \\hline \n",
+            colnames(dat[, 1]),
+            " & ",
+            colnames(dat[, 2]),
             " \\",
             "\\hline \n"
           )
@@ -80,26 +81,39 @@ overview_print <-
     }
     if (crosstab == TRUE) {
       for (i in length(dat)) {
-        begin_crosstab <- paste0("% Overview table generated in ",
+        begin_crosstab <- paste0(
+          "% Overview table generated in ",
           version[['version.string']],
-          " using overviewR \n % Please add the following required packages to your document preamble: \n % \\usepackage{multirow} \n \\begin{table}[] \n \\begin{tabular}{llll} \n \\hline \n \\multicolumn{2}{l}{} & \\multicolumn{2}{c}{\\textbf{",
+          " using overviewR \n % Please add the following required packages to your document preamble: \n % \\usepackage{multirow} % \\usepackage{tabularx} \n
+% \\newcolumntype{b}{X} \n
+% \\newcolumntype{s}{>{\hsize=.5\hsize}X} \n \\begin{table}[] \n \\begin{tabularx}{\textwidth}{ssbb} \n \\hline & & \n \\multicolumn{2}{c}{\textbf{",
           cond1,
-          "}}",
-          " \\\n",
-          "\\multicolumn{2}{l}{} & \\textbf{Fulfilled} & \\textbf{Not fulfilled}",
-          " \\\n",
-          "\\hline \n \\multirow{2}{*}{\\textbf{",
+          "}} \\\n & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled}",
+          "\\\n",
+          "\hline \n \\multirow{2}{*}{\\textbf{",
           cond2,
-          "}} & \\textbf{Fulfilled} & "
+          "}} & \\textbf{Fulfilled} & \n"
         )
+
+        # & ", "\\\n", " & \\textbf{Not fulfilled} & & \n ", "\\ ", "\\hline \n"
+        #   cond1,
+        #   "}}",
+        #   " \\\n",
+        #   "\\multicolumn{2}{l}{} & \\textbf{Fulfilled} & \\textbf{Not fulfilled}",
+        #   " \\\n",
+        #   "\\hline \n \\multirow{2}{*}{\\textbf{",
+        #   cond2,
+        #   "}} & \\textbf{Fulfilled} & "
+        # )
 
         cross_out1 <- paste0(dat[1, 1], " & ", dat[1, 2], "\\\n")
 
-        mid_crosstab <- paste0(" & \textbf{Not fulfilled} & ")
+        mid_crosstab <- paste0(" & \\textbf{Not fulfilled} & ")
 
         cross_out2 <- paste0(dat[2, 1], " & ", dat[2, 2], "\\\n")
 
-        end_crosstab <- paste0("\\hline \n \\end{tabular} \n \\end{table} \n")
+        end_crosstab <-
+          paste0("\\hline \n \\end{tabular} \n \\end{table} \n")
         cat(begin_crosstab,
             cross_out1,
             mid_crosstab,
