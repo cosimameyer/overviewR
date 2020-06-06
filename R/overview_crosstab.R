@@ -1,4 +1,17 @@
-# Conditional crosstab with examples
+#' @title overview_crosstab
+#'
+#' @description This function allows you sort your sample conditionally in a nice cross table. This can be helpful if you want to get a first sense of your data before digging deeper.
+#' @param dat Your dataset
+#' @param cond1 The variable that describes your first condition
+#' @param cond2 The variable that describes your second condition
+#' @param threshold1 A threshold above which your first condition is fulfilled
+#' @param threshold2 A threshold above which your second condition is fulfilled
+#' @param id Your scope (e.g., country codes or individual IDs)
+#' @param time Your time (e.g., time periods given by years, months, ...)
+#' @return A data frame that contains a summary of your sample and that can be easily converted to a LaTeX output
+#' @examples
+#' overview_crosstab(dat = dataset, cond1 = var1, cond2 = var2, threshold1 = 50, threshold2 = 70, id = country_code, time = year)
+
 
 overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, time){
   id <- dplyr::enquo(id)
@@ -22,27 +35,28 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
   quart3 <- red %>% dplyr::filter(quart3 == 1) %>% dplyr::select(!!id, !!time)
   quart4 <- red %>% dplyr::filter(quart4 == 1) %>% dplyr::select(!!id, !!time)
 
-  quart1_1 <- sample(quart1, !!id, !!time)
+  quart1_1 <- overview_tab(quart1, !!id, !!time)
   quart1_1 <- as.data.frame(quart1_1)
   part1 <- paste(paste0(quart1_1[,1], " (", as.character(quart1_1[,2]), ")"), collapse=",")
 
-  quart2_1 <- sample(quart2, !!id, !!time)
+  quart2_1 <- overview_tab(quart2, !!id, !!time)
   quart2_1 <- as.data.frame(quart2_1)
   part2 <- paste(paste0(quart2_1[,1], " (", as.character(quart2_1[,2]), ")"), collapse=", ")
 
-  quart3_1 <- sample(quart3, !!id, !!time)
+  quart3_1 <- overview_tab(quart3, !!id, !!time)
   quart3_1 <- as.data.frame(quart3_1)
   part3 <- paste(paste0(quart3_1[,1], " (", as.character(quart3_1[,2]), ")"), collapse=", ")
 
-  quart4_1 <- sample(quart4, !!id, !!time)
+  quart4_1 <- overview_tab(quart4, !!id, !!time)
   quart4_1 <- as.data.frame(quart4_1)
-  part4 <<- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", \n")
+  part4 <<- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
 
   # Bring it back in a data frame structure to make it easily convertible to a table
   dat1 <- cbind("Cond1 fulfilled" = part1, "Cond1 not fulfilled" = part2)
   dat2 <- cbind(part3, part4)
-  dat <- data.frame(rbind(dat1, dat2), row.names = c("Cond2 fulfilled", "Cond2 not fulfilled"))
+  crosstab <<- data.frame(rbind(dat1, dat2), row.names = c("Cond2 fulfilled", "Cond2 not fulfilled"))
 
+  return(crosstab)
   # colnames(dat) <- c("Cond1 fulfilled", "Cond1 not fulfilled")
   # row.names(dat) <- c("Cond2 fulfilled", "Cond2 not fulfilled")
 }

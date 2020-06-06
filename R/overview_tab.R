@@ -1,4 +1,6 @@
-#' Gives you a nice overview table for time and scope conditions
+#' @title overview_tab
+#'
+#' @description This function gives you a nice overview table for time and scope conditions
 #'
 #' @param dat Your dataset
 #' @param id Your scope (e.g., country codes or individual IDs)
@@ -19,8 +21,8 @@ overview_tab <- function(dat, id, time){
   }
 
   dat <- dat
-  id <- enquo(id)
-  time <- enquo(time)
+  id <- dplyr::enquo(id)
+  time <- dplyr::enquo(time)
   #  group_var <- enquo(group_var)
   obj_prelim <- dat %>%
     dplyr::group_by(!!id, !!time) %>%
