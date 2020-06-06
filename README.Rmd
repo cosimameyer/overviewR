@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of your data by displaying your sample information. At the moment, you have two functions (```overview_tab``` and ```overview_crosstab```) that allow you to generate  a tabular overview of your general sample and conditional sample. ```overview_print``` then converts this output to nicely usable tex code.
@@ -77,6 +78,8 @@ Let's have a first look at the data:
 ```{r}
 head(df_combined)
 ```
+
+As you can see, we need a data frame that has one column with an id (in this case ```countries```) and one column with a time variable (here ```years```). If your dataset does not have this format, consider using [```pivot_wider()``` or ```pivot_longer()```](https://tidyr.tidyverse.org/reference/pivot_longer.html) to get to the format.
 
 Load the package
 ```{r}

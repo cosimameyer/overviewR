@@ -7,6 +7,8 @@
 
 [![Travis build
 status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
+[![License: GPL
+v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of your data
@@ -87,6 +89,13 @@ head(df_combined)
 #> 5       AGO  1994 12260.58   40796.76
 #> 6       AGO  1995 36345.42   13842.45
 ```
+
+As you can see, we need a data frame that has one column with an id (in
+this case `countries`) and one column with a time variable (here
+`years`). If your dataset does not have this format, consider using
+[`pivot_wider()` or
+`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html)
+to get to the format.
 
 Load the package
 
