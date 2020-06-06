@@ -75,6 +75,13 @@ Let’s have a first look at the data:
 
 ``` r
 head(df_combined)
+#>   countries years      gdp population
+#> 1       RWA  1990 25738.10  21728.298
+#> 2       RWA  1991 32562.67   5687.066
+#> 3       RWA  1992 15010.20  46276.909
+#> 4       RWA  1993 19833.02  15557.171
+#> 5       AGO  1994 12260.58  10408.664
+#> 6       AGO  1995 36345.42  34508.064
 ```
 
 Load the package
