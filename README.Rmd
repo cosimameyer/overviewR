@@ -42,6 +42,8 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example, eval=FALSE}
 # Generate some data
+set.seed(68163)
+
 countries <-
   c(rep("RWA", 4), rep("AGO", 8), rep("BEN", 2), rep("UK", 5)) # This vector is consists of characters
 years <-
