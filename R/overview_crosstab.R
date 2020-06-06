@@ -14,6 +14,17 @@
 
 
 overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, time){
+  # Generate some error messages
+  if (is.null(dat)) stop('overview_crosstab requires a data frame')
+  if (is.null(id)) stop('overview_crosstab requires a scope condition (e.g., countries)')
+  if (is.null(time)) stop('overview_crosstab requires a time frame (e.g., a year variable)')
+  if (is.null(cond1)) stop('overview_crosstab requires a conditional variable')
+  if (is.null(cond2)) stop('overview_crosstab requires a conditional variable')
+  if (is.null(threshold1) | !is.numeric(threshold1)) stop('overview_crosstab requires a threshold (numeric)')
+  if (is.null(threshold2) | !is.numeric(threshold2)) stop('overview_crosstab requires a threshold (numeric)')
+
+
+
   id <- dplyr::enquo(id)
   time <- dplyr::enquo(time)
   cond1 <- dplyr::enquo(cond1)
