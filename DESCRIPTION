@@ -18,3 +18,5 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
+URL: https://github.com/cosimameyer/overviewR
+BugReports: https://github.com/cosimameyer/overviewR/issues
