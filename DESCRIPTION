@@ -10,7 +10,6 @@ Authors@R:
     person(given = "Dennis",
            family = "Hammberschmidt",
            role = "aut"))
-Maintainer: The package maintainer <cosima.meyer@gmail.com>
 Description: overviewR makes it easy to display your sample. Getting an easy overview of your data by displaying/visualizing your 
     sample information in different tables. The package also gives you publishable LaTeX code to present the sample information in your paper.
 License: GPL-3
