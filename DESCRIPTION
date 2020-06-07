@@ -14,6 +14,7 @@ Description: overviewR makes it easy to display your sample. Getting an easy ove
     sample information in different tables. The package also gives you publishable LaTeX code to present the sample information in your paper.
 License: GPL-3
 Encoding: UTF-8
+Language: en-US
 Imports:
     tidyverse (>= 1.2.1)
 Depends: R (>= 3.0.0)
