@@ -31,4 +31,44 @@ This function allows you sort your sample conditionally in a nice cross table. T
 \dontrun{
 overview_crosstab(dat = dataset, cond1 = var1, cond2 = var2, threshold1 = 50, threshold2 = 70, id = country_code, time = year)
 }
+
+library(tidyverse)
+
+#' set.seed(68163)
+df_combined <- data.frame(
+  # Countries
+  countries  = c(
+    rep("RWA", 4),
+    rep("AGO", 8),
+    rep("BEN", 2),
+    rep("GBR", 5),
+    rep("FRA", 3)
+  ),
+  # Time frame
+  years =
+    c(
+      seq(1990, 1995),
+      seq(1990, 1992),
+      seq(1995, 1999),
+      seq(1991, 1999, by = 2),
+      seq(1993, 1999, by = 3)
+    ),
+  # GDP
+  gdp =
+    runif(22, 10000, 40000),
+  # Population
+  population =
+    runif(22, 100, 50000),
+  stringsAsFactors = FALSE
+)
+
+output_crosstab <- overview_crosstab(
+dat = df_combined,
+cond1 = gdp,
+cond2 = population,
+threshold1 = 30000,
+threshold2 = 15000,
+id = countries,
+time = years
+)
 }

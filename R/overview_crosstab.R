@@ -13,6 +13,47 @@
 #' \dontrun{
 #' overview_crosstab(dat = dataset, cond1 = var1, cond2 = var2, threshold1 = 50, threshold2 = 70, id = country_code, time = year)
 #' }
+#'
+#' library(tidyverse)
+#'
+#' #' set.seed(68163)
+#' df_combined <- data.frame(
+#'   # Countries
+#'   countries  = c(
+#'     rep("RWA", 4),
+#'     rep("AGO", 8),
+#'     rep("BEN", 2),
+#'     rep("GBR", 5),
+#'     rep("FRA", 3)
+#'   ),
+#'   # Time frame
+#'   years =
+#'     c(
+#'       seq(1990, 1995),
+#'       seq(1990, 1992),
+#'       seq(1995, 1999),
+#'       seq(1991, 1999, by = 2),
+#'       seq(1993, 1999, by = 3)
+#'     ),
+#'   # GDP
+#'   gdp =
+#'     runif(22, 10000, 40000),
+#'   # Population
+#'   population =
+#'     runif(22, 100, 50000),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' output_crosstab <- overview_crosstab(
+#' dat = df_combined,
+#' cond1 = gdp,
+#' cond2 = population,
+#' threshold1 = 30000,
+#' threshold2 = 15000,
+#' id = countries,
+#' time = years
+#' )
+
 
 
 overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, time){
@@ -68,45 +109,5 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
   crosstab <- data.frame(rbind(dat1, dat2)) #, row.names = c("Cond2 fulfilled", "Cond2 not fulfilled"))
 
   return(crosstab)
-  # colnames(dat) <- c("Cond1 fulfilled", "Cond1 not fulfilled")
-  # row.names(dat) <- c("Cond2 fulfilled", "Cond2 not fulfilled")
 }
-##############################################################################################################
-#
-# red <- final_prepared %>%
-#   mutate(cond1 = ifelse(fshare > 20, 1, 0),
-#          cond2 = ifelse(conflict == 1, 1, 0)) %>%
-#   group_by(cond1, cond2) %>%
-#   select(ccode, year, fshare, conflict, cond1, cond2) %>%
-#   mutate(quart1 = ifelse(cond1 ==1 & cond2 == 1, 1, 0),
-#          quart2 = ifelse(cond1 == 0 & cond2 == 1, 1, 0),
-#          quart3 = ifelse(cond1 == 1 & cond2 == 0, 1, 0),
-#          quart4 = ifelse(cond1 == 0 & cond2 == 0, 1, 0)) %>%
-#   ungroup()
-#
-# quart1 <- red %>% filter(quart1 == 1) %>% select(ccode, year)
-# quart2 <- red %>% filter(quart2 == 1) %>% select(ccode, year)
-# quart3 <- red %>% filter(quart3 == 1) %>% select(ccode, year)
-# quart4 <- red %>% filter(quart4 == 1) %>% select(ccode, year)
-#
-# quart1 <- sample(quart1, ccode, year)
-# part1 <- paste(paste0(quart1$ccode, " (", quart1$time_frame, ")"), collapse=", ")
-#
-# quart2 <- sample(quart2, ccode, year)
-# part2 <- paste(paste0(quart2$ccode, " (", quart2$time_frame, ")"), collapse=", ")
-#
-# quart3 <- sample(quart3, ccode, year)
-# part3 <- paste(paste0(quart3$ccode, " (", quart3$time_frame, ")"), collapse=", ")
-#
-# quart4 <- sample(quart4, ccode, year)
-# part4 <- paste(paste0(quart4$ccode, " (", quart4$time_frame, ")"), collapse=", ")
-#
-#
-# # Bring it back in a data frame structure to make it easily convertible to a table
-# dat1 <- cbind(part1, part2)
-# dat2 <- cbind(part3, part4)
-# dat <- data.frame(rbind(dat1, dat2))
-#
-# colnames(dat) <- c("Cond1 fulfilled", "Cond2 not fulfilled")
-# rownames(dat) <- c("Cond2 fulfilled", "Cond2 not fulfilled")
 

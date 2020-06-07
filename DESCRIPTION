@@ -1,7 +1,7 @@
 Package: overviewR
 Type: Package
 Title: Easily Extracting Information About Your Data
-Version: 0.1.0
+Version: 0.0.1
 Authors@R: 
   c(person(given = "Cosima",
            family = "Meyer",
@@ -11,15 +11,13 @@ Authors@R:
            family = "Hammberschmidt",
            role = "aut"))
 Maintainer: The package maintainer <cosima.meyer@gmail.com>
-Description: We proudly present overviewR -- the R package that makes it easy to display    
-    your sample. Getting an easy overview of your data by displaying/visualizing your 
-    sample information.
+Description: overviewR makes it easy to display your sample. Getting an easy overview of your data by displaying/visualizing your 
+    sample information in different tables. The package also gives you publishable LaTeX code to present the sample information in your paper.
 License: GPL-3
 Encoding: UTF-8
 Imports:
-    xtable (>= 1.8.4),
-    tidyverse (>= 1.2.1),
-    flextable (>= 0.5.10)
+    tidyverse (>= 1.2.1)
+Depends: R (>= 3.0.0)
 LazyData: true
 RoxygenNote: 7.1.0
 URL: https://github.com/cosimameyer/overviewR
