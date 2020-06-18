@@ -23,6 +23,5 @@ This function gives you a nice overview table for time and scope conditions
 \dontrun{
 overview_tab(dat = dataset, id = country_code, time = year)
 
-output_table <- overview_tab(dat = data, id = ccode, time = year)
-output_study <- overview_tab(dat = data_day, id = testperson, time = day)}
+output_table <- overview_tab(dat = data, id = ccode, time = year)}
 }

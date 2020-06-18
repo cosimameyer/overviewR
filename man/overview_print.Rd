@@ -20,6 +20,10 @@ overview_print(
 
 \item{title}{Title of your table (default is "Time and scope of the sample")}
 
+\item{id}{The name of your left column (default is "Sample"), will be ignored if crosstab is TRUE}
+
+\item{time}{The name of your right column (default is ("Time frame")), will be ignored if crosstab is TRUE}
+
 \item{crosstab}{Logical argument, if TRUE produces a crosstab output, default is FALSE}
 
 \item{cond1}{Description for your first condition (character), will be ignored if crosstab is FALSE}

@@ -7,7 +7,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(data)
+#' @usage data(toydata)
 #'
 #' @format An object of class \code{"data.frame"}.
 #' \describe{
@@ -21,7 +21,7 @@
 #' @keywords datasets
 #' @examples
 #' \dontrun{
-#' data(data)
-#' head(data)
+#' data(toydata)
+#' head(toydata)
 #' }
-"data"
+"toydata"
