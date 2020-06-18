@@ -11,38 +11,8 @@
 #' overview_tab(dat = dataset, id = country_code, time = year)
 #' }
 #'
-#' library(tidyverse)
-#'
-#' set.seed(68163)
-#' df_combined <- data.frame(
-#'   # Countries
-#'   countries  = c(
-#'     rep("RWA", 4),
-#'     rep("AGO", 8),
-#'     rep("BEN", 2),
-#'     rep("GBR", 5),
-#'     rep("FRA", 3)
-#'   ),
-#'   # Time frame
-#'   years =
-#'     c(
-#'       seq(1990, 1995),
-#'       seq(1990, 1992),
-#'       seq(1995, 1999),
-#'       seq(1991, 1999, by = 2),
-#'       seq(1993, 1999, by = 3)
-#'     ),
-#'   # GDP
-#'   gdp =
-#'     runif(22, 10000, 40000),
-#'   # Population
-#'   population =
-#'     runif(22, 100, 50000),
-#'   stringsAsFactors = FALSE
-#' )
-#'
-#' output_table <- overview_tab(dat = df_combined, id = countries, time = years)
-
+#' output_table <- overview_tab(dat = data, id = ccode, time = year)
+#' output_study <- overview_tab(dat = data_day, id = testperson, time = day)
 
 overview_tab <- function(dat, id, time) {
   # # Generate some error messages
@@ -50,7 +20,7 @@ overview_tab <- function(dat, id, time) {
   # if (is.null(id)) stop('overview_tab requires a scope condition (e.g., countries)')
   # if (is.null(time)) stop('overview_tab requires a time frame (e.g., a year variable)')
 
-  # Check for consecutive numbers and collapse them with -
+  # Check for consecutive numbers and collapse them with "-"
   # From here: https://stackoverflow.com/questions/16911773/collapse-runs-of-consecutive-numbers-to-ranges  findIntRuns <- function(run){
   findIntRuns <- function(run) {
     rundiff <- c(1, diff(run))
@@ -68,6 +38,13 @@ overview_tab <- function(dat, id, time) {
   id <- dplyr::enquo(id)
   time <- dplyr::enquo(time)
 
+  # Check the length of unique observations (based on time and id) in the data set
+  # We need this for the next check
+  length_nodup <<- dat %>%
+    distinct(!!time, !!id, .keep_all = T)
+
+  # Check if data set only has unique observations
+  if (isTRUE(nrow(length_nodup) == nrow(dat))) {
   # Apply it to the data
   tab <- dat %>%
     # Select important variables
@@ -80,9 +57,35 @@ overview_tab <- function(dat, id, time) {
     dplyr::group_by(!!id) %>%
     # Apply function generated above
     dplyr::mutate(time_frame = paste(findIntRuns(!!time), collapse = ", ")) %>%
-    # Subset it to only one distint country
+    # Subset it to only one distinct country
     dplyr::distinct(!!id, time_frame)
 
   # Return object
   return(tab)
+  }
+  # If this is not the case, we need to aggregate the data
+  else {
+    dat2 <- dat %>%
+      dplyr::select(!!id, !!time) %>%
+      dplyr::group_by(!!id, !!time) %>%
+      dplyr::distinct(!!id, !!time)
+
+    # Apply code from above to the new data
+    # Apply it to the data
+    tab2 <- dat2 %>%
+      # Select important variables
+      dplyr::select(!!id,!!time) %>%
+      # # Group data
+      dplyr::group_by(!!id,!!time) %>%
+      # Only get distinct IDs
+      dplyr::distinct(!!id) %>%
+      # Group by ID
+      dplyr::group_by(!!id) %>%
+      # Apply function generated above
+      dplyr::mutate(time_frame = paste(findIntRuns(!!time), collapse = ", ")) %>%
+      # Subset it to only one distinct country
+      dplyr::distinct(!!id, time_frame)
+
+    return(tab2)
+    }
 }

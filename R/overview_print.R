@@ -24,11 +24,14 @@
 overview_print <-
   function(obj,
            title = "Time and scope of the sample",
+           id = "Sample",
+           time = "Time frame",
            crosstab = FALSE,
            cond1 = "Condition 1",
            cond2 = "Condition 2",
            save_out = FALSE) {
-    obj <- as.matrix(obj)
+    col_names <- colnames(obj)
+    obj <- as.matrix(obj) # needs to be excluded to get the colnames
 
     if (ncol(obj) != 2) {
       stop(
@@ -51,9 +54,9 @@ overview_print <-
             " using overviewR \n \\begin{table}[ht] \n \\centering \n \\caption{",
             title,
             "} \n \\begin{tabular}{ll} \n \\hline \n",
-            colnames(obj[, 1]),
+            id, # col_names[1],
             " & ",
-            colnames(obj[, 2]),
+            time, # col_names[2],
             " \\\\ ",
             "\\hline \n"
           )
@@ -71,24 +74,25 @@ overview_print <-
         begin_crosstab <- paste0(
           "% Overview table generated in ",
           version[['version.string']],
-          " using overviewR \n % Please add the following required packages to your document preamble: \n % \\usepackage{multirow} % \\usepackage{tabularx} \n
-% \\newcolumntype{b}{X} \n % \\newcolumntype{s}{>{\\hsize=.5\\hsize}X} \n \\begin{table}[] \n \\begin{tabularx}{\\textwidth}{ssbb} \n \\hline & & \n \\multicolumn{2}{c}{\\textbf{",
+          " using overviewR \n % Please add the following required packages to your document preamble: \n % \\usepackage{multirow} \n % \\usepackage{tabularx} \n % \\newcolumntype{b}{X} \n % \\newcolumntype{s}{>{\\hsize=.5\\hsize}X} \n \\begin{table}[ht] \n \\caption{",
+          title,
+          "} \n \\begin{tabularx}{\\textwidth}{ssbb} \n \\hline & & \n \\multicolumn{2}{c}{\\textbf{",
           cond1,
           "}} \\\\ ",
           " & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled} \\\\ ",
-          "\\hline \\\\ \\multirow{2}{*}{\\textbf{",
+          "\\hline \\\\ \n \\multirow{2}{*}{\\textbf{",
           cond2,
           "}} & \\textbf{Fulfilled} & \n"
         )
         cross_out1 <- paste0(obj[1, 1], " & ", obj[1, 2], "\\\\ ")
 
         mid_crosstab <-
-          paste0("\\\\ \\hline \\\\ & \\textbf{Not fulfilled} & ")
+          paste0("\\\\ \\hline \\\\ \n & \\textbf{Not fulfilled} & ")
 
         cross_out2 <- paste0(obj[2, 1], " & ", obj[2, 2], "\\\\ ")
 
         end_crosstab <-
-          paste0("\\hline \\\\ \\end{tabularx} \n \\end{table} \n")
+          paste0("\\hline \\\\ \n \\end{tabularx} \n \\end{table} \n")
         output <- cat(begin_crosstab,
                       cross_out1,
                       mid_crosstab,

@@ -76,7 +76,7 @@ head(data_day)
   1             2010-01-06
 ```
 
-This dataset contains information on the 16 testpersons (```testperson```) over 2010 (stored in the ```day``` variable that ranges from 2010-01-01 to 2010-12-31). 
+This data set contains information on the 16 test persons (```testperson```) over 2010 (stored in the ```day``` variable that ranges from 2010-01-01 to 2010-12-31). 
 
 <!-- Before we delve into the functions, we need some data to showcase the magic that ```overviewR``` can perform. We have 19 observations for 5 countries (Rwanda, Angola, Benin, UK, and France) stored in the ```ccode``` variable, over a time period between 1990 to 1999 (```year```). As you can tell, we have some gaps in the time frame. We also add randomly generated values for the GDP (```gdp```) and the population size (```population```). -->
 
@@ -195,7 +195,7 @@ overview_print(obj = output_table)
  \caption{Time and scope of the sample} 
  \begin{tabular}{ll} 
  \hline 
-ccode & time_frame \\ \hline 
+Sample & Time frame \\ \hline 
  RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
  \end{tabular} 
  \end{table} 
@@ -206,10 +206,10 @@ ccode & time_frame \\ \hline
 <img src='man/figures/example1.png' height="150"/>
 </p>
 
-The default already gives us a nice title ("Time and scope of the sample") but can be modified in the argument ```title = ...```. 
+The default already gives us a nice title ("Time and scope of the sample") but can be modified in the argument ```title = ...```. The same holds for the column names ("Sample" and "Time frame" by default). 
 
 ```{r, eval = FALSE}
-overview_print(obj = output_table, title = "Cool new title for our awesome table")
+overview_print(obj = output_table, col1 = "Countries", col2 = "Years", title = "Cool new title for our awesome table")
 ```
 <details>
   <summary>TeX output</summary>
@@ -220,7 +220,7 @@ overview_print(obj = output_table, title = "Cool new title for our awesome table
  \caption{Cool new title for our awesome table} 
  \begin{tabular}{ll} 
  \hline 
-ccode & time_frame \\ \hline 
+Countries & Years \\ \hline 
  RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
  \end{tabular} 
  \end{table} 
@@ -230,6 +230,8 @@ ccode & time_frame \\ \hline
 <p align="center">
 <img src='man/figures/example2.png' height="150"/>
 </p>
+
+
 
 The same function also text formatted cross tables, using the argument ```crosstab = TRUE```. We will do this by using the object ```output_crosstab``` that was stored from our cross table above. There are also options to label the respective conditions (```cond1``` and ```cond2```) as you can see in the example.
 

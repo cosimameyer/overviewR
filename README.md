@@ -92,7 +92,7 @@ head(data_day)
   1             2010-01-06
 ```
 
-This dataset contains information on the 16 testpersons (`testperson`)
+This data set contains information on the 16 test persons (`testperson`)
 over 2010 (stored in the `day` variable that ranges from 2010-01-01 to
 2010-12-31).
 
@@ -258,7 +258,7 @@ overview_print(obj = output_table)
      \caption{Time and scope of the sample} 
      \begin{tabular}{ll} 
      \hline 
-    ccode & time_frame \\ \hline 
+    Sample & Time frame \\ \hline 
      RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
      \end{tabular} 
      \end{table} 
@@ -272,10 +272,11 @@ overview_print(obj = output_table)
 </p>
 
 The default already gives us a nice title (“Time and scope of the
-sample”) but can be modified in the argument `title = ...`.
+sample”) but can be modified in the argument `title = ...`. The same
+holds for the column names (“Sample” and “Time frame” by default).
 
 ``` r
-overview_print(obj = output_table, title = "Cool new title for our awesome table")
+overview_print(obj = output_table, col1 = "Countries", col2 = "Years", title = "Cool new title for our awesome table")
 ```
 
 <details>
@@ -288,7 +289,7 @@ overview_print(obj = output_table, title = "Cool new title for our awesome table
      \caption{Cool new title for our awesome table} 
      \begin{tabular}{ll} 
      \hline 
-    ccode & time_frame \\ \hline 
+    Countries & Years \\ \hline 
      RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
      \end{tabular} 
      \end{table} 
