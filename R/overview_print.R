@@ -4,6 +4,8 @@
 #'
 #' @param obj Your overview object produced by overview_tab or overview_crosstab
 #' @param title Title of your table (default is "Time and scope of the sample")
+#' @param id The name of your left column (default is "Sample"), will be ignored if crosstab is TRUE
+#' @param time The name of your right column (default is ("Time frame")), will be ignored if crosstab is TRUE
 #' @param crosstab Logical argument, if TRUE produces a crosstab output, default is FALSE
 #' @param cond1 Description for your first condition (character), will be ignored if crosstab is FALSE
 #' @param cond2 Description for your second condition (character), will be ignored if crosstab is FALSE
@@ -30,7 +32,7 @@ overview_print <-
            cond1 = "Condition 1",
            cond2 = "Condition 2",
            save_out = FALSE) {
-    col_names <- colnames(obj)
+   # col_names <- colnames(obj)
     obj <- as.matrix(obj) # needs to be excluded to get the colnames
 
     if (ncol(obj) != 2) {

@@ -38,8 +38,8 @@ overview_tab <- function(dat, id, time) {
 
   # Check the length of unique observations (based on time and id) in the data set
   # We need this for the next check
-  length_nodup <<- dat %>%
-    distinct(!!time, !!id, .keep_all = T)
+  length_nodup <- dat %>%
+    dplyr::distinct(!!time, !!id, .keep_all = T)
 
   # Check if data set only has unique observations
   if (isTRUE(nrow(length_nodup) == nrow(dat))) {
@@ -56,7 +56,7 @@ overview_tab <- function(dat, id, time) {
     # Apply function generated above
     dplyr::mutate(time_frame = paste(findIntRuns(!!time), collapse = ", ")) %>%
     # Subset it to only one distinct country
-    dplyr::distinct(!!id, time_frame)
+    dplyr::distinct(!!id, !!time_frame)
 
   # Return object
   return(tab)

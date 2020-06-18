@@ -43,7 +43,7 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
 
   # Check the length of unique observations (based on time and id) in the dataset
   # We need this for the next check
-  length_nodup <<- dat %>%
+  length_nodup <- dat %>%
     distinct(!!time, !!id, .keep_all = T)
 
   # Check if dataset only has unique observations
@@ -102,7 +102,7 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
 
   quart4_1 <- overview_tab(quart4, !!id, !!time)
   quart4_1 <- as.data.frame(quart4_1)
-  part4 <<- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
+  part4 <- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
 
   # Bring it back in a data frame structure to make it easily convertible to a table
   dat1 <- cbind(part1, part2) #cbind("Cond1 fulfilled" = part1, "Cond1 not fulfilled" = part2)
@@ -123,10 +123,10 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
       dplyr::ungroup() # %>%
 
     cond1_mean <- red$cond1_mean
-    cond1_mean <- enquo(cond1_mean)
+    cond1_mean <- dplyr::enquo(cond1_mean)
 
     cond2_mean <- red$cond2_mean
-    cond2_mean <- enquo(cond2_mean)
+    cond2_mean <- dplyr::enquo(cond2_mean)
 
     # Apply the code to the code above
     red <- red %>%
@@ -159,7 +159,7 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
 
     quart4_1 <- overview_tab(quart4, !!id, !!time)
     quart4_1 <- as.data.frame(quart4_1)
-    part4 <<- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
+    part4 <- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
 
     # Bring it back in a data frame structure to make it easily convertible to a table
     dat1 <- cbind(part1, part2) #cbind("Cond1 fulfilled" = part1, "Cond1 not fulfilled" = part2)
