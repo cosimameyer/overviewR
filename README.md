@@ -10,6 +10,7 @@ status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--18-yellowgreen.svg)](/commits/master)
+<!-- [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of your data
