@@ -64,21 +64,6 @@ head(data)
 
 We have 264 observations for 5 countries (Angola, Benin, France, Rwanda, and UK) stored in the ```ccode``` variable, over a time period between 1990 to 1999 (```year```). We also have additional information for the month (```month```). As you can tell, we have some gaps in the time frame. We also add randomly generated values for the GDP (```gdp```) and the population size (```population```).
 
-```{r, eval=FALSE}
-head(data_day)
-```
-```
-  testperson    day
-  1             2010-01-01
-  1             2010-01-02
-  1             2010-01-03
-  1             2010-01-04
-  1             2010-01-05
-  1             2010-01-06
-```
-
-This data set contains information on the 16 test persons (```testperson```) over 2010 (stored in the ```day``` variable that ranges from 2010-01-01 to 2010-12-31). 
-
 <!-- Before we delve into the functions, we need some data to showcase the magic that ```overviewR``` can perform. We have 19 observations for 5 countries (Rwanda, Angola, Benin, UK, and France) stored in the ```ccode``` variable, over a time period between 1990 to 1999 (```year```). As you can tell, we have some gaps in the time frame. We also add randomly generated values for the GDP (```gdp```) and the population size (```population```). -->
 
 <!-- ```{r example} -->
