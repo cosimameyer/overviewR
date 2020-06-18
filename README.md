@@ -61,6 +61,16 @@ first.
 head(data)
 ```
 
+``` 
+    ccode   year   month  gdp       population
+    RWA     1990   Jan    24180.77  14969.988
+    RWA     1990   Feb    23650.53  11791.464
+    RWA     1990   Mar    21860.14  30047.979
+    RWA     1990   Apr    20801.06  19853.556
+    RWA     1990   May    18702.84   5148.118
+    RWA     1990   Jun    30272.37  48625.140
+```
+
 We have 264 observations for 5 countries (Angola, Benin, France, Rwanda,
 and UK) stored in the `ccode` variable, over a time period between 1990
 to 1999 (`year`). We also have additional information for the month
@@ -70,6 +80,16 @@ size (`population`).
 
 ``` r
 head(data_day)
+```
+
+``` 
+  testperson    day
+  1             2010-01-01
+  1             2010-01-02
+  1             2010-01-03
+  1             2010-01-04
+  1             2010-01-05
+  1             2010-01-06
 ```
 
 This dataset contains information on the 16 testpersons (`testperson`)
@@ -164,6 +184,12 @@ Generate some general overview using `overview_tab`.
 output_table <- overview_tab(dat = data, id = ccode, time = year)
 ```
 
+Checking the output, we get a data frame like this:
+
+``` r
+output_table
+```
+
     # ccode   time_frame
     # RWA       1990 - 1995         
     # AGO       1990 - 1992         
@@ -184,15 +210,26 @@ output_crosstab <- overview_crosstab(
     dat = data,
     cond1 = gdp,
     cond2 = population,
-    threshold1 = 30000,
-    threshold2 = 15000,
+    threshold1 = 25000,
+    threshold2 = 27000,
     id = ccode,
     time = year
   )
 ```
 
-``` 
+Checking the output, we get a data frame like this:
+
+``` r
+output_crosstab
 ```
+
+    #   part1                                      part2
+    # 1 AGO (1990, 1992), FRA (1993), GBR (1997)   BEN (1996, 1999), FRA (1999), GBR (1993), RWA (1992, 1994)
+    # 2 BEN (1997), RWA (1990)                     AGO (1991), BEN (1995, 1998), FRA (1996), GBR (1991, 1995, 1999), RWA (1991, 1993, 1995)
+
+Note, if you use a data set that has multiple observations on your
+id-time unit, the function automatically aggregates your data frame
+using the mean of your condition 1 and your condition 2.
 
 We also store the output in the object, this time in `output_crosstab`,
 to access it later.
