@@ -12,15 +12,22 @@ v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/li
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of your data
-by displaying your sample information. At the moment, you have two
+by displaying relevant sample information. At the moment, you have two
 functions (`overview_tab` and `overview_crosstab`) that allow you to
-generate a tabular overview of your general sample and conditional
-sample. `overview_print` then converts this output to nicely usable tex
-code.
+generate a tabular overview of both your general sample and conditional
+sample. The general sample plots a two-column table that gives
+information on your id in the left column and on the time frame for the
+respective id in the right column. The conditional column further plots
+a cross table on two conditions. This way, you can easily visualize your
+theoretical assumptions with examples from your dataset. The function
+`overview_print` then converts this output to nicely usable TeX code.
+
+The output of this package is also compatible with other packages such
+as `xtable` and `flextable`.
 
 ## Installation
 
-You can install the released version of overviewR from
+You can install the latest version of overviewR directly from
 [GitHub](https://github.com/cosimameyer/overviewR) with:
 
 ``` r
@@ -36,87 +43,131 @@ install.packages("overviewR")
 
 ## Example
 
-Before we delve into the functions, we need some data to showcase the
-magic that `overviewR` can perform. We have 19 observations for 5
-countries (Rwanda, Angola, Benin, UK, and France) stored in the
-`countries` variable, over a time period between 1990 to 1999 (`years`).
-As you can tell, we have some gaps in the time frame. We also add
-randomly generated values for the GDP (`gdp`) and the population size
-(`population`).
-
-``` r
-# Generate some data
-# Set a seed to make it reproducable
-set.seed(68163)
-
-df_combined <- data.frame(
-  # Countries
-  countries  = c(
-    rep("RWA", 4),
-    rep("AGO", 8),
-    rep("BEN", 2),
-    rep("GBR", 5),
-    rep("FRA", 3)
-  ),
-  # Time frame
-  years =
-    c(
-      seq(1990, 1995),
-      seq(1990, 1992),
-      seq(1995, 1999),
-      seq(1991, 1999, by = 2),
-      seq(1993, 1999, by = 3)
-    ),
-  # GDP
-  gdp =
-    runif(22, 10000, 40000),
-  # Population
-  population =
-    runif(22, 100, 50000),
-  stringsAsFactors = FALSE
-) 
-```
-
-Let’s have a first look at the data:
-
-``` r
-head(df_combined)
-#>   countries years      gdp population
-#> 1       RWA  1990 25738.10   15557.17
-#> 2       RWA  1991 32562.67   10408.66
-#> 3       RWA  1992 15010.20   34508.06
-#> 4       RWA  1993 19833.02   14597.29
-#> 5       AGO  1994 12260.58   40796.76
-#> 6       AGO  1995 36345.42   13842.45
-```
-
-As you can see, we need a data frame that has one column with an id (in
-this case `countries`) and one column with a time variable (here
-`years`). If your dataset does not have this format, consider using
-[`pivot_wider()` or
-`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html)
-to get to the format.
-
-Load the package
+In a first step, we load the package.
 
 ``` r
 library(overviewR)
 ```
+
+For the examples, we will use the pre-loaded toy data of the package.
+The package comes with two cross-sectional datasets on a
+country-month-year unit (`data`) as well as on a testperson-date unit
+(`day_data`). Before we get started, we will have a look at the data
+first.
+
+``` r
+head(data)
+```
+
+We have 264 observations for 5 countries (Angola, Benin, France, Rwanda,
+and UK) stored in the `ccode` variable, over a time period between 1990
+to 1999 (`year`). We also have additional information for the month
+(`month`). As you can tell, we have some gaps in the time frame. We also
+add randomly generated values for the GDP (`gdp`) and the population
+size (`population`).
+
+``` r
+head(data_day)
+```
+
+This dataset contains information on the 16 testpersons (`testperson`)
+over 2010 (stored in the `day` variable that ranges from 2010-01-01 to
+2010-12-31).
+
+<!-- Before we delve into the functions, we need some data to showcase the magic that ```overviewR``` can perform. We have 19 observations for 5 countries (Rwanda, Angola, Benin, UK, and France) stored in the ```ccode``` variable, over a time period between 1990 to 1999 (```year```). As you can tell, we have some gaps in the time frame. We also add randomly generated values for the GDP (```gdp```) and the population size (```population```). -->
+
+<!-- ```{r example} -->
+
+<!-- # Generate some data -->
+
+<!-- # Set a seed to make it reproducable -->
+
+<!-- set.seed(68163) -->
+
+<!-- df_combined <- data.frame( -->
+
+<!--   # Countries -->
+
+<!--   ccode  = c( -->
+
+<!--     rep("RWA", 4), -->
+
+<!--     rep("AGO", 8), -->
+
+<!--     rep("BEN", 2), -->
+
+<!--     rep("GBR", 5), -->
+
+<!--     rep("FRA", 3) -->
+
+<!--   ), -->
+
+<!--   # Time frame -->
+
+<!--   year = -->
+
+<!--     c( -->
+
+<!--       seq(1990, 1995), -->
+
+<!--       seq(1990, 1992), -->
+
+<!--       seq(1995, 1999), -->
+
+<!--       seq(1991, 1999, by = 2), -->
+
+<!--       seq(1993, 1999, by = 3) -->
+
+<!--     ), -->
+
+<!--   # GDP -->
+
+<!--   gdp = -->
+
+<!--     runif(22, 10000, 40000), -->
+
+<!--   # Population -->
+
+<!--   population = -->
+
+<!--     runif(22, 100, 50000), -->
+
+<!--   stringsAsFactors = FALSE -->
+
+<!-- )  -->
+
+<!-- ``` -->
+
+<!-- Let's have a first look at the data: -->
+
+<!-- ```{r} -->
+
+<!-- head(df_combined) -->
+
+<!-- ``` -->
+
+As you can see, we need a data frame that has one column with an id (in
+this case `ccode` which stands for countries or `testperson` which
+stands for the identifier of the test person) and one column with a time
+variable (here `years`, `month`, or `date`). If your data set does not
+have this format, consider using [`pivot_wider()` or
+`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html)
+to get to the format.
 
 ### `overview_tab`
 
 Generate some general overview using `overview_tab`.
 
 ``` r
-output_table <- overview_tab(dat = df_combined, id = countries, time = years)
+output_table <- overview_tab(dat = data, id = ccode, time = year)
 ```
 
-    # countries time_frame
-    # RWA           1990 - 1993
-    # AGO           1994 - 1995, 1990 - 1992, 1996 - 1997
-    # BEN           1998 - 1999
-    # GBR           1991, 1993, 1995, 1997, 1999
-    # FRA           1993, 1996, 1999
+    # ccode   time_frame
+    # RWA       1990 - 1995         
+    # AGO       1990 - 1992         
+    # BEN       1995 - 1999         
+    # GBR       1991, 1993, 1995, 1997, 1999            
+    # FRA       1993, 1996, 1999
 
 We store the output in the object `output_table` to access it later.
 <!-- This function automatically generates an object and stores it in your environment so that you can access it later. -->
@@ -128,13 +179,13 @@ conditionally on two factors, this can be done with `overview_crosstab`.
 
 ``` r
 output_crosstab <- overview_crosstab(
-    dat = df_combined,
+    dat = data,
     cond1 = gdp,
     cond2 = population,
     threshold1 = 30000,
     threshold2 = 15000,
-    id = countries,
-    time = years
+    id = ccode,
+    time = year
   )
 ```
 
@@ -162,18 +213,24 @@ overview_print(obj = output_table)
 
 <summary>TeX output</summary>
 
-    % Overview table generated in R version 3.6.3 (2020-02-29) using overviewR 
+    % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
      \begin{table}[ht] 
      \centering 
      \caption{Time and scope of the sample} 
      \begin{tabular}{ll} 
      \hline 
-     &  \\ \hline 
-     RWA & 1990 - 1993 \\ AGO & 1994 - 1995, 1990 - 1992, 1996 - 1997 \\ BEN & 1998 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
+    ccode & time_frame \\ \hline 
+     RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
      \end{tabular} 
      \end{table} 
 
 </details>
+
+<p align="center">
+
+<img src='man/figures/example1.png' height="150"/>
+
+</p>
 
 The default already gives us a nice title (“Time and scope of the
 sample”) but can be modified in the argument `title = ...`.
@@ -186,18 +243,24 @@ overview_print(obj = output_table, title = "Cool new title for our awesome table
 
 <summary>TeX output</summary>
 
-    % Overview table generated in R version 3.6.3 (2020-02-29) using overviewR 
+    % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
      \begin{table}[ht] 
      \centering 
      \caption{Cool new title for our awesome table} 
      \begin{tabular}{ll} 
      \hline 
-     &  \\ \hline 
-     RWA & 1990 - 1993 \\ AGO & 1994 - 1995, 1990 - 1992, 1996 - 1997 \\ BEN & 1998 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
+    ccode & time_frame \\ \hline 
+     RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
      \end{tabular} 
      \end{table} 
 
 </details>
+
+<p align="center">
+
+<img src='man/figures/example2.png' height="150"/>
+
+</p>
 
 The same function also text formatted cross tables, using the argument
 `crosstab = TRUE`. We will do this by using the object `output_crosstab`
@@ -236,7 +299,13 @@ overview_print(
 
 </details>
 
-With `save_out = TRUE` you can also export both outputs as .tex files
+<p align="center">
+
+<img src='man/figures/example3.png' height="200"/>
+
+</p>
+
+With `save_out = TRUE` you can also export both outputs as `.tex` files
 and store them on your device.
 
 ``` r
@@ -247,5 +316,7 @@ The output is also compatible with other functions such as
 [xtable](https://cran.r-project.org/web/packages/xtable/xtable.pdf) or
 [flextable](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html).
 
-*This package is built by [Cosima Meyer](https://cosimameyer.github.io)
-and [Dennis Hammerschmidt](http://dennis-hammerschmidt.rbind.io).*
+# Credits
+
+This package is built by [Cosima Meyer](https://cosimameyer.github.io)
+and [Dennis Hammerschmidt](http://dennis-hammerschmidt.rbind.io).
