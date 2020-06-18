@@ -9,10 +9,9 @@
 #' @examples
 #' \dontrun{
 #' overview_tab(dat = dataset, id = country_code, time = year)
-#' }
 #'
 #' output_table <- overview_tab(dat = data, id = ccode, time = year)
-#' output_study <- overview_tab(dat = data_day, id = testperson, time = day)
+#' output_study <- overview_tab(dat = data_day, id = testperson, time = day)}
 
 overview_tab <- function(dat, id, time) {
   # # Generate some error messages

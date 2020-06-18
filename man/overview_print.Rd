@@ -7,6 +7,8 @@
 overview_print(
   obj,
   title = "Time and scope of the sample",
+  id = "Sample",
+  time = "Time frame",
   crosstab = FALSE,
   cond1 = "Condition 1",
   cond2 = "Condition 2",
@@ -34,7 +36,13 @@ This function produces a LaTeX for both overview_tab and overview_crosstab
 }
 \examples{
 \dontrun{
-overview_print(obj = overview_object, title = "Some nice title", crosstab = FALSE)
-overview_print(obj = overview_ct_object, title = "Some nice title for a cross tab", crosstab = TRUE, cond1 = "Name of first condition", cond2 = "Name of second condition")
+overview_print(obj = overview_object,
+               title = "Some nice title",
+               crosstab = FALSE)
+overview_print(obj = overview_ct_object,
+               title = "Some nice title for a cross tab",
+               crosstab = TRUE,
+               cond1 = "Name of first condition",
+               cond2 = "Name of second condition")
 }
 }

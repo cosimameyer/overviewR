@@ -15,7 +15,6 @@
 #'                   cond1 = var1, cond2 = var2,
 #'                   threshold1 = 50, threshold2 = 70,
 #'                   id = country_code, time = year)
-#' }
 #'
 #' output_crosstab <- overview_crosstab(
 #' dat = data,
@@ -25,7 +24,7 @@
 #' threshold2 = 27000,
 #' id = ccode,
 #' time = year
-#' )
+#' )}
 
 overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, time){
   # Generate some error messages

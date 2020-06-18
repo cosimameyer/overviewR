@@ -25,50 +25,22 @@ overview_crosstab(dat, cond1, cond2, threshold1, threshold2, id, time)
 A data frame that contains a summary of your sample and that can be easily converted to a LaTeX output
 }
 \description{
-This function allows you sort your sample conditionally in a nice cross table. This can be helpful if you want to get a first sense of your data before digging deeper.
+This function allows you sort your sample conditionally in a nice cross table. This can be helpful if you want to get a first sense of your data before digging deeper. Note, if you use a data set that has multiple observations on your id-time unit, the function automatically aggregates this information using the mean.
 }
 \examples{
 \dontrun{
-overview_crosstab(dat = dataset, cond1 = var1, cond2 = var2, threshold1 = 50, threshold2 = 70, id = country_code, time = year)
-}
-
-library(tidyverse)
-
-#' set.seed(68163)
-df_combined <- data.frame(
-  # Countries
-  countries  = c(
-    rep("RWA", 4),
-    rep("AGO", 8),
-    rep("BEN", 2),
-    rep("GBR", 5),
-    rep("FRA", 3)
-  ),
-  # Time frame
-  years =
-    c(
-      seq(1990, 1995),
-      seq(1990, 1992),
-      seq(1995, 1999),
-      seq(1991, 1999, by = 2),
-      seq(1993, 1999, by = 3)
-    ),
-  # GDP
-  gdp =
-    runif(22, 10000, 40000),
-  # Population
-  population =
-    runif(22, 100, 50000),
-  stringsAsFactors = FALSE
-)
+overview_crosstab(dat = dataset,
+                  cond1 = var1, cond2 = var2,
+                  threshold1 = 50, threshold2 = 70,
+                  id = country_code, time = year)
 
 output_crosstab <- overview_crosstab(
-dat = df_combined,
+dat = data,
 cond1 = gdp,
 cond2 = population,
-threshold1 = 30000,
-threshold2 = 15000,
-id = countries,
-time = years
-)
+threshold1 = 25000,
+threshold2 = 27000,
+id = ccode,
+time = year
+)}
 }
