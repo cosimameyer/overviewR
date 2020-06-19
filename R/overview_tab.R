@@ -8,9 +8,9 @@
 #' @return A data frame that contains a summary of your sample and that can be later easily converted to a LaTeX output
 #' @examples
 #' \dontrun{
-#' overview_tab(dat = dataset, id = country_code, time = year)
 #'
-#' output_table <- overview_tab(dat = toydata, id = ccode, time = year)}
+#' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+#' }
 
 overview_tab <- function(dat, id, time) {
   # # Generate some error messages
@@ -42,7 +42,7 @@ overview_tab <- function(dat, id, time) {
     dplyr::distinct(!!time, !!id, .keep_all = T)
 
   # Check if data set only has unique observations
-  if (row(length_nodup) == nrow(dat)) {
+  if (nrow(length_nodup) == nrow(dat)) {
   # Apply it to the data
   tab <- dat %>%
     # Select important variables

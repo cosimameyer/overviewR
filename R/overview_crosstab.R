@@ -10,11 +10,7 @@
 #' @param time Your time (e.g., time periods given by years, months, ...)
 #' @return A data frame that contains a summary of your sample and that can be easily converted to a LaTeX output
 #' @examples
-#' \dontrun{
-#' overview_crosstab(dat = dataset,
-#'                   cond1 = var1, cond2 = var2,
-#'                   threshold1 = 50, threshold2 = 70,
-#'                   id = country_code, time = year)
+#'\dontrun{
 #'
 #' output_crosstab <- overview_crosstab(
 #' dat = toydata,
@@ -48,7 +44,7 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
   length_nodup <- dat %>%
     dplyr::distinct(!!time, !!id, .keep_all = T)
 
-  # Check if dataset only has unique observations
+  # Check if data set only has unique observations
   if (nrow(length_nodup) == nrow(dat)) {
     red <- dat %>%
     dplyr::mutate(c1 = ifelse(!!cond1 >= threshold1, 1, 0),

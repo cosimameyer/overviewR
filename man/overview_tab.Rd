@@ -21,7 +21,6 @@ This function gives you a nice overview table for time and scope conditions
 }
 \examples{
 \dontrun{
-overview_tab(dat = dataset, id = country_code, time = year)
-
-output_table <- overview_tab(dat = toydata, id = ccode, time = year)}
+output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+}
 }

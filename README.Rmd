@@ -29,7 +29,7 @@ The output of this package  is also compatible with other packages such as [```x
 
 You can install the latest version of `overviewR` directly from [GitHub](https://github.com/cosimameyer/overviewR) with: 
 
-```{r, message=FALSE, warnings=FALSE}
+```{r, message=FALSE, warning=FALSE, results = "hide"}
 library(devtools)
 devtools::install_github("cosimameyer/overviewR")
 ```
@@ -275,6 +275,8 @@ With ```save_out = TRUE``` you can also export both outputs as ```.tex``` files 
 ```{r, eval = FALSE}
 overview_print(obj = output_table, save_out = TRUE)
 ```
+
+## Compatabilities with other packages 
 
 The output is also compatible with other functions such as [```xtable```](https://cran.r-project.org/web/packages/xtable/xtable.pdf) or [```flextable```](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html).
 

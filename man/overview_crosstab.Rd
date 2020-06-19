@@ -29,11 +29,6 @@ This function allows you sort your sample conditionally in a nice cross table. T
 }
 \examples{
 \dontrun{
-overview_crosstab(dat = dataset,
-                  cond1 = var1, cond2 = var2,
-                  threshold1 = 50, threshold2 = 70,
-                  id = country_code, time = year)
-
 output_crosstab <- overview_crosstab(
 dat = toydata,
 cond1 = gdp,

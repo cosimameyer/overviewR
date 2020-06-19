@@ -465,6 +465,8 @@ and store them on your device.
 overview_print(obj = output_table, save_out = TRUE)
 ```
 
+## Compatabilities with other packages
+
 The output is also compatible with other functions such as
 [`xtable`](https://cran.r-project.org/web/packages/xtable/xtable.pdf) or
 [`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html).
