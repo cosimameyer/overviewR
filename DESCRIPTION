@@ -16,7 +16,8 @@ License: GPL-3
 Encoding: UTF-8
 Language: en-US
 Imports:
-    dplyr (>= 1.0.0)
+    dplyr (>= 1.0.0),
+    magrittr (>= 1.0.0)
 Depends: R (>= 3.5.0)
 LazyData: true
 RoxygenNote: 7.1.0

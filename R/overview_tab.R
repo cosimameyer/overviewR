@@ -10,7 +10,7 @@
 #' \dontrun{
 #' overview_tab(dat = dataset, id = country_code, time = year)
 #'
-#' output_table <- overview_tab(dat = data, id = ccode, time = year)}
+#' output_table <- overview_tab(dat = toydata, id = ccode, time = year)}
 
 overview_tab <- function(dat, id, time) {
   # # Generate some error messages
