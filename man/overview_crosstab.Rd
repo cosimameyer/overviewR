@@ -35,12 +35,12 @@ overview_crosstab(dat = dataset,
                   id = country_code, time = year)
 
 output_crosstab <- overview_crosstab(
-dat = data,
+dat = toydata,
 cond1 = gdp,
 cond2 = population,
 threshold1 = 25000,
 threshold2 = 27000,
 id = ccode,
-time = year
-)}
+time = year)
+}
 }

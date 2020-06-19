@@ -23,8 +23,8 @@
 #' threshold1 = 25000,
 #' threshold2 = 27000,
 #' id = ccode,
-#' time = year
-#' )}
+#' time = year)
+#' }
 
 overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, time){
   # Generate some error messages
@@ -43,11 +43,13 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
 
   # Check the length of unique observations (based on time and id) in the dataset
   # We need this for the next check
+  #length_nodup <- unique( dat[ , c("time", "id") ] )
+
   length_nodup <- dat %>%
     dplyr::distinct(!!time, !!id, .keep_all = T)
 
   # Check if dataset only has unique observations
-  if (isTRUE(nrow(length_nodup) == nrow(dat))) {
+  if (nrow(length_nodup) == nrow(dat)) {
     red <- dat %>%
     dplyr::mutate(c1 = ifelse(!!cond1 >= threshold1, 1, 0),
                   c2 = ifelse(!!cond2 >= threshold2, 1, 0)) %>%
@@ -115,12 +117,10 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
   else {
     red <- dat %>%
       dplyr::ungroup() %>%
-    #dplyr::select(!!id, !!time, !!cond1, !!cond2) %>%
       dplyr::group_by(!!id, !!time) %>%
       dplyr::summarise(cond1_mean = mean(!!cond1),
                        cond2_mean = mean(!!cond2)) %>%
-      #select(!!id, !!time, cond1, cond2) %>%
-      dplyr::ungroup() # %>%
+      dplyr::ungroup()
 
     cond1_mean <- red$cond1_mean
     cond1_mean <- dplyr::enquo(cond1_mean)
@@ -133,7 +133,6 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
       dplyr::mutate(c1 = ifelse(!!cond1_mean >= threshold1, 1, 0),
                     c2 = ifelse(!!cond2_mean >= threshold2, 1, 0)) %>%
       dplyr::group_by(c1, c2) %>%
-      # dplyr::select(!!id, !!time, !!cond1_mean, !!cond2_mean, c1, c2) %>%
       dplyr::mutate(quart1 = ifelse(c1 ==1 & c2 == 1, 1, 0),
                     quart2 = ifelse(c1 == 0 & c2 == 1, 1, 0),
                     quart3 = ifelse(c1 == 1 & c2 == 0, 1, 0),
@@ -162,9 +161,9 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
     part4 <- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
 
     # Bring it back in a data frame structure to make it easily convertible to a table
-    dat1 <- cbind(part1, part2) #cbind("Cond1 fulfilled" = part1, "Cond1 not fulfilled" = part2)
+    dat1 <- cbind(part1, part2)
     dat2 <- cbind(part3, part4)
-    crosstab <- data.frame(rbind(dat1, dat2)) #, row.names = c("Cond2 fulfilled", "Cond2 not fulfilled"))
+    crosstab <- data.frame(rbind(dat1, dat2))
 
     return(crosstab)
 

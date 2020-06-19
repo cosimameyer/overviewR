@@ -42,7 +42,7 @@ overview_tab <- function(dat, id, time) {
     dplyr::distinct(!!time, !!id, .keep_all = T)
 
   # Check if data set only has unique observations
-  if (isTRUE(nrow(length_nodup) == nrow(dat))) {
+  if (row(length_nodup) == nrow(dat)) {
   # Apply it to the data
   tab <- dat %>%
     # Select important variables
