@@ -86,19 +86,19 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
   quart3 <- red %>% dplyr::filter(quart3 == 1) %>% dplyr::select(!!id, !!time)
   quart4 <- red %>% dplyr::filter(quart4 == 1) %>% dplyr::select(!!id, !!time)
 
-  quart1_1 <- overview_tab(quart1, !!id, !!time)
+  quart1_1 <- overviewR::overview_tab(quart1, !!id, !!time)
   quart1_1 <- as.data.frame(quart1_1)
   part1 <- paste(paste0(quart1_1[,1], " (", as.character(quart1_1[,2]), ")"), collapse=", ")
 
-  quart2_1 <- overview_tab(quart2, !!id, !!time)
+  quart2_1 <- overviewR::overview_tab(quart2, !!id, !!time)
   quart2_1 <- as.data.frame(quart2_1)
   part2 <- paste(paste0(quart2_1[,1], " (", as.character(quart2_1[,2]), ")"), collapse=", ")
 
-  quart3_1 <- overview_tab(quart3, !!id, !!time)
+  quart3_1 <- overviewR::overview_tab(quart3, !!id, !!time)
   quart3_1 <- as.data.frame(quart3_1)
   part3 <- paste(paste0(quart3_1[,1], " (", as.character(quart3_1[,2]), ")"), collapse=", ")
 
-  quart4_1 <- overview_tab(quart4, !!id, !!time)
+  quart4_1 <- overviewR::overview_tab(quart4, !!id, !!time)
   quart4_1 <- as.data.frame(quart4_1)
   part4 <- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
 
@@ -140,19 +140,19 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
     quart3 <- red %>% dplyr::filter(quart3 == 1) %>% dplyr::select(!!id, !!time)
     quart4 <- red %>% dplyr::filter(quart4 == 1) %>% dplyr::select(!!id, !!time)
 
-    quart1_1 <- overview_tab(quart1, !!id, !!time)
+    quart1_1 <- overviewR::overview_tab(quart1, !!id, !!time)
     quart1_1 <- as.data.frame(quart1_1)
     part1 <- paste(paste0(quart1_1[,1], " (", as.character(quart1_1[,2]), ")"), collapse=", ")
 
-    quart2_1 <- overview_tab(quart2, !!id, !!time)
+    quart2_1 <- overviewR::overview_tab(quart2, !!id, !!time)
     quart2_1 <- as.data.frame(quart2_1)
     part2 <- paste(paste0(quart2_1[,1], " (", as.character(quart2_1[,2]), ")"), collapse=", ")
 
-    quart3_1 <- overview_tab(quart3, !!id, !!time)
+    quart3_1 <- overviewR::overview_tab(quart3, !!id, !!time)
     quart3_1 <- as.data.frame(quart3_1)
     part3 <- paste(paste0(quart3_1[,1], " (", as.character(quart3_1[,2]), ")"), collapse=", ")
 
-    quart4_1 <- overview_tab(quart4, !!id, !!time)
+    quart4_1 <- overviewR::overview_tab(quart4, !!id, !!time)
     quart4_1 <- as.data.frame(quart4_1)
     part4 <- paste(paste0(quart4_1[,1], " (", as.character(quart4_1[,2]), ")"), collapse=", ")
 

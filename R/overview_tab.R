@@ -45,7 +45,7 @@ overview_tab <- function(dat, id, time) {
   if (nrow(length_nodup) == nrow(dat)) {
   # Apply it to the data
   tab <- dat %>%
-    # Select important variables
+    # # Select important variables
     dplyr::select(!!id,!!time) %>%
     # # Group data
     dplyr::group_by(!!id,!!time) %>%
