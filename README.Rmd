@@ -29,7 +29,7 @@ The output of this package  is also compatible with other packages such as [```x
 
 You can install the latest version of overviewR directly from [GitHub](https://github.com/cosimameyer/overviewR) with: 
 
-``` r
+```{r, message=FALSE, warnings=FALSE}
 library(devtools)
 devtools::install_github("cosimameyer/overviewR")
 ```
@@ -43,24 +43,24 @@ install.packages("overviewR")
 ## Example
 
 In a first step, we load the package.
-```{r, eval=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(overviewR)
 ```
 
 For the examples, we will use the pre-loaded toy data of the package. The package comes with two cross-sectional datasets on a country-month-year unit (```data```) as well as on a testperson-date unit (```day_data```). Before we get started, we will have a look at the data first.
 
-```{r, eval=FALSE}
-head(data)
+```{r}
+head(toydata)
 ```
-```
-    ccode   year   month  gdp       population
-    RWA     1990   Jan    24180.77  14969.988
-    RWA     1990   Feb    23650.53  11791.464
-    RWA     1990   Mar    21860.14  30047.979
-    RWA     1990   Apr    20801.06  19853.556
-    RWA     1990   May    18702.84   5148.118
-    RWA     1990   Jun    30272.37  48625.140
-```
+<!-- ``` -->
+<!--     ccode   year   month  gdp       population -->
+<!--     RWA     1990   Jan    24180.77  14969.988 -->
+<!--     RWA     1990   Feb    23650.53  11791.464 -->
+<!--     RWA     1990   Mar    21860.14  30047.979 -->
+<!--     RWA     1990   Apr    20801.06  19853.556 -->
+<!--     RWA     1990   May    18702.84   5148.118 -->
+<!--     RWA     1990   Jun    30272.37  48625.140 -->
+<!-- ``` -->
 
 We have 264 observations for 5 countries (Angola, Benin, France, Rwanda, and UK) stored in the ```ccode``` variable, over a time period between 1990 to 1999 (```year```). We also have additional information for the month (```month```). As you can tell, we have some gaps in the time frame. We also add randomly generated values for the GDP (```gdp```) and the population size (```population```).
 
@@ -108,23 +108,23 @@ As you can see, we need a data frame that has one column with an id (in this cas
 
 ### ```overview_tab```
 Generate some general overview using ```overview_tab```.
-```{r, eval=FALSE}
-output_table <- overview_tab(dat = data, id = ccode, time = year)
+```{r, message=FALSE, warning=FALSE}
+output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 ```
 
-Checking the output, we get a data frame like this:
-```{r, eval=FALSE}
+Checking the output, we get a tibble like this:
+```{r, message=FALSE}
 output_table
 ```
 
-```
-# ccode   time_frame
-# RWA	    1990 - 1995			
-# AGO	    1990 - 1992			
-# BEN	    1995 - 1999			
-# GBR	    1991, 1993, 1995, 1997, 1999			
-# FRA	    1993, 1996, 1999
-```
+<!-- ``` -->
+<!-- # ccode   time_frame -->
+<!-- # RWA	    1990 - 1995			 -->
+<!-- # AGO	    1990 - 1992			 -->
+<!-- # BEN	    1995 - 1999			 -->
+<!-- # GBR	    1991, 1993, 1995, 1997, 1999			 -->
+<!-- # FRA	    1993, 1996, 1999 -->
+<!-- ``` -->
 
 We store the output in the object ```output_table``` to access it later.
 <!-- This function automatically generates an object and stores it in your environment so that you can access it later. -->
@@ -132,9 +132,9 @@ We store the output in the object ```output_table``` to access it later.
 ### ```overview_crosstab```
 If you want to generate a cross table that divides our data conditionally on two factors, this can be done with ```overview_crosstab```. 
 
-```{r, eval=FALSE, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 output_crosstab <- overview_crosstab(
-    dat = data,
+    dat = toydata,
     cond1 = gdp,
     cond2 = population,
     threshold1 = 25000,
@@ -146,7 +146,7 @@ output_crosstab <- overview_crosstab(
 
 Checking the output, we get a data frame like this:
 
-```{r, eval=FALSE}
+```{r, message=FALSE, eval=FALSE}
 output_crosstab
 ```
 ```
@@ -169,23 +169,26 @@ We also store the output in the object, this time in ```output_crosstab```, to a
 To generate an easily usable LaTeX output, ```overviewR``` offers the function ```overview_print```. 
 
 We will start with our general sample overview, stored in ```output_table```.
-```{r, eval = FALSE}
+```{r, eval=FALSE}
 overview_print(obj = output_table)
 ```
 <details>
   <summary>TeX output</summary>
+```{r}
+overview_print(obj = output_table)
 ```
-% Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
- \begin{table}[ht] 
- \centering 
- \caption{Time and scope of the sample} 
- \begin{tabular}{ll} 
- \hline 
-Sample & Time frame \\ \hline 
- RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
- \end{tabular} 
- \end{table} 
-```
+<!-- ``` -->
+<!-- % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR  -->
+<!--  \begin{table}[ht]  -->
+<!--  \centering  -->
+<!--  \caption{Time and scope of the sample}  -->
+<!--  \begin{tabular}{ll}  -->
+<!--  \hline  -->
+<!-- Sample & Time frame \\ \hline  -->
+<!--  RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline  -->
+<!--  \end{tabular}  -->
+<!--  \end{table}  -->
+<!-- ``` -->
 </details>
 
 <p align="center">
@@ -195,22 +198,26 @@ Sample & Time frame \\ \hline
 The default already gives us a nice title ("Time and scope of the sample") but can be modified in the argument ```title = ...```. The same holds for the column names ("Sample" and "Time frame" by default). 
 
 ```{r, eval = FALSE}
-overview_print(obj = output_table, col1 = "Countries", col2 = "Years", title = "Cool new title for our awesome table")
+overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
 ```
 <details>
   <summary>TeX output</summary>
+```{r}
+overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
 ```
-% Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
- \begin{table}[ht] 
- \centering 
- \caption{Cool new title for our awesome table} 
- \begin{tabular}{ll} 
- \hline 
-Countries & Years \\ \hline 
- RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline 
- \end{tabular} 
- \end{table} 
-```
+
+<!-- ``` -->
+<!-- % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR  -->
+<!--  \begin{table}[ht]  -->
+<!--  \centering  -->
+<!--  \caption{Cool new title for our awesome table}  -->
+<!--  \begin{tabular}{ll}  -->
+<!--  \hline  -->
+<!-- Countries & Years \\ \hline  -->
+<!--  RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline  -->
+<!--  \end{tabular}  -->
+<!--  \end{table}  -->
+<!-- ``` -->
 </details>
 
 <p align="center">
@@ -232,22 +239,31 @@ overview_print(
 ```
 <details>
   <summary>TeX output</summary>
+```{r}
+overview_print(
+  obj = output_crosstab,
+  title = "Cross table of the sample",
+  crosstab = TRUE,
+  cond1 = "GDP",
+  cond2 = "Population"
+)
 ```
-% Overview table generated in R version 3.6.3 (2020-02-29) using overviewR 
- % Please add the following required packages to your document preamble: 
- % \usepackage{multirow} 
- % \usepackage{tabularx} 
- % \newcolumntype{b}{X} 
- % \newcolumntype{s}{>{\hsize=.5\hsize}X} 
- 
- \begin{table}[] 
- \begin{tabularx}{\textwidth}{ssbb} 
- \hline & & 
- \multicolumn{2}{c}{\textbf{GDP}} \\  & & \textbf{Fulfilled} & 
- \textbf{Not fulfilled} \\ \hline \\ \multirow{2}{*}{\textbf{Population}} & \textbf{Fulfilled} & 
- RWA (1990 - 1991), AGO (1990), GBR (1993, 1997), FRA (1996) & AGO (1994, 1991 - 1992), GBR (1991), FRA (1993, 1999)\\  \\ \hline \\ & \textbf{Not fulfilled} &  RWA (1992 - 1993), AGO (1996), GBR (1999) & AGO (1995, 1997), BEN (1998 - 1999), GBR (1995)\\  \hline \\ \end{tabularx} 
- \end{table} 
-```
+<!-- ``` -->
+<!-- % Overview table generated in R version 3.6.3 (2020-02-29) using overviewR  -->
+<!--  % Please add the following required packages to your document preamble:  -->
+<!--  % \usepackage{multirow}  -->
+<!--  % \usepackage{tabularx}  -->
+<!--  % \newcolumntype{b}{X}  -->
+<!--  % \newcolumntype{s}{>{\hsize=.5\hsize}X}  -->
+
+<!--  \begin{table}[]  -->
+<!--  \begin{tabularx}{\textwidth}{ssbb}  -->
+<!--  \hline & &  -->
+<!--  \multicolumn{2}{c}{\textbf{GDP}} \\  & & \textbf{Fulfilled} &  -->
+<!--  \textbf{Not fulfilled} \\ \hline \\ \multirow{2}{*}{\textbf{Population}} & \textbf{Fulfilled} &  -->
+<!--  RWA (1990 - 1991), AGO (1990), GBR (1993, 1997), FRA (1996) & AGO (1994, 1991 - 1992), GBR (1991), FRA (1993, 1999)\\  \\ \hline \\ & \textbf{Not fulfilled} &  RWA (1992 - 1993), AGO (1996), GBR (1999) & AGO (1995, 1997), BEN (1998 - 1999), GBR (1995)\\  \hline \\ \end{tabularx}  -->
+<!--  \end{table}  -->
+<!-- ``` -->
 </details>
 
 <p align="center">
@@ -261,6 +277,24 @@ overview_print(obj = output_table, save_out = TRUE)
 ```
 
 The output is also compatible with other functions such as [```xtable```](https://cran.r-project.org/web/packages/xtable/xtable.pdf) or [```flextable```](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html).
+
+One example is shown below:
+
+```{r, eval=FALSE}
+# install.packages("flextable")
+library(flextable)
+table_output <- qflextable(output_table)
+table_output <-
+  set_header_labels(table_output,   
+                    ccode = "Countries",
+                    time_frame = "Time frame")
+set_table_properties(
+  table_output,
+  width = .4,
+  layout = "autofit"
+)
+```
+
 
 # Credits
 
