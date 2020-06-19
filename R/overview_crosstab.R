@@ -17,7 +17,7 @@
 #'                   id = country_code, time = year)
 #'
 #' output_crosstab <- overview_crosstab(
-#' dat = data,
+#' dat = toydata,
 #' cond1 = gdp,
 #' cond2 = population,
 #' threshold1 = 25000,
@@ -44,7 +44,7 @@ overview_crosstab <- function(dat, cond1, cond2, threshold1, threshold2, id, tim
   # Check the length of unique observations (based on time and id) in the dataset
   # We need this for the next check
   length_nodup <- dat %>%
-    distinct(!!time, !!id, .keep_all = T)
+    dplyr::distinct(!!time, !!id, .keep_all = T)
 
   # Check if dataset only has unique observations
   if (isTRUE(nrow(length_nodup) == nrow(dat))) {
