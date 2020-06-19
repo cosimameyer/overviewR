@@ -31,7 +31,7 @@ and
 
 ## Installation
 
-You can install the latest version of overviewR directly from
+You can install the latest version of `overviewR` directly from
 [GitHub](https://github.com/cosimameyer/overviewR) with:
 
 ``` r
@@ -61,13 +61,13 @@ first.
 
 ``` r
 head(toydata)
-#>     ccode year month      gdp population
-#> 1     RWA 1990   Jan 24180.77  14969.988
-#> 1.1   RWA 1990   Feb 23650.53  11791.464
-#> 1.2   RWA 1990   Mar 21860.14  30047.979
-#> 1.3   RWA 1990   Apr 20801.06  19853.556
-#> 1.4   RWA 1990   May 18702.84   5148.118
-#> 1.5   RWA 1990   Jun 30272.37  48625.140
+#>   ccode year month      gdp population
+#> 1   RWA 1990   Jan 24180.77  14969.988
+#> 2   RWA 1990   Feb 23650.53  11791.464
+#> 3   RWA 1990   Mar 21860.14  30047.979
+#> 4   RWA 1990   Apr 20801.06  19853.556
+#> 5   RWA 1990   May 18702.84   5148.118
+#> 6   RWA 1990   Jun 30272.37  48625.140
 ```
 
 <!-- ``` -->

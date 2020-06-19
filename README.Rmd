@@ -27,7 +27,7 @@ The output of this package  is also compatible with other packages such as [```x
 
 ## Installation
 
-You can install the latest version of overviewR directly from [GitHub](https://github.com/cosimameyer/overviewR) with: 
+You can install the latest version of `overviewR` directly from [GitHub](https://github.com/cosimameyer/overviewR) with: 
 
 ```{r, message=FALSE, warnings=FALSE}
 library(devtools)
