@@ -22,13 +22,20 @@ overview_crosstab(dat, cond1, cond2, threshold1, threshold2, id, time)
 \item{time}{Your time (e.g., time periods given by years, months, ...)}
 }
 \value{
-A data frame that contains a summary of your sample and that can be easily converted to a LaTeX output
+A data frame that contains a summary of your sample and that
+    can be easily converted to a LaTeX output
 }
 \description{
-This function allows you sort your sample conditionally in a nice cross table. This can be helpful if you want to get a first sense of your data before digging deeper. Note, if you use a data set that has multiple observations on your id-time unit, the function automatically aggregates this information using the mean.
+This function allows you sort your sample conditionally
+    in a nice cross table. This can be helpful if you want to get a
+    first sense of your data before digging deeper. Note, if you use
+    a data set that has multiple observations on your id-time unit,
+    the function automatically aggregates this information using the
+    mean.
 }
 \examples{
 \dontrun{
+
 output_crosstab <- overview_crosstab(
 dat = toydata,
 cond1 = gdp,

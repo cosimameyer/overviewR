@@ -20,29 +20,38 @@ overview_print(
 
 \item{title}{Title of your table (default is "Time and scope of the sample")}
 
-\item{id}{The name of your left column (default is "Sample"), will be ignored if crosstab is TRUE}
+\item{id}{The name of your left column (default is "Sample"), will be ignored
+if crosstab is TRUE}
 
-\item{time}{The name of your right column (default is ("Time frame")), will be ignored if crosstab is TRUE}
+\item{time}{The name of your right column (default is ("Time frame")), will
+be ignored if crosstab is TRUE}
 
-\item{crosstab}{Logical argument, if TRUE produces a crosstab output, default is FALSE}
+\item{crosstab}{Logical argument, if TRUE produces a crosstab output, default
+is FALSE}
 
-\item{cond1}{Description for your first condition (character), will be ignored if crosstab is FALSE}
+\item{cond1}{Description for your first condition (character), will be
+ignored if crosstab is FALSE}
 
-\item{cond2}{Description for your second condition (character), will be ignored if crosstab is FALSE}
+\item{cond2}{Description for your second condition (character), will be
+ignored if crosstab is FALSE}
 
-\item{save_out}{This is an optional argument that exports your table as .tex file, default is FALSE}
+\item{save_out}{This is an optional argument that exports your table as .tex
+file, default is FALSE}
 }
 \value{
 A LaTeX output that you can copy and paste in your text document
 }
 \description{
-This function produces a LaTeX for both overview_tab and overview_crosstab
+This function produces a LaTeX for both overview_tab and
+    overview_crosstab
 }
 \examples{
 \dontrun{
+
 overview_print(obj = overview_object,
                title = "Some nice title",
                crosstab = FALSE)
+
 overview_print(obj = overview_ct_object,
                title = "Some nice title for a cross tab",
                crosstab = TRUE,

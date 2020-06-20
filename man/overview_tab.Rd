@@ -14,13 +14,16 @@ overview_tab(dat, id, time)
 \item{time}{Your time (e.g., time periods given by years, months, ...)}
 }
 \value{
-A data frame that contains a summary of your sample and that can be later easily converted to a LaTeX output
+A data frame that contains a summary of your sample and that can be
+    later easily converted to a LaTeX output
 }
 \description{
-This function gives you a nice overview table for time and scope conditions
+This function gives you a nice overview table for time and
+    scope conditions
 }
 \examples{
 \dontrun{
+
 output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 }
 }
