@@ -48,8 +48,9 @@ test_that("check output of overview_print for crosstab", {
   output_cross <- overview_crosstab(dat = toydata, id = ccode, time = year,
                                     cond1 = population, cond2 = gdp,
                                     threshold1 = 27000, threshold2 = 25000)
-  tex_output <- overview_print(output_cross, crosstab=TRUE, save_out = TRUE)
-  input_output <- overview_print(output_cross, crosstab=TRUE, save_out = FALSE)
+  tex_output <- overview_print(output_cross, crosstab = TRUE, save_out = TRUE)
+  input_output <- overview_print(output_cross, crosstab = TRUE,
+                                 save_out = FALSE)
   testthat::expect_null(print(tex_output))
   testthat::expect_null(print(input_output))
 })
@@ -64,7 +65,8 @@ test_that("Get an error message", {
       rep("GBR", 5),
       rep("FRA", 3)
     ))
-  expect_error(overview_print(df_combined), "Data frame requires two columns that represent the time and
+  expect_error(overview_print(df_combined),
+  "Data frame requires two columns that represent the time and
         scope dimension of the data")
 })
 
@@ -120,5 +122,4 @@ correct format", {
                                               threshold1 = 20,
                                               threshold2 = 10)
             expect_equal(nrow(output_cross), 2)
-          })
-
+})

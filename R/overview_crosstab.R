@@ -48,43 +48,6 @@ overview_crosstab <-
     length_nodup <- dat %>%
       dplyr::distinct(!!id, !!time, .keep_all = TRUE)
 
-
-    # # Define two helper functions (similar to overview_tab)
-    # # Check for consecutive numbers and collapse them with "-"
-    # # From here: https://bit.ly/3ebZo5j
-    # find_int_runs <- function(run) {
-    #   rundiff <- c(1, diff(run))
-    #   difflist <- split(run, cumsum(rundiff != 1))
-    #   unlist(lapply(difflist, function(x) {
-    #     if (length(x) %in% 1)
-    #       as.character(x)
-    #     else
-    #       paste(x[1], "-", x[length(x)])
-    #   }), use.names = FALSE)
-    # }
-    # # Create output
-    # create_output <- function(data_frame, id_var, time_var) {
-    #   data_frame <- data_frame
-    #   id_var <- dplyr::enquo(id_var)
-    #   time_var <- dplyr::enquo(time_var)
-    #
-    #   tab <- data_frame %>%
-    #   # # Select important variables
-    #   dplyr::select(!!id_var, !!time_var) %>%
-    #   # # Group data
-    #   dplyr::group_by(!!id_var, !!time_var) %>%
-    #   # Only get distinct IDs
-    #   dplyr::distinct(!!id_var) %>%
-    #   # Group by ID
-    #   dplyr::group_by(!!id_var) %>%
-    #   # Apply function generated above
-    #   dplyr::mutate(time_frame = paste(find_int_runs(!!time_var),
-    #                                    collapse = ", ")) %>%
-    #   # Subset it to only one distinct country
-    #   dplyr::distinct(!!id_var, !!time_frame)
-    #   return(tab)
-    # }
-
     # Check if data set only has unique observations
     if (nrow(length_nodup) == nrow(dat)) {
       red <- dat %>%

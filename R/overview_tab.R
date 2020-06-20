@@ -29,7 +29,6 @@ overview_tab <- function(dat, id, time) {
   }
 
   # Then start with the data
-  # dat <- dat
   id <- dplyr::enquo(id)
   time <- dplyr::enquo(time)
 
