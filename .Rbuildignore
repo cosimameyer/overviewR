@@ -7,3 +7,4 @@
 ^\.circleci$
 ^\.circleci/config\.yml$
 ^\.github$
+^codecov\.yml$
