@@ -1,19 +1,19 @@
 #' @title overview_crosstab
 #'
 #' @description Sorts a data set conditionally in a cross table.
-#'     This can be helpful if for instance to get a sense of the time and scope
+#'     This can be helpful to get a sense of the time and scope
 #'     conditions of a data set. Note, if used with a data set that has multiple
 #'     observations on the id-time unit, the function automatically aggregates
 #'     this information using the mean.
 #' @param dat A data set object
 #' @param cond1 Variable that describes the first condition
 #' @param cond2 Variable that describes the second condition
-#' @param threshold1 A threshold for cond1
-#' @param threshold2 A threshold for cond2
+#' @param threshold1 A threshold for \code{cond1}
+#' @param threshold2 A threshold for \code{cond2}
 #' @param id Scope (e.g., country codes or individual IDs)
 #' @param time Time (e.g., time periods given by years, months, ...)
 #' @return A data frame object that contains a summary of the data set that can
-#'     later be converted to a TeX output using overview_print
+#'     later be converted to a TeX output using \code{overview_print}
 #'
 #' @examples
 #' \dontrun{

@@ -14,26 +14,29 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 <!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--21-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
-The goal of overviewR is to make it easy to get an overview of your data
-by displaying relevant sample information. At the moment, you have two
-functions (`overview_tab` and `overview_crosstab`) that allow you to
-generate a tabular overview of both your general sample and conditional
-sample. The general sample plots a two-column table that gives
-information on your id in the left column and on the time frame for the
-respective id in the right column. The conditional column further plots
-a cross table on two conditions. This way, you can easily visualize your
-theoretical assumptions with examples from your dataset. The function
-`overview_print` then converts this output to nicely usable TeX code.
+The goal of overviewR is to make it easy to get an overview of a data
+set by displaying relevant sample information. At the moment, there are
+two functions (`overview_tab` and `overview_crosstab`) that generate a
+tabular overview of the general sample as well as a conditional sample.
+The general sample plots a two-column table that provides information on
+an id in the left column and a the time frame on the right column. The
+conditional column allows to disaggregate the overview table by
+specifying two conditions, hence resulting a 2x2 table. This way, it is
+easy to visualize the time and scope conditions as well as theoretical
+assumptions with examples from the data set. The function
+`overview_print` converts this output of both `overview_tab` and
+`overview_crosstab` into TeX code and/or directly into a .tex file.
 
-The output of this package is also compatible with other packages such
-as [`xtable`](https://cran.r-project.org/web/packages/xtable/xtable.pdf)
-and
-[`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html).
+The output of `overview_tab` and `overview_crosstab` are also compatible
+with other packages such as
+[`xtable`](https://cran.r-project.org/web/packages/xtable/xtable.pdf),
+[`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html),
+or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
 
 ## Installation
 
-You can install the latest version of `overviewR` directly from
-[GitHub](https://github.com/cosimameyer/overviewR) with:
+The latest version of `overviewR` can be installed directly from
+[GitHub](https://github.com/cosimameyer/overviewR) using:
 
 ``` r
 library(devtools)
@@ -42,17 +45,15 @@ devtools::install_github("cosimameyer/overviewR")
 
 ## Example
 
-In a first step, we load the package.
+First, load the package.
 
 ``` r
 library(overviewR)
 ```
 
-For the examples, we will use the pre-loaded toy data of the package.
-The package comes with two cross-sectional datasets on a
-country-month-year unit (`data`) as well as on a testperson-date unit
-(`day_data`). Before we get started, we load the data and have a look at
-the data first.
+The following examples use a toy data set (`toydata`) that comes with
+the package. This data contains artificially generated information in a
+cross-sectional format on 5 countries, covering the period 1990-1999.
 
 ``` r
 data(toydata)
@@ -84,30 +85,33 @@ head(toydata)
 
 <!-- ``` -->
 
-We have 264 observations for 5 countries (Angola, Benin, France, Rwanda,
-and UK) stored in the `ccode` variable, over a time period between 1990
-to 1999 (`year`). We also have additional information for the month
-(`month`). As you can tell, we have some gaps in the time frame. We also
-add randomly generated values for the GDP (`gdp`) and the population
-size (`population`).
+There are 264 observations for 5 countries (Angola, Benin, France,
+Rwanda, and UK) stored in the `ccode` variable, over a time period
+between 1990 to 1999 (`year`) with additional information for the month
+(`month`). Additionally, two artificially generated fake variables for
+GDP (`gdp`) and population size (`population`) are included to
+illustrate of conditions.
 
-As you can see, we need a data frame that has one column with an id (in
-this case `ccode` which stands for countries or `testperson` which
-stands for the identifier of the test person) and one column with a time
-variable (here `years`, `month`, or `date`). If your data set does not
-have this format, consider using [`pivot_wider()` or
+The following functions work best on data sets that have an
+id-time-structure, in the case of `toydata` this corresponds to
+country-year with `ccode` and `year`. If the data set does not have this
+format yet, consider using [`pivot_wider()` or
 `pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html)
 to get to the format.
 
 ### `overview_tab`
 
-Generate some general overview using `overview_tab`.
+Generate some general overview of the data set using the time and scope
+conditions with `overview_tab`.
 
 ``` r
 output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 ```
 
-Checking the output, we get a tibble like this:
+The resulting data frame collapses the time condition for each id by
+taking into account potential gaps in the time frame. Note that the
+column name for the time frame is set by default to `time_frame` and
+internally generated when using `overview_tab`.
 
 ``` r
 output_table
@@ -120,13 +124,12 @@ output_table
     # GBR       1991, 1993, 1995, 1997, 1999
     # FRA       1993, 1996, 1999
 
-We store the output in the object `output_table` to access it later.
-<!-- This function automatically generates an object and stores it in your environment so that you can access it later. -->
-
 ### `overview_crosstab`
 
-If you want to generate a cross table that divides our data
-conditionally on two factors, this can be done with `overview_crosstab`.
+To generate a cross table that divides the data based on two conditions,
+for instance GDP and population size, `overview_crosstab` can be used.
+`threshold1` and `threshold2` thereby indicate the cut point for the two
+conditions (`cond1` and `cond2`), respectively.
 
 ``` r
 output_crosstab <- overview_crosstab(
@@ -140,28 +143,22 @@ output_crosstab <- overview_crosstab(
   )
 ```
 
-Checking the output, we get a data frame like this:
+The data frame output looks as follows:
 
     #   part1                                      part2
     # 1 AGO (1990, 1992), FRA (1993), GBR (1997)   BEN (1996, 1999), FRA (1999), GBR (1993), RWA (1992, 1994)
     # 2 BEN (1997), RWA (1990)                     AGO (1991), BEN (1995, 1998), FRA (1996), GBR (1991, 1995, 1999), RWA (1991, 1993, 1995)
 
-Note, if you use a data set that has multiple observations on your
-id-time unit, the function automatically aggregates your data frame
-using the mean of your condition 1 and your condition 2.
-
-We also store the output in the object, this time in `output_crosstab`,
-to access it later.
-
-<!-- The resulting data frame is again stored as an object in your environment so that you can access it later. -->
+Note, if a data set is used that has multiple observations on the
+id-time unit, the function automatically aggregates the data set using
+the mean of condition 1 (`cond1`) and condition 2 (`cond2`).
 
 ### `overview_print`
 
-To generate an easily usable LaTeX output, `overviewR` offers the
-function `overview_print`.
-
-We will start with our general sample overview, stored in
-`output_table`.
+To generate an easily usable TeX outputfor the generated `overview_tab`
+and `overview_crosstab` objects, `overviewR` offers the function
+`overview_print`. The following illustrate this using the `output_table`
+object from `overview_tab`.
 
 ``` r
 overview_print(obj = output_table)
@@ -201,9 +198,10 @@ overview_print(obj = output_table)
 
 </p>
 
-The default already gives us a nice title (“Time and scope of the
-sample”) but can be modified in the argument `title = ...`. The same
-holds for the column names (“Sample” and “Time frame” by default).
+The default already provides a title (“Time and scope of the sample”)
+that can be modified in the argument `title`. The same holds for the
+column names (“Sample” and “Time frame” are set by default but can be
+modified as shown below).
 
 ``` r
 overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
@@ -243,11 +241,11 @@ overview_print(obj = output_table, id = "Countries", time = "Years", title = "Co
 
 </p>
 
-The same function also text formatted cross tables, using the argument
-`crosstab = TRUE`. We will do this by using the object `output_crosstab`
-that was stored from our cross table above. There are also options to
-label the respective conditions (`cond1` and `cond2`) as you can see in
-the example.
+The same function can also be used for outputs from the
+`overview_crosstab` function by using the argument `crosstab = TRUE`.
+There are also options to label the respective conditions (`cond1` and
+`cond2`). Note that this should correspond to the conditions (`cond1`
+and `cond2`) specified in the `overview_crosstab` function.
 
 ``` r
 overview_print(
@@ -301,8 +299,8 @@ overview_print(
 
 </p>
 
-With `save_out = TRUE` you can also export both outputs as `.tex` files
-and store them on your device.
+With `save_out = TRUE` the function exports the ouput as a `.tex` file
+and stores it on the device.
 
 ``` r
 overview_print(obj = output_table, save_out = TRUE)
@@ -310,7 +308,8 @@ overview_print(obj = output_table, save_out = TRUE)
 
 ## Compatabilities with other packages
 
-The output is also compatible with other functions such as
+The outputs of `overview_tab` and `overview_crosstab` are also
+compatible with other functions such as
 [`xtable`](https://cran.r-project.org/web/packages/xtable/xtable.pdf),
 [`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html),
 or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html)

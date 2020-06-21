@@ -1,22 +1,22 @@
 #' @title overview_print
 #'
-#' @description Produces a TeX output for output obtained via overview_tab and
-#'    overview_crosstab
+#' @description Produces a TeX output for output obtained via
+#'    \code{overview_tab} and \code{overview_crosstab}
 #'
 #' @param obj Overview object produced by overview_tab or overview_crosstab
 #' @param title Title of the table (default is "Time and scope of the sample")
 #' @param id The name of the left column (default is "Sample"), will be ignored
 #'     if crosstab is TRUE
 #' @param time The name of the right column (default is ("Time frame")), will
-#'     be ignored if crosstab is TRUE
-#' @param crosstab Logical argument, if TRUE produces a crosstab output, default
-#'     is FALSE
+#'     be ignored if \code{crosstab} is TRUE
+#' @param crosstab Logical argument, if TRUE produces a \code{crosstab} output,
+#'     default is FALSE
 #' @param cond1 Description for the first condition (character), will be
-#'     ignored if crosstab is FALSE. This should correspond to the input for
-#'     cond1 in overview_crosstab
+#'     ignored if \code{crosstab} is FALSE. This should correspond to the input
+#'     for \code{cond1} in \code{overview_crosstab}
 #' @param cond2 Description for the second condition (character), will be
-#'     ignored if crosstab is FALSE. This should correspond to the input for
-#'     cond2 in overview_crosstab
+#'     ignored if \code{crosstab} is FALSE. This should correspond to the input
+#'     for \code{cond2} in \code{overview_crosstab}
 #' @param save_out Optional argument, exports the output table as a .tex
 #'     file, default is FALSE
 #' @return A TeX output that can either be copy-pasted in a text document or

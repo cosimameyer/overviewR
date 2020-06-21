@@ -24,18 +24,18 @@ overview_print(
 if crosstab is TRUE}
 
 \item{time}{The name of the right column (default is ("Time frame")), will
-be ignored if crosstab is TRUE}
+be ignored if \code{crosstab} is TRUE}
 
-\item{crosstab}{Logical argument, if TRUE produces a crosstab output, default
-is FALSE}
+\item{crosstab}{Logical argument, if TRUE produces a \code{crosstab} output,
+default is FALSE}
 
 \item{cond1}{Description for the first condition (character), will be
-ignored if crosstab is FALSE. This should correspond to the input for
-cond1 in overview_crosstab}
+ignored if \code{crosstab} is FALSE. This should correspond to the input
+for \code{cond1} in \code{overview_crosstab}}
 
 \item{cond2}{Description for the second condition (character), will be
-ignored if crosstab is FALSE. This should correspond to the input for
-cond2 in overview_crosstab}
+ignored if \code{crosstab} is FALSE. This should correspond to the input
+for \code{cond2} in \code{overview_crosstab}}
 
 \item{save_out}{Optional argument, exports the output table as a .tex
 file, default is FALSE}
@@ -45,8 +45,8 @@ A TeX output that can either be copy-pasted in a text document or
     exported directed as a .tex file
 }
 \description{
-Produces a TeX output for output obtained via overview_tab and
-   overview_crosstab
+Produces a TeX output for output obtained via
+   \code{overview_tab} and \code{overview_crosstab}
 }
 \examples{
 \dontrun{

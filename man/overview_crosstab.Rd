@@ -13,9 +13,9 @@ overview_crosstab(dat, cond1, cond2, threshold1, threshold2, id, time)
 
 \item{cond2}{Variable that describes the second condition}
 
-\item{threshold1}{A threshold for cond1}
+\item{threshold1}{A threshold for \code{cond1}}
 
-\item{threshold2}{A threshold for cond2}
+\item{threshold2}{A threshold for \code{cond2}}
 
 \item{id}{Scope (e.g., country codes or individual IDs)}
 
@@ -23,11 +23,11 @@ overview_crosstab(dat, cond1, cond2, threshold1, threshold2, id, time)
 }
 \value{
 A data frame object that contains a summary of the data set that can
-    later be converted to a TeX output using overview_print
+    later be converted to a TeX output using \code{overview_print}
 }
 \description{
 Sorts a data set conditionally in a cross table.
-    This can be helpful if for instance to get a sense of the time and scope
+    This can be helpful to get a sense of the time and scope
     conditions of a data set. Note, if used with a data set that has multiple
     observations on the id-time unit, the function automatically aggregates
     this information using the mean.
