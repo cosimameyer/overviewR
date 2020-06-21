@@ -12,8 +12,8 @@
 #'
 #' @format An object of class \code{"data.frame"}
 #' \describe{
-#'  \item{ccode}{ISO3 country code (as character) for the countries in the sample
-#'      (Angola, Benin, France, Rwanda, and UK)}
+#'  \item{ccode}{ISO3 country code (as character) for the countries in the
+#'      sample (Angola, Benin, France, Rwanda, and UK)}
 #'  \item{year}{A value between 1990 and 1999}
 #'  \item{month}{An abbreviation (MMM) for month (character)}
 #'  \item{gpd}{A fake value for GDP (randomly generated)}

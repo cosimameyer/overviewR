@@ -200,7 +200,8 @@ column names (“Sample” and “Time frame” are set by default but can be
 modified as shown below).
 
 ``` r
-overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
+overview_print(obj = output_table, id = "Countries", time = "Years",
+               title = "Cool new title for our awesome table")
 ```
 
 <details>
@@ -293,18 +294,17 @@ overview_print(obj = output_table, save_out = TRUE)
 The outputs of `overview_tab` and `overview_crosstab` are also
 compatible with other functions such as
 [`xtable`](https://CRAN.R-project.org/package=xtable),
-[`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html),
-or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html)
-from [`knitr`](https://yihui.org/knitr/).
+[`flextable`](https://CRAN.R-project.org/package=flextable), or
+[`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from
+[`knitr`](https://yihui.org/knitr/).
 
 Two examples are shown below:
 
 ``` r
-# install.packages("flextable")
 library(flextable)
 table_output <- qflextable(output_table)
 table_output <-
-  set_header_labels(table_output,   
+  set_header_labels(table_output,
                     ccode = "Countries",
                     time_frame = "Time frame")
 set_table_properties(

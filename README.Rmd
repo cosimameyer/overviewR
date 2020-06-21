@@ -153,12 +153,14 @@ Sample & Time frame \\
 The default already provides a title ("Time and scope of the sample") that can be modified in the argument `title`. The same holds for the column names ("Sample" and "Time frame" are set by default but can be modified as shown below). 
 
 ```{r, eval = FALSE, eval=FALSE}
-overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
+overview_print(obj = output_table, id = "Countries", time = "Years",
+               title = "Cool new title for our awesome table")
 ```
 <details>
   <summary>TeX output</summary>
 ```{r, eval=FALSE, include=FALSE}
-overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
+overview_print(obj = output_table, id = "Countries",
+               time = "Years", title = "Cool new title for our awesome table")
 ```
 
 ```
@@ -245,16 +247,15 @@ overview_print(obj = output_table, save_out = TRUE)
 
 ## Compatabilities with other packages 
 
-The outputs of `overview_tab` and `overview_crosstab` are also compatible with other functions such as [`xtable`](https://CRAN.R-project.org/package=xtable), [`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html), or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from [`knitr`](https://yihui.org/knitr/).
+The outputs of `overview_tab` and `overview_crosstab` are also compatible with other functions such as [`xtable`](https://CRAN.R-project.org/package=xtable), [`flextable`](https://CRAN.R-project.org/package=flextable), or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from [`knitr`](https://yihui.org/knitr/).
 
 Two examples are shown below:
 
 ```{r, eval=FALSE}
-# install.packages("flextable")
 library(flextable)
 table_output <- qflextable(output_table)
 table_output <-
-  set_header_labels(table_output,   
+  set_header_labels(table_output,
                     ccode = "Countries",
                     time_frame = "Time frame")
 set_table_properties(
@@ -265,10 +266,17 @@ set_table_properties(
 ```
 
 ```{r, echo=FALSE, include=FALSE}
-output_table <- data.frame(ccode=c("RWA", "AGO", "BEN", "GBR", "FRA"), 
-                     time_frame = c("1990-1995", "1990-1992", "1995-1999",
-                                    "1991, 1993, 1995, 1997, 1999",
-                                    "1993, 1996, 1999"))
+output_table <-
+  data.frame(
+    ccode = c("RWA", "AGO", "BEN", "GBR", "FRA"),
+    time_frame = c(
+      "1990-1995",
+      "1990-1992",
+      "1995-1999",
+      "1991, 1993, 1995, 1997, 1999",
+      "1993, 1996, 1999"
+    )
+  )
 ```
 
 ```{r}
