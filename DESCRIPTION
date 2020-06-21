@@ -2,17 +2,11 @@ Type: Package
 Package: overviewR
 Title: Easily Extracting Information About Your Data
 Version: 0.0.2
-Authors@R:
-    c(person(given = "Cosima",
-             family = "Meyer",
-             role = c("aut", "cre"),
-             email = "cosima.meyer@gmail.com"),
-      person(given = "Dennis",
-             family = "Hammberschmidt",
-             role = "aut"))
-Description: overviewR makes it easy to display your
-    sample. Getting an easy overview of your data by
-    displaying/visualizing your sample information in different tables.
+Author: Cosima Meyer [aut, cre], Dennis Hammerschmidt [aut]
+Maintainer: Cosima Meyer <cosima.meyer@gmail.com>
+Description: Makes it easy to display your sample. 
+    Getting an easy overview of your data by displaying/visualizing 
+    your sample information in different tables.
     The package also gives you publishable LaTeX code to present the
     sample information in your paper.
 License: GPL-3
