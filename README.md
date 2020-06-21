@@ -30,8 +30,8 @@ assumptions with examples from the data set. The function
 The output of `overview_tab` and `overview_crosstab` are also compatible
 with other packages such as
 [`xtable`](https://CRAN.R-project.org/package=xtable),
-[`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html),
-or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
+[`flextable`](https://CRAN.R-project.org/package=flextable), or
+[`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
 
 ## Installation
 
