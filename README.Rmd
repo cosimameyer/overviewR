@@ -122,7 +122,7 @@ overview_print(obj = output_table)
 ```
 <details>
   <summary>TeX output</summary>
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=FALSE}
 overview_print(obj = output_table)
 ```
 ```
@@ -157,7 +157,7 @@ overview_print(obj = output_table, id = "Countries", time = "Years", title = "Co
 ```
 <details>
   <summary>TeX output</summary>
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=FALSE}
 overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
 ```
 
@@ -201,7 +201,7 @@ overview_print(
 ```
 <details>
   <summary>TeX output</summary>
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=FALSE}
 overview_print(
   obj = output_crosstab,
   title = "Cross table of the sample",

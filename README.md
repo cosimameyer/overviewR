@@ -168,10 +168,6 @@ overview_print(obj = output_table)
 
 <summary>TeX output</summary>
 
-``` r
-overview_print(obj = output_table)
-```
-
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21
     \begin{table}[ht] 
@@ -210,10 +206,6 @@ overview_print(obj = output_table, id = "Countries", time = "Years", title = "Co
 <details>
 
 <summary>TeX output</summary>
-
-``` r
-overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
-```
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21
@@ -260,16 +252,6 @@ overview_print(
 <details>
 
 <summary>TeX output</summary>
-
-``` r
-overview_print(
-  obj = output_crosstab,
-  title = "Cross table of the sample",
-  crosstab = TRUE,
-  cond1 = "GDP",
-  cond2 = "Population"
-)
-```
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21
