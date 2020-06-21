@@ -10,7 +10,6 @@
 #'     can later be converted to a TeX output using \code{overview_print}
 #' @examples
 #' \dontrun{
-#'
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 #' }
 

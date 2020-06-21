@@ -23,7 +23,6 @@ Provides an overview table for the time and scope conditions of
 }
 \examples{
 \dontrun{
-
 output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 }
 }

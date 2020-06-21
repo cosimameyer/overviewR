@@ -23,7 +23,6 @@
 #'     exported directed as a .tex file
 #' @examples
 #' \dontrun{
-#'
 #' overview_print(obj = overview_object,
 #'                title = "Some nice title",
 #'                crosstab = FALSE)

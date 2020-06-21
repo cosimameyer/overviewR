@@ -50,7 +50,6 @@ Produces a TeX output for output obtained via
 }
 \examples{
 \dontrun{
-
 overview_print(obj = overview_object,
                title = "Some nice title",
                crosstab = FALSE)

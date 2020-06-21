@@ -17,7 +17,6 @@
 #'
 #' @examples
 #' \dontrun{
-#'
 #' output_crosstab <- overview_crosstab(
 #' dat = toydata,
 #' cond1 = gdp,

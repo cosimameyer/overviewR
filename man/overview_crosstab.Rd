@@ -34,7 +34,6 @@ Sorts a data set conditionally in a cross table.
 }
 \examples{
 \dontrun{
-
 output_crosstab <- overview_crosstab(
 dat = toydata,
 cond1 = gdp,
