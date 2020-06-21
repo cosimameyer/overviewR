@@ -1,13 +1,13 @@
 #' @title overview_tab
 #'
-#' @description This function gives you a nice overview table for time and
-#'     scope conditions
+#' @description Provides an overview table for the time and scope conditions of
+#'     a data set
 #'
-#' @param dat Your dataset
-#' @param id Your scope (e.g., country codes or individual IDs)
-#' @param time Your time (e.g., time periods given by years, months, ...)
-#' @return A data frame that contains a summary of your sample and that can be
-#'     later easily converted to a LaTeX output
+#' @param dat A ata set object
+#' @param id Scope (e.g., country codes or individual IDs)
+#' @param time Time (e.g., time periods given by years, months, ...)
+#' @return A data frame object that contains a summary of a sample that
+#'     can later be converted to a TeX output using overview_print
 #' @examples
 #' \dontrun{
 #'

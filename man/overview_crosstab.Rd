@@ -7,31 +7,30 @@
 overview_crosstab(dat, cond1, cond2, threshold1, threshold2, id, time)
 }
 \arguments{
-\item{dat}{Your dataset}
+\item{dat}{A data set object}
 
-\item{cond1}{The variable that describes your first condition}
+\item{cond1}{Variable that describes the first condition}
 
-\item{cond2}{The variable that describes your second condition}
+\item{cond2}{Variable that describes the second condition}
 
-\item{threshold1}{A threshold above which your first condition is fulfilled}
+\item{threshold1}{A threshold for cond1}
 
-\item{threshold2}{A threshold above which your second condition is fulfilled}
+\item{threshold2}{A threshold for cond2}
 
-\item{id}{Your scope (e.g., country codes or individual IDs)}
+\item{id}{Scope (e.g., country codes or individual IDs)}
 
-\item{time}{Your time (e.g., time periods given by years, months, ...)}
+\item{time}{Time (e.g., time periods given by years, months, ...)}
 }
 \value{
-A data frame that contains a summary of your sample and that
-    can be easily converted to a LaTeX output
+A data frame object that contains a summary of the data set that can
+    later be converted to a TeX output using overview_print
 }
 \description{
-This function allows you sort your sample conditionally
-    in a nice cross table. This can be helpful if you want to get a
-    first sense of your data before digging deeper. Note, if you use
-    a data set that has multiple observations on your id-time unit,
-    the function automatically aggregates this information using the
-    mean.
+Sorts a data set conditionally in a cross table.
+    This can be helpful if for instance to get a sense of the time and scope
+    conditions of a data set. Note, if used with a data set that has multiple
+    observations on the id-time unit, the function automatically aggregates
+    this information using the mean.
 }
 \examples{
 \dontrun{

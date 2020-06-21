@@ -1,21 +1,17 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # overviewR <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 
 [![Travis build
 status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
-[![License: GPL
-v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--20-yellowgreen.svg)](/commits/master)
 [![Codecov test
 coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.svg)](https://codecov.io/gh/cosimameyer/overviewR?branch=master)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-<!-- [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
+<!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--21-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of your data
@@ -43,12 +39,6 @@ You can install the latest version of `overviewR` directly from
 library(devtools)
 devtools::install_github("cosimameyer/overviewR")
 ```
-
-<!--[CRAN](https://CRAN.R-project.org) with:
-``` r
-install.packages("overviewR")
-```
--->
 
 ## Example
 
@@ -185,22 +175,29 @@ overview_print(obj = output_table)
 overview_print(obj = output_table)
 ```
 
-    % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR
-     \begin{table}[ht]
-     \centering
-     \caption{Time and scope of the sample}
-     \begin{tabular}{ll}
-     \hline
-    Sample & Time frame \\ \hline
-     RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline
-     \end{tabular}
+    % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
+    % Table created on 2020-06-21
+    \begin{table}[ht] 
+     \centering 
+     \caption{Time and scope of the sample} 
+     \begin{tabular}{ll} 
+     \hline 
+    Sample & Time frame \\ 
+    \hline 
+     RWA & 1990 - 1995 \\ 
+     AGO & 1990 - 1992 \\ 
+     BEN & 1995 - 1999 \\ 
+     GBR & 1991, 1993, 1995, 1997, 1999 \\ 
+     FRA & 1993, 1996, 1999 \\ 
+     \hline 
+     \end{tabular} 
      \end{table}
 
 </details>
 
 <p align="center">
 
-<img src='man/figures/example1.png' height="150"/>
+<img src='man/figures/ex1.png' height="150"/>
 
 </p>
 
@@ -220,22 +217,29 @@ overview_print(obj = output_table, id = "Countries", time = "Years", title = "Co
 overview_print(obj = output_table, id = "Countries", time = "Years", title = "Cool new title for our awesome table")
 ```
 
-    % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR
-     \begin{table}[ht]
-     \centering
-     \caption{Cool new title for our awesome table}
-     \begin{tabular}{ll}
-     \hline
-    Countries & Years \\ \hline
-     RWA & 1990 - 1995 \\ AGO & 1990 - 1992 \\ BEN & 1995 - 1999 \\ GBR & 1991, 1993, 1995, 1997, 1999 \\ FRA & 1993, 1996, 1999 \\ \hline
-     \end{tabular}
-     \end{table}
+    % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
+    % Table created on 2020-06-21
+    \begin{table}[ht] 
+     \centering 
+     \caption{Cool new title for our awesome table} 
+     \begin{tabular}{ll} 
+     \hline 
+    Countries & Years \\ 
+    \hline 
+     RWA & 1990 - 1995 \\ 
+     AGO & 1990 - 1992 \\ 
+     BEN & 1995 - 1999 \\ 
+     GBR & 1991, 1993, 1995, 1997, 1999 \\ 
+     FRA & 1993, 1996, 1999 \\ 
+     \hline 
+     \end{tabular} 
+     \end{table} 
 
 </details>
 
 <p align="center">
 
-<img src='man/figures/example2.png' height="150"/>
+<img src='man/figures/ex2.png' height="150"/>
 
 </p>
 
@@ -269,26 +273,31 @@ overview_print(
 )
 ```
 
-    % Overview table generated in R version 3.6.3 (2020-02-29) using overviewR
-     % Please add the following required packages to your document preamble:
-     % \usepackage{multirow}
-     % \usepackage{tabularx}
-     % \newcolumntype{b}{X}
-     % \newcolumntype{s}{>{\hsize=.5\hsize}X}
-    
-     \begin{table}[]
-     \begin{tabularx}{\textwidth}{ssbb}
-     \hline & &
-     \multicolumn{2}{c}{\textbf{GDP}} \\  & & \textbf{Fulfilled} &
-     \textbf{Not fulfilled} \\ \hline \\ \multirow{2}{*}{\textbf{Population}} & \textbf{Fulfilled} &
-     RWA (1990 - 1991), AGO (1990), GBR (1993, 1997), FRA (1996) & AGO (1994, 1991 - 1992), GBR (1991), FRA (1993, 1999)\\  \\ \hline \\ & \textbf{Not fulfilled} &  RWA (1992 - 1993), AGO (1996), GBR (1999) & AGO (1995, 1997), BEN (1998 - 1999), GBR (1995)\\  \hline \\ \end{tabularx}
-     \end{table}
+    % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
+    % Table created on 2020-06-21
+    % Please add the following packages to your document preamble: 
+    % \usepackage{multirow} 
+    % \usepackage{tabularx} 
+    % \newcolumntype{b}{X} 
+    % \newcolumntype{s}{>{\hsize=.5\hsize}X} 
+    \begin{table}[ht] 
+    \caption{Cross table of the sample} 
+     \begin{tabularx}{\textwidth}{ssbb} 
+    \hline & & \multicolumn{2}{c}{\textbf{GDP}} \\ 
+     & & \textbf{Fulfilled} & \textbf{Not fulfilled} \\ 
+     \hline \\ 
+     \multirow{2}{*}{\textbf{Population}} & \textbf{Fulfilled} & 
+     AGO (1990, 1992), FRA (1993), GBR (1997) & BEN (1996, 1999), FRA (1999), GBR (1993), RWA (1992, 1994)\\  
+     \\ \hline \\ 
+     & \textbf{Not fulfilled} &  BEN (1997), RWA (1990) & AGO (1991), BEN (1995, 1998), FRA (1996), GBR (1991, 1995, 1999), RWA (1991, 1993, 1995)\\  \hline \\ 
+     \end{tabularx} 
+     \end{table} 
 
 </details>
 
 <p align="center">
 
-<img src='man/figures/example3.png' height="200"/>
+<img src='man/figures/ex3.png' height="200"/>
 
 </p>
 
@@ -302,10 +311,12 @@ overview_print(obj = output_table, save_out = TRUE)
 ## Compatabilities with other packages
 
 The output is also compatible with other functions such as
-[`xtable`](https://cran.r-project.org/web/packages/xtable/xtable.pdf) or
-[`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html).
+[`xtable`](https://cran.r-project.org/web/packages/xtable/xtable.pdf),
+[`flextable`](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html),
+or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html)
+from [`knitr`](https://yihui.org/knitr/).
 
-One example is shown below:
+Two examples are shown below:
 
 ``` r
 # install.packages("flextable")
@@ -321,6 +332,19 @@ set_table_properties(
   layout = "autofit"
 )
 ```
+
+``` r
+library(knitr)
+knitr::kable(output_table)
+```
+
+| ccode |         time\_frame          |
+| :---- | :--------------------------: |
+| RWA   |          1990-1995           |
+| AGO   |          1990-1992           |
+| BEN   |          1995-1999           |
+| GBR   | 1991, 1993, 1995, 1997, 1999 |
+| FRA   |       1993, 1996, 1999       |
 
 # Credits
 

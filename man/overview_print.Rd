@@ -16,34 +16,37 @@ overview_print(
 )
 }
 \arguments{
-\item{obj}{Your overview object produced by overview_tab or overview_crosstab}
+\item{obj}{Overview object produced by overview_tab or overview_crosstab}
 
-\item{title}{Title of your table (default is "Time and scope of the sample")}
+\item{title}{Title of the table (default is "Time and scope of the sample")}
 
-\item{id}{The name of your left column (default is "Sample"), will be ignored
+\item{id}{The name of the left column (default is "Sample"), will be ignored
 if crosstab is TRUE}
 
-\item{time}{The name of your right column (default is ("Time frame")), will
+\item{time}{The name of the right column (default is ("Time frame")), will
 be ignored if crosstab is TRUE}
 
 \item{crosstab}{Logical argument, if TRUE produces a crosstab output, default
 is FALSE}
 
-\item{cond1}{Description for your first condition (character), will be
-ignored if crosstab is FALSE}
+\item{cond1}{Description for the first condition (character), will be
+ignored if crosstab is FALSE. This should correspond to the input for
+cond1 in overview_crosstab}
 
-\item{cond2}{Description for your second condition (character), will be
-ignored if crosstab is FALSE}
+\item{cond2}{Description for the second condition (character), will be
+ignored if crosstab is FALSE. This should correspond to the input for
+cond2 in overview_crosstab}
 
-\item{save_out}{This is an optional argument that exports your table as .tex
+\item{save_out}{Optional argument, exports the output table as a .tex
 file, default is FALSE}
 }
 \value{
-A LaTeX output that you can copy and paste in your text document
+A TeX output that can either be copy-pasted in a text document or
+    exported directed as a .tex file
 }
 \description{
-This function produces a LaTeX for both overview_tab and
-    overview_crosstab
+Produces a TeX output for output obtained via overview_tab and
+   overview_crosstab
 }
 \examples{
 \dontrun{

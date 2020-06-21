@@ -1,22 +1,22 @@
 #' @title overview_crosstab
 #'
-#' @description This function allows you sort your sample conditionally
-#'     in a nice cross table. This can be helpful if you want to get a
-#'     first sense of your data before digging deeper. Note, if you use
-#'     a data set that has multiple observations on your id-time unit,
-#'     the function automatically aggregates this information using the
-#'     mean.
-#' @param dat Your dataset
-#' @param cond1 The variable that describes your first condition
-#' @param cond2 The variable that describes your second condition
-#' @param threshold1 A threshold above which your first condition is fulfilled
-#' @param threshold2 A threshold above which your second condition is fulfilled
-#' @param id Your scope (e.g., country codes or individual IDs)
-#' @param time Your time (e.g., time periods given by years, months, ...)
-#' @return A data frame that contains a summary of your sample and that
-#'     can be easily converted to a LaTeX output
+#' @description Sorts a data set conditionally in a cross table.
+#'     This can be helpful if for instance to get a sense of the time and scope
+#'     conditions of a data set. Note, if used with a data set that has multiple
+#'     observations on the id-time unit, the function automatically aggregates
+#'     this information using the mean.
+#' @param dat A data set object
+#' @param cond1 Variable that describes the first condition
+#' @param cond2 Variable that describes the second condition
+#' @param threshold1 A threshold for cond1
+#' @param threshold2 A threshold for cond2
+#' @param id Scope (e.g., country codes or individual IDs)
+#' @param time Time (e.g., time periods given by years, months, ...)
+#' @return A data frame object that contains a summary of the data set that can
+#'     later be converted to a TeX output using overview_print
+#'
 #' @examples
-#'\dontrun{
+#' \dontrun{
 #'
 #' output_crosstab <- overview_crosstab(
 #' dat = toydata,

@@ -1,10 +1,10 @@
 #' Cross-sectional data for countries
 #'
-#' This is a small toy data set that comes in a cross-sectional format where the
-#' unit of analysis is either country-year or country-year-month.
-#' It provides artificial information for five countries (Angola, Benin, France,
-#' Rwanda, and UK)
-#' for a time span from 1990 to 1999.
+#' Small, artificially generated toy data set that comes in a cross-sectional
+#' format where the unit of analysis is either country-year or
+#' country-year-month. It provides artificial information for five countries
+#' (Angola, Benin, France, Rwanda, and UK) for a time span from 1990 to 1999 to
+#' illustrate the use of the package.
 #'
 #' @docType data
 #'
@@ -12,10 +12,10 @@
 #'
 #' @format An object of class \code{"data.frame"}.
 #' \describe{
-#'  \item{ccode}{A country code (character) for the countries in the sample
+#'  \item{ccode}{ISO3 country code (as character) for the countries in the sample
 #'      (Angola, Benin, France, Rwanda, and UK.)}
 #'  \item{year}{A value between 1990 and 1999.}
-#'  \item{month}{An abbreviation for month (character).}
+#'  \item{month}{An abbreviation (MMM) for month (character).}
 #'  \item{gpd}{A fake value for GDP (randomly generated).}
 #'  \item{population}{A fake value for population (randomly generated).}
 #' }

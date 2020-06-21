@@ -1,23 +1,26 @@
 #' @title overview_print
 #'
-#' @description This function produces a LaTeX for both overview_tab and
-#'     overview_crosstab
+#' @description Produces a TeX output for output obtained via overview_tab and
+#'    overview_crosstab
 #'
-#' @param obj Your overview object produced by overview_tab or overview_crosstab
-#' @param title Title of your table (default is "Time and scope of the sample")
-#' @param id The name of your left column (default is "Sample"), will be ignored
+#' @param obj Overview object produced by overview_tab or overview_crosstab
+#' @param title Title of the table (default is "Time and scope of the sample")
+#' @param id The name of the left column (default is "Sample"), will be ignored
 #'     if crosstab is TRUE
-#' @param time The name of your right column (default is ("Time frame")), will
+#' @param time The name of the right column (default is ("Time frame")), will
 #'     be ignored if crosstab is TRUE
 #' @param crosstab Logical argument, if TRUE produces a crosstab output, default
 #'     is FALSE
-#' @param cond1 Description for your first condition (character), will be
-#'     ignored if crosstab is FALSE
-#' @param cond2 Description for your second condition (character), will be
-#'     ignored if crosstab is FALSE
-#' @param save_out This is an optional argument that exports your table as .tex
+#' @param cond1 Description for the first condition (character), will be
+#'     ignored if crosstab is FALSE. This should correspond to the input for
+#'     cond1 in overview_crosstab
+#' @param cond2 Description for the second condition (character), will be
+#'     ignored if crosstab is FALSE. This should correspond to the input for
+#'     cond2 in overview_crosstab
+#' @param save_out Optional argument, exports the output table as a .tex
 #'     file, default is FALSE
-#' @return A LaTeX output that you can copy and paste in your text document
+#' @return A TeX output that can either be copy-pasted in a text document or
+#'     exported directed as a .tex file
 #' @examples
 #' \dontrun{
 #'
@@ -62,8 +65,11 @@ overview_print <-
           paste0(
             "% Overview table generated in ",
             version[["version.string"]],
-            " using overviewR \n \\begin{table}[ht] \n \\centering \n
-            \\caption{",
+            " using overviewR \n",
+            "% Table created on ",
+            as.character(Sys.Date()),
+            "\n",
+            "\\begin{table}[ht] \n \\centering \n \\caption{",
             title,
             "} \n \\begin{tabular}{ll} \n \\hline \n",
             id,
@@ -71,10 +77,10 @@ overview_print <-
             " & ",
             time,
             # col_names[2],
-            " \\\\ ",
+            " \\\\ \n",
             "\\hline \n"
           )
-        out <- paste0(obj[, 1], " & ", obj[, 2], " \\\\")
+        out <- paste0(obj[, 1], " & ", obj[, 2], " \\\\ \n")
         end_tab <-
           paste0("\\hline \n \\end{tabular} \n \\end{table} \n")
         output <- cat(begin_tab, out, end_tab)
@@ -88,25 +94,31 @@ overview_print <-
         begin_crosstab <- paste0(
           "% Overview table generated in ",
           version[["version.string"]],
-          " using overviewR \n % Please add the following required packages to
-          your document preamble: \n % \\usepackage{multirow} \n %
-          \\usepackage{tabularx} \n % \\newcolumntype{b}{X} \n %
-          \\newcolumntype{s}{>{\\hsize=.5\\hsize}X} \n \\begin{table}[ht] \n
-          \\caption{",
+          " using overviewR \n",
+          "% Table created on ",
+          as.character(Sys.Date()),
+          "\n",
+          "% Please add the following packages to your document preamble: \n",
+          "% \\usepackage{multirow} \n",
+          "% \\usepackage{tabularx} \n",
+          "% \\newcolumntype{b}{X} \n",
+          "% \\newcolumntype{s}{>{\\hsize=.5\\hsize}X} \n",
+          "\\begin{table}[ht] \n",
+          "\\caption{",
           title,
-          "} \n \\begin{tabularx}{\\textwidth}{ssbb} \n \\hline & & \n
-          \\multicolumn{2}{c}{\\textbf{",
+          "} \n \\begin{tabularx}{\\textwidth}{ssbb} \n",
+          "\\hline & & \\multicolumn{2}{c}{\\textbf{",
           cond1,
-          "}} \\\\ ",
-          " & & \\textbf{Fulfilled} & \n \\textbf{Not fulfilled} \\\\ ",
-          "\\hline \\\\ \n \\multirow{2}{*}{\\textbf{",
+          "}} \\\\ \n",
+          " & & \\textbf{Fulfilled} & \\textbf{Not fulfilled} \\\\ ",
+          "\n \\hline \\\\ \n \\multirow{2}{*}{\\textbf{",
           cond2,
           "}} & \\textbf{Fulfilled} & \n"
         )
         cross_out1 <- paste0(obj[1, 1], " & ", obj[1, 2], "\\\\ ")
 
         mid_crosstab <-
-          paste0("\\\\ \\hline \\\\ \n & \\textbf{Not fulfilled} & ")
+          paste0("\n \\\\ \\hline \\\\ \n & \\textbf{Not fulfilled} & ")
 
         cross_out2 <- paste0(obj[2, 1], " & ", obj[2, 2], "\\\\ ")
 
