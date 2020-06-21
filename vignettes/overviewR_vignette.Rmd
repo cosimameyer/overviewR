@@ -24,6 +24,7 @@ The output of `overview_tab` and `overview_crosstab` are also compatible with ot
 
 First, load the package.
 ```{r, message=FALSE, warning=FALSE}
+library(devtools)
 devtools::install_github("cosimameyer/overviewR")
 library(overviewR)
 ```
