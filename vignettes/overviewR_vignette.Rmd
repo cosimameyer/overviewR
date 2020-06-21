@@ -23,27 +23,26 @@ The output of `overview_tab` and `overview_crosstab` are also compatible with ot
 ## Using the package
 
 First, load the package.
-```{r, message=FALSE, warning=FALSE}
-library(devtools)
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 devtools::install_github("cosimameyer/overviewR")
 library(overviewR)
 ```
 
 The following examples use a toy data set (`toydata`) that comes with the package. This data contains artificially generated information in a cross-sectional format on 5 countries, covering the period 1990-1999.
 
-```{r}
+```{r, eval=FALSE}
 data(toydata)
 head(toydata)
 ```
-<!-- ``` -->
-<!--     ccode   year   month  gdp       population -->
-<!--     RWA     1990   Jan    24180.77  14969.988 -->
-<!--     RWA     1990   Feb    23650.53  11791.464 -->
-<!--     RWA     1990   Mar    21860.14  30047.979 -->
-<!--     RWA     1990   Apr    20801.06  19853.556 -->
-<!--     RWA     1990   May    18702.84   5148.118 -->
-<!--     RWA     1990   Jun    30272.37  48625.140 -->
-<!-- ``` -->
+```
+    ccode   year   month  gdp       population
+    RWA     1990   Jan    24180.77  14969.988
+    RWA     1990   Feb    23650.53  11791.464
+    RWA     1990   Mar    21860.14  30047.979
+    RWA     1990   Apr    20801.06  19853.556
+    RWA     1990   May    18702.84   5148.118
+    RWA     1990   Jun    30272.37  48625.140
+```
 
 There are 264 observations for 5 countries (Angola, Benin, France, Rwanda, and UK) stored in the ```ccode``` variable, over a time period between 1990 to 1999 (```year```) with additional information for the month (```month```). Additionally, two artificially generated fake variables for GDP (```gdp```) and  population size (```population```) are included to illustrate of conditions.
 
