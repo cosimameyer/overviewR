@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 The goal of `overviewR` is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are two functions (```overview_tab``` and ```overview_crosstab```) that generate a tabular overview of the general sample as well as a conditional sample. The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set. The function ```overview_print```  converts this output of both `overview_tab` and `overview_crosstab` into TeX code and/or directly into a .tex file. 
 
-The output of `overview_tab` and `overview_crosstab` are also compatible with other packages such as [```xtable```](https://CRAN.R-project.org/package=xtable), [```flextable```](https://cran.r-project.org/web/packages/flextable/vignettes/overview.html), or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
+The output of `overview_tab` and `overview_crosstab` are also compatible with other packages such as [```xtable```](https://CRAN.R-project.org/package=xtable), [```flextable```](https://CRAN.R-project.org/package=flextable), or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
 
 ## Using the package
 
