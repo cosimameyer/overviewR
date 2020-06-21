@@ -155,7 +155,7 @@ the mean of condition 1 (`cond1`) and condition 2 (`cond2`).
 
 ### `overview_print`
 
-To generate an easily usable TeX outputfor the generated `overview_tab`
+To generate an easily usable TeX output for the generated `overview_tab`
 and `overview_crosstab` objects, `overviewR` offers the function
 `overview_print`. The following illustrate this using the `output_table`
 object from `overview_tab`.

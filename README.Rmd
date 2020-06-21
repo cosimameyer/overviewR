@@ -114,7 +114,7 @@ Note, if a data set is used that has multiple observations on the id-time unit, 
 
 ### ```overview_print```
 
-To generate an easily usable TeX outputfor the generated `overview_tab` and `overview_crosstab` objects, `overviewR` offers the function `overview_print`. 
+To generate an easily usable TeX output for the generated `overview_tab` and `overview_crosstab` objects, `overviewR` offers the function `overview_print`. 
 The following illustrate this using the `output_table` object from `overview_tab`.
 
 ```{r, eval=FALSE}
