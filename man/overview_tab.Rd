@@ -7,7 +7,7 @@
 overview_tab(dat, id, time)
 }
 \arguments{
-\item{dat}{A ata set object}
+\item{dat}{A data set object}
 
 \item{id}{Scope (e.g., country codes or individual IDs)}
 
