@@ -22,7 +22,6 @@ Provides an overview table for the time and scope conditions of
     a data set
 }
 \examples{
-\donttest{
+data(toydata)
 output_table <- overview_tab(dat = toydata, id = ccode, time = year)
-}
 }

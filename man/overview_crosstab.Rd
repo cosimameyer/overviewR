@@ -23,7 +23,7 @@ overview_crosstab(dat, cond1, cond2, threshold1, threshold2, id, time)
 }
 \value{
 A data frame object that contains a summary of the data set that can
-    later be converted to a TeX output using \code{overview_print}
+      later be converted to a TeX output using \code{overview_print}
 }
 \description{
 Sorts a data set conditionally in a cross table.
@@ -33,8 +33,8 @@ Sorts a data set conditionally in a cross table.
     this information using the mean.
 }
 \examples{
-\donttest{
-output_crosstab <- overview_crosstab(
+data(toydata)
+overview_crosstab(
 dat = toydata,
 cond1 = gdp,
 cond2 = population,
@@ -42,5 +42,5 @@ threshold1 = 25000,
 threshold2 = 27000,
 id = ccode,
 time = year)
-}
+
 }

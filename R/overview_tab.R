@@ -9,9 +9,11 @@
 #' @return A data frame object that contains a summary of a sample that
 #'     can later be converted to a TeX output using \code{overview_print}
 #' @examples
-#' \donttest{
+#' data(toydata)
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
-#' }
+#' @export
+#' @importFrom dplyr "%>%"
+
 
 overview_tab <- function(dat, id, time) {
   # Check for consecutive numbers and collapse them with "-"

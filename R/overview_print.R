@@ -22,17 +22,29 @@
 #' @return A TeX output that can either be copy-pasted in a text document or
 #'     exported directed as a .tex file
 #' @examples
-#' \donttest{
+#' data(toydata)
+#'
+#' overview_object <- overview_tab(dat = toydata, id = ccode, time = year)
 #' overview_print(obj = overview_object,
 #'                title = "Some nice title",
 #'                crosstab = FALSE)
 #'
+#' overview_ct_object <- overview_crosstab(
+#' dat = toydata,
+#' cond1 = gdp,
+#' cond2 = population,
+#' threshold1 = 25000,
+#' threshold2 = 27000,
+#' id = ccode,
+#' time = year)
 #' overview_print(obj = overview_ct_object,
 #'                title = "Some nice title for a cross tab",
 #'                crosstab = TRUE,
 #'                cond1 = "Name of first condition",
 #'                cond2 = "Name of second condition")
-#' }
+#' @export
+#' @importFrom dplyr "%>%"
+
 
 overview_print <-
   function(obj,

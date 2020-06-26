@@ -13,11 +13,10 @@
 #' @param id Scope (e.g., country codes or individual IDs)
 #' @param time Time (e.g., time periods given by years, months, ...)
 #' @return A data frame object that contains a summary of the data set that can
-#'     later be converted to a TeX output using \code{overview_print}
-#'
+#'       later be converted to a TeX output using \code{overview_print}
 #' @examples
-#' \donttest{
-#' output_crosstab <- overview_crosstab(
+#' data(toydata)
+#' overview_crosstab(
 #' dat = toydata,
 #' cond1 = gdp,
 #' cond2 = population,
@@ -25,7 +24,9 @@
 #' threshold2 = 27000,
 #' id = ccode,
 #' time = year)
-#' }
+#'
+#' @export
+#' @importFrom dplyr "%>%"
 
 overview_crosstab <-
   function(dat,
