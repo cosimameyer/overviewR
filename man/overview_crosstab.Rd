@@ -33,7 +33,7 @@ Sorts a data set conditionally in a cross table.
     this information using the mean.
 }
 \examples{
-\dontrun{
+\donttest{
 output_crosstab <- overview_crosstab(
 dat = toydata,
 cond1 = gdp,

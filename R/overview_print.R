@@ -22,7 +22,7 @@
 #' @return A TeX output that can either be copy-pasted in a text document or
 #'     exported directed as a .tex file
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' overview_print(obj = overview_object,
 #'                title = "Some nice title",
 #'                crosstab = FALSE)

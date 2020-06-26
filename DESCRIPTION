@@ -2,8 +2,10 @@ Type: Package
 Package: overviewR
 Title: Easily Extracting Information About Your Data
 Version: 0.0.2
-Author: Cosima Meyer [aut, cre], Dennis Hammerschmidt [aut]
-Maintainer: Cosima Meyer <cosima.meyer@gmail.com>
+Authors@R: as.person(c(
+    "Cosima Meyer <cosima.meyer@gmail.com> [aut, cre]",
+    "Dennis Hammerschmidt <dennis_hammerschmidt@yahoo.com> [aut]"
+  ))
 Description: Makes it easy to display descriptive information on
     a data set.  Getting an easy overview of a data set by displaying and
     visualizing sample information in different tables (e.g., time and

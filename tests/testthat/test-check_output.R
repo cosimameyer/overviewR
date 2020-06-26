@@ -38,6 +38,8 @@ test_that("overview_tab() works on a dataframe that is already in the correct
 
 test_that("check output of overview_print", {
   output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+  wd <- tempdir()
+  savedir <- setwd(wd)
   tex_output <- overview_print(output_table, save_out = TRUE)
   input_output <- overview_print(output_table, save_out = FALSE)
   testthat::expect_null(print(tex_output))
@@ -48,6 +50,8 @@ test_that("check output of overview_print for crosstab", {
   output_cross <- overview_crosstab(dat = toydata, id = ccode, time = year,
                                     cond1 = population, cond2 = gdp,
                                     threshold1 = 27000, threshold2 = 25000)
+  wd <- tempdir()
+  savedir <- setwd(wd)
   tex_output <- overview_print(output_cross, crosstab = TRUE, save_out = TRUE)
   input_output <- overview_print(output_cross, crosstab = TRUE,
                                  save_out = FALSE)

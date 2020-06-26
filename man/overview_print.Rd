@@ -49,7 +49,7 @@ Produces a TeX output for output obtained via
    \code{overview_tab} and \code{overview_crosstab}
 }
 \examples{
-\dontrun{
+\donttest{
 overview_print(obj = overview_object,
                title = "Some nice title",
                crosstab = FALSE)

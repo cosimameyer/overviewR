@@ -16,7 +16,7 @@
 #'     later be converted to a TeX output using \code{overview_print}
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' output_crosstab <- overview_crosstab(
 #' dat = toydata,
 #' cond1 = gdp,
