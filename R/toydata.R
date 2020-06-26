@@ -25,5 +25,4 @@
 #'
 #' data(toydata)
 #' head(toydata)
-#'
 "toydata"

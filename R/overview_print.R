@@ -25,23 +25,28 @@
 #' data(toydata)
 #'
 #' overview_object <- overview_tab(dat = toydata, id = ccode, time = year)
-#' overview_print(obj = overview_object,
-#'                title = "Some nice title",
-#'                crosstab = FALSE)
+#' overview_print(
+#'   obj = overview_object,
+#'   title = "Some nice title",
+#'   crosstab = FALSE
+#' )
 #'
 #' overview_ct_object <- overview_crosstab(
-#' dat = toydata,
-#' cond1 = gdp,
-#' cond2 = population,
-#' threshold1 = 25000,
-#' threshold2 = 27000,
-#' id = ccode,
-#' time = year)
-#' overview_print(obj = overview_ct_object,
-#'                title = "Some nice title for a cross tab",
-#'                crosstab = TRUE,
-#'                cond1 = "Name of first condition",
-#'                cond2 = "Name of second condition")
+#'   dat = toydata,
+#'   cond1 = gdp,
+#'   cond2 = population,
+#'   threshold1 = 25000,
+#'   threshold2 = 27000,
+#'   id = ccode,
+#'   time = year
+#' )
+#' overview_print(
+#'   obj = overview_ct_object,
+#'   title = "Some nice title for a cross tab",
+#'   crosstab = TRUE,
+#'   cond1 = "Name of first condition",
+#'   cond2 = "Name of second condition"
+#' )
 #' @export
 #' @importFrom dplyr "%>%"
 
@@ -135,11 +140,13 @@ overview_print <-
 
         end_crosstab <-
           paste0("\\hline \\\\ \n \\end{tabularx} \n \\end{table} \n")
-        output <- cat(begin_crosstab,
-                      cross_out1,
-                      mid_crosstab,
-                      cross_out2,
-                      end_crosstab)
+        output <- cat(
+          begin_crosstab,
+          cross_out1,
+          mid_crosstab,
+          cross_out2,
+          end_crosstab
+        )
         if (save_out == TRUE) {
           save(output, file = "overviewR_crosstab.tex")
         }

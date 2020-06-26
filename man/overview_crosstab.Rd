@@ -35,12 +35,12 @@ Sorts a data set conditionally in a cross table.
 \examples{
 data(toydata)
 overview_crosstab(
-dat = toydata,
-cond1 = gdp,
-cond2 = population,
-threshold1 = 25000,
-threshold2 = 27000,
-id = ccode,
-time = year)
-
+  dat = toydata,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000,
+  id = ccode,
+  time = year
+)
 }

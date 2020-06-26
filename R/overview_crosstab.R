@@ -17,14 +17,14 @@
 #' @examples
 #' data(toydata)
 #' overview_crosstab(
-#' dat = toydata,
-#' cond1 = gdp,
-#' cond2 = population,
-#' threshold1 = 25000,
-#' threshold2 = 27000,
-#' id = ccode,
-#' time = year)
-#'
+#'   dat = toydata,
+#'   cond1 = gdp,
+#'   cond2 = population,
+#'   threshold1 = 25000,
+#'   threshold2 = 27000,
+#'   id = ccode,
+#'   time = year
+#' )
 #' @export
 #' @importFrom dplyr "%>%"
 
@@ -36,7 +36,6 @@ overview_crosstab <-
            threshold2,
            id,
            time) {
-
     id <- dplyr::enquo(id)
     time <- dplyr::enquo(time)
     cond1 <- dplyr::enquo(cond1)
@@ -66,37 +65,49 @@ overview_crosstab <-
         dplyr::ungroup()
 
       quart1 <-
-        red %>% dplyr::filter(quart1 == 1) %>% dplyr::select(!!id, !!time)
+        red %>%
+        dplyr::filter(quart1 == 1) %>%
+        dplyr::select(!!id, !!time)
       quart2 <-
-        red %>% dplyr::filter(quart2 == 1) %>% dplyr::select(!!id, !!time)
+        red %>%
+        dplyr::filter(quart2 == 1) %>%
+        dplyr::select(!!id, !!time)
       quart3 <-
-        red %>% dplyr::filter(quart3 == 1) %>% dplyr::select(!!id, !!time)
+        red %>%
+        dplyr::filter(quart3 == 1) %>%
+        dplyr::select(!!id, !!time)
       quart4 <-
-        red %>% dplyr::filter(quart4 == 1) %>% dplyr::select(!!id, !!time)
+        red %>%
+        dplyr::filter(quart4 == 1) %>%
+        dplyr::select(!!id, !!time)
 
       quart1_1 <- overview_tab(quart1, !!id, !!time)
       quart1_1 <- as.data.frame(quart1_1)
       part1 <-
         paste(paste0(quart1_1[, 1], " (", as.character(quart1_1[, 2]), ")"),
-              collapse = ", ")
+          collapse = ", "
+        )
 
       quart2_1 <- overview_tab(quart2, !!id, !!time)
       quart2_1 <- as.data.frame(quart2_1)
       part2 <-
         paste(paste0(quart2_1[, 1], " (", as.character(quart2_1[, 2]), ")"),
-              collapse = ", ")
+          collapse = ", "
+        )
 
       quart3_1 <- overview_tab(quart3, !!id, !!time)
       quart3_1 <- as.data.frame(quart3_1)
       part3 <-
         paste(paste0(quart3_1[, 1], " (", as.character(quart3_1[, 2]), ")"),
-              collapse = ", ")
+          collapse = ", "
+        )
 
       quart4_1 <- overview_tab(quart4, !!id, !!time)
       quart4_1 <- as.data.frame(quart4_1)
       part4 <-
         paste(paste0(quart4_1[, 1], " (", as.character(quart4_1[, 2]), ")"),
-              collapse = ", ")
+          collapse = ", "
+        )
 
       # Bring it back in a data frame structure to make it easily
       # convertible to a table
@@ -114,8 +125,10 @@ overview_crosstab <-
       red <- dat %>%
         dplyr::ungroup() %>%
         dplyr::group_by(!!id, !!time) %>%
-        dplyr::summarise(cond1_mean = mean(!!cond1),
-                         cond2_mean = mean(!!cond2)) %>%
+        dplyr::summarise(
+          cond1_mean = mean(!!cond1),
+          cond2_mean = mean(!!cond2)
+        ) %>%
         dplyr::ungroup()
 
       cond1_mean <- red$cond1_mean
@@ -140,37 +153,49 @@ overview_crosstab <-
         dplyr::ungroup()
 
       quart1 <-
-        red %>% dplyr::filter(quart1 == 1) %>% dplyr::select(!!id, !!time)
+        red %>%
+        dplyr::filter(quart1 == 1) %>%
+        dplyr::select(!!id, !!time)
       quart2 <-
-        red %>% dplyr::filter(quart2 == 1) %>% dplyr::select(!!id, !!time)
+        red %>%
+        dplyr::filter(quart2 == 1) %>%
+        dplyr::select(!!id, !!time)
       quart3 <-
-        red %>% dplyr::filter(quart3 == 1) %>% dplyr::select(!!id, !!time)
+        red %>%
+        dplyr::filter(quart3 == 1) %>%
+        dplyr::select(!!id, !!time)
       quart4 <-
-        red %>% dplyr::filter(quart4 == 1) %>% dplyr::select(!!id, !!time)
+        red %>%
+        dplyr::filter(quart4 == 1) %>%
+        dplyr::select(!!id, !!time)
 
       quart1_1 <- overview_tab(quart1, !!id, !!time)
       quart1_1 <- as.data.frame(quart1_1)
       part1 <-
         paste(paste0(quart1_1[, 1], " (", as.character(quart1_1[, 2]), ")"),
-              collapse = ", ")
+          collapse = ", "
+        )
 
       quart2_1 <- overview_tab(quart2, !!id, !!time)
       quart2_1 <- as.data.frame(quart2_1)
       part2 <-
         paste(paste0(quart2_1[, 1], " (", as.character(quart2_1[, 2]), ")"),
-              collapse = ", ")
+          collapse = ", "
+        )
 
       quart3_1 <- overview_tab(quart3, !!id, !!time)
       quart3_1 <- as.data.frame(quart3_1)
       part3 <-
         paste(paste0(quart3_1[, 1], " (", as.character(quart3_1[, 2]), ")"),
-              collapse = ", ")
+          collapse = ", "
+        )
 
       quart4_1 <- overview_tab(quart4, !!id, !!time)
       quart4_1 <- as.data.frame(quart4_1)
       part4 <-
         paste(paste0(quart4_1[, 1], " (", as.character(quart4_1[, 2]), ")"),
-              collapse = ", ")
+          collapse = ", "
+        )
 
       # Bring it back in a data frame structure to make
       # it easily convertible to a table

@@ -29,7 +29,6 @@ illustrate the use of the package.
 
 data(toydata)
 head(toydata)
-
 }
 \references{
 This data set was artificially created for the overviewR package.

@@ -22,10 +22,11 @@ overview_tab <- function(dat, id, time) {
     rundiff <- c(1, diff(run))
     difflist <- split(run, cumsum(rundiff != 1))
     unlist(lapply(difflist, function(x) {
-      if (length(x) %in% 1)
+      if (length(x) %in% 1) {
         as.character(x)
-      else
+      } else {
         paste(x[1], "-", x[length(x)])
+      }
     }), use.names = FALSE)
   }
 
@@ -41,7 +42,7 @@ overview_tab <- function(dat, id, time) {
 
   # Check if data set only has unique observations
   if (nrow(length_nodup) == nrow(dat)) {
-  # Apply it to the data
+    # Apply it to the data
     tab <- dat %>%
       # # Select important variables
       dplyr::select(!!id, !!time) %>%
@@ -53,7 +54,8 @@ overview_tab <- function(dat, id, time) {
       dplyr::group_by(!!id) %>%
       # Apply function generated above
       dplyr::mutate(time_frame = paste(find_int_runs(!!time),
-                                       collapse = ", ")) %>%
+        collapse = ", "
+      )) %>%
       # Subset it to only one distinct country
       dplyr::distinct(!!id, time_frame)
 
@@ -80,7 +82,8 @@ overview_tab <- function(dat, id, time) {
       dplyr::group_by(!!id) %>%
       # Apply function generated above
       dplyr::mutate(time_frame = paste(find_int_runs(!!time),
-                                       collapse = ", ")) %>%
+        collapse = ", "
+      )) %>%
       # Subset it to only one distinct country
       dplyr::distinct(!!id, time_frame)
 
