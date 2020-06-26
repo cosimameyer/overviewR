@@ -3,15 +3,17 @@
 
 <!-- badges: start -->
 
-<!-- [![Travis build status](https://img.shields.io/cosimameyer/overviewR.svg?logo=travis)](https://travis-ci.com/cosimameyer/overviewR) -->
-
 [![Travis build
-status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
+status](https://img.shields.io/travis/com/cosimameyer/overviewR.svg?logo=travis)](https://travis-ci.com/cosimameyer/overviewR)
 [![Codecov test
 coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.svg)](https://codecov.io/gh/cosimameyer/overviewR?branch=master)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![overviewR
+badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](https://github.com/cosimameyer/overviewR)
+[![R
+badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
 <!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--26-green.svg)](/commits/master) -->
 <!-- badges: end -->
