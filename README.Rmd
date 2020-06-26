@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 # overviewR <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
+<!-- [![Travis build status](https://img.shields.io/cosimameyer/overviewR.svg?logo=travis)](https://travis-ci.com/cosimameyer/overviewR) -->
 [![Travis build status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
 [![Codecov test coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.svg)](https://codecov.io/gh/cosimameyer/overviewR?branch=master)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -239,13 +240,13 @@ overview_print(
 <img src='man/figures/ex3.png' height="200"/>
 </p>
 
-With ```save_out = TRUE``` the function exports the ouput as a ```.tex``` file and stores it on the device.
+With ```save_out = TRUE``` the function exports the output as a ```.tex``` file and stores it on the device.
 
 ```{r, eval = FALSE}
 overview_print(obj = output_table, save_out = TRUE)
 ```
 
-## Compatabilities with other packages 
+## Compatibilities with other packages 
 
 The outputs of `overview_tab` and `overview_crosstab` are also compatible with other functions such as [`xtable`](https://CRAN.R-project.org/package=xtable), [`flextable`](https://CRAN.R-project.org/package=flextable), or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from [`knitr`](https://yihui.org/knitr/).
 

@@ -3,6 +3,8 @@
 
 <!-- badges: start -->
 
+<!-- [![Travis build status](https://img.shields.io/cosimameyer/overviewR.svg?logo=travis)](https://travis-ci.com/cosimameyer/overviewR) -->
+
 [![Travis build
 status](https://travis-ci.com/cosimameyer/overviewR.svg?branch=master)](https://travis-ci.com/cosimameyer/overviewR)
 [![Codecov test
@@ -11,7 +13,7 @@ coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--21-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--26-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of a data
@@ -282,14 +284,14 @@ overview_print(
 
 </p>
 
-With `save_out = TRUE` the function exports the ouput as a `.tex` file
+With `save_out = TRUE` the function exports the output as a `.tex` file
 and stores it on the device.
 
 ``` r
 overview_print(obj = output_table, save_out = TRUE)
 ```
 
-## Compatabilities with other packages
+## Compatibilities with other packages
 
 The outputs of `overview_tab` and `overview_crosstab` are also
 compatible with other functions such as

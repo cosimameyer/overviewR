@@ -225,13 +225,13 @@ overview_print(
 <img src='ex3.png' height="200"/>
 </p>
 
-With ```save_out = TRUE``` the function exports the ouput as a ```.tex``` file and stores it on the device.
+With ```save_out = TRUE``` the function exports the output as a ```.tex``` file and stores it on the device.
 
 ```{r, eval = FALSE}
 overview_print(obj = output_table, save_out = TRUE)
 ```
 
-## Compatabilities with other packages 
+## Compatibilities with other packages 
 
 The outputs of `overview_tab` and `overview_crosstab` are also compatible with other functions such as [`xtable`](https://CRAN.R-project.org/package=xtable), [`flextable`](https://CRAN.R-project.org/package=flextable), or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from [`knitr`](https://yihui.org/knitr/).
 
