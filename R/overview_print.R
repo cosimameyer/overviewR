@@ -1,6 +1,6 @@
 #' @title overview_print
 #'
-#' @description Produces a TeX output for output obtained via
+#' @description Produces a 'LaTeX' output for output obtained via
 #'    \code{overview_tab} and \code{overview_crosstab}
 #'
 #' @param obj Overview object produced by overview_tab or overview_crosstab
@@ -19,7 +19,7 @@
 #'     for \code{cond2} in \code{overview_crosstab}
 #' @param save_out Optional argument, exports the output table as a .tex
 #'     file, default is FALSE
-#' @return A TeX output that can either be copy-pasted in a text document or
+#' @return A 'LaTeX' output that can either be copy-pasted in a text document or
 #'     exported directed as a .tex file
 #' @examples
 #' data(toydata)

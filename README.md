@@ -15,7 +15,7 @@ badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](htt
 [![R
 badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--26-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--29-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of a data
@@ -29,7 +29,7 @@ specifying two conditions, hence resulting a 2x2 table. This way, it is
 easy to visualize the time and scope conditions as well as theoretical
 assumptions with examples from the data set. The function
 `overview_print` converts this output of both `overview_tab` and
-`overview_crosstab` into TeX code and/or directly into a .tex file.
+`overview_crosstab` into LaTeX code and/or directly into a .tex file.
 
 The output of `overview_tab` and `overview_crosstab` are also compatible
 with other packages such as
@@ -159,10 +159,10 @@ the mean of condition 1 (`cond1`) and condition 2 (`cond2`).
 
 ### `overview_print`
 
-To generate an easily usable TeX output for the generated `overview_tab`
-and `overview_crosstab` objects, `overviewR` offers the function
-`overview_print`. The following illustrate this using the `output_table`
-object from `overview_tab`.
+To generate an easily usable LaTeX output for the generated
+`overview_tab` and `overview_crosstab` objects, `overviewR` offers the
+function `overview_print`. The following illustrate this using the
+`output_table` object from `overview_tab`.
 
 ``` r
 overview_print(obj = output_table)
@@ -170,7 +170,7 @@ overview_print(obj = output_table)
 
 <details>
 
-<summary>TeX output</summary>
+<summary>LaTeX output</summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21
@@ -210,7 +210,7 @@ overview_print(obj = output_table, id = "Countries", time = "Years",
 
 <details>
 
-<summary>TeX output</summary>
+<summary>LaTeX output</summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21
@@ -256,7 +256,7 @@ overview_print(
 
 <details>
 
-<summary>TeX output</summary>
+<summary>LaTeX output</summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21

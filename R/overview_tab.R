@@ -7,7 +7,7 @@
 #' @param id Scope (e.g., country codes or individual IDs)
 #' @param time Time (e.g., time periods given by years, months, ...)
 #' @return A data frame object that contains a summary of a sample that
-#'     can later be converted to a TeX output using \code{overview_print}
+#'     can later be converted to a 'LaTeX' output using \code{overview_print}
 #' @examples
 #' data(toydata)
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
