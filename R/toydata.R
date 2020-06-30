@@ -3,8 +3,8 @@
 #' Small, artificially generated toy data set that comes in a cross-sectional
 #' format where the unit of analysis is either country-year or
 #' country-year-month. It provides artificial information for five countries
-#' (Angola, Benin, France, Rwanda, and the UK) for a time span from 1990 to 1999 to
-#' illustrate the use of the package.
+#' (Angola, Benin, France, Rwanda, and the UK) for a time span from 1990 to
+#' 1999 to illustrate the use of the package.
 #'
 #' @docType data
 #'
