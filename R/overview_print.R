@@ -19,6 +19,8 @@
 #'     for \code{cond2} in \code{overview_crosstab}
 #' @param save_out Optional argument, exports the output table as a .tex
 #'     file, default is FALSE
+#' @param path Specifies the path where the output should be saved
+#' @param file Specifies name and file type (.tex)
 #' @return A 'LaTeX' output that can either be copy-pasted in a text document or
 #'     exported directed as a .tex file
 #' @examples
@@ -59,7 +61,9 @@ overview_print <-
            crosstab = FALSE,
            cond1 = "Condition 1",
            cond2 = "Condition 2",
-           save_out = FALSE) {
+           save_out = FALSE,
+           path,
+           file) {
     obj <- as.matrix(obj)
 
     if (ncol(obj) != 2) {
@@ -89,19 +93,22 @@ overview_print <-
             title,
             "} \n \\begin{tabular}{ll} \n \\hline \n",
             id,
-            # col_names[1],
             " & ",
             time,
-            # col_names[2],
             " \\\\ \n",
             "\\hline \n"
           )
         out <- paste0(obj[, 1], " & ", obj[, 2], " \\\\ \n")
         end_tab <-
           paste0("\\hline \n \\end{tabular} \n \\end{table} \n")
-        output <- cat(begin_tab, out, end_tab)
+        if (save_out == FALSE) {
+          cat(begin_tab, out, end_tab)
+        }
         if (save_out == TRUE) {
-          save(output, file = "overviewR_table.tex")
+          save_dir <- paste0(path, file)
+          sink(save_dir)
+          cat(begin_tab, out, end_tab)
+          sink()
         }
       }
     }
@@ -140,16 +147,23 @@ overview_print <-
 
         end_crosstab <-
           paste0("\\hline \\\\ \n \\end{tabularx} \n \\end{table} \n")
-        output <- cat(
-          begin_crosstab,
-          cross_out1,
-          mid_crosstab,
-          cross_out2,
-          end_crosstab
-        )
-        if (save_out == TRUE) {
-          save(output, file = "overviewR_crosstab.tex")
+        if (save_out == FALSE) {
+          cat(begin_crosstab,
+              cross_out1,
+              mid_crosstab,
+              cross_out2,
+              end_crosstab)
         }
+      }
+      if (save_out == TRUE) {
+        save_dir <- paste0(path, file)
+        sink(save_dir)
+        cat(begin_crosstab,
+            cross_out1,
+            mid_crosstab,
+            cross_out2,
+            end_crosstab)
+        sink()
       }
     }
   }

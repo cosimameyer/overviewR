@@ -290,7 +290,8 @@ With `save_out = TRUE` the function exports the output as a `.tex` file
 and stores it on the device.
 
 ``` r
-overview_print(obj = output_table, save_out = TRUE)
+overview_print(obj = output_table, save_out = TRUE, path = "SET-YOUR-PATH",
+               file = "output.tex")
 ```
 
 ## Compatibilities with other packages
