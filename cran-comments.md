@@ -1,13 +1,16 @@
 ## Resubmission
 
-This is a resubmission that incorporates the CRAN comments from the first submission.
+This is a resubmission that incorporates the CRAN comments from our prior 
+submission.
 
 This is a submission for a new package.
 
 We added:
 
-- Unwrapped examples by removing `\dontrun{}`. All tests passed when using `\devtools::run_examples()`)
-- We used tempdir() to save test outputs in a temporary environment instead of writing on the user's home filespace
+- We used tempfile() and unlink() to store test outputs in a temporary environment instead of writing on the user's home filespace
+- Replaced TeX with LaTeX as requested
+- Wrote package names, software names and API names in single 
+quotes as requested
 
 ## Test environments
 
