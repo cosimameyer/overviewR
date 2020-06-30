@@ -14,8 +14,8 @@ Authors@R:
 Description: Makes it easy to display descriptive information on
     a data set.  Getting an easy overview of a data set by displaying and
     visualizing sample information in different tables (e.g., time and
-    scope conditions).  The package also provides publishable 'LaTeX' code to
-    present the sample information.
+    scope conditions).  The package also provides publishable 'LaTeX' code
+    to present the sample information.
 License: GPL-3
 URL: https://github.com/cosimameyer/overviewR
 BugReports: https://github.com/cosimameyer/overviewR/issues

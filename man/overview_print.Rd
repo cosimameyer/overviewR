@@ -12,7 +12,9 @@ overview_print(
   crosstab = FALSE,
   cond1 = "Condition 1",
   cond2 = "Condition 2",
-  save_out = FALSE
+  save_out = FALSE,
+  path,
+  file
 )
 }
 \arguments{
@@ -39,13 +41,17 @@ for \code{cond2} in \code{overview_crosstab}}
 
 \item{save_out}{Optional argument, exports the output table as a .tex
 file, default is FALSE}
+
+\item{path}{Specifies the path where the output should be saved}
+
+\item{file}{Specifies name and file type (.tex)}
 }
 \value{
-A TeX output that can either be copy-pasted in a text document or
+A 'LaTeX' output that can either be copy-pasted in a text document or
     exported directed as a .tex file
 }
 \description{
-Produces a TeX output for output obtained via
+Produces a 'LaTeX' output for output obtained via
    \code{overview_tab} and \code{overview_crosstab}
 }
 \examples{
