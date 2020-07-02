@@ -19,8 +19,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -88,28 +88,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+  <a href="../articles/overviewR_vignette.html">
+    <span class="fa fa-rocket"></span>
      
+    Getting Started
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+  <a href="../reference/index.html">
+    <span class="fa fa-project-diagram"></span>
      
-    <span class="caret"></span>
+    Functions
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/overviewR_vignette.html">overviewR: Easily Extracting Information About Your Data</a>
-    </li>
-  </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">
+    <span class="fa fa-lightbulb"></span>
+     
+    News
+  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -142,7 +139,7 @@
     a data set</p>
     </div>
 
-    <pre class="usage"><span class='fu'>overview_tab</span>(<span class='kw'>dat</span>, <span class='kw'>id</span>, <span class='kw'>time</span>)</pre>
+    <pre class="usage"><span class='fu'>overview_tab</span>(<span class='no'>dat</span>, <span class='no'>id</span>, <span class='no'>time</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,8 +164,8 @@
     can later be converted to a 'LaTeX' output using <code>overview_print</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>toydata</span>)
-<span class='kw'>output_table</span> <span class='op'>&lt;-</span> <span class='fu'>overview_tab</span>(dat = <span class='kw'>toydata</span>, id = <span class='kw'>ccode</span>, time = <span class='kw'>year</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>toydata</span>)
+<span class='no'>output_table</span> <span class='kw'>&lt;-</span> <span class='fu'>overview_tab</span>(<span class='kw'>dat</span> <span class='kw'>=</span> <span class='no'>toydata</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>ccode</span>, <span class='kw'>time</span> <span class='kw'>=</span> <span class='no'>year</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -180,11 +177,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Cosima Meyer, Dennis Hammerschmidt.</p>
+  <p>Developed by <a href='http://cosimameyer.github.io'>Cosima Meyer</a>, <a href='http://dennis-hammerschmidt.rbind.io'>Dennis Hammerschmidt</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

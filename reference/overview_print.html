@@ -19,8 +19,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -88,28 +88,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+  <a href="../articles/overviewR_vignette.html">
+    <span class="fa fa-rocket"></span>
      
+    Getting Started
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+  <a href="../reference/index.html">
+    <span class="fa fa-project-diagram"></span>
      
-    <span class="caret"></span>
+    Functions
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/overviewR_vignette.html">overviewR: Easily Extracting Information About Your Data</a>
-    </li>
-  </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">
+    <span class="fa fa-lightbulb"></span>
+     
+    News
+  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -143,16 +140,16 @@
     </div>
 
     <pre class="usage"><span class='fu'>overview_print</span>(
-  <span class='kw'>obj</span>,
-  title = <span class='st'>"Time and scope of the sample"</span>,
-  id = <span class='st'>"Sample"</span>,
-  time = <span class='st'>"Time frame"</span>,
-  crosstab = <span class='fl'>FALSE</span>,
-  cond1 = <span class='st'>"Condition 1"</span>,
-  cond2 = <span class='st'>"Condition 2"</span>,
-  save_out = <span class='fl'>FALSE</span>,
-  <span class='kw'>path</span>,
-  <span class='kw'>file</span>
+  <span class='no'>obj</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Time and scope of the sample"</span>,
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"Sample"</span>,
+  <span class='kw'>time</span> <span class='kw'>=</span> <span class='st'>"Time frame"</span>,
+  <span class='kw'>crosstab</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cond1</span> <span class='kw'>=</span> <span class='st'>"Condition 1"</span>,
+  <span class='kw'>cond2</span> <span class='kw'>=</span> <span class='st'>"Condition 2"</span>,
+  <span class='kw'>save_out</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>path</span>,
+  <span class='no'>file</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -214,14 +211,14 @@ file, default is FALSE</p></td>
     exported directed as a .tex file</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>toydata</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>toydata</span>)
 
-<span class='kw'>overview_object</span> <span class='op'>&lt;-</span> <span class='fu'>overview_tab</span>(dat = <span class='kw'>toydata</span>, id = <span class='kw'>ccode</span>, time = <span class='kw'>year</span>)
+<span class='no'>overview_object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='overview_tab.html'>overview_tab</a></span>(<span class='kw'>dat</span> <span class='kw'>=</span> <span class='no'>toydata</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>ccode</span>, <span class='kw'>time</span> <span class='kw'>=</span> <span class='no'>year</span>)
 <span class='fu'>overview_print</span>(
-  obj = <span class='kw'>overview_object</span>,
-  title = <span class='st'>"Some nice title"</span>,
-  crosstab = <span class='fl'>FALSE</span>
-)</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
+  <span class='kw'>obj</span> <span class='kw'>=</span> <span class='no'>overview_object</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Some nice title"</span>,
+  <span class='kw'>crosstab</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
 #&gt; % Table created on 2020-07-02
 #&gt; \begin{table}[ht] 
 #&gt;  \centering 
@@ -238,22 +235,22 @@ file, default is FALSE</p></td>
 #&gt;  \hline 
 #&gt;  \end{tabular} 
 #&gt;  \end{table} </div><div class='input'>
-<span class='kw'>overview_ct_object</span> <span class='op'>&lt;-</span> <span class='fu'>overview_crosstab</span>(
-  dat = <span class='kw'>toydata</span>,
-  cond1 = <span class='kw'>gdp</span>,
-  cond2 = <span class='kw'>population</span>,
-  threshold1 = <span class='fl'>25000</span>,
-  threshold2 = <span class='fl'>27000</span>,
-  id = <span class='kw'>ccode</span>,
-  time = <span class='kw'>year</span>
+<span class='no'>overview_ct_object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='overview_crosstab.html'>overview_crosstab</a></span>(
+  <span class='kw'>dat</span> <span class='kw'>=</span> <span class='no'>toydata</span>,
+  <span class='kw'>cond1</span> <span class='kw'>=</span> <span class='no'>gdp</span>,
+  <span class='kw'>cond2</span> <span class='kw'>=</span> <span class='no'>population</span>,
+  <span class='kw'>threshold1</span> <span class='kw'>=</span> <span class='fl'>25000</span>,
+  <span class='kw'>threshold2</span> <span class='kw'>=</span> <span class='fl'>27000</span>,
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>ccode</span>,
+  <span class='kw'>time</span> <span class='kw'>=</span> <span class='no'>year</span>
 )
 <span class='fu'>overview_print</span>(
-  obj = <span class='kw'>overview_ct_object</span>,
-  title = <span class='st'>"Some nice title for a cross tab"</span>,
-  crosstab = <span class='fl'>TRUE</span>,
-  cond1 = <span class='st'>"Name of first condition"</span>,
-  cond2 = <span class='st'>"Name of second condition"</span>
-)</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
+  <span class='kw'>obj</span> <span class='kw'>=</span> <span class='no'>overview_ct_object</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Some nice title for a cross tab"</span>,
+  <span class='kw'>crosstab</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>cond1</span> <span class='kw'>=</span> <span class='st'>"Name of first condition"</span>,
+  <span class='kw'>cond2</span> <span class='kw'>=</span> <span class='st'>"Name of second condition"</span>
+)</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
 #&gt; % Table created on 2020-07-02
 #&gt; % Please add the following packages to your document preamble: 
 #&gt; % \usepackage{multirow} 
@@ -283,11 +280,11 @@ file, default is FALSE</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Cosima Meyer, Dennis Hammerschmidt.</p>
+  <p>Developed by <a href='http://cosimameyer.github.io'>Cosima Meyer</a>, <a href='http://dennis-hammerschmidt.rbind.io'>Dennis Hammerschmidt</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
