@@ -1,5 +1,6 @@
 # overviewR 0.0.4
 
+- CRAN release
 - Further adjustments to new CRAN comments to avoid writing on the user's home filespace
 
 ---

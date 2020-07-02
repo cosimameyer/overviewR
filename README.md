@@ -14,8 +14,14 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](https://github.com/cosimameyer/overviewR)
 [![R
 badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/overviewR)](https://cran.r-project.org/package=overviewR)
+[![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+<!-- [![Rdoc](https://www.rdocumentation.org/badges/version/overviewR)](https://www.rdocumentation.org/packages/overviewR) -->
+<!-- [![metacran downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://cran.r-project.org/package=overviewR) -->
+<!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
+<!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--29-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--30-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of a data
@@ -39,8 +45,14 @@ with other packages such as
 
 ## Installation
 
-The latest version of `overviewR` can be installed directly from
-[GitHub](https://github.com/cosimameyer/overviewR) using:
+A stable version of `overviewR` can be directly accessed on CRAN:
+
+``` r
+install.packages("overviewR")
+```
+
+To install the latest development version of `overviewR` directly from
+[GitHub](https://github.com/cosimameyer/overviewR) use:
 
 ``` r
 library(devtools)
