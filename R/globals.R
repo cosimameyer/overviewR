@@ -1,1 +1,14 @@
-utils::globalVariables(c("c1", "c2", "time_frame", "toydata"))
+utils::globalVariables(
+  c(
+    "c1",
+    "c2",
+    "time_frame",
+    "toydata",
+    "count",
+    "grp",
+    "n",
+    "percentage",
+    "total",
+    "variable"
+  )
+)

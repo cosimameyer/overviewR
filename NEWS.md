@@ -1,3 +1,12 @@
+# overviewR 0.0.5.900
+
+- This development version adds the following functions:
+   - overview_plot
+   - overview_na
+   - overview_heat
+
+---
+
 # overviewR 0.0.4
 
 - CRAN release

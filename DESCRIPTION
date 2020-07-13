@@ -1,7 +1,7 @@
 Type: Package
 Package: overviewR
 Title: Easily Extracting Information About Your Data
-Version: 0.0.4
+Version: 0.0.5.9000
 Authors@R: 
     c(person(given = "Cosima",
              family = "Meyer",
@@ -22,7 +22,9 @@ BugReports: https://github.com/cosimameyer/overviewR/issues
 Depends: 
     R (>= 3.5.0)
 Imports:
-    dplyr (>= 1.0.0)
+    dplyr (>= 1.0.0),
+    ggplot2 (>= 3.3.2),
+    tibble (>= 3.0.1)
 Suggests: 
     covr,
     knitr,

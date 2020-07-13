@@ -142,3 +142,22 @@ correct format", {
                                               threshold2 = 10)
             expect_equal(nrow(output_cross), 2)
 })
+
+test_that("check output of overview_na", {
+  plot_na <- overview_na(dat = toydata)
+  testthat::expect_is(plot_na, "ggplot")
+  plot_na_abs <- overview_na(dat = toydata, perc = FALSE)
+  testthat::expect_is(plot_na_abs, "ggplot")
+})
+
+test_that("check output of overview_heat", {
+  plot_heat <- overview_heat(toydata, ccode, year, perc = TRUE, exp_total = 12)
+  testthat::expect_is(plot_heat, "ggplot")
+  plot_heat_abs <- overview_heat(toydata, ccode, year, perc = FALSE)
+  testthat::expect_is(plot_heat_abs, "ggplot")
+})
+
+test_that("check output of overview_plot", {
+  plot <- overview_plot(dat = toydata, id = ccode, time = year)
+  testthat::expect_is(plot, "ggplot")
+})
