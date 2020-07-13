@@ -27,7 +27,7 @@ pkgs <- c(
 )
 
 ## Install uninstalled packages
-lapply(pkgs[!(pkgs %in% installed.packages())], install.packages)
+lapply(pkgs[!(pkgs %in% installed.packages(repos = "https://ftp.fau.de/cran/"))], install.packages)
 
 ## Load all packages to library
 lapply(pkgs, library, character.only = TRUE)
