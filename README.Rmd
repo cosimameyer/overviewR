@@ -11,6 +11,21 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{R,echo=FALSE,results='hide',message=FALSE,include=FALSE, eval=TRUE}
+## Packages
+pkgs <- c(
+  "knitr",
+  "tidyverse",
+  "dplyr"
+)
+
+## Install uninstalled packages
+lapply(pkgs[!(pkgs %in% installed.packages())], install.packages)
+
+## Load all packages to library
+lapply(pkgs, library, character.only = TRUE)
+```
+
 # overviewR <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
@@ -50,6 +65,10 @@ devtools::install_github("cosimameyer/overviewR")
 ## Example
 
 First, load the package.
+```{r, include = FALSE, eval = FALSE}
+install.packages("overviewR")
+```
+
 ```{r, message=FALSE, warning=FALSE}
 library(overviewR)
 ```
@@ -258,7 +277,6 @@ With ```save_out = TRUE``` the function exports the output as a ```.tex``` file 
 overview_print(obj = output_table, save_out = TRUE, path = "SET-YOUR-PATH",
                file = "output.tex")
 ```
-
 ## Compatibilities with other packages 
 
 The outputs of `overview_tab` and `overview_crosstab` are also compatible with other functions such as [`xtable`](https://CRAN.R-project.org/package=xtable), [`flextable`](https://CRAN.R-project.org/package=flextable), or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from [`knitr`](https://yihui.org/knitr/).
@@ -298,6 +316,61 @@ library(knitr)
 knitr::kable(output_table)
 ```
 
+
+## Recent additions to the GitHub version of overviewR
+
+In addition to tables, `overviewR` also provides plots to illustrate the structure of your data. 
+The following functions were only added to the GitHub version and are not yet part of the CRAN version of `overviewR`. While the functions should be stable, they are still in a development version. 
+
+You can access the GitHub version of the package here:
+```{r, message=FALSE, warning=FALSE, results = "hide", eval=FALSE}
+library(devtools)
+devtools::install_github("cosimameyer/overviewR")
+library(overviewR)
+```
+
+### ```overview_plot```
+
+`overview_plot` illustrates the information that is generated in `overview_table` in a ggplot graphic. All scope objects (e.g., countries) are listed on the y-axis where horizontal lines indicate the coverage across the entire time frame of the data (x-axis). This helps to spot gaps in the data for specific scope objects and outlines at what time point they occur. 
+
+```{r, out.width = '50%', fig.align='center'}
+data(toydata)
+overview_plot(dat = toydata, id = ccode, time = year)
+```
+
+### ```overview_heat```
+
+`overview_heat` takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. `overview_heat` intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola ("AGO") in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.
+
+```{r, include = FALSE}
+toydata_red <- toydata[-sample(1:nrow(toydata), 64), ]
+```
+
+```{r, out.width = '50%', fig.align='center'}
+overview_heat(toydata_red,
+                ccode,
+                year,
+                perc = TRUE,
+                exp_total = 12)
+```
+
+### ```overview_na```
+
+`overview_na` is a simple function that provides information about the content of all variables in your data, not only the time and scope conditions. It returns a horizontal ggplot bar plot that indicates the amount of missing data (NAs) for each variable (on the y-axis). You can choose whether to display the relative amount of NAs for each variable in percentage (the default) or the total number of NAs. 
+
+```{r, include=FALSE}
+toydata_with_na <- toydata %>%
+  dplyr::mutate(year = ifelse(year < 1992, NA, year),
+                month = ifelse(month %in% c("Jan", "Jun", "Aug"), NA, month),
+                gdp = ifelse(gdp < 20000, NA, gdp))
+```
+
+```{r, out.width = '50%', fig.align='center'}
+overview_na(toydata_with_na)
+```
+```{r, out.width = '50%', fig.align='center'}
+overview_na(toydata_with_na, perc = FALSE)
+```
 
 # Credits
 

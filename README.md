@@ -21,7 +21,7 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--30-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--13-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 The goal of overviewR is to make it easy to get an overview of a data
@@ -343,6 +343,84 @@ knitr::kable(output_table)
 | BEN   |          1995-1999           |
 | GBR   | 1991, 1993, 1995, 1997, 1999 |
 | FRA   |       1993, 1996, 1999       |
+
+## Recent additions to the GitHub version of overviewR
+
+In addition to tables, `overviewR` also provides plots to illustrate the
+structure of your data. The following functions were only added to the
+GitHub version and are not yet part of the CRAN version of `overviewR`.
+While the functions should be stable, they are still in a development
+version.
+
+You can access the GitHub version of the package here:
+
+``` r
+library(devtools)
+devtools::install_github("cosimameyer/overviewR")
+library(overviewR)
+```
+
+### `overview_plot`
+
+`overview_plot` illustrates the information that is generated in
+`overview_table` in a ggplot graphic. All scope objects (e.g.,
+countries) are listed on the y-axis where horizontal lines indicate the
+coverage across the entire time frame of the data (x-axis). This helps
+to spot gaps in the data for specific scope objects and outlines at what
+time point they occur.
+
+``` r
+data(toydata)
+overview_plot(dat = toydata, id = ccode, time = year)
+```
+
+<img src="man/figures/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
+
+### `overview_heat`
+
+`overview_heat` takes a closer look at the time and scope conditions by
+visualizing the data coverage for each time and scope combination in a
+ggplot heat map. This function is best explained using an example.
+Suppose you have a dataset with monthly data for different countries and
+want to know if data is available for each country in every month.
+`overview_heat` intuitively does this by plotting a heat map where each
+cell indicates the coverage for that specific combination of time and
+scope (e,g., country-year). As illustrated below, the darker the cell
+is, the more coverage it has. The plot also indicates the relative or
+absolute coverage of each cell. For instance, Angola (“AGO”) in 1991
+shows the coverage of 75%. This means that of all potential 12 months of
+coverage (12 months for one year), only 9 are covered.
+
+``` r
+overview_heat(toydata_red,
+                ccode,
+                year,
+                perc = TRUE,
+                exp_total = 12)
+```
+
+<img src="man/figures/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" />
+
+### `overview_na`
+
+`overview_na` is a simple function that provides information about the
+content of all variables in your data, not only the time and scope
+conditions. It returns a horizontal ggplot bar plot that indicates the
+amount of missing data (NAs) for each variable (on the y-axis). You can
+choose whether to display the relative amount of NAs for each variable
+in percentage (the default) or the total number of NAs.
+
+``` r
+overview_na(toydata_with_na)
+```
+
+<img src="man/figures/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" />
+
+``` r
+overview_na(toydata_with_na, perc = FALSE)
+```
+
+<img src="man/figures/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;" />
 
 # Credits
 
