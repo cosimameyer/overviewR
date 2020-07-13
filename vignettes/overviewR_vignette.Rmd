@@ -293,7 +293,7 @@ In addition to tables, `overviewR` also provides plots to illustrate the structu
 The following functions were only added to the GitHub version and are not yet part of the CRAN version of `overviewR`. While the functions should be stable, they are still in a development version. 
 
 You can access the GitHub version of the package here:
-```{r, message=FALSE, warning=FALSE, results = "hide", eval=FALSE}
+```{r, message=FALSE, warning=FALSE, results = "hide", eval=TRUE}
 library(devtools)
 devtools::install_github("cosimameyer/overviewR")
 library(overviewR)
@@ -303,10 +303,14 @@ library(overviewR)
 
 `overview_plot` illustrates the information that is generated in `overview_table` in a ggplot graphic. All scope objects (e.g., countries) are listed on the y-axis where horizontal lines indicate the coverage across the entire time frame of the data (x-axis). This helps to spot gaps in the data for specific scope objects and outlines at what time point they occur. 
 
-```{r, out.width = '50%', fig.align='center'}
+```{r, fig.align='center', eval = FALSE}
 data(toydata)
 overview_plot(dat = toydata, id = ccode, time = year)
 ```
+
+<p align="center">
+<img src='unnamed-chunk-23-1.png' height="300"/>
+</p>
 
 ### ```overview_heat```
 
@@ -316,13 +320,17 @@ overview_plot(dat = toydata, id = ccode, time = year)
 toydata_red <- toydata[-sample(1:nrow(toydata), 64), ]
 ```
 
-```{r, out.width = '50%', fig.align='center'}
+```{r, fig.align='center', eval = FALSE}
 overview_heat(toydata_red,
                 ccode,
                 year,
                 perc = TRUE,
                 exp_total = 12)
 ```
+
+<p align="center">
+<img src='unnamed-chunk-25-1.png' height="300"/>
+</p>
 
 ### ```overview_na```
 
@@ -335,9 +343,18 @@ toydata_with_na <- toydata %>%
                 gdp = ifelse(gdp < 20000, NA, gdp))
 ```
 
-```{r, out.width = '50%', fig.align='center'}
+```{r,  fig.align='center', eval= FALSE}
 overview_na(toydata_with_na)
 ```
-```{r, out.width = '50%', fig.align='center'}
+
+<p align="center">
+<img src='unnamed-chunk-27-1.png' height="300"/>
+</p>
+
+```{r, fig.align='center', eval = FALSE}
 overview_na(toydata_with_na, perc = FALSE)
 ```
+
+<p align="center">
+<img src='unnamed-chunk-28-1.png' height="300"/>
+</p>
