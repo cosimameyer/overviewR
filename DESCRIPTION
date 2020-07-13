@@ -30,7 +30,8 @@ Suggests:
     knitr,
     rmarkdown,
     spelling,
-    testthat
+    testthat,
+    pkgdown
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
