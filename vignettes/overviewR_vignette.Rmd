@@ -22,7 +22,8 @@ knitr::opts_chunk$set(
 pkgs <- c(
   "knitr",
   "tidyverse",
-  "dplyr"
+  "dplyr",
+  "devtools"
 )
 
 ## Install uninstalled packages
