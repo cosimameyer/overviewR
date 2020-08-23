@@ -1,3 +1,14 @@
+---
+# overviewR 0.0.6
+- CRAN resubmission
+- Added new functions:
+  - overview_plot
+  - overview_na
+  - overview_heat
+- Fixed two bugs in overview_plot and overview_tab that returned erroneous results on non-sorted data
+
+---
+
 # overviewR 0.0.5.900
 
 - This development version adds the following functions:
@@ -10,7 +21,7 @@
 # overviewR 0.0.4
 
 - CRAN release
-- Further adjustments to new CRAN comments to avoid writing on the user's home filespace
+- Further adjustments to new CRAN comments to avoid writing on the user's home file space
 
 ---
 
