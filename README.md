@@ -21,8 +21,11 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--13-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--08--23-green.svg)](/commits/master) -->
 <!-- badges: end -->
+
+[**You can access the CheatSheet for overviewR
+here**](https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overview.pdf)
 
 The goal of overviewR is to make it easy to get an overview of a data
 set by displaying relevant sample information. At the moment, there are
@@ -182,7 +185,11 @@ overview_print(obj = output_table)
 
 <details>
 
-<summary>LaTeX output</summary>
+<summary>
+
+LaTeX output
+
+</summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21
@@ -222,7 +229,11 @@ overview_print(obj = output_table, id = "Countries", time = "Years",
 
 <details>
 
-<summary>LaTeX output</summary>
+<summary>
+
+LaTeX output
+
+</summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21
@@ -268,7 +279,11 @@ overview_print(
 
 <details>
 
-<summary>LaTeX output</summary>
+<summary>
+
+LaTeX output
+
+</summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
     % Table created on 2020-06-21
@@ -336,13 +351,13 @@ library(knitr)
 knitr::kable(output_table)
 ```
 
-| ccode |         time\_frame          |
-| :---- | :--------------------------: |
-| RWA   |          1990-1995           |
-| AGO   |          1990-1992           |
-| BEN   |          1995-1999           |
+| ccode | time\_frame                  |
+| :---- | :--------------------------- |
+| RWA   | 1990-1995                    |
+| AGO   | 1990-1992                    |
+| BEN   | 1995-1999                    |
 | GBR   | 1991, 1993, 1995, 1997, 1999 |
-| FRA   |       1993, 1996, 1999       |
+| FRA   | 1993, 1996, 1999             |
 
 ## Recent additions to the GitHub version of overviewR
 

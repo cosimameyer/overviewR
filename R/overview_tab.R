@@ -17,7 +17,7 @@
 
 overview_tab <- function(dat, id, time) {
   # Check for consecutive numbers and collapse them with "-"
-  # From here: https://bit.ly/3ebZo5j
+  # Inspired here: https://bit.ly/3ebZo5j
   find_int_runs <- function(run) {
     rundiff <- c(1, diff(run))
     difflist <- split(run, cumsum(rundiff != 1))
@@ -44,10 +44,12 @@ overview_tab <- function(dat, id, time) {
   if (nrow(length_nodup) == nrow(dat)) {
     # Apply it to the data
     tab <- dat %>%
-      # # Select important variables
+      # Select important variables
       dplyr::select(!!id, !!time) %>%
-      # # Group data
+      # Group data
       dplyr::group_by(!!id, !!time) %>%
+      # Arrange the data
+      dplyr::arrange(!!id, !!time) %>%
       # Only get distinct IDs
       dplyr::distinct(!!id) %>%
       # Group by ID
@@ -76,6 +78,8 @@ overview_tab <- function(dat, id, time) {
       dplyr::select(!!id, !!time) %>%
       # # Group data
       dplyr::group_by(!!id, !!time) %>%
+      # Arrange the data
+      dplyr::arrange(!!id, !!time) %>%
       # Only get distinct IDs
       dplyr::distinct(!!id) %>%
       # Group by ID

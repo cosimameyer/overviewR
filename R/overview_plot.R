@@ -60,14 +60,15 @@ overview_plot <-
     # in the time variable
     dat_red <- dat %>%
       dplyr::distinct(!!id, !!time) %>%
-      dplyr::filter(!is.na(!!time))
+      dplyr::filter(!is.na(!!time)) %>%
+      dplyr::arrange(!!id, !!time)
 
     # The following code is inspired by: https://bit.ly/2CpS3B7
     dat_red <- dat_red
     dat_red <- dat_red %>%
       dplyr::mutate(idx = c(1, diff(!!time)))
     i2 <- c(1, which(dat_red$idx != 1), nrow(dat_red) + 1)
-    dat_red$grp <- rep(1:length(diff(i2)), diff(i2))
+    dat_red$grp <- rep(seq_len(length(diff(i2))), diff(i2))
     dat_red <- dat_red
 
     # Plot it

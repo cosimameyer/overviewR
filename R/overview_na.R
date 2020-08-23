@@ -26,15 +26,17 @@ overview_na <- function(dat,
   # Generate necessary variables --------------------------------------------
   # Inspired by:
   # https://bit.ly/3fqhH7l
-  na_count <- sapply(dat, function(y)
+  na_count <- vapply(dat, function(y)
     sum(length(which(is.na(
       y
-    )))))
-  total <- sapply(dat, function(y) length(y))
+    )))), FUN.VALUE = numeric(1))
+  total <- vapply(dat, function(y)
+    length(y), FUN.VALUE = numeric(1))
 
   dat_frame <- data.frame(na_count, total)
   # Add rownames as variable
-  dat_frame <- tibble::rownames_to_column(dat_frame, var = "variable")
+  dat_frame <-
+    tibble::rownames_to_column(dat_frame, var = "variable")
   # Get percentage
   dat_frame <- dat_frame %>%
     dplyr::mutate(percentage = na_count / (total / 100))
@@ -65,10 +67,8 @@ overview_na <- function(dat,
       color = "black",
       size = 8
     ),
-    text = ggplot2::element_text(
-      size = 10,
-      face = "plain"
-    )
+    text = ggplot2::element_text(size = 10,
+                                 face = "plain")
   )
 
   # Absolute numbers --------------------------------------------------------

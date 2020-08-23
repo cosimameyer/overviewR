@@ -10,17 +10,19 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-  )
+knitr::opts_chunk$set(collapse = TRUE,
+                      comment = "#>")
 ```
 
 
 ```{R,echo=FALSE,results='hide',message=FALSE,include=FALSE, eval=TRUE}
-if(!require(knitr)) install.packages("knitr",repos = "http://cran.us.r-project.org")
-if(!require(devtools)) install.packages("devtools",repos = "http://cran.us.r-project.org")
-if(!require(dplyr)) install.packages("dplyr",repos = "http://cran.us.r-project.org")
+if (!require(knitr))
+  install.packages("knitr", repos = "http://cran.us.r-project.org")
+if (!require(devtools))
+  install.packages("devtools", repos = "http://cran.us.r-project.org")
+if (!require(dplyr))
+  install.packages("dplyr", repos = "http://cran.us.r-project.org"
+  )
 ```
 
 The goal of `overviewR` is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are two functions (```overview_tab``` and ```overview_crosstab```) that generate a tabular overview of the general sample as well as a conditional sample. The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set. The function ```overview_print```  converts this output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
@@ -308,7 +310,7 @@ overview_plot(dat = toydata, id = ccode, time = year)
 `overview_heat` takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. `overview_heat` intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola ("AGO") in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.
 
 ```{r, include = FALSE}
-toydata_red <- toydata[-sample(1:nrow(toydata), 64), ]
+toydata_red <- toydata[-sample(seq_len(nrow(toydata)), 64), ]
 ```
 
 ```{r, fig.align='center', eval = FALSE}
