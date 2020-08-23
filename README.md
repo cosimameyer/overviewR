@@ -25,7 +25,7 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
-here**](https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overview.pdf)
+here**](https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf)
 
 The goal of overviewR is to make it easy to get an overview of a data
 set by displaying relevant sample information. At the moment, there are
