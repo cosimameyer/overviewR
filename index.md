@@ -37,6 +37,8 @@ To get a quick and intuitive overview of your data, overviewR provides currently
 
 How to use these functions in practice is best explained in the [Getting Started](https://cosimameyer.github.io/overviewR/articles/overviewR_vignette.html) section.
 
+There is also a CheatSheet available [here](https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf) that showcases the functions of overviewR.
+
 ## <i class="fas fa-people-carry"></i> Get involved!
 
 Have you used overviewR in your project? **Let us know!** You can either e-mail us or use our pull-request template and populate/fill the following with your information:
