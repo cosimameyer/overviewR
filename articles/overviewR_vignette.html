@@ -96,7 +96,7 @@
       <h1 data-toc-skip>overviewR: Easily Extracting Information About Your Data</h1>
                         <h4 class="author">Cosima Meyer and Dennis Hammerschmidt</h4>
             
-            <h4 class="date">2020-08-23</h4>
+            <h4 class="date">2020-08-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/cosimameyer/overviewR/blob/master/vignettes/overviewR_vignette.Rmd"><code>vignettes/overviewR_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>overviewR_vignette.Rmd</code></div>
@@ -105,24 +105,41 @@
 
     
     
-<p>The goal of <code>overviewR</code> is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are two functions (<code>overview_tab</code> and <code>overview_crosstab</code>) that generate a tabular overview of the general sample as well as a conditional sample. The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set. The function <code>overview_print</code> converts this output of both <code>overview_tab</code> and <code>overview_crosstab</code> into LaTeX code and/or directly into a .tex file.</p>
+<p>The goal of overviewR is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are two functions (<code>overview_tab</code> and <code>overview_crosstab</code>) that generate a tabular overview of the general sample as well as a conditional sample. The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set. The function <code>overview_print</code> converts this output of both <code>overview_tab</code> and <code>overview_crosstab</code> into LaTeX code and/or directly into a .tex file.</p>
 <p>The output of <code>overview_tab</code> and <code>overview_crosstab</code> are also compatible with other packages such as <a href="https://CRAN.R-project.org/package=xtable"><code>xtable</code></a>, <a href="https://CRAN.R-project.org/package=flextable"><code>flextable</code></a>, or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html"><code>knitr</code></a>.</p>
-<div id="using-the-package" class="section level2">
+<div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-the-package" class="anchor"></a>Using the package</h2>
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>A stable version of <code>overviewR</code> can be directly accessed on CRAN:</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"overviewR"</span>, <span class="kw">force</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<p>To install the latest development version of <code>overviewR</code> directly from <a href="https://github.com/cosimameyer/overviewR">GitHub</a> use:</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">devtools</span>)
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"cosimameyer/overviewR"</span>)</pre></body></html></div>
+</div>
+<div id="example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h2>
 <p>First, load the package.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"cosimameyer/overviewR"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">overviewR</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">overviewR</span>)</pre></body></html></div>
 <p>The following examples use a toy data set (<code>toydata</code>) that comes with the package. This data contains artificially generated information in a cross-sectional format on 5 countries, covering the period 1990-1999.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">toydata</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">toydata</span>)</pre></body></html></div>
-<pre><code>    ccode   year   month  gdp       population
-    RWA     1990   Jan    24180.77  14969.988
-    RWA     1990   Feb    23650.53  11791.464
-    RWA     1990   Mar    21860.14  30047.979
-    RWA     1990   Apr    20801.06  19853.556
-    RWA     1990   May    18702.84   5148.118
-    RWA     1990   Jun    30272.37  48625.140</code></pre>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">toydata</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">toydata</span>)
+<span class="co">#&gt;   ccode year month      gdp population</span>
+<span class="co">#&gt; 1   RWA 1990   Jan 24180.77  14969.988</span>
+<span class="co">#&gt; 2   RWA 1990   Feb 23650.53  11791.464</span>
+<span class="co">#&gt; 3   RWA 1990   Mar 21860.14  30047.979</span>
+<span class="co">#&gt; 4   RWA 1990   Apr 20801.06  19853.556</span>
+<span class="co">#&gt; 5   RWA 1990   May 18702.84   5148.118</span>
+<span class="co">#&gt; 6   RWA 1990   Jun 30272.37  48625.140</span></pre></body></html></div>
+<!-- ``` -->
+<!--     ccode   year   month  gdp       population -->
+<!--     RWA     1990   Jan    24180.77  14969.988 -->
+<!--     RWA     1990   Feb    23650.53  11791.464 -->
+<!--     RWA     1990   Mar    21860.14  30047.979 -->
+<!--     RWA     1990   Apr    20801.06  19853.556 -->
+<!--     RWA     1990   May    18702.84   5148.118 -->
+<!--     RWA     1990   Jun    30272.37  48625.140 -->
+<!-- ``` -->
 <p>There are 264 observations for 5 countries (Angola, Benin, France, Rwanda, and UK) stored in the <code>ccode</code> variable, over a time period between 1990 to 1999 (<code>year</code>) with additional information for the month (<code>month</code>). Additionally, two artificially generated fake variables for GDP (<code>gdp</code>) and population size (<code>population</code>) are included to illustrate of conditions.</p>
 <p>The following functions work best on data sets that have an id-time-structure, in the case of <code>toydata</code> this corresponds to country-year with <code>ccode</code> and <code>year</code>. If the data set does not have this format yet, consider using <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html"><code>pivot_wider()</code> or <code>pivot_longer()</code></a> to get to the format.</p>
 <div id="overview_tab" class="section level3">
@@ -130,9 +147,9 @@
 <a href="#overview_tab" class="anchor"></a><code>overview_tab</code>
 </h3>
 <p>Generate some general overview of the data set using the time and scope conditions with <code>overview_tab</code>.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">output_table</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_tab.html">overview_tab</a></span>(<span class="kw">dat</span> <span class="kw">=</span> <span class="no">toydata</span>, <span class="kw">id</span> <span class="kw">=</span> <span class="no">ccode</span>, <span class="kw">time</span> <span class="kw">=</span> <span class="no">year</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">output_table</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_tab.html">overview_tab</a></span>(<span class="kw">dat</span> <span class="kw">=</span> <span class="no">toydata</span>, <span class="kw">id</span> <span class="kw">=</span> <span class="no">ccode</span>, <span class="kw">time</span> <span class="kw">=</span> <span class="no">year</span>)</pre></body></html></div>
 <p>The resulting data frame collapses the time condition for each id by taking into account potential gaps in the time frame. Note that the column name for the time frame is set by default to <code>time_frame</code> and internally generated when using <code>overview_tab</code>.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">output_table</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">output_table</span></pre></body></html></div>
 <pre><code># ccode   time_frame
 # RWA       1990 - 1995
 # AGO       1990 - 1992
@@ -145,7 +162,7 @@
 <a href="#overview_crosstab" class="anchor"></a><code>overview_crosstab</code>
 </h3>
 <p>To generate a cross table that divides the data based on two conditions, for instance GDP and population size, <code>overview_crosstab</code> can be used. <code>threshold1</code> and <code>threshold2</code> thereby indicate the cut point for the two conditions (<code>cond1</code> and <code>cond2</code>), respectively.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">output_crosstab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_crosstab.html">overview_crosstab</a></span>(
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">output_crosstab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_crosstab.html">overview_crosstab</a></span>(
     <span class="kw">dat</span> <span class="kw">=</span> <span class="no">toydata</span>,
     <span class="kw">cond1</span> <span class="kw">=</span> <span class="no">gdp</span>,
     <span class="kw">cond2</span> <span class="kw">=</span> <span class="no">population</span>,
@@ -165,7 +182,7 @@
 <a href="#overview_print" class="anchor"></a><code>overview_print</code>
 </h3>
 <p>To generate an easily usable LaTeX output for the generated <code>overview_tab</code> and <code>overview_crosstab</code> objects, <code>overviewR</code> offers the function <code>overview_print</code>. The following illustrate this using the <code>output_table</code> object from <code>overview_tab</code>.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_print.html">overview_print</a></span>(<span class="kw">obj</span> <span class="kw">=</span> <span class="no">output_table</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_print.html">overview_print</a></span>(<span class="kw">obj</span> <span class="kw">=</span> <span class="no">output_table</span>)</pre></body></html></div>
 <details><p><summary>LaTeX output</summary></p>
 <pre><code>% Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
 % Table created on 2020-06-21
@@ -187,7 +204,7 @@ Sample &amp; Time frame \\
 </details><p align="center">
 <img src="ex1.png" height="150"></p>
 <p>The default already provides a title (“Time and scope of the sample”) that can be modified in the argument <code>title</code>. The same holds for the column names (“Sample” and “Time frame” are set by default but can be modified as shown below).</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_print.html">overview_print</a></span>(<span class="kw">obj</span> <span class="kw">=</span> <span class="no">output_table</span>, <span class="kw">id</span> <span class="kw">=</span> <span class="st">"Countries"</span>, <span class="kw">time</span> <span class="kw">=</span> <span class="st">"Years"</span>,
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_print.html">overview_print</a></span>(<span class="kw">obj</span> <span class="kw">=</span> <span class="no">output_table</span>, <span class="kw">id</span> <span class="kw">=</span> <span class="st">"Countries"</span>, <span class="kw">time</span> <span class="kw">=</span> <span class="st">"Years"</span>,
                <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Cool new title for our awesome table"</span>)</pre></body></html></div>
 <details><p><summary>LaTeX output</summary></p>
 <pre><code>% Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
@@ -210,7 +227,7 @@ Countries &amp; Years \\
 </details><p align="center">
 <img src="ex2.png" height="150"></p>
 <p>The same function can also be used for outputs from the <code>overview_crosstab</code> function by using the argument <code>crosstab = TRUE</code>. There are also options to label the respective conditions (<code>cond1</code> and <code>cond2</code>). Note that this should correspond to the conditions (<code>cond1</code> and <code>cond2</code>) specified in the <code>overview_crosstab</code> function.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_print.html">overview_print</a></span>(
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_print.html">overview_print</a></span>(
   <span class="kw">obj</span> <span class="kw">=</span> <span class="no">output_crosstab</span>,
   <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Cross table of the sample"</span>,
   <span class="kw">crosstab</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
@@ -240,7 +257,39 @@ Countries &amp; Years \\
 </details><p align="center">
 <img src="ex3.png" height="200"></p>
 <p>With <code>save_out = TRUE</code> the function exports the output as a <code>.tex</code> file and stores it on the device.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_print.html">overview_print</a></span>(<span class="kw">obj</span> <span class="kw">=</span> <span class="no">output_table</span>, <span class="kw">save_out</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_print.html">overview_print</a></span>(<span class="kw">obj</span> <span class="kw">=</span> <span class="no">output_table</span>, <span class="kw">save_out</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">path</span> <span class="kw">=</span> <span class="st">"SET-YOUR-PATH"</span>,
+               <span class="kw">file</span> <span class="kw">=</span> <span class="st">"output.tex"</span>)</pre></body></html></div>
+</div>
+<div id="overview_plot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview_plot" class="anchor"></a><code>overview_plot</code>
+</h3>
+<p>In addition to tables, <code>overviewR</code> also provides plots to illustrate the structure of your data. <code>overview_plot</code> illustrates the information that is generated in <code>overview_table</code> in a ggplot graphic. All scope objects (e.g., countries) are listed on the y-axis where horizontal lines indicate the coverage across the entire time frame of the data (x-axis). This helps to spot gaps in the data for specific scope objects and outlines at what time point they occur.</p>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">toydata</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_plot.html">overview_plot</a></span>(<span class="kw">dat</span> <span class="kw">=</span> <span class="no">toydata</span>, <span class="kw">id</span> <span class="kw">=</span> <span class="no">ccode</span>, <span class="kw">time</span> <span class="kw">=</span> <span class="no">year</span>)</pre></body></html></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;"></p>
+</div>
+<div id="overview_heat" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview_heat" class="anchor"></a><code>overview_heat</code>
+</h3>
+<p><code>overview_heat</code> takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. <code>overview_heat</code> intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola (“AGO”) in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.</p>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_heat.html">overview_heat</a></span>(<span class="no">toydata_red</span>,
+                <span class="no">ccode</span>,
+                <span class="no">year</span>,
+                <span class="kw">perc</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+                <span class="kw">exp_total</span> <span class="kw">=</span> <span class="fl">12</span>)</pre></body></html></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;"></p>
+</div>
+<div id="overview_na" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview_na" class="anchor"></a><code>overview_na</code>
+</h3>
+<p><code>overview_na</code> is a simple function that provides information about the content of all variables in your data, not only the time and scope conditions. It returns a horizontal ggplot bar plot that indicates the amount of missing data (NAs) for each variable (on the y-axis). You can choose whether to display the relative amount of NAs for each variable in percentage (the default) or the total number of NAs.</p>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_na.html">overview_na</a></span>(<span class="no">toydata_with_na</span>)</pre></body></html></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_na.html">overview_na</a></span>(<span class="no">toydata_with_na</span>, <span class="kw">perc</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="compatibilities-with-other-packages" class="section level2">
@@ -248,7 +297,7 @@ Countries &amp; Years \\
 <a href="#compatibilities-with-other-packages" class="anchor"></a>Compatibilities with other packages</h2>
 <p>The outputs of <code>overview_tab</code> and <code>overview_crosstab</code> are also compatible with other functions such as <a href="https://CRAN.R-project.org/package=xtable"><code>xtable</code></a>, <a href="https://CRAN.R-project.org/package=flextable"><code>flextable</code></a>, or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html"><code>kable</code></a> from <a href="https://yihui.org/knitr/"><code>knitr</code></a>.</p>
 <p>Two examples are shown below:</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">flextable</span>)
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">flextable</span>)
 <span class="no">table_output</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/flextable/man/flextable.html">qflextable</a></span>(<span class="no">output_table</span>)
 <span class="no">table_output</span> <span class="kw">&lt;-</span>
   <span class="fu"><a href="https://rdrr.io/pkg/flextable/man/set_header_labels.html">set_header_labels</a></span>(<span class="no">table_output</span>,
@@ -259,7 +308,7 @@ Countries &amp; Years \\
   <span class="kw">width</span> <span class="kw">=</span> <span class="fl">.4</span>,
   <span class="kw">layout</span> <span class="kw">=</span> <span class="st">"autofit"</span>
 )</pre></body></html></div>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">knitr</span>)
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">knitr</span>)
 <span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="no">output_table</span>)</pre></body></html></div>
 <table class="table">
 <thead><tr class="header">
@@ -289,50 +338,6 @@ Countries &amp; Years \\
 </tr>
 </tbody>
 </table>
-</div>
-<div id="recent-additions-to-the-github-version-of-overviewr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#recent-additions-to-the-github-version-of-overviewr" class="anchor"></a>Recent additions to the GitHub version of overviewR</h2>
-<p>In addition to tables, <code>overviewR</code> also provides plots to illustrate the structure of your data. The following functions were only added to the GitHub version and are not yet part of the CRAN version of <code>overviewR</code>. While the functions should be stable, they are still in a development version.</p>
-<p>You can access the GitHub version of the package here:</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">devtools</span>)
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"cosimameyer/overviewR"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">overviewR</span>)</pre></body></html></div>
-<div id="overview_plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#overview_plot" class="anchor"></a><code>overview_plot</code>
-</h3>
-<p><code>overview_plot</code> illustrates the information that is generated in <code>overview_table</code> in a ggplot graphic. All scope objects (e.g., countries) are listed on the y-axis where horizontal lines indicate the coverage across the entire time frame of the data (x-axis). This helps to spot gaps in the data for specific scope objects and outlines at what time point they occur.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">toydata</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_plot.html">overview_plot</a></span>(<span class="kw">dat</span> <span class="kw">=</span> <span class="no">toydata</span>, <span class="kw">id</span> <span class="kw">=</span> <span class="no">ccode</span>, <span class="kw">time</span> <span class="kw">=</span> <span class="no">year</span>)</pre></body></html></div>
-<p align="center">
-<img src="unnamed-chunk-23-1.png" height="300"></p>
-</div>
-<div id="overview_heat" class="section level3">
-<h3 class="hasAnchor">
-<a href="#overview_heat" class="anchor"></a><code>overview_heat</code>
-</h3>
-<p><code>overview_heat</code> takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. <code>overview_heat</code> intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola (“AGO”) in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_heat.html">overview_heat</a></span>(<span class="no">toydata_red</span>,
-                <span class="no">ccode</span>,
-                <span class="no">year</span>,
-                <span class="kw">perc</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                <span class="kw">exp_total</span> <span class="kw">=</span> <span class="fl">12</span>)</pre></body></html></div>
-<p align="center">
-<img src="unnamed-chunk-25-1.png" height="300"></p>
-</div>
-<div id="overview_na" class="section level3">
-<h3 class="hasAnchor">
-<a href="#overview_na" class="anchor"></a><code>overview_na</code>
-</h3>
-<p><code>overview_na</code> is a simple function that provides information about the content of all variables in your data, not only the time and scope conditions. It returns a horizontal ggplot bar plot that indicates the amount of missing data (NAs) for each variable (on the y-axis). You can choose whether to display the relative amount of NAs for each variable in percentage (the default) or the total number of NAs.</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_na.html">overview_na</a></span>(<span class="no">toydata_with_na</span>)</pre></body></html></div>
-<p align="center">
-<img src="unnamed-chunk-27-1.png" height="300"></p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/overviewR/man/overview_na.html">overview_na</a></span>(<span class="no">toydata_with_na</span>, <span class="kw">perc</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p align="center">
-<img src="unnamed-chunk-28-1.png" height="300"></p>
-</div>
 </div>
   </div>
 
