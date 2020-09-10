@@ -15,6 +15,7 @@ badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](htt
 [![R
 badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/overviewR)](https://cran.r-project.org/package=overviewR)
+[![downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://github.com/cosimameyer/overviewR)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 <!-- [![Rdoc](https://www.rdocumentation.org/badges/version/overviewR)](https://www.rdocumentation.org/packages/overviewR) -->
 <!-- [![metacran downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://cran.r-project.org/package=overviewR) -->
