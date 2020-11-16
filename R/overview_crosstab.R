@@ -42,7 +42,7 @@ overview_crosstab <-
     cond2 <- dplyr::enquo(cond2)
 
     # Check the length of unique observations
-    # (based on time and id) in the dataset
+    # (based on time and id) in the data set
     # We need this for the next check
     length_nodup <- dat %>%
       dplyr::distinct(!!id, !!time, .keep_all = TRUE)

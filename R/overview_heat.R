@@ -3,7 +3,7 @@
 #' @description This function plots a heat map to visualize the
 #'     coverage of the time-scope-units of the data. Options include total
 #'     number of cases per time-scope-unit or relative number in percentage.
-#' @param dat Your dataset
+#' @param dat Your data set
 #' @param id Your scope (e.g., country codes or individual IDs)
 #' @param time Your time (e.g., time periods given by years, months, ...)
 #' @param perc If FALSE (default) plot returns the total number of observations

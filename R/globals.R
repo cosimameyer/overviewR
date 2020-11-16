@@ -9,6 +9,7 @@ utils::globalVariables(
     "n",
     "percentage",
     "total",
-    "variable"
+    "variable",
+    "idx"
   )
 )

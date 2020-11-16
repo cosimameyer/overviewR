@@ -3,12 +3,14 @@
 #' @description This function plots a ggplot to visualize the distribution of
 #'     scope objects across the time frame.
 #'
-#' @param dat Your dataset
-#' @param id Your scope (e.g., country codes or individual IDs)
+#' @param dat Your data set
+#' @param id Your scope (e.g., country codes or individual IDs). If the id
+#'     variable contains NAs, they will not be included in the plot.
 #' @param time Your time (e.g., time periods given by years, months, ...)
-#' @param xaxis Label of your x axis ("Time frame" is default)
-#' @param yaxis Label of your y axis ("Sample" is default)
-#' @return A ggplot figure that presents your sample information visually
+#' @param xaxis Label of the x axis ("Time frame" is default)
+#' @param yaxis Label of the y axis ("Sample" is default)
+#' @param asc Sorting the y axis in ascending order ("TRUE" is default)
+#' @return A ggplot figure that presents the sample information visually
 #' @examples
 #' data(toydata)
 #' overview_plot(dat = toydata, id = ccode, time = year)
@@ -20,7 +22,8 @@ overview_plot <-
            id,
            time,
            xaxis = "Time frame",
-           yaxis = "Sample") {
+           yaxis = "Sample",
+           asc = TRUE) {
     # Start with the data
     dat <- dat
     id <- dplyr::enquo(id)
@@ -57,9 +60,11 @@ overview_plot <-
     )
 
     # Reduce data frame to distinct values and drop if observations with NA
-    # in the time variable
+    # in the time variable and id variable
     dat_red <- dat %>%
+      dplyr::ungroup() %>%
       dplyr::distinct(!!id, !!time) %>%
+      dplyr::filter(!is.na(!!id)) %>%
       dplyr::filter(!is.na(!!time)) %>%
       dplyr::arrange(!!id, !!time)
 
@@ -69,18 +74,37 @@ overview_plot <-
       dplyr::mutate(idx = c(1, diff(!!time)))
     i2 <- c(1, which(dat_red$idx != 1), nrow(dat_red) + 1)
     dat_red$grp <- rep(seq_len(length(diff(i2))), diff(i2))
+
+    dat_red <- dat_red %>%
+      dplyr::mutate(grp = ifelse(dplyr::lead(!!id) != !!id &
+                                   dplyr::lead(idx) == 1, idx + 1, grp))
+
     dat_red <- dat_red
 
     # Plot it
-    plot <- dat_red %>%
-      dplyr::group_by(!!id) %>%
-      ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
-      ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
-      ggplot2::geom_point(pch = 15, size = 2) +
-      ggplot2::ylab(yaxis) +
-      ggplot2::xlab(xaxis) +
-      theme_plot
+    if (asc == TRUE) {
+      plot <- dat_red %>%
+        dplyr::group_by(!!id) %>%
+        ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
+        ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
+        ggplot2::geom_point(pch = 15, size = 2) +
+        ggplot2::ylab(yaxis) +
+        ggplot2::xlab(xaxis) +
+        ggplot2::scale_y_discrete(limits = rev) +
+        theme_plot
 
     return(plot)
+    }
+    else {
+      plot <- dat_red %>%
+        dplyr::group_by(!!id) %>%
+        ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
+        ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
+        ggplot2::geom_point(pch = 15, size = 2) +
+        ggplot2::ylab(yaxis) +
+        ggplot2::xlab(xaxis) +
+        theme_plot
 
+      return(plot)
+    }
   }

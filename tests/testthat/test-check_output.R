@@ -161,3 +161,8 @@ test_that("check output of overview_plot", {
   plot <- overview_plot(dat = toydata, id = ccode, time = year)
   testthat::expect_is(plot, "ggplot")
 })
+
+test_that("check output of overview_plot", {
+  plot <- overview_plot(dat = toydata, id = ccode, time = year, asc = FALSE)
+  testthat::expect_is(plot, "ggplot")
+})

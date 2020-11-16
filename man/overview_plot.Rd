@@ -4,21 +4,31 @@
 \alias{overview_plot}
 \title{overview_plot}
 \usage{
-overview_plot(dat, id, time, xaxis = "Time frame", yaxis = "Sample")
+overview_plot(
+  dat,
+  id,
+  time,
+  xaxis = "Time frame",
+  yaxis = "Sample",
+  asc = TRUE
+)
 }
 \arguments{
-\item{dat}{Your dataset}
+\item{dat}{Your data set}
 
-\item{id}{Your scope (e.g., country codes or individual IDs)}
+\item{id}{Your scope (e.g., country codes or individual IDs). If the id
+variable contains NAs, they will not be included in the plot.}
 
 \item{time}{Your time (e.g., time periods given by years, months, ...)}
 
-\item{xaxis}{Label of your x axis ("Time frame" is default)}
+\item{xaxis}{Label of the x axis ("Time frame" is default)}
 
-\item{yaxis}{Label of your y axis ("Sample" is default)}
+\item{yaxis}{Label of the y axis ("Sample" is default)}
+
+\item{asc}{Sorting the y axis in ascending order ("TRUE" is default)}
 }
 \value{
-A ggplot figure that presents your sample information visually
+A ggplot figure that presents the sample information visually
 }
 \description{
 This function plots a ggplot to visualize the distribution of

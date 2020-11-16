@@ -17,7 +17,7 @@ overview_heat(
 )
 }
 \arguments{
-\item{dat}{Your dataset}
+\item{dat}{Your data set}
 
 \item{id}{Your scope (e.g., country codes or individual IDs)}
 
