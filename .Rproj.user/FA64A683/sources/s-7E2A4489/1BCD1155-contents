@@ -1,0 +1,168 @@
+---
+title: "</br></br></br></br></br>Using supervised and unsupervised approaches in NLP"
+subtitle: ""
+author: 
+  - "Cosima Meyer"
+date: '2020-12-08'
+output:
+  xaringan::moon_reader:
+    includes:
+      in_header:
+        - 'toc.html'
+    lib_dir: libs
+    css:
+      - "xaringan-themer-rladies.css"
+      - "ninjutsu"
+      - "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r load_packages, message=FALSE, warning=FALSE, include=FALSE} 
+# devtools::install_github("rstudio/fontawesome")
+
+library(fontawesome)
+library(dplyr)
+library(ggplot2)
+library(zoo)
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#283444",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Helvetica", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+```
+
+## Researcher and data lover
+
+
+.left-column[
+<img src="book.png" width=100 height=100>
+<br>
+
+<img src="computer.png" width=100 height=100> 
+
+<br>
+
+<img src="lamp.png" width=100 height=100>
+]
+
+.right-column[
+**PhD Candidate** and **researcher** at the University of Mannheim
+
+<br><br><br>
+**Co-founder** and **co-editor** of the data science blog [**Methods Bites**](https://www.mzes.uni-mannheim.de/socialsciencedatalab/)
+
+<br><br><br><br><br>
+**Maintainer** and **author** of the CRAN package [**overviewR**](https://cosimameyer.github.io/overviewR/)
+]
+
+---
+
+## What is text data?
+
+---
+
+## Why would you  work with it?
+
+---
+
+## How can you work with text data?
+
+---
+class: inverse
+background-image: url("overview.png")
+background-size: 600px
+
+---
+
+## Quanteda
+
+- `quanteda`: **qu**antitative **an**alysis of **te**xtual **da**ta
+  - Fully-featured package that allows you to easily perform NLP tasks
+
+- What are alternatives?
+  - `tm`: simpler grammar but fewer features
+  - `tidytext`: good integration with the `tidyverse`
+  - `koRpus`: good for part-of-speech tagging
+
+---
+
+## How do we use quanteda?
+
+1. **Import** the data 
+
+2. Build a **corpus**
+
+3. Calculate a **document-feature matrix** (DFM)
+
+![](dfm.png)
+
+
+---
+
+## Visualizing text data
+
+
+---
+
+## Preprocess your data
+
+---
+
+## Supervised approach: Dictionary-based approach and sentiment analysis
+
+---
+
+## Unsupervised approach: Topic models
+
+---
+
+## Validation? Oolong
+
+---
+class: inverse
+background-image: url("computer2.png")
+background-size: 200px
+background-position: 95% 8%
+
+<br><br><br>
+# More resources 
+
+.pull-left[.small[
+- Quanteda
+
+  - [Kohei Watanabe and Stefan Müller: Quanteda Tutorials](https://tutorials.quanteda.io)
+
+- More on text mining
+  - [Cosima Meyer and Cornelius Puschmann: Advancing Text Mining with R and quanteda](https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/advancing-text-mining/)
+
+]]
+  
+.pull-right[.small[
+]]
+
+
+
+
+---
+class: inverse, middle, center
+
+<img src="computer2.png" width=200 height=150>
+
+`r fontawesome::fa(name = "twitter", fill = "white")` [@cosima_meyer](https://twitter.com/cosima_meyer)
+
+`r fontawesome::fa(name = "linkedin", fill = "white")` [cosimameyer](https://www.linkedin.com/in/cosimameyer/)
+
+`r fontawesome::fa(name = "globe", fill = "white")` [cosimameyer.rbind.io](http://cosimameyer.rbind.io) 
+
+`r fontawesome::fa(name = "github", fill = "white")` Code and slides at </br></br>
+[bit.ly/shinyApp-material](http://bit.ly/shinyApp-material)
+
+---
+.footer[Illustrations are either created by myself or provided by www.canva.com]

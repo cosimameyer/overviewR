@@ -1,0 +1,1385 @@
+---
+title: "Visualization"
+author: "Cosima Meyer and Dennis Hammerschmidt"
+date: "7/14/2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+---
+
+## Remove everything in our workspace so we can start with a clean slate:
+```{r, eval=FALSE}
+rm(list = ls())
+```
+
+## Load packages
+```{r setup, eval=FALSE}
+
+library(devtools)
+install_github("ropengov/rqog")
+
+library(install.load)
+packages <- c(
+  "install.load",
+  "tidyverse",
+  "data.table",
+  "statnet",
+  "network",
+  "ergm",
+  "sna",
+  "coda",
+  "igraph",
+  "calibrate",
+  "ggraph",
+  "graphlayouts",
+  "stringr",
+  "statnet",
+  "gtools",
+  "plyr",
+  "magrittr",
+  "countrycode",
+  "rqog",
+  "snahelper",
+  "RColorBrewer",
+  "dplyr",
+  "ggnet",
+  "scales",
+  "intergraph",
+  "GGally",
+  "mapproj")
+
+install_load(packages)
+
+# devtools::install_github("cosimameyer/snahelper")
+library(snahelper)
+```
+
+<!-- ```{r} -->
+<!-- library(igraph) -->
+<!-- library(snahelper) -->
+<!-- library(dplyr) -->
+<!-- ``` -->
+
+
+# Edge list
+Contains information on voting and sponsoring dyads.
+
+## Voting
+
+```{r, eval=FALSE}
+load("~/Dropbox/cohere-and-concur/data/voting_full.RData")
+final_voting4 <- final_voting4 %>%
+  dplyr::rename(ccode1 = country1.x,
+                ccode2 = country2)
+final_voting4 <- subset(final_voting4, select = -country1.y)
+final_voting4$vote_num <- ifelse(final_voting4$vote == "yes",
+                                 1,
+                                 ifelse(final_voting4$vote == "abstain", 2, 3))
+```
+
+We now reduce our dataset to distinct observations. This code is based on the solution provided [here](https://stackoverflow.com/questions/31658741/deleting-duplicates-in-dyadic-datasets-r). 
+
+```{r}
+final_voting2 <- final_voting4 %>% 
+   rowwise() %>% 
+   dplyr::mutate(tmp = paste(sort(c(ccode1,ccode2)), collapse = '')) %>%  
+      group_by(year,res,ccode1,ccode2,vote) %>% 
+      dplyr::distinct(tmp) %>% 
+      dplyr::select(-tmp)
+```
+In a next step, we generate a threshold.
+```{r}
+# drop if ccode2 is NA
+final_voting2 <- final_voting2[!is.na(final_voting2$ccode2),] 
+
+# drop if ccode1 is NA
+final_voting2 <- final_voting2[!is.na(final_voting2$ccode1),] 
+
+
+# generate again the temporary variable
+final_voting3 <- final_voting2 %>% 
+   rowwise() %>% 
+   dplyr::mutate(tmp = paste(sort(c(ccode1,ccode2)), collapse = '')) 
+
+final_voting <- final_voting3 %>% 
+  group_by(year, tmp) %>% 
+  dplyr::mutate(count = n())
+
+# aggregate and calculate the mean
+final_voting1 <- final_voting %>% 
+  group_by(year, tmp) %>% 
+  dplyr::summarize(ccode1 = first(ccode1),
+            ccode2 = first(ccode2), 
+            count = first(count))
+
+final_voting2 <- final_voting1 %>% 
+  group_by(year) %>% 
+  dplyr::summarize(mean_count=mean(count))
+
+final_voting4 <- merge(final_voting1, final_voting2, by="year")
+
+# generate the threshold (1 if it's above the mean)
+final_voting4$threshold <- ifelse(final_voting4$count > final_voting4$mean_count, 1, 0)
+
+# subset to only dyads containing threshold == 1
+final_voting4 <- final_voting4 %>% 
+  filter(threshold==1)
+
+save(final_voting4, file = "../data/voting_red.RData")
+load("../data/voting_red.RData")
+```
+
+And we then proceed and build the network dataset. 
+```{r}
+voting_el <- final_voting4
+voting_el$ccodeyear1 <- paste0(voting_el$ccode1,voting_el$year)
+voting_el$ccodeyear2 <- paste0(voting_el$ccode2,voting_el$year)
+
+# voting_el <- subset(voting_el, select = -c(country1full, country2full))
+# 
+voting_el <- voting_el[c("ccode1", "ccode2", "ccodeyear1", "ccodeyear2", "year", "mean_count", "threshold", "count")] # "res", "session", "vote", "vote_num", 
+# voting_el <- voting_el[c("ccodeyear1", "ccodeyear2", "year", "ccode1", "ccode2", "res", "session", "vote", "vote_num")] # 
+```
+
+## Sponsoring
+
+```{r, eval=FALSE}
+load("~/Dropbox/cohere-and-concur/data/sponsoring.RData")
+final_sponsoring$year <- final_sponsoring$session + 1945
+```
+
+We now reduce our dataset to distinct observations. This code is based on the solution provided [here](https://stackoverflow.com/questions/31658741/deleting-duplicates-in-dyadic-datasets-r). 
+
+```{r}
+final_sponsoring2 <- final_sponsoring %>% 
+   rowwise() %>% 
+   dplyr::mutate(tmp = paste(sort(c(country1,country2)), collapse = '')) %>%  
+      group_by(year,res,country1,country2) %>% 
+      dplyr::distinct(tmp) %>% 
+      dplyr::select(-tmp)
+```
+
+We generate here a threshold as well.
+```{r}
+# generate again the temporary variable
+final_sponsoring3 <- final_sponsoring2 %>% 
+   rowwise() %>% 
+   dplyr::mutate(tmp = paste(sort(c(country1,country2)), collapse = '')) 
+
+final_sponsoring <- final_sponsoring3 %>% 
+  group_by(year, tmp) %>% 
+  dplyr::mutate(count = n())
+
+# aggregate and calculate the mean
+final_sponsoring1 <- final_sponsoring %>% 
+  group_by(year, tmp) %>% 
+  dplyr::summarize(country1 = first(country1),
+            country2 = first(country2), 
+            count = first(count))
+
+final_sponsoring2 <- final_sponsoring1 %>% 
+  group_by(year) %>% 
+  dplyr::summarize(mean_count=mean(count))
+
+final_sponsoring3 <- merge(final_sponsoring1, final_sponsoring2, by="year")
+
+# generate the threshold (1 if it's above the mean)
+final_sponsoring3$threshold <- ifelse(final_sponsoring3$count > final_sponsoring3$mean_count, 1, 0)
+
+# subset to only dyads containing threshold == 1
+final_sponsoring <- final_sponsoring3 %>% 
+  filter(threshold==1)
+
+save(final_sponsoring, file="../data/sponsoring_red.RData")
+load("../data/sponsoring_red.RData")
+```
+
+And proceed.
+```{r}
+sponsoring_el <- final_sponsoring %>%
+  dplyr::rename(ccode1 = country1,
+                ccode2 = country2)
+sponsoring_el$ccodeyear1 <- paste0(sponsoring_el$ccode1,sponsoring_el$year)
+sponsoring_el$ccodeyear2 <- paste0(sponsoring_el$ccode2,sponsoring_el$year)
+
+sponsoring_el <- sponsoring_el[c("ccode1", "ccode2", "ccodeyear1", "ccodeyear2", "year", "mean_count", "threshold", "count")] # "res", "session", "vote", "vote_num", 
+#sponsoring_el <- sponsoring_el[c("ccodeyear1", "ccodeyear2", "res", "session", "year", "ccode1", "ccode2")]
+
+```
+
+# Node list
+Contains information on the democracy level, region and continent dummies.
+```{r, eval=FALSE}
+load("~/Dropbox/cohere-and-concur/data/qog.RData")
+qog <- subset(qog, select = -c(ccode, ccodealp))
+
+qog_nl <- qog %>%
+  dplyr::rename(ccode = c_code)
+
+qog_nl$ccodeyear <- paste0(qog_nl$ccode,qog_nl$year)
+
+qog_nl <- subset(qog_nl, select = -cname)
+# 
+# qog_nl$pol_regime <- ifelse(qog_nl$p_polity2 < 0, 1,
+#                             ifelse(is.na(qog_nl$p_polity2), NA, 0))
+# 
+# qog_nl$pol_regime <- ordered(
+#   qog_nl$pol_regime,
+#   levels = c(0, 1),
+#   labels = c("Democracy", "Autocracy")
+# )
+
+qog_nl$pol_regime <- ifelse(qog_nl$p_polity2 < 6, "Autocracy",
+                            ifelse(is.na(qog_nl$p_polity2), "NA", "Democracy"))
+
+
+# rescale polity 4
+qog_nl$p_polity2 <- scales::rescale(qog_nl$p_polity2, to = c(0,20), from = c(-10, 10))
+
+  
+# remove duplicates in qog_nl
+qog_nl <- qog_nl[!duplicated(qog_nl$ccodeyear), ]
+
+qog_nl <- qog_nl[c("ccode", "ccodeyear", "p_polity2", "pol_regime", "continent", "region_wb", "year")]
+```
+
+### Subset to networks that contain observations present in both networks
+
+```{r, eval=FALSE}
+qog_voting_nl <- subset(qog_nl, ccodeyear %in% voting_el$ccodeyear1 & ccodeyear %in% voting_el$ccodeyear2)
+voting_el <- subset(voting_el, ccodeyear1 %in% qog_voting_nl$ccodeyear & ccodeyear2 %in% qog_voting_nl$ccodeyear)
+
+qog_sponsoring_nl <- subset(qog_nl, ccodeyear %in% sponsoring_el$ccodeyear1 & ccodeyear %in% sponsoring_el$ccodeyear2)
+sponsoring_el <- subset(sponsoring_el, ccodeyear1 %in% qog_sponsoring_nl$ccodeyear & ccodeyear2 %in% qog_sponsoring_nl$ccodeyear)
+```
+
+# Generate yearly perspective: Sponsoring network
+## QoG Network
+```{r}
+snap_year <- function(nl, el, date) {
+  dat1b <- nl %>%
+    filter(year == date) # nodelist
+  dat2b <- el %>%
+    filter(year == date) # edgelist
+  dat1b <-
+    subset(dat1b,
+           ccodeyear %in% dat2b$ccodeyear1 &
+             ccodeyear %in% dat2b$ccodeyear2) # nodelist
+  dat2b <-
+    subset(dat2b,
+           ccodeyear1 %in% dat1b$ccodeyear &
+             ccodeyear2 %in% dat1b$ccodeyear) # edgelist
+  nw <-
+    graph_from_data_frame(d = dat2b,
+                          vertices = dat1b,
+                          directed = FALSE)
+  return(nw)
+}
+ 
+snap_year_vote <- function(nl, el, date, vote) {
+  dat1b <- nl %>%
+    filter(year == date) # nodelist
+  dat2b <- el %>%
+    filter(year == date & vote ==  vote) # edgelist
+  dat1b <-
+    subset(dat1b,
+           ccodeyear %in% dat2b$ccodeyear1 &
+             ccodeyear %in% dat2b$ccodeyear2) # nodelist
+  dat2b <-
+    subset(dat2b,
+           ccodeyear1 %in% dat1b$ccodeyear &
+             ccodeyear2 %in% dat1b$ccodeyear) # edgelist
+  nw <-
+    graph_from_data_frame(d = dat2b,
+                          vertices = dat1b,
+                          directed = FALSE)
+  return(nw)
+}
+ 
+
+spon_80 <- snap_year(qog_sponsoring_nl, sponsoring_el, 1980)
+spon_85 <- snap_year(qog_sponsoring_nl, sponsoring_el, 1985)
+spon_90 <- snap_year(qog_sponsoring_nl, sponsoring_el, 1990)
+spon_95 <- snap_year(qog_sponsoring_nl, sponsoring_el, 1995)
+spon_00 <- snap_year(qog_sponsoring_nl, sponsoring_el, 2000)
+spon_05 <- snap_year(qog_sponsoring_nl, sponsoring_el, 2005)
+spon_10 <- snap_year(qog_sponsoring_nl, sponsoring_el, 2010)
+spon_12 <- snap_year(qog_sponsoring_nl, sponsoring_el, 2012)
+
+```
+
+Visualize the network
+
+## Manually
+```{r}
+
+# 1980
+graph_s_80 <- ggnet2(
+  spon_80,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_s_80, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-80_ggnet_new.png')
+
+# 1985
+graph_s_85 <- ggnet2(
+  spon_85,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_s_85, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-85_ggnet_new.png')
+
+# 1990
+graph_s_90 <- ggnet2(
+  spon_90,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_s_90, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-90_ggnet_new.png')
+
+# 1995
+graph_s_95 <- ggnet2(
+  spon_95,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_s_95, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-95_ggnet_new.png')
+
+# 2000
+graph_s_00 <- ggnet2(
+  spon_00,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_s_00, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-00_ggnet_new.png')
+
+# 2005
+graph_s_05 <- ggnet2(
+  spon_05,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_s_05, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-05_ggnet_new.png')
+
+# 2010
+graph_s_10 <- ggnet2(
+  spon_10,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_s_10, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-10_ggnet_new.png')
+
+# 2012
+graph_s_12 <- ggnet2(
+  spon_12,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_s_12, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-12_ggnet_new.png')
+
+
+```
+
+## With SNA helper
+
+```{r}
+
+visNetwork <- function(nw){
+ggraph(nw,
+       layout = "manual",
+       node.positions = data.frame(x = V(nw)$x, y = V(nw)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+}
+
+```
+
+For 1980
+```{r}
+# visNetwork(spon_80)
+spon_80
+graph_80 <- ggraph(spon_80,
+       layout = "manual",
+       node.positions = data.frame(x = V(spon_80)$x, y = V(spon_80)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_80, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-80.png')
+
+```
+
+For 1985
+```{r}
+# visNetwork(spon_85)
+# extrafont::loadfonts()
+
+graph_85 <- ggraph(spon_85,
+       layout = "manual",
+       node.positions = data.frame(x = V(spon_85)$x, y = V(spon_85)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_85, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-85.png')
+
+# pdf("~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-85.pdf", height=5, width=12)
+# 
+# graph_85
+# 
+# dev.off()
+
+```
+
+For 1990
+```{r}
+# visNetwork(spon_90)
+
+graph_90 <- ggraph(spon_90,
+       layout = "manual",
+       node.positions = data.frame(x = V(spon_90)$x, y = V(spon_90)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_90, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-90.png')
+
+```
+
+For 1995
+```{r}
+visNetwork(spon_95)
+
+graph_95 <- ggraph(spon_95,
+       layout = "manual",
+       node.positions = data.frame(x = V(spon_95)$x, y = V(spon_95)$y)) +
+  geom_edge_fan(edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size= 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_95, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-95.png')
+
+```
+
+For 2000
+```{r}
+# visNetwork(spon_00)
+
+graph_00 <- ggraph(spon_00,
+       layout = "manual",
+       node.positions = data.frame(x = V(spon_00)$x, y = V(spon_00)$y)) +
+ geom_edge_fan(edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size= 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+  
+ggsave(graph_00, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-00.png')
+
+  
+  #  geom_edge_fan(aes(alpha = ,
+  #                   width = , colour =), n = 2) +
+  # scale_edge_colour_gradient(low = "#87CEFF", high = "#27408B") +
+  # scale_edge_width(range = c(0.3,
+  #                            1.2)) +
+  # scale_edge_alpha(range = c(0.1, 1)) +
+  # geom_node_point(
+  #   aes(fill = , size =),
+  #   colour = "#000000",
+  #   shape = 21,
+  #   stroke = 0.3
+  # ) +
+  # scale_fill_gradient(low = "#87CEFF", high = "#27408B") +
+  # scale_size(range = c(3, 8)) +
+  # theme_graph() +
+  # 
+  # theme(legend.position = "bottom")
+```
+
+For 2005
+```{r}
+# visNetwork(spon_05)
+
+graph_05 <- ggraph(spon_05,
+       layout = "manual",
+       node.positions = data.frame(x = V(spon_05)$x, y = V(spon_05)$y)) +
+  geom_edge_fan(edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size= 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+  
+ggsave(graph_05, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-05.png')
+
+```
+
+For 2010
+```{r}
+# visNetwork(spon_10)
+
+graph_10 <- ggraph(spon_10,
+       layout = "manual",
+       node.positions = data.frame(x = V(spon_10)$x, y = V(spon_10)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_10, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-10.png')
+
+```
+
+For 2012
+```{r}
+# visNetwork(spon_12)
+
+graph_12 <- ggraph(spon_12,
+       layout = "manual",
+       node.positions = data.frame(x = V(spon_12)$x, y = V(spon_12)$y)) +
+ geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_12, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/spon-12.png')
+
+```
+
+# Generate yearly perspective: Voting network
+
+```{r}
+vot_80 <- snap_year(qog_voting_nl, voting_el, 1980)
+# vot_80_yes <- snap_year_vote(qog_voting_nl, voting_el, 1980, 1)
+# vot_80_no <- snap_year_vote(qog_voting_nl, voting_el, 1980, 3)
+# vot_80_abstain <- snap_year_vote(qog_voting_nl, voting_el, 1980, 2)
+
+vot_85 <- snap_year(qog_voting_nl, voting_el, 1985)
+
+vot_90 <- snap_year(qog_voting_nl, voting_el, 1990)
+# vot_90_yes <- snap_year_vote(qog_voting_nl, voting_el, 1990, 1)
+# vot_90_no <- snap_year_vote(qog_voting_nl, voting_el, 1990, 3)
+# vot_90_abstain <- snap_year_vote(qog_voting_nl, voting_el, 1990, 2)
+
+vot_95 <- snap_year(qog_voting_nl, voting_el, 1995)
+
+vot_00 <- snap_year(qog_voting_nl, voting_el, 2000)
+# vot_00_yes <- snap_year_vote(qog_voting_nl, voting_el, 2000, 1)
+# vot_00_no <- snap_year_vote(qog_voting_nl, voting_el, 2000, 3)
+# vot_00_abstain <- snap_year_vote(qog_voting_nl, voting_el, 2000, 2)
+
+vot_05 <- snap_year(qog_voting_nl, voting_el, 2005)
+
+vot_10 <- snap_year(qog_voting_nl, voting_el, 2010)
+# vot_10_yes <- snap_year_vote(qog_voting_nl, voting_el, 2010, 1)
+# vot_10_no <- snap_year_vote(qog_voting_nl, voting_el, 2010, 3)
+# vot_10_abstain <- snap_year_vote(qog_voting_nl, voting_el, 2010, 2)
+
+vot_12 <- snap_year(qog_voting_nl, voting_el, 2012)
+```
+
+## Manually
+Based on this code [here](https://briatte.github.io/ggnet/).
+```{r}
+
+# 1980
+graph_v_80 <- ggnet2(
+  vot_80,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_v_80, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-80_ggnet_new.png')
+
+# 1985
+graph_v_85 <- ggnet2(
+  vot_85,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_v_85, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-85_ggnet_new.png')
+
+# 1990
+graph_v_90 <- ggnet2(
+  vot_90,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_v_90, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-90_ggnet_new.png')
+
+# 1995
+graph_v_95 <- ggnet2(
+  vot_95,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_v_95, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-95_ggnet_new.png')
+
+# 2000
+graph_v_00 <- ggnet2(
+  vot_00,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_v_00, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-00_ggnet_new.png')
+
+# 2005
+graph_v_05 <- ggnet2(
+  vot_05,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_v_05, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-05_ggnet_new.png')
+
+# 2010
+graph_v_10 <- ggnet2(
+  vot_10,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_v_10, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-10_ggnet_new.png')
+
+# 2012
+graph_v_12 <- ggnet2(
+  vot_12,
+  color = "pol_regime", 
+  palette = c("Autocracy" = "#FF1222", "Democracy" = "#087831"),
+  label = TRUE,
+  label.size = 2,
+ legend.position = "bottom"
+) 
+ggsave(graph_v_12, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-12_ggnet_new.png')
+```
+
+
+## With SNAHELPER
+
+
+For 1980
+```{r}
+
+snahelper::
+graph_v_80 <- ggraph(vot_80,
+       layout = "manual",
+      node.positions = data.frame(x = V(vot_80)$x, y = V(vot_80)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_80, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-80.png')
+
+```
+
+For 1980: Yes
+```{r}
+graph_v_80_yes <- ggraph(vot_80,
+       layout = "manual",
+       node.positions = data.frame(x = V(vot_80)$x, y = V(vot_80)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_80_yes, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-yes-80.png')
+```
+
+For 1980: No
+```{r}
+graph_v_80_no <-
+  ggraph(vot_80_no,
+         layout = "manual",
+         node.positions = data.frame(x = V(vot_80_no)$x, y = V(vot_80_no)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_80_no, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-no-80.png')
+
+```
+
+For 1980: Abstain
+```{r}
+graph_v_80_abstain <- ggraph(vot_80_abstain,
+       layout = "manual",
+       node.positions = data.frame(
+         x = V(vot_80_abstain)$x,
+         y = V(vot_80_abstain)$y
+       )) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_80_abstain, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-abstain-80.png')
+
+```
+
+For 1985
+```{r}
+vot_85
+```
+
+For 1990
+```{r}
+vot_90
+```
+
+For 1990: Yes
+```{r}
+graph_v_90_yes <- ggraph(vot_90_yes,
+       layout = "manual",
+       node.positions = data.frame(x = V(vot_90_yes)$x, y = V(vot_90_yes)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.1,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_90_yes, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-yes-90.png')
+
+```
+
+For 1990: No
+```{r}
+graph_v_90_no <- ggraph(vot_90_no,
+       layout = "manual",
+       node.positions = data.frame(x = V(vot_90_no)$x, y = V(vot_90_no)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.01,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_90_no, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-no-90_2.png')
+```
+
+
+For 1990: Abstain
+```{r}
+graph_v_90_abstain <- ggraph(vot_90_abstain,
+       layout = "manual",
+       node.positions = data.frame(
+         x = V(vot_90_abstain)$x,
+         y = V(vot_90_abstain)$y
+       )) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.01,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_90_abstain, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-abstain-90.png')
+
+```
+
+For 1995
+```{r}
+vot_95
+```
+
+For 2000
+```{r}
+vot_00
+```
+
+For 2000: Yes
+```{r}
+graph_v_00_yes <- ggraph(vot_00_yes,
+       layout = "manual",
+       node.positions = data.frame(x = V(vot_00_yes)$x, y = V(vot_00_yes)$y)) +
+   geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.01,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_00_yes, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-yes-00.png')
+```
+
+For 2000: No
+```{r}
+graph_v_00_no <-
+  ggraph(vot_00_no,
+         layout = "manual",
+         node.positions = data.frame(x = V(vot_00_no)$x, y = V(vot_00_no)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.01,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_00_no, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-no-00.png')
+
+```
+
+For 2000: Abstain
+```{r}
+graph_v_00_abstain <-
+  ggraph(vot_00_abstain,
+         layout = "manual",
+         node.positions = data.frame(
+           x = V(vot_00_abstain)$x,
+           y = V(vot_00_abstain)$y
+         )) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.01,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_00_abstain, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-abstain-00.png')
+
+```
+
+For 2005
+```{r}
+vot_05
+```
+
+For 2010
+```{r}
+vot_10
+```
+
+For 2010: yes
+```{r}
+graph_v_10_yes <- ggraph(vot_10_yes,
+       layout = "manual",
+       node.positions = data.frame(x = V(vot_10_yes)$x, y = V(vot_10_yes)$y)) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.01,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_10_yes, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-yes-10.png')
+```
+
+For 2010: no
+```{r}
+graph_v_10_no <- ggraph(vot_10_no,
+       layout = "manual",
+       node.positions = data.frame(x = V(vot_10_no)$x, y = V(vot_10_no)$y)) +
+   geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.01,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_10_no, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-no-10.png')
+```
+
+For 2010: abstain
+```{r}
+graph_v_10_abstain <-
+  ggraph(vot_10_abstain,
+         layout = "manual",
+         node.positions = data.frame(
+           x = V(vot_10_abstain)$x,
+           y = V(vot_10_abstain)$y
+         )) +
+  geom_edge_fan(
+    edge_colour = "#A8A8A8",
+    edge_width = 0.01,
+    edge_alpha = 1,
+    n = 2
+  ) +
+  geom_node_point(
+    aes(fill = p_polity2),
+    colour = "#000000",
+    size = 8,
+    shape = 21,
+    stroke = 0.3
+  ) +
+  scale_fill_gradient(low = "#FF1222", high = "#087831") +
+  geom_node_text(aes(label = ccode),
+                 colour = "#000000",
+                 size = 2) +
+  theme_graph() +
+  theme(legend.position = "bottom")
+
+ggsave(graph_v_10_abstain, file='~/Dropbox/Apps/Overleaf/Cohere_and_concur/vot-abstain-10.png')
+```
+
+For 2012
+```{r}
+vot_12
+```
+
+# Generate snapshots: Sponsoring network
+## QoG Network
+```{r, eval=FALSE}
+
+snapshot_qog <- function(dat, yearmin, yearmax){
+  dat <-
+    dat %>%                                          #2
+    group_by(ccodeyear, year) %>%
+    filter(year >= yearmin & year <= yearmax) #%>%
+    # dplyr::summarise(
+    #   p_polity2 = mean(p_polity2),
+    #   region_wb = first(region_wb),
+    #   continent = first(continent))
+}
+
+qog_spon_80 <- snapshot_qog(qog_sponsoring_nl, 1980, 1984)
+qog_spon_85 <- snapshot_qog(qog_sponsoring_nl, 1985, 1989)
+qog_spon_90 <- snapshot_qog(qog_sponsoring_nl, 1990, 1994)
+qog_spon_95 <- snapshot_qog(qog_sponsoring_nl, 1995, 1999)
+qog_spon_00 <- snapshot_qog(qog_sponsoring_nl, 2000, 2004)
+qog_spon_05 <- snapshot_qog(qog_sponsoring_nl, 2005, 2009)
+
+```
+
+## Sponsoring Network
+
+```{r, eval=FALSE}
+snapshot_el <- function(dat, yearmin, yearmax){
+  dat <-
+    dat %>%                                          #2
+    group_by(ccodeyear1, ccodeyear2, year) %>%
+    filter(year >= yearmin & year <= yearmax) # %>%
+    # dplyr::summarise(
+    #   res = first(res),
+    #   ccode1 = first(ccode1),
+    #   ccode2 = first(ccode2),
+    #   session = first(session))
+}
+
+spon_80 <- snapshot_el(sponsoring_el, 1980, 1984)
+spon_85 <- snapshot_el(sponsoring_el, 1985, 1989)
+spon_90 <- snapshot_el(sponsoring_el, 1990, 1994)
+spon_95 <- snapshot_el(sponsoring_el, 1995, 1999)
+spon_00 <- snapshot_el(sponsoring_el, 2000, 2004)
+spon_05 <- snapshot_el(sponsoring_el, 2005, 2009)
+
+```
+
+# Generate snapshots: Voting network
+
+```{r, eval=FALSE}
+
+```
+
+
+# Generate igraph object
+
+## For sponsoring
+```{r}
+
+nw_sponsor <- function(el, nl){
+  nl <- subset(nl, ccodeyear %in% el$ccodeyear1 & ccodeyear %in% el$ccodeyear2)
+  el <- subset(el, ccodeyear1 %in% nl$ccodeyear & ccodeyear2 %in% nl$ccodeyear)
+  new <-
+  graph_from_data_frame(d = el,
+                        vertices = nl,
+                        directed = FALSE)
+  return(new)
+}
+
+
+# 1980-1984
+sponsoring_80 <- nw_sponsor(spon_80, qog_spon_80)
+
+qog_spon_80 <- subset(qog_spon_80, ccodeyear %in% spon_80$ccodeyear1 & ccodeyear %in% spon_80$ccodeyear2)
+spon_80 <- subset(spon_80, ccodeyear1 %in% qog_spon_80$ccodeyear & ccodeyear2 %in% qog_spon_80$ccodeyear)
+
+sponsoring_80 <-
+  graph_from_data_frame(d = spon_80,
+                        vertices = qog_spon_80,
+                        directed = FALSE)
+
+
+```
+
+
+```{r, eval=FALSE}
+voting_nw <- graph_from_data_frame(d=voting_el, vertices=qog_voting_nl) 
+
+# For 1990
+sponsoring_el1990 <- sponsoring_el %>% 
+  filter(session==45)
+qog_sponsoring_nl1990 <- qog_sponsoring_nl %>% 
+  filter(year==1990)
+
+qog_sponsoring_nl1990 <- subset(qog_sponsoring_nl1990, ccodeyear %in% sponsoring_el$ccodeyear1 & ccodeyear %in% sponsoring_el$ccodeyear2)
+
+sponsoring_el1990 <- subset(sponsoring_el1990, ccodeyear1 %in% qog_sponsoring_nl$ccodeyear & ccodeyear2 %in% qog_sponsoring_nl$ccodeyear)
+
+
+sponsoring_nw1990 <-
+  graph_from_data_frame(d = sponsoring_el1990,
+                        vertices = qog_sponsoring_nl1990,
+                        directed = FALSE)
+
+SNAhelperGadget(sponsoring_nw1990)
+
+sponsoring_nw <- graph_from_data_frame(d=sponsoring_el, vertices =qog_sponsoring_nl) 
+# snahelper:::SNAhelperAddin(sponsoring_nw)
+```
+
+
+# Visualize
+```{r, eval=FALSE}
+
+ggraph(sponsoring_nw1990, layout = "manual", node.positions = data.frame(x = V(sponsoring_nw1990)$x, y = V(sponsoring_nw1990)$y)) + 
+    geom_edge_fan(edge_colour = "#A8A8A8", edge_width = 0.1, edge_alpha = 1, n = 2) + 
+	 geom_node_point(aes(fill = p_polity2), 
+    colour = "#000000", size = 5, shape = 21, stroke = 0.3) + 
+	 scale_fill_gradient(low = "#87CEFF", high = "#27408B") + 
+	 
+    theme_graph() + 
+	 theme(legend.position = "top")
+```
+

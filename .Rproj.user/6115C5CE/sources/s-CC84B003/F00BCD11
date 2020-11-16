@@ -1,0 +1,25 @@
+{
+    "id": "F00BCD11",
+    "path": "~/overviewR/tests/testthat/test-check_output.R",
+    "project_path": "tests/testthat/test-check_output.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1594646249259.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "cursorPosition": "59,41",
+        "scrollLine": "0",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1594651943,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1594651943068,
+    "read_only": false,
+    "read_only_alternatives": []
+}

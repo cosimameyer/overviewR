@@ -1,0 +1,329 @@
+---
+title: "A Pledged Community"
+subtitle: "Using Community Detection to Analyze Autocratic Cooperation in UN Co-Sponsorship Networks"
+author: 
+  - "Cosima Meyer"
+  - "Dennis Hammerschmidt"
+institute: "University of Mannheim"
+date: '2020-12-XX'
+output:
+  xaringan::moon_reader:
+    includes:
+      in_header:
+        - 'toc.html'
+    lib_dir: libs
+    css: ["xaringan-themer-complex.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r load_packages, message=FALSE, warning=FALSE, include=FALSE} 
+# devtools::install_github("rstudio/fontawesome")
+
+library(fontawesome)
+library(kableExtra)
+library(xaringanExtra)
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#a50034",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Helvetica", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  table_row_even_background_color = lighten_color("#a50034", 0.8)
+)
+
+library(RefManageR)
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear",
+           cite.style = "authoryear",
+           style = "markdown",
+           hyperlink = FALSE,
+           dashed = TRUE)
+myBib <- ReadBib("./myBib.bib", check = FALSE)
+```
+
+## What Matters For Cooperation?
+
+<br> 
+- Common ground for cooperation based on
+
+  1. Similar **institutional characteristics** (accountability) `r AutoCite(myBib, "leeds1999domestic")`
+  
+  2. **Past cooperation behavior** `r AutoCite(myBib, "Crescenzi2012")`
+
+---
+
+## Democratic cooperation 
+
+<br> 
+
+- Democracies are good at both
+
+  1. Democratic characteristics are beneficial for cooperation `r AutoCite(myBib, "leeds1999domestic")` 
+      - High accountability
+    
+      - Low flexibility to change policy decisions
+    
+      - High transparency in policy-making process
+
+  2. Cooperation agreements are less likely to fail
+
+  $\rightarrow$ **Democracies are more likely to cooperate with fellow democracies**
+  
+  $\rightarrow$ **Democratic cooperation** is widely studied `r AutoCite(myBib, "mattes2014autocracies")` 
+
+---
+
+## Share of Autocracies and Democracies
+
+<img src="ratio1989.png" width=2000 height=500>
+
+---
+
+## Autocratic cooperation 
+
+<br> 
+
+- **Autocratic cooperation** is less studied
+
+- Autocracies face difficulties finding cooperation partners
+
+  - Less reliable, might even benefit from breaking agreements `r AutoCite(myBib, "leeds1999domestic")` 
+  
+  $\rightarrow$ Often problematic past cooperation behavior
+
+- But autocratic cooperation happens! `r AutoCite(myBib, "von2015democracy", "bailey2018two")` 
+
+  - Similar to democracies, autocratic institutions facilitate cooperation with fellow autocracies `r AutoCite(myBib, "mattes2014autocracies")` 
+
+  $\rightarrow$ **We expect that regime type is important for cooperation and that autocracies are more likely to cooperate with each other**
+
+---
+
+## Co-Sponsorship of UNGA Resolutions
+
+<br> 
+
+- Existing research looks at **highly formalized treaties** and **official agreements** `r AutoCite(myBib, "jackson2015networks")` 
+
+- Not suitable to study autocratic cooperation!
+
+- Co-sponsorship of UNGA resolutions can help
+
+  - Carry high symbolic value to legitimize policy actions `r AutoCite(myBib, "CarterStone2016")` 
+
+  - Less formalized but still selective when it comes to cooperation
+
+    - Lead sponsor lists fellow sponsors `r AutoCite(myBib, "panke2017institutional")` 
+
+---
+class: show-only-last-code-result
+
+## Methods I
+
+<br> 
+
+- Data on UNGA co-sponsorship by `r Citet(myBib, "lee2016shifting")` (1979-2014) $\rightarrow$ 36 weighted and directed networks
+
+--
+
+- $n \times n$ agreement matrix of annual co-sponsorship following `r Citet(myBib, "aleman2009comparing")`
+
+- Agreement matrix of co-sponsoring at the UNGA in 1985 (first 5 rows and columns)
+
+|          |    **AUS**   |    **AUT**   |    **BGD**   |    **BRB**   |    **CAN**   | $\cdots$ |
+|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+|    **AUS**   |   1.00   |   0.79   |   0.61   |   0.35   |   0.79   | $\cdots$ |
+|    **AUT**   |   1.00   |   1.00   |   0.45   |   0.45   |   0.77   | $\cdots$ |
+|    **BGD**   |   0.71   |   0.41   |   1.00   |   0.71   |   0.71   | $\cdots$ |
+|    **BRB**   |   0.58   |   0.58   |   1.00   |   1.00   |   0.58   | $\cdots$ |
+|    **CAN**   |   1.00   |   0.77   |   0.77   |   0.45   |   1.00   | $\cdots$ |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\ddots$ |
+
+---
+
+## Methods I
+
+<br> 
+
+- Data on UNGA co-sponsorship by `r Citet(myBib, "lee2016shifting")` (1979-2014) $\rightarrow$ 36 weighted and directed networks
+
+- $n \times n$ agreement matrix of annual co-sponsorship following `r Citet(myBib, "aleman2009comparing")`
+
+- Agreement matrix of co-sponsoring at the UNGA in 1985 (first 5 rows and columns)
+
+|          |    **AUS**   |    **AUT**   |    **BGD**   |    **BRB**   |    **CAN**   | $\cdots$ |
+|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+|    **AUS**   |   1.00   |   0.79   |   0.61   |   0.35   |   0.79   | $\cdots$ |
+|    **AUT**   |   **1.00**   |   1.00   |   0.45   |   0.45   |   0.77   | $\cdots$ |
+|    **BGD**   |   0.71   |   0.41   |   1.00   |   0.71   |   0.71   | $\cdots$ |
+|    **BRB**   |   0.58   |   0.58   |   1.00   |   1.00   |   0.58   | $\cdots$ |
+|    **CAN**   |   1.00   |   0.77   |   0.77   |   0.45   |   1.00   | $\cdots$ |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\ddots$ |
+
+---
+
+
+## Methods I
+
+<br> 
+
+- Data on UNGA co-sponsorship by `r Citet(myBib, "lee2016shifting")` (1979-2014) $\rightarrow$ 36 weighted and directed networks
+
+- $n \times n$ agreement matrix of annual co-sponsorship following `r Citet(myBib, "aleman2009comparing")`
+
+- Agreement matrix of co-sponsoring at the UNGA in 1985 (first 5 rows and columns)
+
+|          |    **AUS**   |    **AUT**   |    **BGD**   |    **BRB**   |    **CAN**   | $\cdots$ |
+|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+|    **AUS**   |   1.00   |   **0.79**   |   0.61   |   0.35   |   0.79   | $\cdots$ |
+|    **AUT**   |   1.00   |   1.00   |   0.45   |   0.45   |   0.77   | $\cdots$ |
+|    **BGD**   |   0.71   |   0.41   |   1.00   |   0.71   |   0.71   | $\cdots$ |
+|    **BRB**   |   0.58   |   0.58   |   1.00   |   1.00   |   0.58   | $\cdots$ |
+|    **CAN**   |   1.00   |   0.77   |   0.77   |   0.45   |   1.00   | $\cdots$ |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\ddots$ |
+
+---
+
+## Methods II
+
+<br> 
+
+- **Identify cooperation clusters**
+
+  - Leiden algorithm with Reichardt and Bornholdt's Potts partition algorithm `r AutoCite(myBib, "reichardt2004detecting", "reichardt2006statistical")`
+
+  - An extension to Louvain algorithm and can also capture weighted *and* directed networks `r AutoCite(myBib, "traag2019louvain")` 
+
+
+---
+
+## Methods III
+
+<br> 
+  
+- **Estimate the effect of regime type on cooperation clusters**
+
+  - Categorize **democratic and autocratic regimes** based on Polity IV `r AutoCite(myBib, "marshall2002polity")` 
+
+  - **Multi-class random forest** classification to identify feature importance
+  
+  - We further include **control variables** for economic and political factors
+
+<!-- --- -->
+
+<!-- ## Methods IV -->
+
+<!-- <br>  -->
+
+<!-- - Control variables -->
+
+<!--   - Past alliance behavior (ATOP) `r AutoCite(myBib, "leeds2002alliance", "leeds2005alliance")`  -->
+
+<!--   - Membership in regional groups at UN `r AutoCite(myBib, "lee2016shifting", "ball1951bloc")`  -->
+
+<!--   - States' trade behavior `r AutoCite(myBib, "qog15")`  -->
+
+<!--   - GDP per capita `r AutoCite(myBib, "qog15")`  -->
+
+<!--   - Population size `r AutoCite(myBib, "qog15")`  -->
+
+<!--   - Post-conflict environments (UCDP) `r AutoCite(myBib, "ucdp2004codebook")`  -->
+  
+---
+
+## Results I
+<img src="share-plot.jpg" width=2000 height=500>
+
+---
+
+## Results II
+<img src="network.jpg" width=2000 height=500>
+
+---
+
+## Results III
+<img src="vip-plot.jpg" width=2000 height=500>
+
+---
+
+## Conclusion
+
+<br> 
+<br> 
+
+
+- **Regime type matters** for co-sponsoring behavior
+
+- We observe **autocratic cooperation  patterns at the UNGA**
+
+- UNGA is a **good venue** to also analyze autocratic cooperation behavior
+
+---
+
+class: inverse, center
+
+<br> 
+<br> 
+
+# Thank you very much!
+
+.pull-left[
+`r fontawesome::fa(name = "twitter", fill = "white")` [@d_hammers](https://twitter.com/cosima_meyer)
+
+`r fontawesome::fa(name = "globe", fill = "white")` [dennis-hammerschmidt.rbind.io](http://dennis-hammerschmidt.rbind.io) 
+]
+
+.pull-right[
+`r fontawesome::fa(name = "twitter", fill = "white")` [@cosima_meyer](https://twitter.com/cosima_meyer)
+
+`r fontawesome::fa(name = "globe", fill = "white")` [cosimameyer.rbind.io](http://cosimameyer.rbind.io) 
+]
+
+---
+
+# References
+
+```{r refs, echo=FALSE, results="asis"}
+PrintBibliography(myBib, start = 1, end = 6)
+```
+
+---
+
+# References
+
+```{r refs2, echo=FALSE, results="asis"}
+PrintBibliography(myBib, start = 7, end = 13)
+```
+
+---
+
+# References
+
+```{r refs3, echo=FALSE, results="asis"}
+PrintBibliography(myBib, start = 14, end = 17)
+```
+
+---
+
+## Appendix
+
+<br> 
+
+- Control variables
+
+  - Past alliance behavior (ATOP) `r AutoCite(myBib, "leeds2002alliance", "leeds2005alliance")` 
+
+  - Membership in regional groups at UN `r AutoCite(myBib, "lee2016shifting", "ball1951bloc")` 
+
+  - States' trade behavior `r AutoCite(myBib, "qog15")` 
+
+  - GDP per capita `r AutoCite(myBib, "qog15")` 
+
+  - Population size `r AutoCite(myBib, "qog15")` 
+
+  - Post-conflict environments (UCDP) `r AutoCite(myBib, "ucdp2004codebook")` 

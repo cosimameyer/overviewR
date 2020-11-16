@@ -1,0 +1,889 @@
+## ------------------------------------------------------------------------- ##
+##
+## Title: LIDL Case Study - Erweiterung des Süßwarensortiments
+##
+## Author: Dennis Hammerschmidt
+## Purpose: Analyze the impact of different characteristics on the popularity
+##          of sweets and candy to provide a recommendation for a new candy to
+##          to extend the current sweets assortment.
+## Last edited: August 16, 2020
+##
+## ------------------------------------------------------------------------- ##
+
+## Dependencies ------------------------------------------------------------ ##
+
+install_and_load <- function(pkg) {
+  new.pkgs <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkgs))
+    install.packages(new.pkgs, repos = "https://cran.rstudio.com/")
+  
+  for (pkg_name in pkg)
+    library(pkg_name, character.only = TRUE, quietly = TRUE)
+}
+
+packages <-
+  c(
+    "devtools", # Tools to Make Developing R Packages Easier
+    "ggplot2",  # Create Elegant Data Visualisations Using the Grammar of Graphics
+    "dplyr", # A Grammar of Data Manipulation
+    "tidyr", # Tidy Messy Data
+    "sjPlot", # Data Visualization for Statistics in Social Science
+    "hablar", # Non-Astonishing Results in R
+    "magrittr", # A Forward-Pipe Operator for R
+    "moments", # Moments, cumulants, skewness, kurtosis and related tests
+    "MASS", # Support Functions and Datasets for Venables and Ripley's MASS
+    "bestNormalize", # Normalizing Transformation Functions
+    "ggcorrplot", # Visualization of a Correlation Matrix using 'ggplot2'
+    "caret", # Classification and Regression Training
+    "car", # Companion to Applied Regression
+    "ggfortify", # Data Visualization Tools for Statistical Analysis Results
+    "GGally", # Extension to 'ggplot2'
+    "mgcv",  # Mixed GAM Computation Vehicle with Automatic Smoothness Estimation
+    "mgcViz", # Visualisations for Generalized Additive Models
+    "rpart.plot", # Plot 'rpart' Models: An Enhanced Version of 'plot.rpart'
+    "quanteda", # Quantitative Analysis of Textual Data
+    "skimr", # Compact and Flexible Summaries of Data
+    "echarts4r",  # Create Interactive Graphs with 'Echarts JavaScript' Version 4
+    "ranger" # A Fast Implementation of Random Forests
+  )
+install_and_load(packages)
+
+#devtools::install_github("cosimameyer/overviewR")
+library(overviewR) # Easily Extracting Information About Your Data
+
+#devtools::install_github("STATWORX/helfRlein")
+library(helfRlein) # R Helper Functions
+
+#devtools::install_github("NightingaleHealth/ggforestplot")
+library(ggforestplot) # Forestplots of Measures of Effects and Their Confidence 
+# Intervals
+
+# Set seed
+set.seed(68163)
+## ------------------------------------------------------------------------- ##
+
+# Helper functions --------------------------------------------------------
+
+# calculate the mode for a variable
+calc_mode <- function(x) {
+  unique_x <- unique(x)
+  unique_x[which.max(tabulate(match(x, unique_x)))]
+}
+
+# Aesthetics --------------------------------------------------------------
+
+## ggplot ##
+# set default ggplot2 theme
+ggplot2::theme_set(theme_minimal())
+# set LIDL-themed colors
+gg_colors <- c("#015AA2", "#FFF200", "#EE1C25", "black")
+
+## e_charts ##
+# set default echarts4r theme colors
+e_col <- '{"color":["#015AA2","#EE1C25", "#FFF200"]}'
+# set the call for marks to average
+avg <- list(name = "AVG",
+            type = "average")
+
+# Load data ---------------------------------------------------------------
+
+# store the path to the data from the URL on GitHub
+data_url <-
+  "https://raw.githubusercontent.com/fivethirtyeight/data/master/candy-power-ranking/candy-data.csv"
+
+# read the .csv data and declare first row as header for colnames, separator for
+# columns and file encoding
+candy_data <-
+  read.csv(
+    url(data_url),
+    header = TRUE,
+    sep = ",",
+    fileEncoding = "UTF-8"
+  )
+
+# Dataset exploration -----------------------------------------------------
+
+# get a sense of the data
+candy_data %>% 
+  skimr::skim()
+
+# check for NAs -- none detected
+overviewR::overview_na(candy_data)
+
+# clean competitorname variable
+candy_data$competitorname <-
+  gsub("Õ", "'", candy_data$competitorname)
+
+# The accompanying article by FiveThirtyEigth elaborates a bit on the data
+# generating process (DGP) and how the variables were constructed. The target
+# "winpercentage" is based on 269,000 matchups where a total of 8,371 different
+# users (according to their IP address) were asked "Which [of the two randomly
+# presented candies] would you prefer as a trick-or-treater?" The game is
+# still online http://walthickey.com/2017/10/18/whats-the-best-halloween-candy/
+# According to FiveThirtyEight, there is an average of 32 and a median of about
+# 11 matchups from each IP which should be good enough to get a first idea of
+# what characteristics make candy more popular - at least when presented two
+# alternatives.
+
+# Taking a look at the game and playing a few rounds, there is one interesting
+# finding with regard to the competitor candies ("competitorname"): Of the 85
+# observations, it seems that two - "One dime" and "One quarter" - are not candy
+# but are actually money in the form of coins. This might be given that it is not
+# only candy that kids receive from trick-or-treating but also money. Taking a
+# look at those two observations in comparison to one "real" candy confirms this
+# as the dime and the quarter do not possess any candy characteristics.
+
+candy_data %>%
+  dplyr::filter(
+    competitorname == "One dime" |
+      competitorname == "One quarter" |
+      competitorname == "100 Grand"
+  ) %>%
+  hablar::convert(hablar::fct(chocolate:pluribus)) %>%
+  tidyr::gather(key = "characteristic", value = "value", chocolate:pluribus) %>%
+  dplyr::group_by(competitorname) %>%
+  ggplot2::ggplot(aes(x = competitorname, fill = value)) +
+  geom_bar() +
+  facet_wrap(. ~ characteristic) +
+  labs(
+    title = "Are One dime and One quarter really candy?",
+    subtitle = "Plotting One dime and One quarter against 100 Grand - a known candy - across all candy characteristics",
+    x = "Candy",
+    fill = "Attribute present"
+  ) +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.position = "bottom",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_fill_discrete(
+    type = gg_colors,
+    labels = c("No", "Yes"),
+    guide = guide_legend(reverse = TRUE)
+  )
+
+# These two "candies" can safely be dropped from the data since they do not contain
+# any of the candy characteristics that other candies (in this case 100 Grand) 
+# contains (the not-in operator %nin% comes from the helfRlein package and the
+# %<>% pipe operator from the magrittr package)
+candy_data %<>%
+  filter(competitorname %nin% c("One dime", "One quarter"))
+
+# Data exploration --------------------------------------------------------
+
+# The goal is to see how all candy characteristics/features are associated with
+# the target variable winpercent. I split the data exploration between the two
+# types of features: binary (the ingredient characteristics) and numeric (price
+# and sugar percent)
+
+## Ingredients ##
+
+# Taking a look at the distribution of binary candy features w.r.t. to the win
+# percentage -- more yellow areas to the right imply that a candy's characteristic
+# is associated with higher win percentages
+candy_data %>%
+  hablar::convert(hablar::fct(chocolate:pluribus)) %>%
+  tidyr::gather(key = "characteristic", value = "value", chocolate:pluribus) %>%
+  ggplot2::ggplot(aes(winpercent, fill = value)) +
+  geom_area(stat = "bin", bins = 20) +
+  facet_wrap(. ~ characteristic) + 
+  labs(title = "Distribution of candy characteristics' win percentage",
+                                        x = "Win Percentage (in %)",
+                                        y = "Count",
+                                        fill = "Attribute present") +
+  theme(legend.position = "bottom") +
+  scale_fill_discrete(
+    type = gg_colors,
+    labels = c("No", "Yes"),
+    guide = guide_legend(reverse = TRUE)
+  )
+
+## Price and Sugar ##
+
+# Exploring the relationship of the numeric features with winpercent - from this
+# it seems that price and (to a lower extent (lower level of significance))
+# sugar are positively correlated with winpercent, implying that the more sugar
+# and the higher the price, the more likely it is that one candy is chosen over
+# another.
+candy_data %>%
+  hablar::convert(hablar::fct(chocolate:pluribus)) %>%
+  dplyr::select(sugarpercent:winpercent) %>%
+  GGally::ggpairs(lower = list(continuous = "smooth"))
+
+# On another note: winpercent appears not completely to follow a normal
+# distribution but is slightly right-skewed.
+summary(candy_data$winpercent)
+calc_mode(candy_data$winpercent)
+
+# The skewness of 0.3 confirms this suspicion
+moments::skewness(candy_data$winpercent)
+# The kurtosis of ~2.37 further shows that it is platykurtic
+moments::kurtosis(candy_data$winpercent)
+
+# Trying out different approaches to normalize the target variable using the
+# bestNormalize package, it turns out that this is not much of an improvement
+# given that the data - using the best normalizer asinh() - is still skewed,
+# this time left-skewed. Given the small dataset, I proceed without a transfor-
+# mation of the target variable but issue a word of caution to keep the non-
+# normality in mind for the following interpretations.
+transform_target <-
+  bestNormalize::bestNormalize(candy_data$winpercent)
+MASS::truehist(transform_target$x.t)
+
+# Descriptive analysis ----------------------------------------------------
+
+# Calculate the correlation across all features in the data set, excluding the
+# competitorname variable
+corr <- round(cor(candy_data[, -1]), 1)
+p.mat <- ggcorrplot::cor_pmat(candy_data[, -1])
+ggcorrplot::ggcorrplot(
+  corr,
+  p.mat = p.mat,
+  hc.order = TRUE,
+  outline.col = "white",
+  lab = TRUE,
+  insig = "blank",
+  colors = c("#015AA2", "white", "#FFF200")
+) +
+  labs(title = "Correlation across all features and the target",
+       subtitle = "Correlation matrix includes only significant correlation values \nInsignificant values are represented with white squares")
+
+# Based on this, it seems that winpercent is highly correlated (0.6 using
+# Pearson's correlation) with chocolate but less so with fruity (-0.4).
+# Another interesting aspect is that fruity and chocolate appear highly
+# negatively correlated (-0.8). The high correlation might be problematic for
+# future analyses. I take a look at this specific case to see if this is problematic.
+
+# Take a look at the number of cases where a candy is both fruity and contains
+# chocolate
+candy_data %>%
+  filter(fruity == 1 & chocolate == 1)
+
+# There is only one candy (Tootsie Pop) that has both chocolate and fruity as
+# characteristic. To see the impact of this observation, I remove it from the
+# data and re-run the correlation.
+corr2 <-
+  round(cor(candy_data[candy_data$competitorname != "Tootsie Pop", -1]), 1)
+p.mat2 <-
+  ggcorrplot::cor_pmat(candy_data[candy_data$competitorname != "Tootsie Pop", -1])
+
+ggcorrplot::ggcorrplot(
+  corr2,
+  p.mat = p.mat2,
+  hc.order = TRUE,
+  outline.col = "white",
+  lab = TRUE,
+  insig = "blank",
+  colors = c("#015AA2", "white", "#FFF200")
+) +
+  labs(title = "Correlation across all features and the target (excl. Tootsie Pop)",
+       subtitle = "Correlation matrix includes only significant correlation values \nInsignificant values are represented with white squares")
+
+# This does not seem to improve the high correlation between chocolate and fruity.
+# To be save, I will re-run all my analysis below again with a subset of the
+# characteristics where one of the two characteristics is excluded.
+
+# Data preparation --------------------------------------------------------
+
+# For the multivariate regression and decision tree model below, I prepare the
+# following data sets
+
+# model_main contains all features of the data set except for the competitorname
+model_main <- candy_data %>%
+  dplyr::select(-competitorname) %>%
+  hablar::convert(hablar::fct(chocolate:pluribus))
+
+# -------------------------------------------------------------------------
+# Part 1: Candy Characteristics -------------------------------------------
+# -------------------------------------------------------------------------
+
+# Global control settings -------------------------------------------------
+
+# To avoid overfitting and to compensate for the inability to make predictions
+# due to the small dataset size, I include 5-fold cross-validation that I apply
+# to all models below to ensure comparability. The only model that does not use
+# this control parameter is the semi-parametric generalized additive model (GAM).
+# Part of the reason is that GAM as implemented in caret cannot be trained with
+# specific basis for the non-parametric features. The other is that the very
+# essence of GAMs, as implemented in mgcv, avoids overfitting by running
+# an internal generalized cross-validation (GCV) check and is optimized on this
+# score. For these reasons, I use the mgcv package, also because GAM is used
+# primarily as a robustness check to the linear model and is not included in the
+# feature importance comparison below.
+
+control <- caret::trainControl(method = "cv", number = 5)
+
+# Linear Model ------------------------------------------------------------
+
+# Run a linear regression model with all features on the target winpercent
+lm_mod <- caret::train(winpercent ~ .,
+                       data = model_main,
+                       method = "lm",
+                       trControl = control)
+
+# The results confirm that chocolate appears to be a strong predictor and an
+# important feature for winpercent. The same goes for nuts (peanutyalmondy) and
+# fruit. More sugar also seems to be positively associated with winpercent.
+summary(lm_mod)
+plot(varImp(lm_mod))
+
+# To investigate the potential multicollinearity problem in the data from fruity
+# and chocolate, I run the Variance Inflation Factor (VIF) test using the car
+# package. Although choclate and fruity appear to be higher than all other
+# variables, their VIF of ~3 does not seem to indicate a serious problem with
+# multicollinearity
+car::vif(lm_mod$finalModel)
+
+# To visualize the results from the model, I calculate their
+# point estimates as well as the confidence bands.
+lm_out <- as.data.frame(coef(summary(lm_mod)))
+lm_out$var <- rownames(lm_out)
+lm_out$lower <- lm_out$Estimate - 2 * lm_out$`Std. Error`
+lm_out$upper <- lm_out$Estimate + 2 * lm_out$`Std. Error`
+
+# The outcome of the linear regression model is plotted using echarts4r to
+# include an interactive component.
+lm_out %>%
+  arrange(desc(Estimate)) %>%
+  dplyr::slice(-1) %>%
+  e_charts(var) %>%
+  e_bar(Estimate) %>%
+  e_error_bar(lower, upper) %>%
+  e_x_axis(axisLabel = list(interval = 0, rotate = 45)) %>%
+  e_theme_custom(e_col)
+
+# The results allow for a first interpretation. Given that chocolate has
+# the strongest impact on winpercent and that the combination of chocolate and
+# fruit flavor does not seem to occur very often, it could either mean that
+# it is not very successful, and one should go with a nut-based candy or that
+# this is a niche that could be filled -- more data and studies need to be
+# conducted at this point to investigate this finding further.
+
+# To test the extent that chocolate and nuts might interact together, I re-ran
+# the linear model with an interaction term for the two features. Note that I
+# do this using the basic lm() function instead of the caret wrapper in order
+# to be able to plot the output of the interaction below. The results hold for 
+# both caret and basic lm.
+lm_interact <-
+  lm(
+    winpercent ~ chocolate + fruity + caramel + peanutyalmondy + 
+      chocolate:peanutyalmondy + nougat + crispedricewafer + hard + bar + 
+      pluribus + sugarpercent + pricepercent,
+    data = model_main
+  )
+
+# The results indicate that the interaction between chocolate and nuts is not 
+# statistically significant. Plotting the results, however, shows that there 
+# still appears to be a difference between the case when both chocolate and 
+# nuts are included in candy compared to the case when there is no chocolate. 
+# However, given the small sample size and the marginal overlap in the 
+# confidence bands for chocolate with and without nuts, these results need to be 
+# treated with caution. They will be further evaluated in the following models.
+summary(lm_interact)
+plot_model(lm_interact, type = "int", terms = c("chocolate", "peanutyalmondy"))
+
+# Model Check LM ----------------------------------------------------------
+
+# The results from the model check indicate that, in general, the linear model
+# seems fine but would require some fine-tuning given the identified leverage
+# points.
+ggplot2::autoplot(lm_mod$finalModel, which = 1:6, ncol = 2)
+
+# Following the model diagnostics, I reduced the data set to see if and how my
+# results vary
+data_red <- model_main[-c(11, 60, 66, 69, 84), ]
+lm_mod_red <- caret::train(winpercent ~ .,
+                           data = data_red,
+                           method = "lm",
+                           trControl = control)
+summary(lm_mod_red)
+plot(varImp(lm_mod_red))
+ggplot2::autoplot(lm_mod_red$finalModel, which = 1:6, ncol = 2)
+
+# The results remain largely similar, and chocolate remains the most important
+# and strongest feature/characteristic. Nuts are still very important. Sugarpercent
+# and fruity decrease a bit in their explanatory power and the model's adjusted
+# R-squared increased tremendously. However, there are still some problematic
+# datapoints. I do one last round of removing those obs in the data to see how
+# the results change.
+
+data_red2 <- data_red[-c(8, 51, 76, 80), ]
+lm_mod_red2 <- caret::train(winpercent ~ .,
+                            data = data_red2,
+                            method = "lm",
+                            trControl = control)
+summary(lm_mod_red2)
+plot(varImp(lm_mod_red2))
+ggplot2::autoplot(lm_mod_red2$finalModel, which = 1:6, ncol = 2)
+
+# The result for chocolate still holds but the results for other variables change 
+# a little bit. The adjusted R-squared increases again but with now only 
+# 76 observations and 11 variables, the DF are at 64 and reducing further 
+# might not be meaningful.
+
+# Generalized Additive Model ----------------------------------------------
+
+# To accommodate potential non-linearities in the two numeric variables
+# sugarpercent and pricepercent, I also run a semi-parametric generalized
+# additive model with splines of basis 4 for these variables. K = 4 was selected
+# after observing the model diagnostics. The results are largely similar to the
+# linear model.
+
+gam_model <-
+  mgcv::gam(
+    winpercent ~ chocolate +
+      fruity + caramel +
+      peanutyalmondy + nougat +
+      crispedricewafer + hard +
+      bar + pluribus + s(sugarpercent, k = 4) +
+      s(pricepercent, k = 4),
+    data = model_main %>% filter(fruity != 1 | chocolate != 1)
+  )
+summary(gam_model)
+
+gam_diag <- mgcViz::getViz(gam_model)
+
+# The model check confirms the non-normality of the residuals that was also
+# discussed above. However, given the small data set, the model seems to fit
+# well, and the linear assumption does not seem to be violated (based on the QQ-
+# plot).
+check(gam_diag)
+
+# The visual analysis of the estimated relationship between all characteristics
+# and winpercent confirms the findings of the linear model: chocolate, fruit and
+# peanutyalmondy appear to be the most important and significant candy character-
+# istics.
+print(plot(gam_diag, allTerms = T), pages = 1)
+
+# GLMNET ------------------------------------------------------------------
+
+# Given the small sample size and to make sure that the marginal VIF
+# factor of ~3 for chocolate and fruity do not cause any issues, I run a GLMNET
+# model.
+
+# Fit a basic glmnet model
+glmnet_mod_basic <- caret::train(winpercent ~ .,
+                                 data = model_main,
+                                 method = "glmnet",
+                                 trControl = control)
+
+plot(varImp(glmnet_mod_basic))
+min(glmnet_mod_basic$results$RMSE)
+max(glmnet_mod_basic$results$Rsquared)
+plot(glmnet_mod_basic)
+
+# With the basic hyperparameter, it appears that the variation is relatively low.
+# I further modify the model using grid-search with 20 different values for each
+# hyperparameter, alpha and lambda, respectively.
+
+glmnet_mod <- train(
+  winpercent ~ .,
+  data = model_main,
+  method = "glmnet",
+  trControl = control,
+  tuneGrid = expand.grid(
+    alpha = seq(0, 1, length = 20),
+    lambda = seq(0.0001, 1, length = 20)
+  )
+)
+
+plot(varImp(glmnet_mod))
+print(glmnet_mod)
+min(glmnet_mod$results$RMSE)
+max(glmnet_mod$results$Rsquared)
+
+# The tuned model receives slightly better results while showing a constant
+# picture regarding the features: chocolate, again, appears as the most important
+# feature followed by peanutyalmondy. Fruity does not play an important role in
+# this model compared to the linear model above.
+
+# Decision Tree Model -----------------------------------------------------
+
+# To complement the linear regression analyses and to further ensure the robustness 
+# of the findings, I further ran two tree-based models: a simple decision and a
+# basic random forest.
+
+dt_mod <-
+  caret::train(winpercent ~ .,
+               data = model_main,
+               method = "rpart",
+               trControl = control,
+  )
+plot(varImp(dt_mod))
+print(dt_mod)
+rpart.plot(dt_mod$finalModel)
+
+# The model reiterates the findings of the glmnet: chocolate is the most important
+# feature followed by nuts. Although small, the decision tree shows that having
+# chocolate and nuts in the candy gives the highest winpercentage.
+
+# Random Forest -----------------------------------------------------------
+
+# Finally, I use a random forest model to evaluate the results of the models
+# above.
+
+# Using permutation as the importance measure
+rf_mod <-  caret::train(
+  winpercent ~ .,
+  data = model_main,
+  method = "ranger",
+  trControl = control,
+  importance = "permutation",
+  tuneGrid = expand.grid(
+    mtry = seq(1, 11),
+    splitrule = c("variance", "extratrees"),
+    min.node.size = 1
+  )
+)
+
+# For the random forest, chocolate is even stronger relative to the other features
+plot(varImp(rf_mod))
+print(rf_mod)
+plot(rf_mod)
+
+# Once again, the results show that chocolate is the most important feature.
+# Given the grid search, it further appears that with some hyperparamter tuning,
+# results of the random forest model can markedly be increased.
+
+# Model Comparison --------------------------------------------------------
+
+# Despite that all models indicate the importance of chocolate, there seems to
+# be a bit more variation in terms of the second most important candy
+# characteristic. In the following, I compare all main models with each other
+# and show how they align the different characteristics based on the variable
+# importance plot and output the best overall model based on the RMSE and adj.
+# R-squared.
+
+# Preparation
+model_list <- lapply(ls(pattern = "_mod$"), get)
+
+# Evaluating the best overall model by looping over the lowest RMSE and the
+# highest adjusted R-squared for each model (similar to above)
+eval_score <- data.frame(matrix(nrow = 4, ncol = 0))
+for (i in 1:length(model_list)) {
+  rmse <- min(model_list[[i]][["results"]][["RMSE"]])
+  rsq <- max(model_list[[i]][["results"]][["Rsquared"]])
+  meth <- model_list[[i]][["method"]]
+  result <- cbind(rmse, rsq)
+  rownames(result) <- meth
+  eval_score <- rbind(eval_score, result)
+}
+
+# Based on this table, the best model seems to be the random forest model given
+# that is has the lowest RMSE and the highest adjusted R-squared.
+print(eval_score)
+
+# Recommendation ----------------------------------------------------------
+
+# Create a data frame that stores the information from the variable importance
+# estimates for all four main models (lm, glmnet, decision tree, random forest).
+# As stated above, GAM is not included here given that it was not calculated with
+# caret.
+varimp_dat <- data.frame(matrix(nrow = 11, ncol = 0))
+for (i in 1:length(model_list)) {
+  vi <- varImp(model_list[[i]])
+  vi_dat <- data.frame(vi$importance)
+  vi_dat <- vi_dat[order(row.names(vi_dat)), , drop = FALSE]
+  colnames(vi_dat) <- vi$model
+  varimp_dat <- cbind(varimp_dat, vi_dat)
+}
+
+# Transforming the data set to plot all four importance scores for each feature
+varimp_trans <- varimp_dat %>%
+  tibble::rownames_to_column() %>%
+  tidyr::pivot_longer(-rowname, names_to = "model", values_to = "value") %>%
+  dplyr::mutate(label = rep(
+    0:1,
+    times = 6,
+    each = 4,
+    len = 44
+  ),
+  label = as.factor(label)) %>%
+  dplyr::mutate(rowname_numeric = as.numeric(as.factor(rowname)))
+
+# Plot the variable importance for each model across all features
+varimp_trans %>%
+  ggplot(aes(x = reorder(rowname, value),
+             y = value)) +
+  geom_point(aes(color = model),
+             position = position_dodge(width = 1),
+             size = 3) +
+  geom_linerange(
+    aes(
+      x = rowname,
+      ymin = 0,
+      ymax = value,
+      colour = model
+    ),
+    position = position_dodge(width = 1),
+    size = 2
+  ) +
+  coord_flip() +
+  geom_rect(
+    aes(
+      xmin = rowname_numeric - 0.5,
+      xmax = rowname_numeric + 0.5,
+      ymin = 0,
+      ymax = 100,
+      fill = label
+    ),
+    alpha = 0.1,
+    show.legend = FALSE
+  ) +
+  theme_forest() +
+  labs(title = "Variable Importance across 4 main models and all candy characteristics",
+       legend = "Model",
+       y = "Variable Importance") +
+  theme(
+    axis.title.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.position = "bottom"
+  ) +
+  scale_fill_manual(values = c("#ffffff", "#D3D3D3")) +
+  scale_colour_manual(values = gg_colors) +
+  scale_x_discrete(
+    breaks = c(
+      "chocolate1",
+      "peanutyalmondy1",
+      "sugarpercent",
+      "pricepercent",
+      "fruity1",
+      "crispedricewafer1",
+      "bar1",
+      "hard1",
+      "caramel1",
+      "pluribus1",
+      "nougat1"
+    ),
+    labels = c(
+      "Chocolate",
+      "Nuts",
+      "Sugar (%)",
+      "Price (%)",
+      "Fruity",
+      "Cripsed/Ricewaffle",
+      "Bar",
+      "Hard",
+      "Caramel",
+      "Box",
+      "Nougat"
+    )
+  )
+
+# The plot reiterates the findings from above: chocolate is the most important
+# feature -- across all four models. Based on the findings in the models as well 
+# as in this plot, the second most important feature appears to be nuts. Although
+# fruity is also seems to have a great impact, the analysis above suggests that
+# rarely if ever, a candy contains both chocolate and fruit and gets high ratings.
+# Hence, I would recommend creating a chocolate-nut-based candy.
+
+candy_data2 <- candy_data %>%
+  dplyr::mutate(
+    winning_strategy = ifelse(chocolate == 1 &
+                                peanutyalmondy == 1, 1, 0),
+    winning_strategy = factor(
+      x = winning_strategy,
+      levels = sort(unique(winning_strategy)),
+      labels = c("Chocolate, Nuts, or None", "Chocolate & Nuts")
+    )
+  )
+
+candy_data2 %>%
+  dplyr::arrange(winpercent) %>%
+  dplyr::mutate(winpercent = round(winpercent, 1)) %>%
+  group_by(winning_strategy) %>%
+  e_charts(competitorname) %>%
+  e_bar(winpercent) %>%
+  e_flip_coords() %>%
+  e_mark_line(data = list(xAxis = 50.3),
+              title = "Minimum Score for both Chocolate and Nuts") %>%
+  e_mark_point(data = avg) %>%
+  e_theme_custom(e_col) %>% 
+  e_title("Comparing candy with both chocolate and nuts to other candy")
+
+# The graph shows that having both chocolate and candy, the average winpercent
+# is higher than for all other candy in the data. Also visually, the graph shows
+# that the majority of chocolate-and-nut-based candy are in the upper part of
+# the graph, hence, at the high winpercent.
+
+# Part 2: Price -----------------------------------------------------------
+
+# Price did not seem to play a role in the model. Suppose we consider that the 
+# survey asks for  a choice between candy from trick-or-treating on Halloween 
+# where participants do not consider to buy the candy but receive it for free. 
+# In that case, it might be problematic to link the price component to the win 
+# percentage (only if it is assumed that there is an implicit sense of value to 
+# candy where higher priced brands and candy are generally perceived better and 
+# are thus chosen more often).
+
+# If we would assume that the price as included in the data set is a representative
+# feature - as I did in the analysis - it is possible to take a look at how price
+# varies across different win percentages.
+
+ggplot(candy_data, aes(pricepercent, winpercent)) +
+  geom_point() +
+  scale_colour_discrete(type = gg_colors) +
+  stat_smooth(method = "lm", aes(colour = "Linear Model")) +
+  stat_smooth(method = "loess", aes(colour = "Loess Smoother")) +
+  stat_smooth(method = "gam", aes(colour = "GAM")) +
+  geom_text(
+    data = candy_data %>% filter(pricepercent > 0.15 &
+                                   pricepercent < 0.3),
+    aes(pricepercent, winpercent, label = competitorname)
+  ) +
+  geom_text(
+    data = candy_data %>% filter(pricepercent > 0.6 &
+                                   pricepercent < 0.75),
+    aes(pricepercent, winpercent, label = competitorname)
+  ) + 
+  labs(title = "Comparing the prince percent to the win percentage")
+
+# According to this figure, there are two potential strategies to pursue with
+# regard to the price of the product (solely based on the analysis here, not 
+# taking into account material and production costs):
+#
+# 1) Lower priced product:
+#       Competitors: Reese's Miniatures
+# 2) Higher priced product:
+#       Competitors: Reese's Peanut Butter Cup, Snickers Reese's Pieces,
+#       Peanut Butter M&Ms, M&Ms, Snickers Crisper, etc.
+#
+# If this is for the US market and you keep Reese's in the product range, it
+# might be challenging to compete with the variety of products in the higher-
+# priced sector of successful chocolate+nuts-based products. In the lower-priced
+# segment, there is only Reese's Miniatures to beat (though they have a
+# very high winpercent rating). Still, this segment seems promising as it taps
+# into the company range of products for the Eigenmarke, has only one strong
+# competitor in the market, and could potentially become a serious alternative in
+# this field for chocolate+nut candy.
+
+# Taking a look at how sugar and price are related while bearing in mind that
+# sugar has a positive effect on the winpercentage across all models, it seems
+# that there is a steep increase in the relationship between sugar and price.
+# Based on the graph, sugar only appears to reduce the price if there is much
+# sugar in the candy (potentially because sugar is cheaper relative to other
+# ingredients).
+
+ggplot(candy_data, aes(sugarpercent, pricepercent)) +
+  geom_point() +
+  scale_colour_discrete(type = gg_colors) +
+  stat_smooth(method = "lm",
+              aes(colour = "Linear Model"),
+              formula = "y ~ x") +
+  stat_smooth(method = "loess",
+              aes(colour = "Loess Smoother"),
+              formula = "y ~ x") +
+  stat_smooth(method = "gam", aes(colour = "GAM")) +
+  geom_text(
+    data = candy_data %>% filter(sugarpercent > 0.15 &
+                                   sugarpercent < 0.3),
+    aes(sugarpercent, pricepercent, label = competitorname)
+  ) +
+  geom_text(
+    data = candy_data %>% filter(sugarpercent > 0.65 &
+                                   sugarpercent < 0.75),
+    aes(sugarpercent, pricepercent, label = competitorname)
+  ) +
+  labs(title = "Comparing the sugar percent to the price percent")
+
+# In the low-sugar compartment, there is no competitor with chocolate and nuts, 
+# whereas the area with much sugar seems to have a downward trend in price. 
+# Here, Reese's Peanut Butter Cup is one of the strongest competitors.
+
+# Based on this, my recommendation is to produce a chocolate-and-nut-based candy
+# with low sugar that might also tap into the emerging healthy lifestyle trend
+# and could be advertised as such.
+
+# Part 3: Name ------------------------------------------------------------
+
+# Finally, I want to see if I can recommend how the new product's name should 
+# look. For this, I add two variables to the data set: chr_len and syl, indicating 
+# the length of all characters (do popular candies have long or short names) and 
+# the number of syllables (to indicate how complex their name is). This is under 
+# the assumption that all candies are always referred to and associated with 
+# their entire name, i.e., the one that is included in the data at hand.
+
+# Remove apostrophes to include only letters in chr_len, create chr_len and syl
+candy_data3 <- candy_data %>%
+  dplyr::mutate(
+    competitorname = gsub("[[:punct:]]+", "", competitorname),
+    chr_len = nchar(competitorname),
+    syl = quanteda::nsyllable(
+      competitorname,
+      syllable_dictionary = quanteda::data_int_syllables,
+      use.names = FALSE
+    )
+  ) %>%
+  dplyr::select(-competitorname) %>%
+  na.omit()
+
+# To test their effect, I use the best model from the evaluation above -- a random
+# forest model -- and add the two additional variables to it
+
+rf_char <-  caret::train(
+  winpercent ~ .,
+  data = candy_data3,
+  method = "ranger",
+  trControl = control,
+  importance = "permutation",
+  tuneGrid = expand.grid(
+    mtry = seq(1, 13),
+    splitrule = c("variance", "extratrees"),
+    min.node.size = 1
+  )
+)
+
+# It turns out that neither the number of characters nor the number of syllables
+# in the name seem to contribute substantially to the winpercent
+plot(varImp(rf_char))
+print(rf_char)
+plot(rf_char)
+
+# To get the effect sizes, I use a linear model again
+lm_char <- caret::train(winpercent ~ . ,
+                        data = candy_data3,
+                        method = "lm",
+                        trControl = control)
+summary(lm_char$finalModel)
+
+# Sentiment Analysis ------------------------------------------------------
+
+# At last, I look into the sentiment of the candy names. As the code below
+# shows, not much sentiment was detected which makes sense given that most
+# company names do not follow standard words included in a dictionary. The 
+# dictionary is the well-known Lexicoder dictionary that consists of 2,858 
+# "negative" and 1,709 "positive" sentiment words.
+
+sent <-
+  quanteda::dfm(candy_data$competitorname,
+                dictionary = quanteda::data_dictionary_LSD2015)
+candy_data4 <-
+  cbind(candy_data, quanteda::convert(sent, to = "data.frame")[, 2:3])
+
+candy_data4 %<>%
+  rowwise() %>%
+  dplyr::mutate(sentiment = positive - negative) %>%
+  dplyr::mutate(sentiment = case_when(sentiment == -2 ~ -1,
+                                      sentiment == 2 ~ 1,
+                                      TRUE ~ sentiment)) %>%
+  dplyr::mutate(sentiment = factor(
+    x = sentiment,
+    levels = c(-1, 0, 1),
+    labels = c("Negative", "Neutral", "Positive")
+  ))
+
+# There is not much of a difference in the win percentage for positive and
+# negative terms (as far as a simple dictionary lookup can identify)
+candy_data4 %>%
+  dplyr::arrange(winpercent) %>%
+  dplyr::mutate(winpercent = round(winpercent, 1)) %>%
+  group_by(sentiment) %>%
+  e_charts(competitorname) %>%
+  e_bar(winpercent) %>%
+  e_flip_coords() %>%
+  e_mark_point(data = avg) %>%
+  e_theme_custom(e_col) %>%
+  e_title("Sentiment across candy")

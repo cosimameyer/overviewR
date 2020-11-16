@@ -1,0 +1,25 @@
+{
+    "id": "9478DEDF",
+    "path": "~/overviewR/R/overview_na.R",
+    "project_path": "R/overview_na.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1594645567631.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "cursorPosition": "80,16",
+        "scrollLine": "0",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1597415083,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1597415083789,
+    "read_only": false,
+    "read_only_alternatives": []
+}

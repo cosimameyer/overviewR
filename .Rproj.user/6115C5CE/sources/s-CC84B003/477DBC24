@@ -1,0 +1,26 @@
+{
+    "id": "477DBC24",
+    "path": "~/overviewR/R/overview_plot.R",
+    "project_path": "R/overview_plot.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1594645541127.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "tempName": "Untitled1",
+        "cursorPosition": "86,0",
+        "scrollLine": "0",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1597413026,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1597413026519,
+    "read_only": false,
+    "read_only_alternatives": []
+}

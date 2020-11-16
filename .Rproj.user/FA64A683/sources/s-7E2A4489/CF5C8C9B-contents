@@ -1,0 +1,72 @@
+# Visualization
+
+
+year1 <- seq(1980, 2010, 1)
+
+member <- c(154, 157, 157, 158, rep(159, 7), 166, 179, 184, rep(185, 5), 188, 189, 189, rep(191, 4), rep(192, 5))
+
+dat <- data.frame(year1, member)
+
+sponsor <- final_sponsoring %>% 
+  filter(year>= 1980 & year <= 2010) %>% 
+  group_by(year) %>% 
+  # distinct(country1) %>% 
+  count()  %>%
+  rename(sponsordyad = n)
+  # group_by(year) %>% 
+  # dplyr::summarise(sponsor=n())
+
+voting <- final_voting4 %>% 
+  filter(year>= 1980 & year <= 2010) %>% 
+  group_by(year) %>% 
+  # distinct(ccode1) %>% 
+  count() %>% 
+  rename(votingdyad = n)
+  # group_by(year) %>% 
+  # dplyr::summarise(votedyad=n())
+
+dat <- cbind(dat, sponsor$sponsordyad, voting$votingdyad)
+# dat <- subset(dat, select=-year)
+
+########################################################################################## 
+dat2 <- subset(dat, select=-member)
+dfp1 <- melt(dat2, id="year1")
+
+
+plot1 <- ggplot(dfp1) + geom_bar(aes(x = year1, y = value, fill = variable),
+                        position = "dodge",
+                        stat = "identity") +
+ #  scale_fill_brewer(palette = "Set1") +
+  labs(y = "Total number of dyads",
+       x = "") +
+  guides(fill = guide_legend(title = NULL)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 10, angle = 45))  +
+  scale_fill_manual(name = "", labels = c("Sponsoring dyads", "Voting dyads"),
+                    values=c('#a6bddb','#1c9099')) +
+  theme(legend.position = "bottom") +
+  scale_y_continuous(label=scales::comma)
+
+ggsave(plot1, filename = "Dropbox/Apps/Overleaf/Cohere_and_concur/dyad-comparison.png")
+
+plot1 <-  dat %>%
+  ggplot() +
+  geom_bar(aes(
+    factor(year1),
+    `sponsor$sponsordyad`,
+    #fill = as.factor(year1),
+    width = .5), stat = "identity", position = "dodge")  +
+  geom_bar(aes(
+    factor(year1),
+    `voting$votingdyad`,
+    #fill = as.factor(year1),
+    width = .5), stat = "identity", position = "dodge")
+  )
+  
+  scale_fill_brewer(palette = "Set1") +
+  labs(y = "Percentage of women in cabinet",
+       x = "") +
+  guides(fill = guide_legend(title = NULL)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 10, angle = 45)) +
+  scale_fill_manual(values = c("#a6bddb", "#1c9099"))

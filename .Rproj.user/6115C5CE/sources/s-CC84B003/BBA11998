@@ -1,0 +1,26 @@
+{
+    "id": "BBA11998",
+    "path": "~/overviewR/R/overview_crosstab.R",
+    "project_path": "R/overview_crosstab.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1594651795921.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "cursorPosition": "15,39",
+        "scrollLine": "0",
+        "tempName": "Untitled1",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1593448294,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1593448294,
+    "read_only": false,
+    "read_only_alternatives": []
+}

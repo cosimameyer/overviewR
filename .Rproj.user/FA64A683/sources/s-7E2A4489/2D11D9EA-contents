@@ -1,0 +1,284 @@
+---
+title: "overviewR"
+subtitle: ""
+author: 
+  - "Cosima Meyer"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    includes:
+      in_header:
+        - 'toc.html'
+    lib_dir: libs
+    css: ["xaringan-themer-zurich.css", "ninjutsu"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r load_packages, message=FALSE, warning=FALSE, include=FALSE} 
+# devtools::install_github("rstudio/fontawesome")
+# devtools::install_github("gadenbuie/xaringanExtra")
+library(xaringanExtra)
+library(fontawesome)
+library(overviewR)
+library(knitr)
+library(kableExtra)
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#2A5773",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Helvetica", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+```
+
+```{r xaringan-extra-styles, echo=FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+```
+
+## What is `overviewR`? 
+
+- Small but powerful package to get a quick overview of your data
+<br/>
+<br/>
+- Useful for academic and non-academic purposes alike
+<br/>
+<br/>
+- Focus on plots and tables to visualize data structure
+<br/>
+<br/>
+<br/>
+- Highly customizable (`tidyverse`-based) and open to suggestions `r fontawesome::fa(name = "smile")`
+---
+class: show-only-last-code-result
+
+## What can you do with `overviewR`?
+
+```{r, eval=FALSE}
+install.packages("overviewR")
+library(overviewR)
+```
+
+--
+
+<p align="center"><img src="overview-overviewr.png" width="550"></p>
+
+
+---
+class: show-only-last-code-result
+
+## `toydata`
+
+`overviewR` has an internal (comparative) data set with `toydata` on a **country-year level**:
+
+--
+
+```{r, eval=FALSE}
+head(toydata)
+```
+--
+
+```{r, echo=FALSE}
+toydata2 <- head(toydata)
+toydata2 %>% 
+  head() %>% 
+  kable() %>% 
+  row_spec(seq(0,nrow(toydata2),2), background="#b7c4ce") %>% 
+  kable_styling(full_width=FALSE)
+```
+
+---
+class: show-only-last-code-result
+
+## Table: `overview_tab`
+
+```{r}
+output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+```
+
+--
+
+```{r, echo=FALSE}
+knitr::kable(output_table) %>% 
+  row_spec(seq(0,nrow(output_table),2), background="#b7c4ce") %>% 
+  kable_styling(full_width=FALSE)
+```
+
+---
+class: show-only-last-code-result
+
+## Table: `overview_crosstab`
+```{r}
+output_crosstab <- overview_crosstab(
+    dat = toydata,
+    cond1 = gdp,
+    cond2 = population,
+    threshold1 = 25000,
+    threshold2 = 27000,
+    id = ccode,
+    time = year
+  )
+```
+
+--
+
+```{r, echo=FALSE}
+knitr::kable(output_crosstab) %>% 
+  row_spec(seq(0,nrow(output_crosstab),2), background="#b7c4ce") %>% 
+  kable_styling(full_width=FALSE)
+```
+---
+class: show-only-last-code-result
+
+## Store your tables: `overview_print`
+
+```{r, eval=FALSE}
+overview_print(obj = output_table)
+```
+--
+
+<p align="center"><img src="ex1.png" width="400"></p>
+
+--
+
+```{r, eval=FALSE}
+# Store it as a .tex file directly
+overview_print(obj = output_table, 
+*              save_out = TRUE, 
+*              path = "SET-YOUR-PATH",
+*              file = "output.tex")
+```
+
+---
+class: show-only-last-code-result
+
+## Store your tables: `overview_print`
+
+```{r, eval =FALSE}
+overview_print(
+  obj = output_crosstab,
+  title = "Cross table of the sample",
+  crosstab = TRUE,
+  cond1 = "GDP",
+  cond2 = "Population"
+)
+```
+
+--
+<p align="center"><img src="ex3.png" width="500"></p>
+
+
+---
+class: show-only-last-code-result
+
+## Plots: `overview_plot`
+
+```{r, eval=FALSE}
+overview_plot(dat = toydata, id = ccode, time = year)
+```
+--
+<p align="center"><img src="unnamed-chunk-19-1.png" width="500"></p>
+
+---
+
+## Plots: `overview_plot`
+
+![](plot_sample.png)
+---
+class: show-only-last-code-result
+
+## Plots: `overview_heat`
+
+```{r, eval=FALSE}
+overview_heat(toydata_red,
+                ccode,
+                year,
+                perc = TRUE,
+                exp_total = 12)
+```
+--
+
+<p align="center"><img src="unnamed-chunk-21-1.png" width="500"></p>
+
+---
+class: show-only-last-code-result
+
+## Plots: `overview_na`
+
+```{r, eval=FALSE}
+overview_na(toydata_with_na)
+```
+--
+
+<p align="center"><img src="unnamed-chunk-23-1.png" width="500"></p>
+
+---
+class: show-only-last-code-result
+
+## Plots: `overview_na`
+
+```{r, eval=FALSE}
+overview_na(toydata_with_na, 
+            perc = FALSE) #<<
+```
+--
+
+<p align="center"><img src="unnamed-chunk-24-1.png" width="500"></p>
+
+
+---
+
+## Store your plots
+
+```{r, message=FALSE}
+library(ggplot2)
+
+# Create plot
+plot <- overview_plot(dat = toydata, id = ccode, time = year)
+
+# Store it with ggplot
+ggsave(plot, file = "plot.png")
+```
+
+---
+class: inverse
+background-image: url("computer2.png")
+background-size: 200px
+background-position: 95% 8%
+
+<br><br><br>
+# More resources 
+
+- overviewR
+  - [overviewR](https://cosimameyer.github.io/overviewR/)
+  - [overviewR CheatSheet](https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf)
+  - [overviewR Github repository](https://github.com/cosimameyer/overviewR)
+
+- How to write R packages
+  - [Cosima Meyer and Dennis Hammerschmidt: How to write your own R package and publish it on CRAN](https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/)
+  
+???
+
+also mention that there are more blog posts
+
+---
+class: inverse, middle, center
+
+<img src="computer2.png" width=200 height=150>
+
+`r fontawesome::fa(name = "twitter", fill = "white")` [@cosima_meyer](https://twitter.com/cosima_meyer)
+
+`r fontawesome::fa(name = "globe", fill = "white")` [cosimameyer.rbind.io](http://cosimameyer.rbind.io) 
+
+`r fontawesome::fa(name = "github", fill = "white")` Slides at </br></br>
+[bit.ly/XX]()
+
+---
+.footer[Illustrations are either created by myself, my co-author, or by canva.com]

@@ -1,0 +1,33 @@
+{
+    "id": "9F2AA747",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1597402019089.0,
+    "source_on_save": false,
+    "relative_order": 16,
+    "properties": {
+        "expression": "dat_red",
+        "caption": "dat_red",
+        "totalObservations": "287",
+        "displayedObservations": "287",
+        "variables": "4",
+        "cacheKey": "A9AD0E21",
+        "object": "dat_red",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=dat_red&cache_key=A9AD0E21&max_cols=50",
+        "preview": "0",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 7809653119305523809,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1597402019089,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,42 @@
+dat_red <- data %>%
+  dplyr::distinct(missioncountry, year) %>%
+  dplyr::filter(!is.na(year)) %>%
+  dplyr::arrange(missioncountry, year)
+
+
+  
+dat_red <- dat_red %>% 
+ # group_by(missioncountry) %>% 
+  dplyr::mutate(idx = c(1, diff(year)))
+dat_red %>% select(year, idx, missioncountry) %>% View()
+
+i2 <- c(1, which(dat_red$idx != 1), nrow(dat_red) + 1)
+
+
+dat_red$grp <- rep(seq_len(length(diff(i2))), diff(i2))
+
+dat_red <- dat_red %>% 
+  dplyr::mutate(grp = ifelse(lead(missioncountry) != missioncountry & lead(idx)==1, idx+1, grp))
+dat_red %>% select(year, idx, grp, missioncountry) %>% View()
+
+
+plot <- dat_red %>%
+  dplyr::group_by(missioncountry) %>%
+  ggplot2::ggplot(ggplot2::aes(x = factor(year), y = missioncountry)) +
+  ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
+  ggplot2::geom_point(pch = 15, size = 2) +
+  ggplot2::scale_y_discrete(limits = rev) 
+
+# -------------------------------------------------------------------------
+
+
+dat_red <- dat_red %>%
+  group_by(year, missioncountry) %>% 
+  mutate(ID = cur_group_id())
+
+dat_red %>% select(year, ID, missioncountry) %>% View()
+
+
+# -------------------------------------------------------------------------
+
+data <- data

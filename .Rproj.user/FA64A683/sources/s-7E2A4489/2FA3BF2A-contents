@@ -1,0 +1,109 @@
+---
+title: "Data visualization III and open office hours"
+subtitle: "Computational conflict research: "
+date: "November 25, 2020"
+author: "Cosima Meyer"
+output: 
+  html_document
+---
+
+## What did we do last time?
+- We met `ggplot2`
+- We replicated the figures from Hultman et al. 2014
+- You generated your first graphs with `ggplot2`
+
+## What are we doing today?
+- Learn how to save plots
+- Learn how to make interactive plots
+
+### Preparation: Remove documents, install packages, load data sets
+```{r}
+# Remove all objects from R's memory
+rm(list=ls())  
+```
+
+```{r, message=FALSE, warnings=FALSE, results="hide"}
+# We will use the following code to install all packages
+packages <- c("tidyverse", # to load tidyverse
+              "dplyr",# to load dplyr
+              "ggplot2", # for plotting
+              "haven", # for reading in data
+              "plotly" # for interactive graphs
+              )
+# Install uninstalled packages
+lapply(packages[!(packages %in% installed.packages())], install.packages)
+# Load all packages to library
+lapply(packages, library, character.only = TRUE)
+```
+
+## Load the data sets
+```{r}
+unpko <- read_dta("CMPS Mission Totals 1990-2011.dta")
+unpko_unmil <- unpko %>% 
+  filter(mission == "UNMIL")
+unpko_unavem <- unpko %>% 
+  filter(mission == "UNAVEM")
+
+unpko_unavem$d <- 1
+unpko_unavem$count <-
+  with(unpko_unavem, ave(d == 1, cumsum(d == 0), FUN = cumsum))
+unpko_unmil$d <- 1
+unpko_unmil$count <-
+  with(unpko_unmil, ave(d == 1, cumsum(d == 0), FUN = cumsum))
+```
+
+## Saving graphs
+
+In a last step, we will learn how to save graphs. We will save the graphs in an object called `plot1` first.
+
+```{r}
+plot1 <- ggplot() +
+  geom_line(data = unpko_unavem,
+            aes(x = count, y = troop), color = "gray") +
+  geom_line(data = unpko_unmil,
+            aes(x = count, y = troop)) +
+  labs(title = "Longitudinal Variation in the Capacity of UN Mission Deployments 
+                \nto Angola and Liberia") + 
+  xlab ("Time of Deployment") + 
+  ylab("Number of UN Military Troops Deployed") + 
+  theme(text = element_text(size=10)) +
+  theme_minimal() 
+  
+ggsave(plot1, filename = "Plot1.png")
+```
+
+## Making interactive graphs
+
+The package `plotly` allows us to easily generate interactive graphs. We simply wrap the function `ggplotly()` around our ggplot object; in this case it's `plot1`.
+
+```{r}
+ggplotly(plot1)
+```
+
+We can now hover the object and get precise information on every single observation point. This is a great tool for a general (web-)based visualization but also for data exploration.
+
+## `esquisse`
+
+If you want to do a quick and dirty ggplot, the package `esquisse` can be great.
+This is how it works: 
+
+```{r}
+# Install the package
+install.packages("esquisse")
+# Load the package
+library(esquisse)
+# Launch the package
+esquisse::esquisser()
+```
+
+
+# Further readings
+- **Colors**
+  - [Color Brewer](https://colorbrewer2.org) 
+  - [wesanderson](https://github.com/karthik/wesanderson) 
+  - [rijkspalette](https://vankesteren.github.io/rijkspalette/) 
+  - [fishualize](https://nschiett.github.io/fishualize/index.html) 
+  - [ghibli](https://ewenme.github.io/ghibli/index.html) 
+- [`ggplot themes`](https://www.datanovia.com/en/blog/ggplot-themes-gallery/) for different themes
+- [`esquisse` (click and drop version of `ggplot`)](https://twitter.com/WeAreRLadies/status/1139591763432222723)
+- If you want to write your term paper in markdown, this [R markdown workshop](https://www.r-bloggers.com/r-markdown-workshop/) might be worth looking at.
