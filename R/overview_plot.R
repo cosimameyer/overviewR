@@ -61,6 +61,7 @@ overview_plot <-
 
     # Reduce data frame to distinct values and drop if observations with NA
     # in the time variable and id variable
+    # We further ungroup any grouping before continuing
     dat_red <- dat %>%
       dplyr::ungroup() %>%
       dplyr::distinct(!!id, !!time) %>%
