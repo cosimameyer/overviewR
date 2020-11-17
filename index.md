@@ -41,6 +41,8 @@ There is also a CheatSheet available [here](https://github.com/cosimameyer/overv
 
 ## <i class="fas fa-people-carry"></i> Get involved!
 
+Is there a function that you are currently missing in our package? Reach out to us!
+
 Have you used overviewR in your project? **Let us know!** You can either e-mail us or use our pull-request template and populate/fill the following with your information:
 
 ```
