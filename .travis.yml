@@ -3,13 +3,13 @@
 language: R
 cache: packages
 
-after_success:
-  - Rscript -e 'pkgdown::build_site()'
-
 addons:
   apt:
     packages:
       - pkgdown-dev
+
+after_success:
+  - Rscript -e 'pkgdown::build_site()'
 
 deploy:
   provider: pages
