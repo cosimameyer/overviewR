@@ -3,11 +3,6 @@
 language: R
 cache: packages
 
-addons:
-  apt:
-    packages:
-      - pkgdown-dev
-
 after_success:
   - Rscript -e 'pkgdown::build_site()'
 
