@@ -3,7 +3,10 @@
 language: R
 cache: packages
 
-before_install: R -e 'source("https://install-github.me/r-lib/remotes")'
+addons:
+  apt:
+    packages:
+      - libpkgdown-dev
 
 after_success:
   - Rscript -e 'pkgdown::build_site()'
