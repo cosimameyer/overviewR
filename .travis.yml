@@ -9,7 +9,7 @@ after_success:
 addons:
   apt:
     packages:
-      - pkgown-dev
+      - pkgdown-dev
 
 deploy:
   provider: pages
