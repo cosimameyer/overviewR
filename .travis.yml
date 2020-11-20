@@ -6,6 +6,11 @@ cache: packages
 after_success:
   - Rscript -e 'pkgdown::build_site()'
 
+addons:
+  apt:
+    packages:
+      - pkgdown
+
 deploy:
   provider: pages
   skip-cleanup: true
