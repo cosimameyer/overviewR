@@ -3,9 +3,10 @@
 #' @description This function plots a heat map to visualize the
 #'     coverage of the time-scope-units of the data. Options include total
 #'     number of cases per time-scope-unit or relative number in percentage.
-#' @param dat Your data set
-#' @param id Your scope (e.g., country codes or individual IDs)
-#' @param time Your time (e.g., time periods given by years, months, ...)
+#' @param dat The data set
+#' @param id The scope (e.g., country codes or individual IDs). The axis is
+#'     ordered in ascending order by default.
+#' @param time The time (e.g., time periods given by years, months, ...)
 #' @param perc If FALSE (default) plot returns the total number of observations
 #'     per time-scope-unit. If TRUE it returns the number of observations per
 #'     time-scope-unit in percentage
@@ -15,6 +16,8 @@
 #' @param yaxis Label of your y axis ("Sample" is default)
 #' @param col_low Hex color code for the lowest value (default is "#dceaf2")
 #' @param col_high Hex color code for the lowest value (default is "#2A5773")
+#' @param label Controls whether the total number of observations/percentages of
+#'     observations should be displayed. (TRUE is default)
 #' @return A ggplot figure that presents sample coverage visually
 #' @examples
 #' data(toydata)
@@ -32,9 +35,8 @@ overview_heat <-
            xaxis = "Time frame",
            yaxis = "Sample",
            col_low = "#dceaf2",
-           col_high = "#2A5773") {
-    # if( perc==TRUE & is.na(exp_total)) stop('Argument `exp_total` is empty.
-    # Please add a value (>0) that indicates XX' )
+           col_high = "#2A5773",
+           label = TRUE) {
 
     dat <- dat
     id <- dplyr::enquo(id)
@@ -70,28 +72,31 @@ overview_heat <-
       )
     )
 
-    # No percentages ----------------------------------------------------------
-    if (perc == FALSE) {
+    # No percentages with label ------------------------------------------------
+    if ((perc == FALSE) && (label = TRUE)) {
       # Generate a count
       dat_agg <- dat %>%
         dplyr::group_by(!!id, !!time) %>%
         dplyr::mutate(count = dplyr::n())
 
       # Plot the result
-      plot <-
-        ggplot2::ggplot(dat_agg, ggplot2::aes(factor(!!time), !!id)) +
+      plot <- dat_agg %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(!!id) %>%
+        ggplot2::ggplot(ggplot2::aes(factor(!!time), !!id)) +
         ggplot2::geom_tile(ggplot2::aes(fill = count), colour = "white") +
-        ggplot2::geom_text(ggplot2::aes(label = round(n, 1)), size = 3.3) +
+        ggplot2::geom_text(ggplot2::aes(label = round(count, 1)), size = 3.3) +
         ggplot2::scale_fill_gradient(low = col_low, high = col_high) +
         ggplot2::ylab(yaxis) +
         ggplot2::xlab(xaxis) +
+        ggplot2::scale_y_discrete(limits = rev) +
         theme_plot
 
       return(plot)
     }
 
-    # Add percentages ---------------------------------------------------------
-    if (perc == TRUE) {
+    # Add percentages with label -----------------------------------------------
+    if ((perc == TRUE) && (label == TRUE)) {
       # Generate a count
       dat_agg <- dat %>%
         dplyr::group_by(!!id, !!time) %>%
@@ -99,8 +104,10 @@ overview_heat <-
                       total = count / exp_total)
 
       # Plot the result
-      plot_perc <-
-        ggplot2::ggplot(dat_agg, ggplot2::aes(factor(!!time), !!id)) +
+      plot_perc <- dat_agg %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(!!id) %>%
+        ggplot2::ggplot(ggplot2::aes(factor(!!time), !!id)) +
         ggplot2::geom_tile(ggplot2::aes(fill = count), colour = "white") +
         ggplot2::geom_text(ggplot2::aes(label = paste(round(100 * total, 2),
                                                       "%", sep = "")),
@@ -108,8 +115,54 @@ overview_heat <-
         ggplot2::scale_fill_gradient(low = col_low, high = col_high) +
         ggplot2::ylab(yaxis) +
         ggplot2::xlab(xaxis) +
+        ggplot2::scale_y_discrete(limits = rev) +
         theme_plot
 
       return(plot_perc)
+    }
+
+    # No percentages without label ---------------------------------------------
+    if ((perc == FALSE) && (label == FALSE)) {
+      # Generate a count
+      dat_agg <- dat %>%
+        dplyr::group_by(!!id, !!time) %>%
+        dplyr::mutate(count = dplyr::n())
+
+      # Plot the result
+      plot_no_lab <- dat_agg %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(!!id) %>%
+        ggplot2::ggplot(ggplot2::aes(factor(!!time), !!id)) +
+        ggplot2::geom_tile(ggplot2::aes(fill = count), colour = "white") +
+        ggplot2::scale_fill_gradient(low = col_low, high = col_high) +
+        ggplot2::ylab(yaxis) +
+        ggplot2::xlab(xaxis) +
+        ggplot2::scale_y_discrete(limits = rev) +
+        theme_plot
+
+      return(plot_no_lab)
+    }
+
+    # Add percentages without label --------------------------------------------
+    if ((perc == TRUE) && (label == FALSE)) {
+      # Generate a count
+      dat_agg <- dat %>%
+        dplyr::group_by(!!id, !!time) %>%
+        dplyr::mutate(count = dplyr::n(),
+                      total = count / exp_total)
+
+      # Plot the result
+      plot_perc_no_lab <- dat_agg %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(!!id) %>%
+        ggplot2::ggplot(ggplot2::aes(factor(!!time), !!id)) +
+        ggplot2::geom_tile(ggplot2::aes(fill = count), colour = "white") +
+        ggplot2::scale_fill_gradient(low = col_low, high = col_high) +
+        ggplot2::ylab(yaxis) +
+        ggplot2::xlab(xaxis) +
+        ggplot2::scale_y_discrete(limits = rev) +
+        theme_plot
+
+      return(plot_perc_no_lab)
     }
   }

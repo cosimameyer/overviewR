@@ -157,6 +157,18 @@ test_that("check output of overview_heat", {
   testthat::expect_is(plot_heat_abs, "ggplot")
 })
 
+test_that("check output of overview_heat with label FALSE", {
+  plot_heat_no_lab <- overview_heat(toydata, ccode, year, perc = TRUE,
+                                    label = FALSE, exp_total = 12)
+  testthat::expect_is(plot_heat_no_lab, "ggplot")
+})
+
+test_that("check output of overview_heat with label FALSE and no perc", {
+  plot_heat_abs_lab_false <- overview_heat(toydata, ccode, year, perc = FALSE,
+                                           label = FALSE)
+  testthat::expect_is(plot_heat_abs_lab_false, "ggplot")
+})
+
 test_that("check output of overview_plot", {
   plot <- overview_plot(dat = toydata, id = ccode, time = year)
   testthat::expect_is(plot, "ggplot")
