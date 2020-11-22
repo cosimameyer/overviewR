@@ -16,8 +16,8 @@
 #' @param yaxis Label of your y axis ("Sample" is default)
 #' @param col_low Hex color code for the lowest value (default is "#dceaf2")
 #' @param col_high Hex color code for the lowest value (default is "#2A5773")
-#' @param label Controls whether the total number of observations/percentages of
-#'     observations should be displayed. (TRUE is default)
+#' @param label If TRUE (default), the total number of observations/percentages
+#'     of observations are displayed.
 #' @return A ggplot figure that presents sample coverage visually
 #' @examples
 #' data(toydata)
