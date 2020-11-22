@@ -8,7 +8,7 @@
 #'     ordered in ascending order by default.
 #' @param time The time (e.g., time periods given by years, months, ...)
 #' @param perc If FALSE (default) plot returns the total number of observations
-#'     per time-scope-unit. If TRUE it returns the number of observations per
+#'     per time-scope-unit. If TRUE, it returns the number of observations per
 #'     time-scope-unit in percentage
 #' @param exp_total Expected total number of observations (i.e. maximum)
 #'     for time unit.
@@ -17,7 +17,7 @@
 #' @param col_low Hex color code for the lowest value (default is "#dceaf2")
 #' @param col_high Hex color code for the lowest value (default is "#2A5773")
 #' @param label If TRUE (default), the total number of observations/percentages
-#'     of observations are displayed.
+#'     of observations are displayed. If FALSE, it returns no labels.
 #' @return A ggplot figure that presents sample coverage visually
 #' @examples
 #' data(toydata)
