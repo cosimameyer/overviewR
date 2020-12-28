@@ -10,6 +10,7 @@
 #' @param xaxis Label of the x axis ("Time frame" is default)
 #' @param yaxis Label of the y axis ("Sample" is default)
 #' @param asc Sorting the y axis in ascending order ("TRUE" is default)
+#' @param color Optional argument that defines the color
 #' @return A ggplot figure that presents the sample information visually
 #' @examples
 #' data(toydata)
@@ -17,18 +18,15 @@
 #' @export
 #' @importFrom dplyr "%>%"
 #' @importFrom ggplot2 ggplot
+
 overview_plot <-
   function(dat,
            id,
            time,
            xaxis = "Time frame",
            yaxis = "Sample",
-           asc = TRUE) {
-    # Start with the data
-    dat <- dat
-    id <- dplyr::enquo(id)
-    time <- dplyr::enquo(time)
-
+           asc = TRUE,
+           color) {
     # Create a theme for the plot
     theme_plot <- ggplot2::theme(
       # get rid of panel grids
@@ -43,8 +41,9 @@ overview_plot <-
       panel.background = ggplot2::element_rect(fill = "white"),
       # Change legend
       legend.direction = "horizontal",
-      legend.background = ggplot2::element_rect(fill = "black", color = NA),
-      legend.key = ggplot2::element_rect(color = "black", fill = "black"),
+      legend.position = "bottom",
+      legend.background = ggplot2::element_rect(fill = "white", color = NA),
+      legend.key = ggplot2::element_rect(color = "white", fill = "white"),
       legend.title = ggplot2::element_blank(),
       # Change text
       plot.caption = ggplot2::element_text(size = 5),
@@ -53,59 +52,162 @@ overview_plot <-
         color = "black",
         size = 8
       ),
-      text = ggplot2::element_text(
-        size = 10,
-        face = "plain"
-      )
+      text = ggplot2::element_text(size = 10,
+                                   face = "plain")
     )
 
-    # Reduce data frame to distinct values and drop if observations with NA
-    # in the time variable and id variable
-    # We further ungroup any grouping before continuing
-    dat_red <- dat %>%
-      dplyr::ungroup() %>%
-      dplyr::distinct(!!id, !!time) %>%
-      dplyr::filter(!is.na(!!id)) %>%
-      dplyr::filter(!is.na(!!time)) %>%
-      dplyr::arrange(!!id, !!time)
+    # First: Evaluate whether we have a color argument given or not
+    if (missing(color) == TRUE) {
+      # Start with the data
+      dat <- dat
+      id <- dplyr::enquo(id)
+      time <- dplyr::enquo(time)
 
-    # The following code is inspired by: https://bit.ly/2CpS3B7
-    dat_red <- dat_red
-    dat_red <- dat_red %>%
-      dplyr::mutate(idx = c(1, diff(!!time)))
-    i2 <- c(1, which(dat_red$idx != 1), nrow(dat_red) + 1)
-    dat_red$grp <- rep(seq_len(length(diff(i2))), diff(i2))
+      # Reduce data frame to distinct values and drop if observations with NA
+      # in the time variable and id variable
+      # We further ungroup any grouping before continuing
+      dat_red <- dat %>%
+        dplyr::ungroup() %>%
+        dplyr::distinct(!!id, !!time) %>%
+        dplyr::filter(!is.na(!!id)) %>%
+        dplyr::filter(!is.na(!!time)) %>%
+        dplyr::arrange(!!id, !!time)
+      # The following code is inspired by: https://bit.ly/2CpS3B7
+      dat_red <- dat_red
+      dat_red <- dat_red %>%
+        dplyr::mutate(idx = c(1, diff(!!time)))
+      i2 <- c(1, which(dat_red$idx != 1), nrow(dat_red) + 1)
+      dat_red$grp <- rep(seq_len(length(diff(i2))), diff(i2))
 
-    dat_red <- dat_red %>%
-      dplyr::mutate(grp = ifelse(dplyr::lead(!!id) != !!id &
-                                   dplyr::lead(idx) == 1, idx + 1, grp))
+      # Adjust the plot where needed (trailing NA and leading NAs for instance)
+      dat_red <-
+        dat_red %>% dplyr::mutate(
+          grp = ifelse(dplyr::lead(!!id) !=
+                         ccode &
+                         dplyr::lead(idx) == 1, idx + 1, grp),
+          grp = ifelse(
+            is.na(grp) &
+              dplyr::lag(!!id) == ccode & idx == 1,
+            dplyr::lag(grp),
+            grp
+          ),
+          grp = ifelse(
+            is.na(grp) &
+              ccode == dplyr::lead(!!id),
+            dplyr::lag(grp),
+            grp
+          )
+        )
 
-    dat_red <- dat_red
+      dat_red <- dat_red
 
-    # Plot it
-    if (asc == TRUE) {
-      plot <- dat_red %>%
-        dplyr::group_by(!!id) %>%
-        ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
-        ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
-        ggplot2::geom_point(pch = 15, size = 2) +
-        ggplot2::ylab(yaxis) +
-        ggplot2::xlab(xaxis) +
-        ggplot2::scale_y_discrete(limits = rev) +
-        theme_plot
+      # Plot it
+      if (asc == TRUE) {
+        plot <- dat_red %>%
+          dplyr::group_by(!!id) %>%
+          ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
+          ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
+          ggplot2::geom_point(pch = 15, size = 2) +
+          # ggplot2::scale_color_manual(factor(!!color)) +
+          ggplot2::ylab(yaxis) +
+          ggplot2::xlab(xaxis) +
+          ggplot2::scale_y_discrete(limits = rev) +
+          theme_plot
 
-    return(plot)
+        return(plot)
+      }
+      else {
+        plot <- dat_red %>%
+          dplyr::group_by(!!id) %>%
+          ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
+          ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
+          ggplot2::geom_point(pch = 15, size = 2) +
+          #ggplot2::scale_color_manual() +
+          ggplot2::ylab(yaxis) +
+          ggplot2::xlab(xaxis) +
+          theme_plot
+
+        return(plot)
+      }
     }
     else {
-      plot <- dat_red %>%
-        dplyr::group_by(!!id) %>%
-        ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
-        ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
-        ggplot2::geom_point(pch = 15, size = 2) +
-        ggplot2::ylab(yaxis) +
-        ggplot2::xlab(xaxis) +
-        theme_plot
+      # Start with the data
+      dat <- dat
+      id <- dplyr::enquo(id)
+      time <- dplyr::enquo(time)
+      color <- dplyr::enquo(color)
 
-      return(plot)
+      # Reduce data frame to distinct values and drop if observations with NA
+      # in the time variable and id variable
+      # We further ungroup any grouping before continuing
+      dat_red <- dat %>%
+        dplyr::ungroup() %>%
+        dplyr::distinct(!!id, !!time, !!color) %>%
+        dplyr::filter(!is.na(!!id)) %>%
+        dplyr::filter(!is.na(!!time)) %>%
+        dplyr::arrange(!!id, !!time, !!color)
+      # The following code is inspired by: https://bit.ly/2CpS3B7
+      dat_red <- dat_red
+      dat_red <- dat_red %>%
+        dplyr::mutate(idx = c(1, diff(!!time)))
+      i2 <- c(1, which(dat_red$idx != 1), nrow(dat_red) + 1)
+      dat_red$grp <- rep(seq_len(length(diff(i2))), diff(i2))
+
+      # Adjust the plot where needed (trailing NA and leading NAs for instance)
+      dat_red <-
+        dat_red %>% dplyr::mutate(
+          grp = ifelse(dplyr::lead(!!id) !=
+                         ccode &
+                         dplyr::lead(idx) == 1, idx + 1, grp),
+          grp = ifelse(
+            is.na(grp) &
+              dplyr::lag(!!id) == ccode & idx == 1,
+            dplyr::lag(grp),
+            grp
+          ),
+          grp = ifelse(
+            is.na(grp) &
+              ccode == dplyr::lead(!!id),
+            dplyr::lag(grp),
+            grp
+          )
+        )
+
+      dat_red <- dat_red
+
+      # Plot it
+      if (asc == TRUE) {
+        plot <- dat_red %>%
+          dplyr::group_by(!!id) %>%
+          ggplot2::ggplot(ggplot2::aes(
+            x = factor(!!time),
+            y = !!id,
+            col = factor(!!color)
+          )) +
+          ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
+          ggplot2::geom_point(pch = 15, size = 2) +
+          ggplot2::ylab(yaxis) +
+          ggplot2::xlab(xaxis) +
+          ggplot2::scale_y_discrete(limits = rev) +
+          theme_plot
+
+        return(plot)
+      }
+      else {
+        plot <- dat_red %>%
+          dplyr::group_by(!!id) %>%
+          ggplot2::ggplot(ggplot2::aes(
+            x = factor(!!time),
+            y = !!id,
+            col = factor(!!color)
+          )) +
+          ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
+          ggplot2::geom_point(pch = 15, size = 2) +
+          ggplot2::ylab(yaxis) +
+          ggplot2::xlab(xaxis) +
+          theme_plot
+
+        return(plot)
+      }
     }
   }

@@ -10,7 +10,8 @@ overview_plot(
   time,
   xaxis = "Time frame",
   yaxis = "Sample",
-  asc = TRUE
+  asc = TRUE,
+  color
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ variable contains NAs, they will not be included in the plot.}
 \item{yaxis}{Label of the y axis ("Sample" is default)}
 
 \item{asc}{Sorting the y axis in ascending order ("TRUE" is default)}
+
+\item{color}{Optional argument that defines the color}
 }
 \value{
 A ggplot figure that presents the sample information visually
