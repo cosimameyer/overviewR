@@ -3,8 +3,7 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://img.shields.io/travis/com/cosimameyer/overviewR.svg?logo=travis)](https://travis-ci.com/cosimameyer/overviewR)
+[![R-CMD-check](https://github.com/cosimameyer/overviewR/workflows/R-CMD-check/badge.svg)](https://github.com/cosimameyer/overviewR/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.svg)](https://codecov.io/gh/cosimameyer/overviewR?branch=master)
 [![Project Status: Active – The project has reached a stable, usable
@@ -15,14 +14,13 @@ badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](htt
 [![R
 badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/overviewR)](https://cran.r-project.org/package=overviewR)
-[![downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://github.com/cosimameyer/overviewR)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 <!-- [![Rdoc](https://www.rdocumentation.org/badges/version/overviewR)](https://www.rdocumentation.org/packages/overviewR) -->
 <!-- [![metacran downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://cran.r-project.org/package=overviewR) -->
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--08--29-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--28-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -88,21 +86,13 @@ head(toydata)
 ```
 
 <!-- ``` -->
-
 <!--     ccode   year   month  gdp       population -->
-
 <!--     RWA     1990   Jan    24180.77  14969.988 -->
-
 <!--     RWA     1990   Feb    23650.53  11791.464 -->
-
 <!--     RWA     1990   Mar    21860.14  30047.979 -->
-
 <!--     RWA     1990   Apr    20801.06  19853.556 -->
-
 <!--     RWA     1990   May    18702.84   5148.118 -->
-
 <!--     RWA     1990   Jun    30272.37  48625.140 -->
-
 <!-- ``` -->
 
 There are 264 observations for 5 countries (Angola, Benin, France,
@@ -185,11 +175,8 @@ overview_print(obj = output_table)
 ```
 
 <details>
-
 <summary>
-
 LaTeX output
-
 </summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
@@ -211,11 +198,8 @@ LaTeX output
      \end{table}
 
 </details>
-
 <p align="center">
-
 <img src='man/figures/ex1.png' height="150"/>
-
 </p>
 
 The default already provides a title (“Time and scope of the sample”)
@@ -229,11 +213,8 @@ overview_print(obj = output_table, id = "Countries", time = "Years",
 ```
 
 <details>
-
 <summary>
-
 LaTeX output
-
 </summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
@@ -255,11 +236,8 @@ LaTeX output
      \end{table} 
 
 </details>
-
 <p align="center">
-
 <img src='man/figures/ex2.png' height="150"/>
-
 </p>
 
 The same function can also be used for outputs from the
@@ -279,11 +257,8 @@ overview_print(
 ```
 
 <details>
-
 <summary>
-
 LaTeX output
-
 </summary>
 
     % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
@@ -307,11 +282,8 @@ LaTeX output
      \end{table} 
 
 </details>
-
 <p align="center">
-
 <img src='man/figures/ex3.png' height="200"/>
-
 </p>
 
 With `save_out = TRUE` the function exports the output as a `.tex` file
@@ -416,7 +388,7 @@ knitr::kable(output_table)
 ```
 
 | ccode | time\_frame                  |
-| :---- | :--------------------------- |
+|:------|:-----------------------------|
 | RWA   | 1990-1995                    |
 | AGO   | 1990-1992                    |
 | BEN   | 1995-1999                    |

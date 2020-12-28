@@ -2,7 +2,6 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
-^\.travis\.yml$
 ^\.gitlab-ci\.yml$
 ^\.circleci$
 ^\.circleci/config\.yml$
