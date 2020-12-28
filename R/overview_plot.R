@@ -83,17 +83,17 @@ overview_plot <-
       dat_red <-
         dat_red %>% dplyr::mutate(
           grp = ifelse(dplyr::lead(!!id) !=
-                         ccode &
+                         !!id &
                          dplyr::lead(idx) == 1, idx + 1, grp),
           grp = ifelse(
             is.na(grp) &
-              dplyr::lag(!!id) == ccode & idx == 1,
+              dplyr::lag(!!id) == !!id & idx == 1,
             dplyr::lag(grp),
             grp
           ),
           grp = ifelse(
             is.na(grp) &
-              ccode == dplyr::lead(!!id),
+              !!id == dplyr::lead(!!id),
             dplyr::lag(grp),
             grp
           )
@@ -157,17 +157,17 @@ overview_plot <-
       dat_red <-
         dat_red %>% dplyr::mutate(
           grp = ifelse(dplyr::lead(!!id) !=
-                         ccode &
+                         !!id &
                          dplyr::lead(idx) == 1, idx + 1, grp),
           grp = ifelse(
             is.na(grp) &
-              dplyr::lag(!!id) == ccode & idx == 1,
+              dplyr::lag(!!id) == !!id & idx == 1,
             dplyr::lag(grp),
             grp
           ),
           grp = ifelse(
             is.na(grp) &
-              ccode == dplyr::lead(!!id),
+              !!id == dplyr::lead(!!id),
             dplyr::lag(grp),
             grp
           )
