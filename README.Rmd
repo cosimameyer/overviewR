@@ -443,7 +443,7 @@ toydata %>%
   overview_plot(id = country, time = year)
 ```
 
-```{r}
+```{r, eval = FALSE}
 # Produces a printable LaTeX output
 toydata %>% 
   overview_tab(id = ccode, time = year) %>% 
@@ -451,7 +451,27 @@ toydata %>%
 
 
 ```
+```
+% Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
+% Table created on 2020-12-30
+\begin{table}[ht] 
+ \centering 
+ \caption{Time and scope of the sample} 
+\label{tab:tab1} 
 
+\begin{tabular}{ll} 
+ \hline 
+Sample & Time frame \\ 
+\hline 
+ AGO & 1990 - 1992 \\ 
+ BEN & 1995 - 1999 \\ 
+ FRA & 1993, 1996, 1999 \\ 
+ GBR & 1991, 1993, 1995, 1997, 1999 \\ 
+ RWA & 1990 - 1995 \\ 
+ \hline 
+ \end{tabular} 
+ \end{table} 
+```
 
 # Credits
 

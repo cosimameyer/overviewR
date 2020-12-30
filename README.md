@@ -350,22 +350,6 @@ development version that can be accessed from GitHub.*
 # Load the GitHub version
 library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
-#> rlang   (0.4.9 -> 0.4.10) [CRAN]
-#> ggplot2 (3.3.2 -> 3.3.3 ) [CRAN]
-#> 
-#>   There are binary versions available but the source versions are later:
-#>         binary source needs_compilation
-#> rlang    0.4.9 0.4.10              TRUE
-#> ggplot2  3.3.2  3.3.3             FALSE
-#> 
-#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpnI8eAd/remotes42d820d6af72/cosimameyer-overviewR-ac8b3f4/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpnI8eAd/remotes42d820d6af72/cosimameyer-overviewR-ac8b3f4/DESCRIPTION’
-#>   ─  preparing ‘overviewR’:
-#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
-#>   ─  checking for LF line-endings in source and make files and shell scripts
-#>   ─  checking for empty or unneeded directories
-#>   ─  building ‘overviewR_0.0.7.999.tar.gz’
-#>      
-#> 
 library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
 library(magrittr) # A Forward-Pipe Operator for R
 
@@ -465,7 +449,7 @@ knitr::kable(output_table)
 | GBR   | 1991, 1993, 1995, 1997, 1999 |
 | FRA   | 1993, 1996, 1999             |
 
-### Customizing plots: `ggplot2`
+### Customizing plots: `ggplot2` and other packages
 
 The plot functions are fully `ggplot2` based. While a theme is
 pre-defined, this can easily be overwritten.
@@ -520,24 +504,27 @@ toydata %>%
 toydata %>% 
   overview_tab(id = ccode, time = year) %>% 
   overview_print()
-#> % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
-#> % Table created on 2020-12-30
-#> \begin{table}[ht] 
-#>  \centering 
-#>  \caption{Time and scope of the sample} 
-#>  \begin{tabular}{ll} 
-#>  \hline 
-#> Sample & Time frame \\ 
-#> \hline 
-#>  AGO & 1990 - 1992 \\ 
-#>  BEN & 1995 - 1999 \\ 
-#>  FRA & 1993, 1996, 1999 \\ 
-#>  GBR & 1991, 1993, 1995, 1997, 1999 \\ 
-#>  RWA & 1990 - 1995 \\ 
-#>  \hline 
-#>  \end{tabular} 
-#>  \end{table}
 ```
+
+    % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
+    % Table created on 2020-12-30
+    \begin{table}[ht] 
+     \centering 
+     \caption{Time and scope of the sample} 
+    \label{tab:tab1} 
+
+    \begin{tabular}{ll} 
+     \hline 
+    Sample & Time frame \\ 
+    \hline 
+     AGO & 1990 - 1992 \\ 
+     BEN & 1995 - 1999 \\ 
+     FRA & 1993, 1996, 1999 \\ 
+     GBR & 1991, 1993, 1995, 1997, 1999 \\ 
+     RWA & 1990 - 1995 \\ 
+     \hline 
+     \end{tabular} 
+     \end{table} 
 
 # Credits
 
