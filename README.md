@@ -350,6 +350,22 @@ development version that can be accessed from GitHub.*
 # Load the GitHub version
 library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
+#> rlang   (0.4.9 -> 0.4.10) [CRAN]
+#> ggplot2 (3.3.2 -> 3.3.3 ) [CRAN]
+#> 
+#>   There are binary versions available but the source versions are later:
+#>         binary source needs_compilation
+#> rlang    0.4.9 0.4.10              TRUE
+#> ggplot2  3.3.2  3.3.3             FALSE
+#> 
+#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpnI8eAd/remotes42d820d6af72/cosimameyer-overviewR-ac8b3f4/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpnI8eAd/remotes42d820d6af72/cosimameyer-overviewR-ac8b3f4/DESCRIPTION’
+#>   ─  preparing ‘overviewR’:
+#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘overviewR_0.0.7.999.tar.gz’
+#>      
+#> 
 library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
 library(magrittr) # A Forward-Pipe Operator for R
 
@@ -463,6 +479,15 @@ overview_na(toydata_with_na) +
 
 <img src="man/figures/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" />
 
+``` r
+library(ggpubr) # 'ggplot2' Based Publication Ready Plots
+
+overview_na(toydata_with_na) +
+  ggpubr::theme_pubclean() 
+```
+
+<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
+
 ### Workflow: `tidyverse`
 
 All functions are further easily accessible using a common `tidyverse`
@@ -476,7 +501,7 @@ toydata_with_na %>%
   overview_na()
 ```
 
-<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 library(countrycode) # Convert Country Names and Country Codes
@@ -484,11 +509,11 @@ library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
 
 toydata %>% 
   # Transform the country code (ISO3 character code) into a country name using the `countrycode` package
-  dplyr::mutate(country = countrycode(ccode, "iso3c", "country.name")) %>% 
+  dplyr::mutate(country = countrycode::countrycode(ccode, "iso3c", "country.name")) %>% 
   overview_plot(id = country, time = year)
 ```
 
-<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 # Produces a printable LaTeX output
