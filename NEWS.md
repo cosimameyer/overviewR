@@ -1,4 +1,11 @@
 ---
+# overviewR 0.0.7.999
+
+- This development version adds bugs fixes and extensions for `overview_plot`
+   - some consecutive years were not correctly connected before)
+   - `color` argument to color parts of the time lines
+
+---
 # overviewR 0.0.7
 - CRAN resubmission
 We fixed the following bugs:

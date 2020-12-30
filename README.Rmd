@@ -48,12 +48,12 @@ lapply(pkgs, library, character.only = TRUE)
 
 The goal of overviewR is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are the following functions:
 
-- `overview_tab` - generates a tabular overview of the sample.  The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. 
-- `overview_crosstab` - generates a cross table. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set.
-- `overview_print` - converts the output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
+- `overview_tab` generates a tabular overview of the sample.  The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. 
+- `overview_crosstab` generates a cross table. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set.
+- `overview_print` converts the output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
 - `overview_plot` is an alternative to visualize the sample (a way to present results from `overview_tab`)
-- `overview_heat`
-- `overview_na`
+- `overview_heat` plots a heat map of your time line
+- `overview_na` plots an overview of missing values by variable
 
 The plots can be saved using the `ggsave()` command. The output of `overview_tab` and `overview_crosstab` are also compatible with other packages such as [```xtable```](https://CRAN.R-project.org/package=xtable), [```flextable```](https://CRAN.R-project.org/package=flextable), or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
 

@@ -23,11 +23,30 @@ if (!require(devtools))
 if (!require(dplyr))
   install.packages("dplyr", repos = "http://cran.us.r-project.org"
   )
+if (!require(magrittr))
+  install.packages("magrittr", repos = "http://cran.us.r-project.org"
+  )
+if (!require(ggplot2))
+  install.packages("ggplot2", repos = "http://cran.us.r-project.org"
+  )
+if (!require(countrycode))
+  install.packages("countrycode", repos = "http://cran.us.r-project.org"
+  )
 ```
 
-The goal of overviewR is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are two functions (```overview_tab``` and ```overview_crosstab```) that generate a tabular overview of the general sample as well as a conditional sample. The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set. The function ```overview_print```  converts this output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
 
-The output of `overview_tab` and `overview_crosstab` are also compatible with other packages such as [```xtable```](https://CRAN.R-project.org/package=xtable), [```flextable```](https://CRAN.R-project.org/package=flextable), or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
+The goal of overviewR is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are the following functions:
+
+- `overview_tab` generates a tabular overview of the sample.  The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. 
+- `overview_crosstab` generates a cross table. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set.
+- `overview_print` converts the output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
+- `overview_plot` is an alternative to visualize the sample (a way to present results from `overview_tab`)
+- `overview_heat` plots a heat map of your time line
+- `overview_na` plots an overview of missing values by variable
+
+The plots can be saved using the `ggsave()` command. The output of `overview_tab` and `overview_crosstab` are also compatible with other packages such as [```xtable```](https://CRAN.R-project.org/package=xtable), [```flextable```](https://CRAN.R-project.org/package=flextable), or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
+
+We present a short step-by-step guide as well as the functions in more detail below.
 
 ## Installation
 
@@ -269,6 +288,30 @@ data(toydata)
 overview_plot(dat = toydata, id = ccode, time = year)
 ```
 
+The results are sorted alphabetically by default. The order can also be reversed by setting `asc` to `FALSE`.
+
+```{r, out.width = '50%', fig.align='center'}
+overview_plot(dat = toydata, id = ccode, time = year, asc = FALSE)
+```
+
+There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the `color` argument. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+
+```{r, out.width = '50%', fig.align='center', include = TRUE, echo = TRUE, message = FALSE}
+# Load the GitHub version
+library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
+devtools::install_github("cosimameyer/overviewR")
+library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
+library(magrittr) # A Forward-Pipe Operator for R
+
+# Code whether a year was before 1995
+toydata %<>%
+  dplyr::mutate(before = ifelse(year < 1995, 1, 0))
+
+# Plot using the `color` argument
+overview_plot(dat = toydata, id = ccode, time = year, color = before)
+```
+
+
 ### ```overview_heat```
 
 `overview_heat` takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. `overview_heat` intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola ("AGO") in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.
@@ -306,14 +349,16 @@ overview_na(toydata_with_na)
 overview_na(toydata_with_na, perc = FALSE)
 ```
 
+
 ## Compatibilities with other packages 
 
+### Presenting tables: `flextable`, `xtable`, and `kable`
 The outputs of `overview_tab` and `overview_crosstab` are also compatible with other functions such as [`xtable`](https://CRAN.R-project.org/package=xtable), [`flextable`](https://CRAN.R-project.org/package=flextable), or [`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from [`knitr`](https://yihui.org/knitr/).
 
 Two examples are shown below:
 
 ```{r, eval=FALSE}
-library(flextable)
+library(flextable) # not installed on this machine
 table_output <- qflextable(output_table)
 table_output <-
   set_header_labels(table_output,
@@ -341,6 +386,41 @@ output_table <-
 ```
 
 ```{r}
-library(knitr)
+library(knitr) # A General-Purpose Package for Dynamic Report Generation in R
 knitr::kable(output_table)
 ```
+
+### Customizing plots: `ggplot2`
+The plot functions are fully `ggplot2` based. While a theme is pre-defined, this can easily be overwritten.
+
+```{r, out.width = '50%', fig.align='center'}
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+
+overview_na(toydata_with_na) +
+  ggplot2::theme_minimal() 
+```
+
+### Workflow: `tidyverse`
+
+All functions are further easily accessible using a common `tidyverse` workflow. Here are just two examples -- the possibilities are endless.
+
+```{r, out.width = '50%', fig.align='center'}
+library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
+
+toydata_with_na %>% 
+  dplyr::filter(year > 1993) %>% 
+  overview_na()
+```
+
+```{r, out.width = '50%', fig.align='center'}
+library(countrycode) # Convert Country Names and Country Codes
+library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
+
+toydata %>% 
+  # Transform the country code (ISO3 character code) into a country name using the `countrycode` package
+  dplyr::mutate(country = countrycode(ccode, "iso3c", "country.name")) %>% 
+  overview_plot(id = country, time = year)
+
+
+```
+

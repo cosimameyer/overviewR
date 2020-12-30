@@ -20,7 +20,7 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--29-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--30-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -30,21 +30,21 @@ The goal of overviewR is to make it easy to get an overview of a data
 set by displaying relevant sample information. At the moment, there are
 the following functions:
 
--   `overview_tab` - generates a tabular overview of the sample. The
+-   `overview_tab` generates a tabular overview of the sample. The
     general sample plots a two-column table that provides information on
     an id in the left column and a the time frame on the right column.
--   `overview_crosstab` - generates a cross table. The conditional
-    column allows to disaggregate the overview table by specifying two
+-   `overview_crosstab` generates a cross table. The conditional column
+    allows to disaggregate the overview table by specifying two
     conditions, hence resulting a 2x2 table. This way, it is easy to
     visualize the time and scope conditions as well as theoretical
     assumptions with examples from the data set.
--   `overview_print` - converts the output of both `overview_tab` and
+-   `overview_print` converts the output of both `overview_tab` and
     `overview_crosstab` into LaTeX code and/or directly into a .tex
     file.
 -   `overview_plot` is an alternative to visualize the sample (a way to
     present results from `overview_tab`)
--   `overview_heat`
--   `overview_na`
+-   `overview_heat` plots a heat map of your time line
+-   `overview_na` plots an overview of missing values by variable
 
 The plots can be saved using the `ggsave()` command. The output of
 `overview_tab` and `overview_crosstab` are also compatible with other
