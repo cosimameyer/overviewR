@@ -1,9 +1,13 @@
 ---
 # overviewR 0.0.7.999
 
-- This development version adds bugs fixes and extensions for `overview_plot`
-   - some consecutive years were not correctly connected before)
-   - `color` argument to color parts of the time lines
+- This development version adds bugs fixes and extensions for 
+   - `overview_plot`
+      - some consecutive years were not correctly connected before)
+      - `color` argument to color parts of the time lines
+   - `overview_print`
+      - `label` to add a cross-reference label
+      - `fontsize` to change the font size
 
 ---
 # overviewR 0.0.7

@@ -271,6 +271,13 @@ overview_print(
 <img src='ex3.png' height="200"/>
 </p>
 
+`overview_print` further allows more specifications such as the font size or a a label. *These functions are currently supported only in the development version of the package.*
+```{r, eval = FALSE}
+overview_print(obj = output_table,
+               fontsize = "scriptsize",
+               label = "tab:overview")
+```
+
 With ```save_out = TRUE``` the function exports the output as a ```.tex``` file and stores it on the device.
 
 ```{r, eval = FALSE}
@@ -420,6 +427,15 @@ toydata %>%
   # Transform the country code (ISO3 character code) into a country name using the `countrycode` package
   dplyr::mutate(country = countrycode(ccode, "iso3c", "country.name")) %>% 
   overview_plot(id = country, time = year)
+
+
+```
+
+```{r}
+# Produces a printable LaTeX output
+toydata %>% 
+  overview_tab(id = ccode, time = year) %>% 
+  overview_print()
 
 
 ```

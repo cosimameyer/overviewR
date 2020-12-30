@@ -296,6 +296,16 @@ LaTeX output
 <img src='man/figures/ex3.png' height="200"/>
 </p>
 
+`overview_print` further allows more specifications such as the font
+size or a a label. *These functions are currently supported only in the
+development version of the package.*
+
+``` r
+overview_print(obj = output_table,
+               fontsize = "scriptsize",
+               label = "tab:overview")
+```
+
 With `save_out = TRUE` the function exports the output as a `.tex` file
 and stores it on the device.
 
@@ -319,7 +329,7 @@ data(toydata)
 overview_plot(dat = toydata, id = ccode, time = year)
 ```
 
-<img src="man/figures/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
 
 The results are sorted alphabetically by default. The order can also be
 reversed by setting `asc` to `FALSE`.
@@ -328,7 +338,7 @@ reversed by setting `asc` to `FALSE`.
 overview_plot(dat = toydata, id = ccode, time = year, asc = FALSE)
 ```
 
-<img src="man/figures/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
 
 There is also an option to color the time lines conditionally. Here, we
 introduce a dummy variable that indicates whether the year was before
@@ -351,7 +361,7 @@ toydata %<>%
 overview_plot(dat = toydata, id = ccode, time = year, color = before)
 ```
 
-<img src="man/figures/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_heat`
 
@@ -376,7 +386,7 @@ overview_heat(toydata_red,
                 exp_total = 12)
 ```
 
-<img src="man/figures/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_na`
 
@@ -391,13 +401,13 @@ in percentage (the default) or the total number of NAs.
 overview_na(toydata_with_na)
 ```
 
-<img src="man/figures/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 overview_na(toydata_with_na, perc = FALSE)
 ```
 
-<img src="man/figures/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" />
 
 ## Compatibilities with other packages
 
@@ -451,12 +461,12 @@ overview_na(toydata_with_na) +
   ggplot2::theme_minimal() 
 ```
 
-<img src="man/figures/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### Workflow: `tidyverse`
 
 All functions are further easily accessible using a common `tidyverse`
-workflow. Here are just two examples – the possibilities are endless.
+workflow. Here are just three examples – the possibilities are endless.
 
 ``` r
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
@@ -466,7 +476,7 @@ toydata_with_na %>%
   overview_na()
 ```
 
-<img src="man/figures/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 library(countrycode) # Convert Country Names and Country Codes
@@ -478,7 +488,31 @@ toydata %>%
   overview_plot(id = country, time = year)
 ```
 
-<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
+
+``` r
+# Produces a printable LaTeX output
+toydata %>% 
+  overview_tab(id = ccode, time = year) %>% 
+  overview_print()
+#> % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
+#> % Table created on 2020-12-30
+#> \begin{table}[ht] 
+#>  \centering 
+#>  \caption{Time and scope of the sample} 
+#>  \begin{tabular}{ll} 
+#>  \hline 
+#> Sample & Time frame \\ 
+#> \hline 
+#>  AGO & 1990 - 1992 \\ 
+#>  BEN & 1995 - 1999 \\ 
+#>  FRA & 1993, 1996, 1999 \\ 
+#>  GBR & 1991, 1993, 1995, 1997, 1999 \\ 
+#>  RWA & 1990 - 1995 \\ 
+#>  \hline 
+#>  \end{tabular} 
+#>  \end{table}
+```
 
 # Credits
 

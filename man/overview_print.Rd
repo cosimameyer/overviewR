@@ -14,13 +14,15 @@ overview_print(
   cond2 = "Condition 2",
   save_out = FALSE,
   path,
-  file
+  file,
+  label = "tab:tab1",
+  fontsize
 )
 }
 \arguments{
 \item{obj}{Overview object produced by overview_tab or overview_crosstab}
 
-\item{title}{Title of the table (default is "Time and scope of the sample")}
+\item{title}{Caption of the table (default is "Time and scope of the sample")}
 
 \item{id}{The name of the left column (default is "Sample"), will be ignored
 if crosstab is TRUE}
@@ -45,6 +47,11 @@ file, default is FALSE}
 \item{path}{Specifies the path where the output should be saved}
 
 \item{file}{Specifies name and file type (.tex)}
+
+\item{label}{Specifies the label (default is "tab:tab1")}
+
+\item{fontsize}{Specifies the font size (all 'LaTeX' font sizes such as
+"scriptsize" or "small" work)}
 }
 \value{
 A 'LaTeX' output that can either be copy-pasted in a text document or

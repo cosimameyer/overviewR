@@ -231,8 +231,6 @@ Countries & Years \\
 <img src='man/figures/ex2.png' height="150"/>
 </p>
 
-
-
 The same function can also be used for outputs from the `overview_crosstab` function by using the argument `crosstab = TRUE`. There are also options to label the respective conditions (```cond1``` and ```cond2```). Note that this should correspond to the conditions (```cond1``` and ```cond2```) specified in the `overview_crosstab` function.
 
 ```{r, eval = FALSE}
@@ -281,6 +279,14 @@ overview_print(
 <p align="center">
 <img src='man/figures/ex3.png' height="200"/>
 </p>
+
+`overview_print` further allows more specifications such as the font size or a a label. *These functions are currently supported only in the development version of the package.*
+```{r, eval = FALSE}
+overview_print(obj = output_table,
+               fontsize = "scriptsize",
+               label = "tab:overview")
+```
+
 
 With ```save_out = TRUE``` the function exports the output as a ```.tex``` file and stores it on the device.
 
@@ -410,7 +416,7 @@ overview_na(toydata_with_na) +
 
 ### Workflow: `tidyverse`
 
-All functions are further easily accessible using a common `tidyverse` workflow. Here are just two examples -- the possibilities are endless.
+All functions are further easily accessible using a common `tidyverse` workflow. Here are just three examples -- the possibilities are endless.
 
 ```{r, out.width = '50%', fig.align='center'}
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
@@ -428,6 +434,13 @@ toydata %>%
   # Transform the country code (ISO3 character code) into a country name using the `countrycode` package
   dplyr::mutate(country = countrycode(ccode, "iso3c", "country.name")) %>% 
   overview_plot(id = country, time = year)
+```
+
+```{r}
+# Produces a printable LaTeX output
+toydata %>% 
+  overview_tab(id = ccode, time = year) %>% 
+  overview_print()
 
 
 ```
