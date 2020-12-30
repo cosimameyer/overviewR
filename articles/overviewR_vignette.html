@@ -105,8 +105,23 @@
 
     
     
-<p>The goal of overviewR is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are two functions (<code>overview_tab</code> and <code>overview_crosstab</code>) that generate a tabular overview of the general sample as well as a conditional sample. The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set. The function <code>overview_print</code> converts this output of both <code>overview_tab</code> and <code>overview_crosstab</code> into LaTeX code and/or directly into a .tex file.</p>
-<p>The output of <code>overview_tab</code> and <code>overview_crosstab</code> are also compatible with other packages such as <a href="https://CRAN.R-project.org/package=xtable"><code>xtable</code></a>, <a href="https://CRAN.R-project.org/package=flextable"><code>flextable</code></a>, or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html"><code>knitr</code></a>.</p>
+<p>The goal of overviewR is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are the following functions:</p>
+<ul>
+<li>
+<code>overview_tab</code> generates a tabular overview of the sample. The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column.</li>
+<li>
+<code>overview_crosstab</code> generates a cross table. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set.</li>
+<li>
+<code>overview_print</code> converts the output of both <code>overview_tab</code> and <code>overview_crosstab</code> into LaTeX code and/or directly into a .tex file.</li>
+<li>
+<code>overview_plot</code> is an alternative to visualize the sample (a way to present results from <code>overview_tab</code>)</li>
+<li>
+<code>overview_heat</code> plots a heat map of your time line</li>
+<li>
+<code>overview_na</code> plots an overview of missing values by variable</li>
+</ul>
+<p>The plots can be saved using the <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code> command. The output of <code>overview_tab</code> and <code>overview_crosstab</code> are also compatible with other packages such as <a href="https://CRAN.R-project.org/package=xtable"><code>xtable</code></a>, <a href="https://CRAN.R-project.org/package=flextable"><code>flextable</code></a>, or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html"><code>knitr</code></a>.</p>
+<p>We present a short step-by-step guide as well as the functions in more detail below.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -280,40 +295,88 @@ Countries &amp; Years \\
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">toydata</span><span class="op">)</span>
 <span class="fu"><a href="../reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">toydata</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span></code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p>The results are sorted alphabetically by default. The order can also be reversed by setting <code>asc</code> to <code>FALSE</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">toydata</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span>, asc <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p>There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the <code>color</code> argument. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Load the GitHub version</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">library</span>(devtools) <span class="co"># Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co">#&gt; </span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co">#&gt;   </span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpBOwysY<span class="op">/</span>remotes7d24913832b<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>ec010e2<span class="op">/</span>DESCRIPTION’ ...</span>
+<span id="cb19-7"><a href="#cb19-7"></a>  </span>
+<span id="cb19-8"><a href="#cb19-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpBOwysY<span class="op">/</span>remotes7d24913832b<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>ec010e2<span class="op">/</span>DESCRIPTION’</span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co">#&gt; </span></span>
+<span id="cb19-10"><a href="#cb19-10"></a>  </span>
+<span id="cb19-11"><a href="#cb19-11"></a>─  preparing ‘overviewR’<span class="op">:</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co">#&gt; </span></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="st">  </span></span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="st">   </span>checking DESCRIPTION meta<span class="op">-</span>information ...</span>
+<span id="cb19-15"><a href="#cb19-15"></a>  </span>
+<span id="cb19-16"><a href="#cb19-16"></a>✔  checking DESCRIPTION meta<span class="op">-</span>information</span>
+<span id="cb19-17"><a href="#cb19-17"></a><span class="co">#&gt; </span></span>
+<span id="cb19-18"><a href="#cb19-18"></a>  </span>
+<span id="cb19-19"><a href="#cb19-19"></a>─  checking <span class="cf">for</span> LF line<span class="op">-</span>endings <span class="cf">in</span> source and make files and shell scripts</span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="co">#&gt; </span></span>
+<span id="cb19-21"><a href="#cb19-21"></a>  </span>
+<span id="cb19-22"><a href="#cb19-22"></a>─  checking <span class="cf">for</span> empty or unneeded directories</span>
+<span id="cb19-23"><a href="#cb19-23"></a><span class="co">#&gt; </span></span>
+<span id="cb19-24"><a href="#cb19-24"></a>  </span>
+<span id="cb19-25"><a href="#cb19-25"></a>─  building ‘overviewR_<span class="dv">0</span>.<span class="dv">0</span>.<span class="dv">7</span>.<span class="fl">999.</span>tar.gz’</span>
+<span id="cb19-26"><a href="#cb19-26"></a><span class="co">#&gt; </span></span>
+<span id="cb19-27"><a href="#cb19-27"></a>  </span>
+<span id="cb19-28"><a href="#cb19-28"></a>   </span>
+<span id="cb19-29"><a href="#cb19-29"></a><span class="co">#&gt; </span></span>
+<span id="cb19-30"><a href="#cb19-30"></a><span class="kw">library</span>(overviewR) <span class="co"># Easily Extracting Information About Your Data # Easily Extracting Information About Your Data</span></span>
+<span id="cb19-31"><a href="#cb19-31"></a><span class="kw">library</span>(magrittr) <span class="co"># A Forward-Pipe Operator for R</span></span>
+<span id="cb19-32"><a href="#cb19-32"></a></span>
+<span id="cb19-33"><a href="#cb19-33"></a><span class="co"># Code whether a year was before 1995</span></span>
+<span id="cb19-34"><a href="#cb19-34"></a>toydata <span class="op">%&lt;&gt;%</span></span>
+<span id="cb19-35"><a href="#cb19-35"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">before =</span> <span class="kw">ifelse</span>(year <span class="op">&lt;</span><span class="st"> </span><span class="dv">1995</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb19-36"><a href="#cb19-36"></a></span>
+<span id="cb19-37"><a href="#cb19-37"></a><span class="co"># Plot using the `color` argument</span></span>
+<span id="cb19-38"><a href="#cb19-38"></a><span class="kw">overview_plot</span>(<span class="dt">dat =</span> toydata, <span class="dt">id =</span> ccode, <span class="dt">time =</span> year, <span class="dt">color =</span> before)</span></code></pre></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="overview_heat" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview_heat" class="anchor"></a><code>overview_heat</code>
 </h3>
 <p><code>overview_heat</code> takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. <code>overview_heat</code> intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola (“AGO”) in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overview_heat.html">overview_heat</a></span><span class="op">(</span><span class="va">toydata_red</span>,
                 <span class="va">ccode</span>,
                 <span class="va">year</span>,
                 perc <span class="op">=</span> <span class="cn">TRUE</span>,
                 exp_total <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></code></pre></div>
-<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="overview_na" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview_na" class="anchor"></a><code>overview_na</code>
 </h3>
 <p><code>overview_na</code> is a simple function that provides information about the content of all variables in your data, not only the time and scope conditions. It returns a horizontal ggplot bar plot that indicates the amount of missing data (NAs) for each variable (on the y-axis). You can choose whether to display the relative amount of NAs for each variable in percentage (the default) or the total number of NAs.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span><span class="op">)</span></code></pre></div>
-<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span>, perc <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="compatibilities-with-other-packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#compatibilities-with-other-packages" class="anchor"></a>Compatibilities with other packages</h2>
+<div id="presenting-tables-flextable-xtable-and-kable" class="section level3">
+<h3 class="hasAnchor">
+<a href="#presenting-tables-flextable-xtable-and-kable" class="anchor"></a>Presenting tables: <code>flextable</code>, <code>xtable</code>, and <code>kable</code>
+</h3>
 <p>The outputs of <code>overview_tab</code> and <code>overview_crosstab</code> are also compatible with other functions such as <a href="https://CRAN.R-project.org/package=xtable"><code>xtable</code></a>, <a href="https://CRAN.R-project.org/package=flextable"><code>flextable</code></a>, or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html"><code>kable</code></a> from <a href="https://yihui.org/knitr/"><code>knitr</code></a>.</p>
 <p>Two examples are shown below:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">flextable</span><span class="op">)</span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">flextable</span><span class="op">)</span> <span class="co"># not installed on this machine</span>
 <span class="va">table_output</span> <span class="op">&lt;-</span> <span class="fu">qflextable</span><span class="op">(</span><span class="va">output_table</span><span class="op">)</span>
 <span class="va">table_output</span> <span class="op">&lt;-</span>
   <span class="fu">set_header_labels</span><span class="op">(</span><span class="va">table_output</span>,
@@ -324,8 +387,8 @@ Countries &amp; Years \\
   width <span class="op">=</span> <span class="fl">.4</span>,
   layout <span class="op">=</span> <span class="st">"autofit"</span>
 <span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span> <span class="co"># A General-Purpose Package for Dynamic Report Generation in R</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">output_table</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -355,6 +418,41 @@ Countries &amp; Years \\
 </tr>
 </tbody>
 </table>
+</div>
+<div id="customizing-plots-ggplot2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#customizing-plots-ggplot2" class="anchor"></a>Customizing plots: <code>ggplot2</code>
+</h3>
+<p>The plot functions are fully <code>ggplot2</code> based. While a theme is pre-defined, this can easily be overwritten.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span> <span class="co"># Create Elegant Data Visualisations Using the Grammar of Graphics</span>
+
+<span class="fu"><a href="../reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-29-1.png" width="50%" style="display: block; margin: auto;"></p>
+</div>
+<div id="workflow-tidyverse" class="section level3">
+<h3 class="hasAnchor">
+<a href="#workflow-tidyverse" class="anchor"></a>Workflow: <code>tidyverse</code>
+</h3>
+<p>All functions are further easily accessible using a common <code>tidyverse</code> workflow. Here are just two examples – the possibilities are endless.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># A Grammar of Data Manipulation # A Grammar of Data Manipulation</span>
+
+<span class="va">toydata_with_na</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">&gt;</span> <span class="fl">1993</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vincentarelbundock/countrycode">countrycode</a></span><span class="op">)</span> <span class="co"># Convert Country Names and Country Codes</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># A Grammar of Data Manipulation # A Grammar of Data Manipulation</span>
+
+<span class="va">toydata</span> <span class="op">%&gt;%</span> 
+  <span class="co"># Transform the country code (ISO3 character code) into a country name using the `countrycode` package</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">ccode</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">country</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span></code></pre></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;"></p>
+</div>
 </div>
   </div>
 
