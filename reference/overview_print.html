@@ -156,7 +156,9 @@
   cond2 <span class='op'>=</span> <span class='st'>"Condition 2"</span>,
   save_out <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>path</span>,
-  <span class='va'>file</span>
+  <span class='va'>file</span>,
+  label <span class='op'>=</span> <span class='st'>"tab:tab1"</span>,
+  <span class='va'>fontsize</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -168,7 +170,7 @@
     </tr>
     <tr>
       <th>title</th>
-      <td><p>Title of the table (default is "Time and scope of the sample")</p></td>
+      <td><p>Caption of the table (default is "Time and scope of the sample")</p></td>
     </tr>
     <tr>
       <th>id</th>
@@ -210,6 +212,15 @@ file, default is FALSE</p></td>
       <th>file</th>
       <td><p>Specifies name and file type (.tex)</p></td>
     </tr>
+    <tr>
+      <th>label</th>
+      <td><p>Specifies the label (default is "tab:tab1")</p></td>
+    </tr>
+    <tr>
+      <th>fontsize</th>
+      <td><p>Specifies the font size (all 'LaTeX' font sizes such as
+"scriptsize" or "small" work)</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -231,7 +242,9 @@ file, default is FALSE</p></td>
 #&gt; \begin{table}[ht] 
 #&gt;  \centering 
 #&gt;  \caption{Some nice title} 
-#&gt;  \begin{tabular}{ll} 
+#&gt; \label{tab:tab1} 
+#&gt; 
+#&gt; \begin{tabular}{ll} 
 #&gt;  \hline 
 #&gt; Sample &amp; Time frame \\ 
 #&gt; \hline 
@@ -268,7 +281,9 @@ file, default is FALSE</p></td>
 #&gt; % \newcolumntype{s}{&gt;{\hsize=.5\hsize}X} 
 #&gt; \begin{table}[ht] 
 #&gt; \caption{Some nice title for a cross tab} 
-#&gt;  \begin{tabularx}{\textwidth}{ssbb} 
+#&gt; \label{tab:tab1} 
+#&gt; 
+#&gt; \begin{tabularx}{\textwidth}{ssbb} 
 #&gt; \hline &amp; &amp; \multicolumn{2}{c}{\textbf{Name of first condition}} \\ 
 #&gt;  &amp; &amp; \textbf{Fulfilled} &amp; \textbf{Not fulfilled} \\ 
 #&gt;  \hline \\ 
