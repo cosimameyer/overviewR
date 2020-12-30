@@ -32,6 +32,9 @@ if (!require(ggplot2))
 if (!require(countrycode))
   install.packages("countrycode", repos = "http://cran.us.r-project.org"
   )
+if (!require(ggpubr))
+  install.packages("ggpubr", repos = "http://cran.us.r-project.org"
+  )
 ```
 
 
