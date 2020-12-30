@@ -310,9 +310,9 @@ Countries &amp; Years \\
 <span id="cb20-3"><a href="#cb20-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; </span></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt;   </span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmppFN2to<span class="op">/</span>remotes843ce198af<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>ac8b3f4<span class="op">/</span>DESCRIPTION’ ...</span>
+<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmp8cAE0M<span class="op">/</span>remotes8321c638930<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>960f250<span class="op">/</span>DESCRIPTION’ ...</span>
 <span id="cb20-7"><a href="#cb20-7"></a>  </span>
-<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmppFN2to<span class="op">/</span>remotes843ce198af<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>ac8b3f4<span class="op">/</span>DESCRIPTION’</span>
+<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmp8cAE0M<span class="op">/</span>remotes8321c638930<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>960f250<span class="op">/</span>DESCRIPTION’</span>
 <span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; </span></span>
 <span id="cb20-10"><a href="#cb20-10"></a>  </span>
 <span id="cb20-11"><a href="#cb20-11"></a>─  preparing ‘overviewR’<span class="op">:</span></span>
@@ -424,10 +424,9 @@ Countries &amp; Years \\
 </tbody>
 </table>
 </div>
-<div id="customizing-plots-ggplot2" class="section level3">
+<div id="customizing-plots-ggplot2-and-other-packages" class="section level3">
 <h3 class="hasAnchor">
-<a href="#customizing-plots-ggplot2" class="anchor"></a>Customizing plots: <code>ggplot2</code>
-</h3>
+<a href="#customizing-plots-ggplot2-and-other-packages" class="anchor"></a>Customizing plots: <code>ggplot2</code> and other packages</h3>
 <p>The plot functions are fully <code>ggplot2</code> based. While a theme is pre-defined, this can easily be overwritten.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span> <span class="co"># Create Elegant Data Visualisations Using the Grammar of Graphics</span>
@@ -435,20 +434,26 @@ Countries &amp; Years \\
 <span class="fu"><a href="../reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span> <span class="co"># 'ggplot2' Based Publication Ready Plots</span>
+
+<span class="fu"><a href="../reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggpubr</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/theme_pubr.html">theme_pubclean</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="workflow-tidyverse" class="section level3">
 <h3 class="hasAnchor">
 <a href="#workflow-tidyverse" class="anchor"></a>Workflow: <code>tidyverse</code>
 </h3>
 <p>All functions are further easily accessible using a common <code>tidyverse</code> workflow. Here are just two examples – the possibilities are endless.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># A Grammar of Data Manipulation # A Grammar of Data Manipulation</span>
 
 <span class="va">toydata_with_na</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">&gt;</span> <span class="fl">1993</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vincentarelbundock/countrycode">countrycode</a></span><span class="op">)</span> <span class="co"># Convert Country Names and Country Codes</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># A Grammar of Data Manipulation # A Grammar of Data Manipulation</span>
 
@@ -456,31 +461,31 @@ Countries &amp; Years \\
   <span class="co"># Transform the country code (ISO3 character code) into a country name using the `countrycode` package</span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">ccode</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">country</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span></code></pre></div>
-<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Produces a printable LaTeX output</span>
 <span class="va">toydata</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/overview_tab.html">overview_tab</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; % Overview table generated in R version 4.0.3 (2020-10-10) using overviewR </span>
-<span class="co">#&gt; % Table created on 2020-12-30</span>
-<span class="co">#&gt; \begin{table}[ht] </span>
-<span class="co">#&gt;  \centering </span>
-<span class="co">#&gt;  \caption{Time and scope of the sample} </span>
-<span class="co">#&gt; \label{tab:tab1} </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; \begin{tabular}{ll} </span>
-<span class="co">#&gt;  \hline </span>
-<span class="co">#&gt; Sample &amp; Time frame \\ </span>
-<span class="co">#&gt; \hline </span>
-<span class="co">#&gt;  AGO &amp; 1990 - 1992 \\ </span>
-<span class="co">#&gt;  BEN &amp; 1995 - 1999 \\ </span>
-<span class="co">#&gt;  FRA &amp; 1993, 1996, 1999 \\ </span>
-<span class="co">#&gt;  GBR &amp; 1991, 1993, 1995, 1997, 1999 \\ </span>
-<span class="co">#&gt;  RWA &amp; 1990 - 1995 \\ </span>
-<span class="co">#&gt;  \hline </span>
-<span class="co">#&gt;  \end{tabular} </span>
-<span class="co">#&gt;  \end{table}</span></code></pre></div>
+  <span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>% Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
+% Table created on 2020-12-30
+\begin{table}[ht] 
+ \centering 
+ \caption{Time and scope of the sample} 
+\label{tab:tab1} 
+
+\begin{tabular}{ll} 
+ \hline 
+Sample &amp; Time frame \\ 
+\hline 
+ AGO &amp; 1990 - 1992 \\ 
+ BEN &amp; 1995 - 1999 \\ 
+ FRA &amp; 1993, 1996, 1999 \\ 
+ GBR &amp; 1991, 1993, 1995, 1997, 1999 \\ 
+ RWA &amp; 1990 - 1995 \\ 
+ \hline 
+ \end{tabular} 
+ \end{table} </code></pre>
 </div>
 </div>
   </div>
