@@ -20,7 +20,7 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--28-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--29-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -28,22 +28,32 @@ here**](https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSh
 
 The goal of overviewR is to make it easy to get an overview of a data
 set by displaying relevant sample information. At the moment, there are
-two functions (`overview_tab` and `overview_crosstab`) that generate a
-tabular overview of the general sample as well as a conditional sample.
-The general sample plots a two-column table that provides information on
-an id in the left column and a the time frame on the right column. The
-conditional column allows to disaggregate the overview table by
-specifying two conditions, hence resulting a 2x2 table. This way, it is
-easy to visualize the time and scope conditions as well as theoretical
-assumptions with examples from the data set. The function
-`overview_print` converts this output of both `overview_tab` and
-`overview_crosstab` into LaTeX code and/or directly into a .tex file.
+the following functions:
 
-The output of `overview_tab` and `overview_crosstab` are also compatible
-with other packages such as
-[`xtable`](https://CRAN.R-project.org/package=xtable),
+-   `overview_tab` - generates a tabular overview of the sample. The
+    general sample plots a two-column table that provides information on
+    an id in the left column and a the time frame on the right column.
+-   `overview_crosstab` - generates a cross table. The conditional
+    column allows to disaggregate the overview table by specifying two
+    conditions, hence resulting a 2x2 table. This way, it is easy to
+    visualize the time and scope conditions as well as theoretical
+    assumptions with examples from the data set.
+-   `overview_print` - converts the output of both `overview_tab` and
+    `overview_crosstab` into LaTeX code and/or directly into a .tex
+    file.
+-   `overview_plot` is an alternative to visualize the sample (a way to
+    present results from `overview_tab`)
+-   `overview_heat`
+-   `overview_na`
+
+The plots can be saved using the `ggsave()` command. The output of
+`overview_tab` and `overview_crosstab` are also compatible with other
+packages such as [`xtable`](https://CRAN.R-project.org/package=xtable),
 [`flextable`](https://CRAN.R-project.org/package=flextable), or
 [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
+
+We present a short step-by-step guide as well as the functions in more
+detail below.
 
 ## Installation
 
@@ -57,7 +67,7 @@ To install the latest development version of `overviewR` directly from
 [GitHub](https://github.com/cosimameyer/overviewR) use:
 
 ``` r
-library(devtools)
+library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
 ```
 
@@ -66,7 +76,7 @@ devtools::install_github("cosimameyer/overviewR")
 First, load the package.
 
 ``` r
-library(overviewR)
+library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
 ```
 
 The following examples use a toy data set (`toydata`) that comes with
@@ -311,6 +321,38 @@ overview_plot(dat = toydata, id = ccode, time = year)
 
 <img src="man/figures/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" />
 
+The results are sorted alphabetically by default. The order can also be
+reversed by setting `asc` to `FALSE`.
+
+``` r
+overview_plot(dat = toydata, id = ccode, time = year, asc = FALSE)
+```
+
+<img src="man/figures/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
+
+There is also an option to color the time lines conditionally. Here, we
+introduce a dummy variable that indicates whether the year was before
+1995 or not. We use this dummy to color the time lines using the `color`
+argument. *Note, this argument is currently only implemented in the
+development version that can be accessed from GitHub.*
+
+``` r
+# Load the GitHub version
+library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
+devtools::install_github("cosimameyer/overviewR")
+library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
+library(magrittr) # A Forward-Pipe Operator for R
+
+# Code whether a year was before 1995
+toydata %<>%
+  dplyr::mutate(before = ifelse(year < 1995, 1, 0))
+
+# Plot using the `color` argument
+overview_plot(dat = toydata, id = ccode, time = year, color = before)
+```
+
+<img src="man/figures/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
+
 ### `overview_heat`
 
 `overview_heat` takes a closer look at the time and scope conditions by
@@ -334,7 +376,7 @@ overview_heat(toydata_red,
                 exp_total = 12)
 ```
 
-<img src="man/figures/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_na`
 
@@ -349,15 +391,17 @@ in percentage (the default) or the total number of NAs.
 overview_na(toydata_with_na)
 ```
 
-<img src="man/figures/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 overview_na(toydata_with_na, perc = FALSE)
 ```
 
-<img src="man/figures/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
 
 ## Compatibilities with other packages
+
+### Presenting tables: `flextable`, `xtable`, and `kable`
 
 The outputs of `overview_tab` and `overview_crosstab` are also
 compatible with other functions such as
@@ -369,7 +413,7 @@ compatible with other functions such as
 Two examples are shown below:
 
 ``` r
-library(flextable)
+library(flextable) # not installed on this machine
 table_output <- qflextable(output_table)
 table_output <-
   set_header_labels(table_output,
@@ -383,7 +427,7 @@ set_table_properties(
 ```
 
 ``` r
-library(knitr)
+library(knitr) # A General-Purpose Package for Dynamic Report Generation in R
 knitr::kable(output_table)
 ```
 
@@ -394,6 +438,47 @@ knitr::kable(output_table)
 | BEN   | 1995-1999                    |
 | GBR   | 1991, 1993, 1995, 1997, 1999 |
 | FRA   | 1993, 1996, 1999             |
+
+### Customizing plots: `ggplot2`
+
+The plot functions are fully `ggplot2` based. While a theme is
+pre-defined, this can easily be overwritten.
+
+``` r
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+
+overview_na(toydata_with_na) +
+  ggplot2::theme_minimal() 
+```
+
+<img src="man/figures/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" />
+
+### Workflow: `tidyverse`
+
+All functions are further easily accessible using a common `tidyverse`
+workflow. Here are just two examples – the possibilities are endless.
+
+``` r
+library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
+
+toydata_with_na %>% 
+  dplyr::filter(year > 1993) %>% 
+  overview_na()
+```
+
+<img src="man/figures/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" />
+
+``` r
+library(countrycode) # Convert Country Names and Country Codes
+library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
+
+toydata %>% 
+  # Transform the country code (ISO3 character code) into a country name using the `countrycode` package
+  dplyr::mutate(country = countrycode(ccode, "iso3c", "country.name")) %>% 
+  overview_plot(id = country, time = year)
+```
+
+<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
 
 # Credits
 
