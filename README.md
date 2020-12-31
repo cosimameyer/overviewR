@@ -465,17 +465,6 @@ overview_na(toydata_with_na) +
 
 <img src="man/figures/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" />
 
-A `theme_pubclean` theme alternative
-
-``` r
-library(ggpubr) # 'ggplot2' Based Publication Ready Plots
-
-overview_na(toydata_with_na) +
-  ggpubr::theme_pubclean() 
-```
-
-<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
-
 ### Workflow: `tidyverse`
 
 All functions are further easily accessible using a common `tidyverse`
@@ -491,7 +480,7 @@ toydata_with_na %>%
   overview_na()
 ```
 
-<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
 
 Using mutate to generate meaningful country names
 
@@ -505,7 +494,7 @@ toydata %>%
   overview_plot(id = country, time = year)
 ```
 
-<img src="man/figures/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
 
 Using different `overviewR` functions after each other to generate a
 workflow

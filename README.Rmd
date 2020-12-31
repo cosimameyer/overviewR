@@ -17,7 +17,6 @@ pkgs <- c(
   "knitr",
   "tidyverse",
   "dplyr",
-  "ggpubr",
   "magrittr",
   "countrycode"
 )
@@ -416,14 +415,6 @@ library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graph
 
 overview_na(toydata_with_na) +
   ggplot2::theme_minimal() 
-```
-
-A `theme_pubclean` theme alternative
-```{r, out.width = '50%', fig.align='center'}
-library(ggpubr) # 'ggplot2' Based Publication Ready Plots
-
-overview_na(toydata_with_na) +
-  ggpubr::theme_pubclean() 
 ```
 
 ### Workflow: `tidyverse`
