@@ -20,7 +20,7 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--30-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--31-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -454,6 +454,8 @@ knitr::kable(output_table)
 The plot functions are fully `ggplot2` based. While a theme is
 pre-defined, this can easily be overwritten.
 
+A classical `ggplot2` theme alternative
+
 ``` r
 library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
 
@@ -462,6 +464,8 @@ overview_na(toydata_with_na) +
 ```
 
 <img src="man/figures/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" />
+
+A `theme_pubclean` theme alternative
 
 ``` r
 library(ggpubr) # 'ggplot2' Based Publication Ready Plots
@@ -477,6 +481,8 @@ overview_na(toydata_with_na) +
 All functions are further easily accessible using a common `tidyverse`
 workflow. Here are just three examples – the possibilities are endless.
 
+Using a filter function
+
 ``` r
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
 
@@ -486,6 +492,8 @@ toydata_with_na %>%
 ```
 
 <img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
+
+Using mutate to generate meaningful country names
 
 ``` r
 library(countrycode) # Convert Country Names and Country Codes
@@ -498,6 +506,9 @@ toydata %>%
 ```
 
 <img src="man/figures/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" />
+
+Using different `overviewR` functions after each other to generate a
+workflow
 
 ``` r
 # Produces a printable LaTeX output
