@@ -331,6 +331,29 @@ overview_plot(dat = toydata, id = ccode, time = year, color = before)
 ```
 
 
+### ```overview_crossplot````
+
+To visualize also the cross table, `overview_crossplot` does the job. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+
+```{r, out.width = '50%', fig.align='center'}
+# Load the GitHub version
+library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
+devtools::install_github("cosimameyer/overviewR")
+library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
+
+overview_crossplot(
+  toydata,
+  id = ccode,
+  time = year,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000,
+  color = TRUE,
+  label = TRUE
+)
+```
+
 ### ```overview_heat```
 
 `overview_heat` takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. `overview_heat` intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola ("AGO") in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.

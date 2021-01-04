@@ -318,6 +318,29 @@ toydata %<>%
 overview_plot(dat = toydata, id = ccode, time = year, color = before)
 ```
 
+### ```overview_crossplot````
+
+To visualize also the cross table, `overview_crossplot` does the job. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+
+```{r, out.width = '50%', fig.align='center'}
+# Load the GitHub version
+library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
+devtools::install_github("cosimameyer/overviewR")
+library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
+
+overview_crossplot(
+  toydata,
+  id = ccode,
+  time = year,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000,
+  color = TRUE,
+  label = TRUE
+)
+```
+
 
 ### ```overview_heat```
 

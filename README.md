@@ -20,7 +20,7 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--31-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2021--01--04-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -363,6 +363,35 @@ overview_plot(dat = toydata, id = ccode, time = year, color = before)
 
 <img src="man/figures/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
 
+### \`\`\`overview\_crossplot\`\`\`\`
+
+To visualize also the cross table, `overview_crossplot` does the job.
+*Note, this argument is currently only implemented in the development
+version that can be accessed from GitHub.*
+
+``` r
+# Load the GitHub version
+library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
+devtools::install_github("cosimameyer/overviewR")
+#> Skipping install of 'overviewR' from a github remote, the SHA1 (1ee4b2e8) has not changed since last install.
+#>   Use `force = TRUE` to force installation
+library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
+
+overview_crossplot(
+  toydata,
+  id = ccode,
+  time = year,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000,
+  color = TRUE,
+  label = TRUE
+)
+```
+
+<img src="man/figures/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
+
 ### `overview_heat`
 
 `overview_heat` takes a closer look at the time and scope conditions by
@@ -386,7 +415,7 @@ overview_heat(toydata_red,
                 exp_total = 12)
 ```
 
-<img src="man/figures/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_na`
 
@@ -401,13 +430,13 @@ in percentage (the default) or the total number of NAs.
 overview_na(toydata_with_na)
 ```
 
-<img src="man/figures/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 overview_na(toydata_with_na, perc = FALSE)
 ```
 
-<img src="man/figures/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;" />
 
 ## Compatibilities with other packages
 
@@ -463,7 +492,7 @@ overview_na(toydata_with_na) +
   ggplot2::theme_minimal() 
 ```
 
-<img src="man/figures/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### Workflow: `tidyverse`
 
@@ -480,7 +509,7 @@ toydata_with_na %>%
   overview_na()
 ```
 
-<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
 
 Using mutate to generate meaningful country names
 
@@ -494,7 +523,7 @@ toydata %>%
   overview_plot(id = country, time = year)
 ```
 
-<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" />
 
 Using different `overviewR` functions after each other to generate a
 workflow
