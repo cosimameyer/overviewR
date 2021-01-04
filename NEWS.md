@@ -8,6 +8,8 @@
    - `overview_print`
       - `label` to add a cross-reference label
       - `fontsize` to change the font size
+   - `overview_crossplot`
+      - a new function that visualizes basically the same output as `overview_crosstab`
 
 ---
 # overviewR 0.0.7
