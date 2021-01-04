@@ -26,7 +26,7 @@ overviewR can be used by everyone who works with data that has a **time-and-scop
 
 Consider a data set that covers countries over the past 50 years. **Not all countries existed throughout the entire period** -- some dissolved, others were newly founded and yet for others, data might not be available for the entire period. Before starting any analysis, it is helpful to get an overview not only of which countries are included and what the entire time span is but also to **see which countries are present at which points in time**. In other words, are there missing data for certain countries at different points in time?
 
-To get a quick and intuitive overview of your data, overviewR provides currently **six basic functions**:
+To get a quick and intuitive overview of your data, overviewR provides currently **seven basic functions**:
 
 - **`overview_tab`** generates a basic table that lists all unique units of observation (e.g., countries) and aggregates the time frame at which each unit is present in the data set. This means it also takes into account gaps in the data set, e.g., when there is -- for whatever reason -- no data available for a country for a few years within the time frame
 - **`overview_crosstab`**  generates a similar table but allows you to separate the overview table using two conditions. For instance, you want to know not only at what time points countries are present in your data but also when these countries can be considered to have high or low GDP and can be categorized as having a small or large population size. For this, `overview_crosstab` is used.

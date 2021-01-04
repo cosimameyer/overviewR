@@ -122,7 +122,7 @@ overview_crossplot <-
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
-          theme(legend.position = "none")
+          ggplot2:: theme(legend.position = "none")
 
         return(plot)
       }
@@ -135,7 +135,7 @@ overview_crossplot <-
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
-          theme(legend.position = "none")
+          ggplot2::theme(legend.position = "none")
 
         return(plot)
       }
@@ -149,7 +149,7 @@ overview_crossplot <-
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
-          theme(legend.position = "none")
+          ggplot2::theme(legend.position = "none")
 
         return(plot)
       }
@@ -162,7 +162,7 @@ overview_crossplot <-
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
-          theme(legend.position = "none")
+          ggplot2::theme(legend.position = "none")
 
         return(plot)
       }
@@ -216,7 +216,7 @@ overview_crossplot <-
         ggplot2::ylab(yaxis) +
         ggplot2::xlab(xaxis) +
         theme_plot +
-        theme(legend.position = "none")
+        ggplot2::theme(legend.position = "none")
 
       return(plot)
       }
@@ -229,7 +229,7 @@ overview_crossplot <-
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
-          theme(legend.position = "none")
+          ggplot2::theme(legend.position = "none")
 
         return(plot)
       }
@@ -243,7 +243,7 @@ overview_crossplot <-
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
-          theme(legend.position = "none")
+          ggplot2::theme(legend.position = "none")
 
         return(plot)
       }
@@ -256,12 +256,9 @@ overview_crossplot <-
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
-          theme(legend.position = "none")
+          ggplot2::theme(legend.position = "none")
 
         return(plot)
       }
     }
   }
-
-
-
