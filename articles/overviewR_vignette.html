@@ -308,13 +308,13 @@ Countries &amp; Years \\
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;"></p>
 <p>There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the <code>color</code> argument. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Load the GitHub version</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">library</span>(devtools) <span class="co"># Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">library</span>(devtools) <span class="co"># Tools to Make Developing R Packages Easier </span></span>
 <span id="cb20-3"><a href="#cb20-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; </span></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt;   </span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmpz9XE5L<span class="op">/</span>remotes72e15bb57a4<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’ ...</span>
+<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpHtUAU1<span class="op">/</span>remotes7443873b8f5<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>1f81e8a<span class="op">/</span>DESCRIPTION’ ...</span>
 <span id="cb20-7"><a href="#cb20-7"></a>  </span>
-<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmpz9XE5L<span class="op">/</span>remotes72e15bb57a4<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’</span>
+<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpHtUAU1<span class="op">/</span>remotes7443873b8f5<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>1f81e8a<span class="op">/</span>DESCRIPTION’</span>
 <span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; </span></span>
 <span id="cb20-10"><a href="#cb20-10"></a>  </span>
 <span id="cb20-11"><a href="#cb20-11"></a>─  preparing ‘overviewR’<span class="op">:</span></span>
@@ -334,7 +334,7 @@ Countries &amp; Years \\
 <span id="cb20-25"><a href="#cb20-25"></a>  </span>
 <span id="cb20-26"><a href="#cb20-26"></a>   </span>
 <span id="cb20-27"><a href="#cb20-27"></a><span class="co">#&gt; </span></span>
-<span id="cb20-28"><a href="#cb20-28"></a><span class="kw">library</span>(overviewR) <span class="co"># Easily Extracting Information About Your Data # Easily Extracting Information About Your Data</span></span>
+<span id="cb20-28"><a href="#cb20-28"></a><span class="kw">library</span>(overviewR) <span class="co"># Easily Extracting Information About Your Data </span></span>
 <span id="cb20-29"><a href="#cb20-29"></a><span class="kw">library</span>(magrittr) <span class="co"># A Forward-Pipe Operator for R</span></span>
 <span id="cb20-30"><a href="#cb20-30"></a></span>
 <span id="cb20-31"><a href="#cb20-31"></a><span class="co"># Code whether a year was before 1995</span></span>
@@ -351,13 +351,13 @@ Countries &amp; Years \\
 </h3>
 <p>To visualize also the cross table, <code>overview_crossplot</code> does the job. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Load the GitHub version</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">library</span>(devtools) <span class="co"># Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">library</span>(devtools) <span class="co"># Tools to Make Developing R Packages Easier </span></span>
 <span id="cb21-3"><a href="#cb21-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
 <span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt; </span></span>
 <span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt;   </span></span>
-<span id="cb21-6"><a href="#cb21-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmpz9XE5L<span class="op">/</span>remotes72e66783a5f<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’ ...</span>
+<span id="cb21-6"><a href="#cb21-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpHtUAU1<span class="op">/</span>remotes7443bc44b6e<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>1f81e8a<span class="op">/</span>DESCRIPTION’ ...</span>
 <span id="cb21-7"><a href="#cb21-7"></a>  </span>
-<span id="cb21-8"><a href="#cb21-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmpz9XE5L<span class="op">/</span>remotes72e66783a5f<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’</span>
+<span id="cb21-8"><a href="#cb21-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpHtUAU1<span class="op">/</span>remotes7443bc44b6e<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>1f81e8a<span class="op">/</span>DESCRIPTION’</span>
 <span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; </span></span>
 <span id="cb21-10"><a href="#cb21-10"></a>  </span>
 <span id="cb21-11"><a href="#cb21-11"></a>─  preparing ‘overviewR’<span class="op">:</span></span>
@@ -379,19 +379,18 @@ Countries &amp; Years \\
 <span id="cb21-27"><a href="#cb21-27"></a>  </span>
 <span id="cb21-28"><a href="#cb21-28"></a>   </span>
 <span id="cb21-29"><a href="#cb21-29"></a><span class="co">#&gt; </span></span>
-<span id="cb21-30"><a href="#cb21-30"></a><span class="kw">library</span>(overviewR) <span class="co"># Easily Extracting Information About Your Data # Easily Extracting Information About Your Data</span></span>
-<span id="cb21-31"><a href="#cb21-31"></a></span>
-<span id="cb21-32"><a href="#cb21-32"></a><span class="kw">overview_crossplot</span>(</span>
-<span id="cb21-33"><a href="#cb21-33"></a>  toydata,</span>
-<span id="cb21-34"><a href="#cb21-34"></a>  <span class="dt">id =</span> ccode,</span>
-<span id="cb21-35"><a href="#cb21-35"></a>  <span class="dt">time =</span> year,</span>
-<span id="cb21-36"><a href="#cb21-36"></a>  <span class="dt">cond1 =</span> gdp,</span>
-<span id="cb21-37"><a href="#cb21-37"></a>  <span class="dt">cond2 =</span> population,</span>
-<span id="cb21-38"><a href="#cb21-38"></a>  <span class="dt">threshold1 =</span> <span class="dv">25000</span>,</span>
-<span id="cb21-39"><a href="#cb21-39"></a>  <span class="dt">threshold2 =</span> <span class="dv">27000</span>,</span>
-<span id="cb21-40"><a href="#cb21-40"></a>  <span class="dt">color =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb21-41"><a href="#cb21-41"></a>  <span class="dt">label =</span> <span class="ot">TRUE</span></span>
-<span id="cb21-42"><a href="#cb21-42"></a>)</span></code></pre></div>
+<span id="cb21-30"><a href="#cb21-30"></a><span class="kw">library</span>(overviewR) <span class="co"># Easily Extracting Information About Your Data </span></span>
+<span id="cb21-31"><a href="#cb21-31"></a><span class="kw">overview_crossplot</span>(</span>
+<span id="cb21-32"><a href="#cb21-32"></a>  toydata,</span>
+<span id="cb21-33"><a href="#cb21-33"></a>  <span class="dt">id =</span> ccode,</span>
+<span id="cb21-34"><a href="#cb21-34"></a>  <span class="dt">time =</span> year,</span>
+<span id="cb21-35"><a href="#cb21-35"></a>  <span class="dt">cond1 =</span> gdp,</span>
+<span id="cb21-36"><a href="#cb21-36"></a>  <span class="dt">cond2 =</span> population,</span>
+<span id="cb21-37"><a href="#cb21-37"></a>  <span class="dt">threshold1 =</span> <span class="dv">25000</span>,</span>
+<span id="cb21-38"><a href="#cb21-38"></a>  <span class="dt">threshold2 =</span> <span class="dv">27000</span>,</span>
+<span id="cb21-39"><a href="#cb21-39"></a>  <span class="dt">color =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb21-40"><a href="#cb21-40"></a>  <span class="dt">label =</span> <span class="ot">TRUE</span></span>
+<span id="cb21-41"><a href="#cb21-41"></a>)</span></code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="overview_heat" class="section level3">
