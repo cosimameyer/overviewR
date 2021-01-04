@@ -114,8 +114,8 @@ overview_crossplot <-
 
       if (color == TRUE & label == TRUE) {
         plot <- dat_red %>%
-          ggplot2::ggplot(aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
-          ggplot2::geom_point(alpha = 0.5, aes(color = factor(grp))) +
+          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
+          ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
           ggrepel::geom_text_repel(size = 2.5) +
@@ -128,8 +128,8 @@ overview_crossplot <-
       }
       if (color == TRUE) {
         plot <- dat_red %>%
-          ggplot2::ggplot(aes(x = !!cond1_mean, y = !!cond2_mean)) +
-          ggplot2::geom_point(alpha = 0.5, aes(color = factor(grp))) +
+          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
+          ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
           ggplot2::ylab(yaxis) +
@@ -141,7 +141,7 @@ overview_crossplot <-
       }
       if (label == TRUE) {
         plot <- dat_red %>%
-          ggplot2::ggplot(aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
+          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
           ggplot2::geom_point(alpha = 0.5) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
@@ -155,7 +155,7 @@ overview_crossplot <-
       }
       else {
         plot <- dat_red %>%
-          ggplot2::ggplot(aes(x = !!cond1_mean, y = !!cond2_mean)) +
+          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
           ggplot2::geom_point(alpha = 0.5) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
@@ -208,8 +208,8 @@ overview_crossplot <-
 
       if (color == TRUE & label == TRUE) {
       plot <- dat_red %>%
-        ggplot2::ggplot(aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
-        ggplot2::geom_point(alpha = 0.5, aes(color = factor(grp))) +
+        ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
+        ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
         ggplot2::geom_vline(xintercept = threshold1) +
         ggplot2::geom_hline(yintercept = threshold2) +
         ggrepel::geom_text_repel(size = 2.5) +
@@ -222,8 +222,8 @@ overview_crossplot <-
       }
       if (color == TRUE) {
         plot <- dat_red %>%
-          ggplot2::ggplot(aes(x = !!cond1_mean, y = !!cond2_mean)) +
-          ggplot2::geom_point(alpha = 0.5, aes(color = factor(grp))) +
+          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
+          ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
           ggplot2::ylab(yaxis) +
@@ -235,7 +235,7 @@ overview_crossplot <-
       }
       if (label == TRUE) {
         plot <- dat_red %>%
-          ggplot2::ggplot(aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
+          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
           ggplot2::geom_point(alpha = 0.5) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
@@ -249,7 +249,7 @@ overview_crossplot <-
       }
       else {
         plot <- dat_red %>%
-          ggplot2::ggplot(aes(x = !!cond1_mean, y = !!cond2_mean)) +
+          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
           ggplot2::geom_point(alpha = 0.5) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +

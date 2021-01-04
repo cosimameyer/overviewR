@@ -350,18 +350,9 @@ development version that can be accessed from GitHub.*
 
 ``` r
 # Load the GitHub version
-library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
+library(devtools) # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
-#> 
-#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpXNXFhN/remotes5f60608d8cd9/cosimameyer-overviewR-db1e9c4/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpXNXFhN/remotes5f60608d8cd9/cosimameyer-overviewR-db1e9c4/DESCRIPTION’
-#>   ─  preparing ‘overviewR’:
-#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
-#>   ─  checking for LF line-endings in source and make files and shell scripts
-#>   ─  checking for empty or unneeded directories
-#>   ─  building ‘overviewR_0.0.7.999.tar.gz’
-#>      
-#> 
-library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
+library(overviewR) # Easily Extracting Information About Your Data
 library(magrittr) # A Forward-Pipe Operator for R
 
 # Code whether a year was before 1995
@@ -382,18 +373,9 @@ version that can be accessed from GitHub.*
 
 ``` r
 # Load the GitHub version
-library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
+library(devtools) # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
-#> 
-#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpXNXFhN/remotes5f6019455350/cosimameyer-overviewR-db1e9c4/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpXNXFhN/remotes5f6019455350/cosimameyer-overviewR-db1e9c4/DESCRIPTION’
-#>   ─  preparing ‘overviewR’:
-#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
-#>   ─  checking for LF line-endings in source and make files and shell scripts
-#>   ─  checking for empty or unneeded directories
-#>   ─  building ‘overviewR_0.0.7.999.tar.gz’
-#>      
-#> 
-library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
+library(overviewR) # Easily Extracting Information About Your Data
 
 overview_crossplot(
   toydata,
