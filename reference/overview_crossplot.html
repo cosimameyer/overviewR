@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>overview_print — overview_print • overviewR</title>
+<title>overview_crossplot — overview_crossplot • overviewR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="overview_print — overview_print" />
-<meta property="og:description" content="Produces a 'LaTeX' output for output obtained via
-   overview_tab and overview_crosstab" />
+<meta property="og:title" content="overview_crossplot — overview_crossplot" />
+<meta property="og:description" content="This function plots a ggplot to visualize a cross table plot." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -136,127 +135,85 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>overview_print</h1>
-    <small class="dont-index">Source: <a href='https://github.com/cosimameyer/overviewR/blob/master/R/overview_print.R'><code>R/overview_print.R</code></a></small>
-    <div class="hidden name"><code>overview_print.Rd</code></div>
+    <h1>overview_crossplot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/cosimameyer/overviewR/blob/master/R/overview_crossplot.R'><code>R/overview_crossplot.R</code></a></small>
+    <div class="hidden name"><code>overview_crossplot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Produces a 'LaTeX' output for output obtained via
-   <code>overview_tab</code> and <code>overview_crosstab</code></p>
+    <p>This function plots a ggplot to visualize a cross table plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>overview_print</span><span class='op'>(</span>
-  <span class='va'>obj</span>,
-  title <span class='op'>=</span> <span class='st'>"Time and scope of the sample"</span>,
-  id <span class='op'>=</span> <span class='st'>"Sample"</span>,
-  time <span class='op'>=</span> <span class='st'>"Time frame"</span>,
-  crosstab <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  cond1 <span class='op'>=</span> <span class='st'>"Condition 1"</span>,
-  cond2 <span class='op'>=</span> <span class='st'>"Condition 2"</span>,
-  save_out <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>path</span>,
-  <span class='va'>file</span>,
-  label <span class='op'>=</span> <span class='st'>"tab:tab1"</span>,
-  <span class='va'>fontsize</span>
+    <pre class="usage"><span class='fu'>overview_crossplot</span><span class='op'>(</span>
+  <span class='va'>dat</span>,
+  <span class='va'>id</span>,
+  <span class='va'>time</span>,
+  <span class='va'>cond1</span>,
+  <span class='va'>cond2</span>,
+  <span class='va'>threshold1</span>,
+  <span class='va'>threshold2</span>,
+  xaxis <span class='op'>=</span> <span class='st'>"Condition 1"</span>,
+  yaxis <span class='op'>=</span> <span class='st'>"Condition 2"</span>,
+  label <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  color <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>obj</th>
-      <td><p>Overview object produced by overview_tab or overview_crosstab</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>Caption of the table (default is "Time and scope of the sample")</p></td>
+      <th>dat</th>
+      <td><p>Your data set
+#' @param cond1 Variable that describes the first condition</p></td>
     </tr>
     <tr>
       <th>id</th>
-      <td><p>The name of the left column (default is "Sample"), will be ignored
-if crosstab is TRUE</p></td>
+      <td><p>Your scope (e.g., country codes or individual IDs). If the id
+variable contains NAs, they will not be included in the plot.</p></td>
     </tr>
     <tr>
       <th>time</th>
-      <td><p>The name of the right column (default is ("Time frame")), will
-be ignored if <code>crosstab</code> is TRUE</p></td>
-    </tr>
-    <tr>
-      <th>crosstab</th>
-      <td><p>Logical argument, if TRUE produces a <code>crosstab</code> output,
-default is FALSE</p></td>
-    </tr>
-    <tr>
-      <th>cond1</th>
-      <td><p>Description for the first condition (character), will be
-ignored if <code>crosstab</code> is FALSE. This should correspond to the input
-for <code>cond1</code> in <code>overview_crosstab</code></p></td>
+      <td><p>Your time (e.g., time periods given by years, months, ...)</p></td>
     </tr>
     <tr>
       <th>cond2</th>
-      <td><p>Description for the second condition (character), will be
-ignored if <code>crosstab</code> is FALSE. This should correspond to the input
-for <code>cond2</code> in <code>overview_crosstab</code></p></td>
+      <td><p>Variable that describes the second condition</p></td>
     </tr>
     <tr>
-      <th>save_out</th>
-      <td><p>Optional argument, exports the output table as a .tex
-file, default is FALSE</p></td>
+      <th>threshold1</th>
+      <td><p>A threshold for <code>cond1</code></p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>Specifies the path where the output should be saved</p></td>
+      <th>threshold2</th>
+      <td><p>A threshold for <code>cond2</code></p></td>
     </tr>
     <tr>
-      <th>file</th>
-      <td><p>Specifies name and file type (.tex)</p></td>
+      <th>xaxis</th>
+      <td><p>Label of the x axis ("Condition 1" is default)</p></td>
+    </tr>
+    <tr>
+      <th>yaxis</th>
+      <td><p>Label of the y axis ("Condition 2" is default)</p></td>
     </tr>
     <tr>
       <th>label</th>
-      <td><p>Specifies the label (default is "tab:tab1")</p></td>
+      <td><p>Label of the observations. Overlapping labels are
+avoided by using 'ggrepel'</p></td>
     </tr>
     <tr>
-      <th>fontsize</th>
-      <td><p>Specifies the font size (all 'LaTeX' font sizes such as
-"scriptsize" or "small" work)</p></td>
+      <th>color</th>
+      <td><p>Color of the different observation groups</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A 'LaTeX' output that can either be copy-pasted in a text document or
-    exported directed as a .tex file</p>
+    <p>A ggplot figure that presents the sample information visually
+    in a cross table</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>toydata</span><span class='op'>)</span>
-
-<span class='va'>overview_object</span> <span class='op'>&lt;-</span> <span class='fu'><a href='overview_tab.html'>overview_tab</a></span><span class='op'>(</span>dat <span class='op'>=</span> <span class='va'>toydata</span>, id <span class='op'>=</span> <span class='va'>ccode</span>, time <span class='op'>=</span> <span class='va'>year</span><span class='op'>)</span>
-<span class='fu'>overview_print</span><span class='op'>(</span>
-  obj <span class='op'>=</span> <span class='va'>overview_object</span>,
-  title <span class='op'>=</span> <span class='st'>"Some nice title"</span>,
-  crosstab <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.3 (2020-10-10) using overviewR 
-#&gt; % Table created on 2021-01-04
-#&gt; \begin{table}[ht] 
-#&gt;  \centering 
-#&gt;  \caption{Some nice title} 
-#&gt; \label{tab:tab1} 
-#&gt; 
-#&gt; \begin{tabular}{ll} 
-#&gt;  \hline 
-#&gt; Sample &amp; Time frame \\ 
-#&gt; \hline 
-#&gt;  AGO &amp; 1990 - 1992 \\ 
-#&gt;  BEN &amp; 1995 - 1999 \\ 
-#&gt;  FRA &amp; 1993, 1996, 1999 \\ 
-#&gt;  GBR &amp; 1991, 1993, 1995, 1997, 1999 \\ 
-#&gt;  RWA &amp; 1990 - 1995 \\ 
-#&gt;  \hline 
-#&gt;  \end{tabular} 
-#&gt;  \end{table} </div><div class='input'>
-<span class='va'>overview_ct_object</span> <span class='op'>&lt;-</span> <span class='fu'><a href='overview_crosstab.html'>overview_crosstab</a></span><span class='op'>(</span>
+<span class='fu'>overview_crossplot</span><span class='op'>(</span>
   dat <span class='op'>=</span> <span class='va'>toydata</span>,
   cond1 <span class='op'>=</span> <span class='va'>gdp</span>,
   cond2 <span class='op'>=</span> <span class='va'>population</span>,
@@ -265,34 +222,7 @@ file, default is FALSE</p></td>
   id <span class='op'>=</span> <span class='va'>ccode</span>,
   time <span class='op'>=</span> <span class='va'>year</span>
 <span class='op'>)</span>
-<span class='fu'>overview_print</span><span class='op'>(</span>
-  obj <span class='op'>=</span> <span class='va'>overview_ct_object</span>,
-  title <span class='op'>=</span> <span class='st'>"Some nice title for a cross tab"</span>,
-  crosstab <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  cond1 <span class='op'>=</span> <span class='st'>"Name of first condition"</span>,
-  cond2 <span class='op'>=</span> <span class='st'>"Name of second condition"</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.3 (2020-10-10) using overviewR 
-#&gt; % Table created on 2021-01-04
-#&gt; % Please add the following packages to your document preamble: 
-#&gt; % \usepackage{multirow} 
-#&gt; % \usepackage{tabularx} 
-#&gt; % \newcolumntype{b}{X} 
-#&gt; % \newcolumntype{s}{&gt;{\hsize=.5\hsize}X} 
-#&gt; \begin{table}[ht] 
-#&gt; \caption{Some nice title for a cross tab} 
-#&gt; \label{tab:tab1} 
-#&gt; 
-#&gt; \begin{tabularx}{\textwidth}{ssbb} 
-#&gt; \hline &amp; &amp; \multicolumn{2}{c}{\textbf{Name of first condition}} \\ 
-#&gt;  &amp; &amp; \textbf{Fulfilled} &amp; \textbf{Not fulfilled} \\ 
-#&gt;  \hline \\ 
-#&gt;  \multirow{2}{*}{\textbf{Name of second condition}} &amp; \textbf{Fulfilled} &amp; 
-#&gt;  AGO (1990, 1992), FRA (1993), GBR (1997) &amp; BEN (1996, 1999), FRA (1999), GBR (1993), RWA (1992, 1994)\\  
-#&gt;  \\ \hline \\ 
-#&gt;  &amp; \textbf{Not fulfilled} &amp;  BEN (1997), RWA (1990) &amp; AGO (1991), BEN (1995, 1998), FRA (1996), GBR (1991, 1995, 1999), RWA (1991, 1993, 1995)\\  \hline \\ 
-#&gt;  \end{tabularx} 
-#&gt;  \end{table} </div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in aes(x = !!cond1_mean, y = !!cond2_mean): could not find function "aes"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
