@@ -116,6 +116,8 @@
 <li>
 <code>overview_plot</code> is an alternative to visualize the sample (a way to present results from <code>overview_tab</code>)</li>
 <li>
+<code>overview_crossplot</code> is an alternative to visualize a cross table (a way to present results from <code>overview_crosstab</code>)</li>
+<li>
 <code>overview_heat</code> plots a heat map of your time line</li>
 <li>
 <code>overview_na</code> plots an overview of missing values by variable</li>
@@ -310,9 +312,9 @@ Countries &amp; Years \\
 <span id="cb20-3"><a href="#cb20-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; </span></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt;   </span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpG6bypd<span class="op">/</span>remotes79547401ba<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’ ...</span>
+<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmpz9XE5L<span class="op">/</span>remotes72e15bb57a4<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’ ...</span>
 <span id="cb20-7"><a href="#cb20-7"></a>  </span>
-<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpG6bypd<span class="op">/</span>remotes79547401ba<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’</span>
+<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmpz9XE5L<span class="op">/</span>remotes72e15bb57a4<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’</span>
 <span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; </span></span>
 <span id="cb20-10"><a href="#cb20-10"></a>  </span>
 <span id="cb20-11"><a href="#cb20-11"></a>─  preparing ‘overviewR’<span class="op">:</span></span>
@@ -345,54 +347,51 @@ Countries &amp; Years \\
 </div>
 <div id="overview_crossplot" class="section level3">
 <h3 class="hasAnchor">
-<a href="#overview_crossplot" class="anchor"></a>```overview_crossplot````</h3>
+<a href="#overview_crossplot" class="anchor"></a><code>overview_crossplot</code>
+</h3>
 <p>To visualize also the cross table, <code>overview_crossplot</code> does the job. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Load the GitHub version</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="kw">library</span>(devtools) <span class="co"># Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt; Using github PAT from envvar GITHUB_PAT</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; Downloading GitHub repo cosimameyer/overviewR@HEAD</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; </span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="co">#&gt;   </span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpG6bypd<span class="op">/</span>remotes79577544e20<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’ ...</span>
-<span id="cb21-9"><a href="#cb21-9"></a>  </span>
-<span id="cb21-10"><a href="#cb21-10"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpG6bypd<span class="op">/</span>remotes79577544e20<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’</span>
-<span id="cb21-11"><a href="#cb21-11"></a><span class="co">#&gt; </span></span>
-<span id="cb21-12"><a href="#cb21-12"></a>  </span>
-<span id="cb21-13"><a href="#cb21-13"></a>─  preparing ‘overviewR’<span class="op">:</span></span>
-<span id="cb21-14"><a href="#cb21-14"></a><span class="co">#&gt; </span></span>
-<span id="cb21-15"><a href="#cb21-15"></a><span class="st">  </span></span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="st">   </span>checking DESCRIPTION meta<span class="op">-</span>information ...</span>
-<span id="cb21-17"><a href="#cb21-17"></a>  </span>
-<span id="cb21-18"><a href="#cb21-18"></a>✔  checking DESCRIPTION meta<span class="op">-</span>information</span>
-<span id="cb21-19"><a href="#cb21-19"></a><span class="co">#&gt; </span></span>
-<span id="cb21-20"><a href="#cb21-20"></a>  </span>
-<span id="cb21-21"><a href="#cb21-21"></a>─  checking <span class="cf">for</span> LF line<span class="op">-</span>endings <span class="cf">in</span> source and make files and shell scripts</span>
-<span id="cb21-22"><a href="#cb21-22"></a><span class="co">#&gt; </span></span>
-<span id="cb21-23"><a href="#cb21-23"></a>  </span>
-<span id="cb21-24"><a href="#cb21-24"></a>─  checking <span class="cf">for</span> empty or unneeded directories</span>
-<span id="cb21-25"><a href="#cb21-25"></a><span class="co">#&gt; </span></span>
-<span id="cb21-26"><a href="#cb21-26"></a>  </span>
-<span id="cb21-27"><a href="#cb21-27"></a>─  building ‘overviewR_<span class="dv">0</span>.<span class="dv">0</span>.<span class="dv">7</span>.<span class="fl">999.</span>tar.gz’</span>
-<span id="cb21-28"><a href="#cb21-28"></a><span class="co">#&gt; </span></span>
-<span id="cb21-29"><a href="#cb21-29"></a>  </span>
-<span id="cb21-30"><a href="#cb21-30"></a>   </span>
-<span id="cb21-31"><a href="#cb21-31"></a><span class="co">#&gt; </span></span>
-<span id="cb21-32"><a href="#cb21-32"></a><span class="co">#&gt; Installing package into '/Users/runner/work/_temp/Library'</span></span>
-<span id="cb21-33"><a href="#cb21-33"></a><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span id="cb21-34"><a href="#cb21-34"></a><span class="kw">library</span>(overviewR) <span class="co"># Easily Extracting Information About Your Data # Easily Extracting Information About Your Data</span></span>
-<span id="cb21-35"><a href="#cb21-35"></a></span>
-<span id="cb21-36"><a href="#cb21-36"></a><span class="kw">overview_crossplot</span>(</span>
-<span id="cb21-37"><a href="#cb21-37"></a>  toydata,</span>
-<span id="cb21-38"><a href="#cb21-38"></a>  <span class="dt">id =</span> ccode,</span>
-<span id="cb21-39"><a href="#cb21-39"></a>  <span class="dt">time =</span> year,</span>
-<span id="cb21-40"><a href="#cb21-40"></a>  <span class="dt">cond1 =</span> gdp,</span>
-<span id="cb21-41"><a href="#cb21-41"></a>  <span class="dt">cond2 =</span> population,</span>
-<span id="cb21-42"><a href="#cb21-42"></a>  <span class="dt">threshold1 =</span> <span class="dv">25000</span>,</span>
-<span id="cb21-43"><a href="#cb21-43"></a>  <span class="dt">threshold2 =</span> <span class="dv">27000</span>,</span>
-<span id="cb21-44"><a href="#cb21-44"></a>  <span class="dt">color =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb21-45"><a href="#cb21-45"></a>  <span class="dt">label =</span> <span class="ot">TRUE</span></span>
-<span id="cb21-46"><a href="#cb21-46"></a>)</span></code></pre></div>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt; </span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt;   </span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmpz9XE5L<span class="op">/</span>remotes72e66783a5f<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’ ...</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  </span>
+<span id="cb21-8"><a href="#cb21-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmpz9XE5L<span class="op">/</span>remotes72e66783a5f<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>db1e9c4<span class="op">/</span>DESCRIPTION’</span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; </span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>  </span>
+<span id="cb21-11"><a href="#cb21-11"></a>─  preparing ‘overviewR’<span class="op">:</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="co">#&gt; </span></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="st">  </span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="st">   </span>checking DESCRIPTION meta<span class="op">-</span>information ...</span>
+<span id="cb21-15"><a href="#cb21-15"></a>  </span>
+<span id="cb21-16"><a href="#cb21-16"></a>✔  checking DESCRIPTION meta<span class="op">-</span>information</span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="co">#&gt; </span></span>
+<span id="cb21-18"><a href="#cb21-18"></a>  </span>
+<span id="cb21-19"><a href="#cb21-19"></a>─  checking <span class="cf">for</span> LF line<span class="op">-</span>endings <span class="cf">in</span> source and make files and shell scripts</span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="co">#&gt; </span></span>
+<span id="cb21-21"><a href="#cb21-21"></a>  </span>
+<span id="cb21-22"><a href="#cb21-22"></a>─  checking <span class="cf">for</span> empty or unneeded directories</span>
+<span id="cb21-23"><a href="#cb21-23"></a><span class="co">#&gt; </span></span>
+<span id="cb21-24"><a href="#cb21-24"></a>  </span>
+<span id="cb21-25"><a href="#cb21-25"></a>─  building ‘overviewR_<span class="dv">0</span>.<span class="dv">0</span>.<span class="dv">7</span>.<span class="fl">999.</span>tar.gz’</span>
+<span id="cb21-26"><a href="#cb21-26"></a><span class="co">#&gt; </span></span>
+<span id="cb21-27"><a href="#cb21-27"></a>  </span>
+<span id="cb21-28"><a href="#cb21-28"></a>   </span>
+<span id="cb21-29"><a href="#cb21-29"></a><span class="co">#&gt; </span></span>
+<span id="cb21-30"><a href="#cb21-30"></a><span class="kw">library</span>(overviewR) <span class="co"># Easily Extracting Information About Your Data # Easily Extracting Information About Your Data</span></span>
+<span id="cb21-31"><a href="#cb21-31"></a></span>
+<span id="cb21-32"><a href="#cb21-32"></a><span class="kw">overview_crossplot</span>(</span>
+<span id="cb21-33"><a href="#cb21-33"></a>  toydata,</span>
+<span id="cb21-34"><a href="#cb21-34"></a>  <span class="dt">id =</span> ccode,</span>
+<span id="cb21-35"><a href="#cb21-35"></a>  <span class="dt">time =</span> year,</span>
+<span id="cb21-36"><a href="#cb21-36"></a>  <span class="dt">cond1 =</span> gdp,</span>
+<span id="cb21-37"><a href="#cb21-37"></a>  <span class="dt">cond2 =</span> population,</span>
+<span id="cb21-38"><a href="#cb21-38"></a>  <span class="dt">threshold1 =</span> <span class="dv">25000</span>,</span>
+<span id="cb21-39"><a href="#cb21-39"></a>  <span class="dt">threshold2 =</span> <span class="dv">27000</span>,</span>
+<span id="cb21-40"><a href="#cb21-40"></a>  <span class="dt">color =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb21-41"><a href="#cb21-41"></a>  <span class="dt">label =</span> <span class="ot">TRUE</span></span>
+<span id="cb21-42"><a href="#cb21-42"></a>)</span></code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="overview_heat" class="section level3">
