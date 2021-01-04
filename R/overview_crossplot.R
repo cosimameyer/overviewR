@@ -3,7 +3,7 @@
 #' @description This function plots a ggplot to visualize a cross table plot.
 #'
 #' @param dat Your data set
-#' #' @param cond1 Variable that describes the first condition
+#' @param cond1 Variable that describes the first condition
 #' @param cond2 Variable that describes the second condition
 #' @param threshold1 A threshold for \code{cond1}
 #' @param threshold2 A threshold for \code{cond2}

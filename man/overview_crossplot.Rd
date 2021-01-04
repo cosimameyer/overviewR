@@ -19,13 +19,14 @@ overview_crossplot(
 )
 }
 \arguments{
-\item{dat}{Your data set
-#' @param cond1 Variable that describes the first condition}
+\item{dat}{Your data set}
 
 \item{id}{Your scope (e.g., country codes or individual IDs). If the id
 variable contains NAs, they will not be included in the plot.}
 
 \item{time}{Your time (e.g., time periods given by years, months, ...)}
+
+\item{cond1}{Variable that describes the first condition}
 
 \item{cond2}{Variable that describes the second condition}
 
