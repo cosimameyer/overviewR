@@ -41,6 +41,7 @@ The goal of overviewR is to make it easy to get an overview of a data set by dis
 - `overview_crosstab` generates a cross table. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set.
 - `overview_print` converts the output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
 - `overview_plot` is an alternative to visualize the sample (a way to present results from `overview_tab`)
+- `overview_crossplot` is an alternative to visualize a cross table (a way to present results from `overview_crosstab`)
 - `overview_heat` plots a heat map of your time line
 - `overview_na` plots an overview of missing values by variable
 
@@ -318,11 +319,11 @@ toydata %<>%
 overview_plot(dat = toydata, id = ccode, time = year, color = before)
 ```
 
-### ```overview_crossplot````
+### ```overview_crossplot```
 
 To visualize also the cross table, `overview_crossplot` does the job. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
 
-```{r, out.width = '50%', fig.align='center'}
+```{r, out.width = '50%', fig.align='center', include = TRUE, echo = TRUE, message = FALSE}
 # Load the GitHub version
 library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")

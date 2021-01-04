@@ -43,6 +43,8 @@ the following functions:
     file.
 -   `overview_plot` is an alternative to visualize the sample (a way to
     present results from `overview_tab`)
+-   `overview_crossplot` is an alternative to visualize a cross table (a
+    way to present results from `overview_crosstab`)
 -   `overview_heat` plots a heat map of your time line
 -   `overview_na` plots an overview of missing values by variable
 
@@ -350,6 +352,15 @@ development version that can be accessed from GitHub.*
 # Load the GitHub version
 library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
+#> 
+#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpXNXFhN/remotes5f60608d8cd9/cosimameyer-overviewR-db1e9c4/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpXNXFhN/remotes5f60608d8cd9/cosimameyer-overviewR-db1e9c4/DESCRIPTION’
+#>   ─  preparing ‘overviewR’:
+#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘overviewR_0.0.7.999.tar.gz’
+#>      
+#> 
 library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
 library(magrittr) # A Forward-Pipe Operator for R
 
@@ -363,7 +374,7 @@ overview_plot(dat = toydata, id = ccode, time = year, color = before)
 
 <img src="man/figures/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
 
-### \`\`\`overview\_crossplot\`\`\`\`
+### `overview_crossplot`
 
 To visualize also the cross table, `overview_crossplot` does the job.
 *Note, this argument is currently only implemented in the development
@@ -373,8 +384,15 @@ version that can be accessed from GitHub.*
 # Load the GitHub version
 library(devtools) # Tools to Make Developing R Packages Easier # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
-#> Skipping install of 'overviewR' from a github remote, the SHA1 (1ee4b2e8) has not changed since last install.
-#>   Use `force = TRUE` to force installation
+#> 
+#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpXNXFhN/remotes5f6019455350/cosimameyer-overviewR-db1e9c4/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/RtmpXNXFhN/remotes5f6019455350/cosimameyer-overviewR-db1e9c4/DESCRIPTION’
+#>   ─  preparing ‘overviewR’:
+#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘overviewR_0.0.7.999.tar.gz’
+#>      
+#> 
 library(overviewR) # Easily Extracting Information About Your Data # Easily Extracting Information About Your Data
 
 overview_crossplot(
