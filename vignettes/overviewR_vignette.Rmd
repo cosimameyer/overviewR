@@ -423,7 +423,8 @@ knitr::kable(output_table)
 
 A classical `ggplot2` theme alternative
 ```{r, out.width = '50%', fig.align='center'}
-library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(ggplot2) # Create Elegant Data Visualisations Using the 
+                 # Grammar of Graphics
 
 overview_na(toydata_with_na) +
   ggplot2::theme_minimal() 
@@ -448,8 +449,10 @@ library(countrycode) # Convert Country Names and Country Codes
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
 
 toydata %>% 
-  # Transform the country code (ISO3 character code) into a country name using the `countrycode` package
-  dplyr::mutate(country = countrycode::countrycode(ccode, "iso3c", "country.name")) %>% 
+  # Transform the country code (ISO3 character code) into a country name using 
+  # the `countrycode` package
+  dplyr::mutate(country = 
+                  countrycode::countrycode(ccode, "iso3c", "country.name")) %>% 
   overview_plot(id = country, time = year)
 ```
 
