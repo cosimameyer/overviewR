@@ -10,6 +10,11 @@
       - `fontsize` to change the font size
    - `overview_crossplot`
       - a new function that visualizes basically the same output as `overview_crosstab`
+   - `overview_tab`
+      - if there is a `NA` in the `id` variable this observation will be automatically deleted. The user receives a warning.
+   - `overview_crosstab`
+      - if there is a `NA` in the `id` variable this observation will be automatically deleted. The user receives a warning.
+   
 
 ---
 # overviewR 0.0.7
