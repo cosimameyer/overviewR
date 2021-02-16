@@ -20,7 +20,7 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2021--01--04-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2021--02--16-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -554,6 +554,80 @@ toydata %>%
      \hline 
      \end{tabular} 
      \end{table} 
+
+## Extensions
+
+If you wish to compare two data sets using `overview_tab`, this is not
+(yet) implemented in `overviewR` but there is currently a workaround.
+
+``` r
+library(overviewR)
+library(dplyr)
+library(xtable)
+
+# Load data
+data(toydata)
+
+# Restrict the data so that we have something to compare :-)
+toydata_res <- toydata %>% 
+  dplyr::filter(year > 1992)
+
+# Generate two overview_tab objects
+dat1 <- overview_tab(toydata, id = ccode, time = year)
+dat2 <- overview_tab(toydata_res, id = ccode, time = year)
+
+# And now we use full_join to combine both
+dat_full <- dat1 %>% 
+  dplyr::full_join(dat2, by = "ccode") %>% 
+  dplyr::rename(time_dat1 = time_frame.x,
+                time_dat2 = time_frame.y)
+```
+
+Having a look at the output, we see that this is exactly what we wanted
+to have:
+
+``` r
+head(dat_full)
+```
+
+    #> # A tibble: 5 x 3
+    #> # Groups:   ccode [5]
+    #>   ccode time_dat1                    time_dat2             
+    #>   <chr> <chr>                        <chr>                 
+    #> 1 AGO   1990 - 1992                  <NA>                  
+    #> 2 BEN   1995 - 1999                  1995 - 1999           
+    #> 3 FRA   1993, 1996, 1999             1993, 1996, 1999      
+    #> 4 GBR   1991, 1993, 1995, 1997, 1999 1993, 1995, 1997, 1999
+    #> 5 RWA   1990 - 1995                  1993 - 1995
+
+`overview_print` cannot handle this object (yet), so we use `xtable`
+instead which gives us the LaTeX output.
+
+``` r
+print(xtable(dat_full), include.rownames=FALSE)
+```
+
+    % latex table generated in R 4.0.2 by xtable 1.8-4 package
+    % Tue Feb 16 18:20:51 2021
+    \begin{table}[ht]
+    \centering
+    \begin{tabular}{lll}
+      \hline
+    ccode & time\_dat1 & time\_dat2 \\ 
+      \hline
+    AGO & 1990 - 1992 &  \\ 
+      BEN & 1995 - 1999 & 1995 - 1999 \\ 
+      FRA & 1993, 1996, 1999 & 1993, 1996, 1999 \\ 
+      GBR & 1991, 1993, 1995, 1997, 1999 & 1993, 1995, 1997, 1999 \\ 
+      RWA & 1990 - 1995 & 1993 - 1995 \\ 
+       \hline
+    \end{tabular}
+    \end{table}
+
+</details>
+<p align="center">
+<img src='man/figures/extension1.png' height="150"/>
+</p>
 
 # Credits
 
