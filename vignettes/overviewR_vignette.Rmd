@@ -558,6 +558,6 @@ AGO & 1990 - 1992 &  \\
 </details>
 
 <p align="center">
-<img src='man/figures/extension1.png' height="150"/>
+<img src='extension1.png' height="150"/>
 </p>
 
