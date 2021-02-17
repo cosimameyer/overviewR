@@ -96,7 +96,7 @@
       <h1 data-toc-skip>overviewR: Easily Extracting Information About Your Data</h1>
                         <h4 class="author">Cosima Meyer and Dennis Hammerschmidt</h4>
             
-            <h4 class="date">2021-02-16</h4>
+            <h4 class="date">2021-02-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/cosimameyer/overviewR/blob/master/vignettes/overviewR_vignette.Rmd"><code>vignettes/overviewR_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>overviewR_vignette.Rmd</code></div>
@@ -312,9 +312,9 @@ Countries &amp; Years \\
 <span id="cb20-3"><a href="#cb20-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; </span></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt;   </span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpkZzXqS<span class="op">/</span>remotesb3978f2846f<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="fl">-9371e35</span><span class="op">/</span>DESCRIPTION’ ...</span>
+<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmp9KCsBq<span class="op">/</span>remotes73047714191<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>b8241bb<span class="op">/</span>DESCRIPTION’ ...</span>
 <span id="cb20-7"><a href="#cb20-7"></a>  </span>
-<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpkZzXqS<span class="op">/</span>remotesb3978f2846f<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="fl">-9371e35</span><span class="op">/</span>DESCRIPTION’</span>
+<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmp9KCsBq<span class="op">/</span>remotes73047714191<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>b8241bb<span class="op">/</span>DESCRIPTION’</span>
 <span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; </span></span>
 <span id="cb20-10"><a href="#cb20-10"></a>  </span>
 <span id="cb20-11"><a href="#cb20-11"></a>─  preparing ‘overviewR’<span class="op">:</span></span>
@@ -508,6 +508,66 @@ Sample &amp; Time frame \\
  \end{tabular} 
  \end{table} </code></pre>
 </div>
+</div>
+<div id="extensions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#extensions" class="anchor"></a>Extensions</h2>
+<p>If you wish to compare two data sets using <code>overview_tab</code>, this is not (yet) implemented in <code>overviewR</code> but there is currently a workaround.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cosimameyer/overviewR">overviewR</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://xtable.r-forge.r-project.org/">xtable</a></span><span class="op">)</span>
+
+<span class="co"># Load data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">toydata</span><span class="op">)</span>
+
+<span class="co"># Restrict the data so that we have something to compare :-)</span>
+<span class="va">toydata_res</span> <span class="op">&lt;-</span> <span class="va">toydata</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">&gt;</span> <span class="fl">1992</span><span class="op">)</span>
+
+<span class="co"># Generate two overview_tab objects</span>
+<span class="va">dat1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/overview_tab.html">overview_tab</a></span><span class="op">(</span><span class="va">toydata</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span>
+<span class="va">dat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/overview_tab.html">overview_tab</a></span><span class="op">(</span><span class="va">toydata_res</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span>
+
+<span class="co"># And now we use full_join to combine both</span>
+<span class="va">dat_full</span> <span class="op">&lt;-</span> <span class="va">dat1</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">dat2</span>, by <span class="op">=</span> <span class="st">"ccode"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>time_dat1 <span class="op">=</span> <span class="va">time_frame.x</span>,
+                time_dat2 <span class="op">=</span> <span class="va">time_frame.y</span><span class="op">)</span></code></pre></div>
+<p>Having a look at the output, we see that this is exactly what we wanted to have:</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat_full</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 5 x 3
+#&gt; # Groups:   ccode [5]
+#&gt;   ccode time_dat1                    time_dat2             
+#&gt;   &lt;chr&gt; &lt;chr&gt;                        &lt;chr&gt;                 
+#&gt; 1 AGO   1990 - 1992                  &lt;NA&gt;                  
+#&gt; 2 BEN   1995 - 1999                  1995 - 1999           
+#&gt; 3 FRA   1993, 1996, 1999             1993, 1996, 1999      
+#&gt; 4 GBR   1991, 1993, 1995, 1997, 1999 1993, 1995, 1997, 1999
+#&gt; 5 RWA   1990 - 1995                  1993 - 1995</code></pre>
+<p><code>overview_print</code> cannot handle this object (yet), so we use <code>xtable</code> instead which gives us the LaTeX output.</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/xtable/man/xtable.html">xtable</a></span><span class="op">(</span><span class="va">dat_full</span><span class="op">)</span>, include.rownames<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<pre><code>% latex table generated in R 4.0.2 by xtable 1.8-4 package
+% Tue Feb 16 18:20:51 2021
+\begin{table}[ht]
+\centering
+\begin{tabular}{lll}
+  \hline
+ccode &amp; time\_dat1 &amp; time\_dat2 \\ 
+  \hline
+AGO &amp; 1990 - 1992 &amp;  \\ 
+  BEN &amp; 1995 - 1999 &amp; 1995 - 1999 \\ 
+  FRA &amp; 1993, 1996, 1999 &amp; 1993, 1996, 1999 \\ 
+  GBR &amp; 1991, 1993, 1995, 1997, 1999 &amp; 1993, 1995, 1997, 1999 \\ 
+  RWA &amp; 1990 - 1995 &amp; 1993 - 1995 \\ 
+   \hline
+\end{tabular}
+\end{table}</code></pre>
+
+<p align="center">
+<img src="extension1.png" height="150"></p>
 </div>
   </div>
 
