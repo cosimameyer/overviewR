@@ -1,5 +1,6 @@
 template:
-  package: themepkgdown
+  params:
+    bootswatch: cosmo
 
 development:
   mode: auto
