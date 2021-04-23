@@ -23,6 +23,10 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
+    news:
+      - icon: fa-lightbulb
+      text: News
+      href: news/index.html
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/cosimameyer/reproducr
@@ -38,11 +42,6 @@ navbar:
         - text: The basics
         - text: overview_plot
           href: articles/overview_plot.html
-
-
-
-reference:
-- title: Output formats
 
 
 authors:
