@@ -3,7 +3,5 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   overviewR_vignette: overviewR_vignette.html
-  overview_plot: overview_plot.html
-  overview_tab: overview_tab.html
-last_built: 2021-04-23T12:54Z
+last_built: 2021-04-23T13:18Z
 

@@ -54,7 +54,7 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">The basics</li>
     <li>
-      <a href="../articles/overview_tab.html">overview_tab</a>
+      <a href="../articles/overviewR_vignette.html#overview_tab">overview_tab</a>
     </li>
   </ul>
 </li>
@@ -67,7 +67,7 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">The basics</li>
     <li>
-      <a href="../articles/overview_plot.html">overview_plot</a>
+      <a href="../articles/overviewR_vignette.html#overview_plot">overview_plot</a>
     </li>
   </ul>
 </li>
@@ -94,12 +94,6 @@
 <li>
       <a href="../articles/overviewR_vignette.html">overviewR: Easily Extracting Information About Your Data</a>
     </li>
-    <li>
-      <a href="../articles/overview_plot.html">overview_plot</a>
-    </li>
-    <li>
-      <a href="../articles/overview_tab.html">overview_tab</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -115,7 +109,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/cosimameyer/reproducr">
+  <a href="https://github.com/cosimameyer/overviewR/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -175,9 +169,9 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"cosimameyer/overviewR"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div id="overview_tab" class="section level1">
+<h1 class="hasAnchor">
+<a href="#overview_tab" class="anchor"></a>overview_tab</h1>
 <p>First, load the package.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cosimameyer/overviewR">overviewR</a></span><span class="op">)</span></code></pre></div>
@@ -203,10 +197,6 @@
 <!-- ``` -->
 <p>There are 264 observations for 5 countries (Angola, Benin, France, Rwanda, and UK) stored in the <code>ccode</code> variable, over a time period between 1990 to 1999 (<code>year</code>) with additional information for the month (<code>month</code>). Additionally, two artificially generated fake variables for GDP (<code>gdp</code>) and population size (<code>population</code>) are included to illustrate of conditions.</p>
 <p>The following functions work best on data sets that have an id-time-structure, in the case of <code>toydata</code> this corresponds to country-year with <code>ccode</code> and <code>year</code>. If the data set does not have this format yet, consider using <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html"><code>pivot_wider()</code> or <code>pivot_longer()</code></a> to get to the format.</p>
-<div id="overview_tab" class="section level3">
-<h3 class="hasAnchor">
-<a href="#overview_tab" class="anchor"></a><code>overview_tab</code>
-</h3>
 <p>Generate some general overview of the data set using the time and scope conditions with <code>overview_tab</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">output_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/overview_tab.html">overview_tab</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">toydata</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span></code></pre></div>
@@ -219,7 +209,6 @@
 # BEN       1995 - 1999
 # GBR       1991, 1993, 1995, 1997, 1999
 # FRA       1993, 1996, 1999</code></pre>
-</div>
 <div id="overview_crosstab" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview_crosstab" class="anchor"></a><code>overview_crosstab</code>
@@ -333,10 +322,10 @@ Countries &amp; Years \\
 <code class="sourceCode R"><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span>obj <span class="op">=</span> <span class="va">output_table</span>, save_out <span class="op">=</span> <span class="cn">TRUE</span>, path <span class="op">=</span> <span class="st">"SET-YOUR-PATH"</span>,
                file <span class="op">=</span> <span class="st">"output.tex"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="overview_plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#overview_plot" class="anchor"></a><code>overview_plot</code>
-</h3>
+</div>
+<div id="overview_plot" class="section level1">
+<h1 class="hasAnchor">
+<a href="#overview_plot" class="anchor"></a>overview_plot</h1>
 <p>In addition to tables, <code>overviewR</code> also provides plots to illustrate the structure of your data. <code>overview_plot</code> illustrates the information that is generated in <code>overview_table</code> in a ggplot graphic. All scope objects (e.g., countries) are listed on the y-axis where horizontal lines indicate the coverage across the entire time frame of the data (x-axis). This helps to spot gaps in the data for specific scope objects and outlines at what time point they occur.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">toydata</span><span class="op">)</span>
@@ -352,12 +341,12 @@ Countries &amp; Years \\
 <span id="cb20-3"><a href="#cb20-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; </span></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt;   </span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpR3C1v4<span class="op">/</span>remotese4566db3e5a<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>45d8a2d<span class="op">/</span>DESCRIPTION’ ...</span>
+<span id="cb20-6"><a href="#cb20-6"></a>   checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmp0c6AZF<span class="op">/</span>remotesdba34d8de2d<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>ce794a7<span class="op">/</span>DESCRIPTION’ ...</span>
 <span id="cb20-7"><a href="#cb20-7"></a>  </span>
-<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>RtmpR3C1v4<span class="op">/</span>remotese4566db3e5a<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>45d8a2d<span class="op">/</span>DESCRIPTION’ (442ms)</span>
+<span id="cb20-8"><a href="#cb20-8"></a>✔  checking <span class="cf">for</span> file ‘<span class="op">/</span>private<span class="op">/</span>var<span class="op">/</span>folders<span class="op">/</span><span class="dv">24</span><span class="op">/</span>8k48jl6d249_n_qfxwsl6xvm0000gn<span class="op">/</span>T<span class="op">/</span>Rtmp0c6AZF<span class="op">/</span>remotesdba34d8de2d<span class="op">/</span>cosimameyer<span class="op">-</span>overviewR<span class="op">-</span>ce794a7<span class="op">/</span>DESCRIPTION’ (497ms)</span>
 <span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; </span></span>
 <span id="cb20-10"><a href="#cb20-10"></a>  </span>
-<span id="cb20-11"><a href="#cb20-11"></a>─  preparing ‘overviewR’<span class="op">:</span><span class="st"> </span>(<span class="fl">1.2</span>s)</span>
+<span id="cb20-11"><a href="#cb20-11"></a>─  preparing ‘overviewR’<span class="op">:</span><span class="st"> </span>(<span class="fl">1.3</span>s)</span>
 <span id="cb20-12"><a href="#cb20-12"></a><span class="co">#&gt; </span></span>
 <span id="cb20-13"><a href="#cb20-13"></a>  </span>
 <span id="cb20-14"><a href="#cb20-14"></a>   checking DESCRIPTION meta<span class="op">-</span>information ...</span>
@@ -386,7 +375,6 @@ Countries &amp; Years \\
 <span id="cb20-37"><a href="#cb20-37"></a><span class="co"># Plot using the `color` argument</span></span>
 <span id="cb20-38"><a href="#cb20-38"></a><span class="kw">overview_plot</span>(<span class="dt">dat =</span> toydata, <span class="dt">id =</span> ccode, <span class="dt">time =</span> year, <span class="dt">color =</span> before)</span></code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;"></p>
-</div>
 <div id="overview_crossplot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview_crossplot" class="anchor"></a><code>overview_crossplot</code>
@@ -434,7 +422,6 @@ Countries &amp; Years \\
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span>, perc <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;"></p>
-</div>
 </div>
 <div id="compatibilities-with-other-packages" class="section level2">
 <h2 class="hasAnchor">
@@ -608,6 +595,7 @@ AGO &amp; 1990 - 1992 &amp;  \\
 
 <p align="center">
 <img src="extension1.png" height="150"></p>
+</div>
 </div>
   </div>
 
