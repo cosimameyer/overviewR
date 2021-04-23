@@ -62,3 +62,4 @@ vignettes/*.pdf
 # pkgdown docs folder
 
 docs/*
+docs
