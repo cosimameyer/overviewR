@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>overview_na — overview_na • overviewR</title>
+<title>overview_crossplot — overview_crossplot • overviewR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="overview_na — overview_na" />
-<meta property="og:description" content="This function plots a ggplot to visualize the distribution of
-    NAs across all variables in the data set." />
+<meta property="og:title" content="overview_crossplot — overview_crossplot" />
+<meta property="og:description" content="This function plots a ggplot to visualize a cross table plot." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -136,17 +135,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>overview_na</h1>
-    <small class="dont-index">Source: <a href='https://github.com/cosimameyer/overviewR/blob/master/R/overview_na.R'><code>R/overview_na.R</code></a></small>
-    <div class="hidden name"><code>overview_na.Rd</code></div>
+    <h1>overview_crossplot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/cosimameyer/overviewR/blob/master/R/overview_crossplot.R'><code>R/overview_crossplot.R</code></a></small>
+    <div class="hidden name"><code>overview_crossplot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function plots a ggplot to visualize the distribution of
-    NAs across all variables in the data set.</p>
+    <p>This function plots a ggplot to visualize a cross table plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>overview_na</span><span class='op'>(</span><span class='va'>dat</span>, yaxis <span class='op'>=</span> <span class='st'>"Variables"</span>, perc <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>overview_crossplot</span><span class='op'>(</span>
+  <span class='va'>dat</span>,
+  <span class='va'>id</span>,
+  <span class='va'>time</span>,
+  <span class='va'>cond1</span>,
+  <span class='va'>cond2</span>,
+  <span class='va'>threshold1</span>,
+  <span class='va'>threshold2</span>,
+  xaxis <span class='op'>=</span> <span class='st'>"Condition 1"</span>,
+  yaxis <span class='op'>=</span> <span class='st'>"Condition 2"</span>,
+  label <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  color <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,24 +166,66 @@
       <td><p>Your data set</p></td>
     </tr>
     <tr>
-      <th>yaxis</th>
-      <td><p>Label of your y axis ("Variables" is default)</p></td>
+      <th>id</th>
+      <td><p>Your scope (e.g., country codes or individual IDs). If the id
+variable contains NAs, they will not be included in the plot.</p></td>
     </tr>
     <tr>
-      <th>perc</th>
-      <td><p>If TRUE (default) plot returns the number of NAs in percentage</p></td>
+      <th>time</th>
+      <td><p>Your time (e.g., time periods given by years, months, ...)</p></td>
+    </tr>
+    <tr>
+      <th>cond1</th>
+      <td><p>Variable that describes the first condition</p></td>
+    </tr>
+    <tr>
+      <th>cond2</th>
+      <td><p>Variable that describes the second condition</p></td>
+    </tr>
+    <tr>
+      <th>threshold1</th>
+      <td><p>A threshold for <code>cond1</code></p></td>
+    </tr>
+    <tr>
+      <th>threshold2</th>
+      <td><p>A threshold for <code>cond2</code></p></td>
+    </tr>
+    <tr>
+      <th>xaxis</th>
+      <td><p>Label of the x axis ("Condition 1" is default)</p></td>
+    </tr>
+    <tr>
+      <th>yaxis</th>
+      <td><p>Label of the y axis ("Condition 2" is default)</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>Label of the observations. Overlapping labels are
+avoided by using 'ggrepel'</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>Color of the different observation groups</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A ggplot figure that presents the distribution of NAs in the
-    data set</p>
+    <p>A ggplot figure that presents the sample information visually
+    in a cross table</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>toydata</span><span class='op'>)</span>
-<span class='fu'>overview_na</span><span class='op'>(</span><span class='va'>toydata</span>, perc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='img'><img src='overview_na-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>overview_crossplot</span><span class='op'>(</span>
+  dat <span class='op'>=</span> <span class='va'>toydata</span>,
+  cond1 <span class='op'>=</span> <span class='va'>gdp</span>,
+  cond2 <span class='op'>=</span> <span class='va'>population</span>,
+  threshold1 <span class='op'>=</span> <span class='fl'>25000</span>,
+  threshold2 <span class='op'>=</span> <span class='fl'>27000</span>,
+  id <span class='op'>=</span> <span class='va'>ccode</span>,
+  time <span class='op'>=</span> <span class='va'>year</span>
+<span class='op'>)</span>
+</div><div class='img'><img src='overview_crossplot-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

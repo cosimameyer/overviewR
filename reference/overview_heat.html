@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">overviewR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7.999</span>
       </span>
     </div>
 
@@ -90,28 +90,28 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../articles/overviewR_vignette.html">
-    <span class="fa fa-rocket"></span>
+    <span class="fas fa-rocket"></span>
      
     Getting Started
   </a>
 </li>
 <li>
   <a href="../reference/index.html">
-    <span class="fa fa-project-diagram"></span>
+    <span class="fas fa-project-diagram"></span>
      
     Functions
   </a>
 </li>
 <li>
   <a href="https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf">
-    <span class="fa fa-sticky-note"></span>
+    <span class="fas fa-sticky-note"></span>
      
     CheatSheet
   </a>
 </li>
 <li>
   <a href="../news/index.html">
-    <span class="fa fa-lightbulb"></span>
+    <span class="fas fa-lightbulb"></span>
      
     News
   </a>
@@ -120,7 +120,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/cosimameyer/overviewR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -148,37 +148,39 @@
     number of cases per time-scope-unit or relative number in percentage.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>overview_heat</span>(
-  <span class='kw'>dat</span>,
-  <span class='kw'>id</span>,
-  <span class='kw'>time</span>,
-  perc = <span class='fl'>FALSE</span>,
-  <span class='kw'>exp_total</span>,
-  xaxis = <span class='st'>"Time frame"</span>,
-  yaxis = <span class='st'>"Sample"</span>,
-  col_low = <span class='st'>"#dceaf2"</span>,
-  col_high = <span class='st'>"#2A5773"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>overview_heat</span><span class='op'>(</span>
+  <span class='va'>dat</span>,
+  <span class='va'>id</span>,
+  <span class='va'>time</span>,
+  perc <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>exp_total</span>,
+  xaxis <span class='op'>=</span> <span class='st'>"Time frame"</span>,
+  yaxis <span class='op'>=</span> <span class='st'>"Sample"</span>,
+  col_low <span class='op'>=</span> <span class='st'>"#dceaf2"</span>,
+  col_high <span class='op'>=</span> <span class='st'>"#2A5773"</span>,
+  label <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dat</th>
-      <td><p>Your dataset</p></td>
+      <td><p>The data set</p></td>
     </tr>
     <tr>
       <th>id</th>
-      <td><p>Your scope (e.g., country codes or individual IDs)</p></td>
+      <td><p>The scope (e.g., country codes or individual IDs). The axis is
+ordered in ascending order by default.</p></td>
     </tr>
     <tr>
       <th>time</th>
-      <td><p>Your time (e.g., time periods given by years, months, ...)</p></td>
+      <td><p>The time (e.g., time periods given by years, months, ...)</p></td>
     </tr>
     <tr>
       <th>perc</th>
       <td><p>If FALSE (default) plot returns the total number of observations
-per time-scope-unit. If TRUE it returns the number of observations per
+per time-scope-unit. If TRUE, it returns the number of observations per
 time-scope-unit in percentage</p></td>
     </tr>
     <tr>
@@ -202,6 +204,11 @@ for time unit.</p></td>
       <th>col_high</th>
       <td><p>Hex color code for the lowest value (default is "#2A5773")</p></td>
     </tr>
+    <tr>
+      <th>label</th>
+      <td><p>If TRUE (default), the total number of observations/percentages
+of observations are displayed. If FALSE, it returns no labels.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -209,8 +216,8 @@ for time unit.</p></td>
     <p>A ggplot figure that presents sample coverage visually</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>toydata</span>)
-<span class='fu'>overview_heat</span>(<span class='kw'>toydata</span>, <span class='kw'>ccode</span>, <span class='kw'>year</span>, perc = <span class='fl'>TRUE</span>, exp_total = <span class='fl'>12</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>toydata</span><span class='op'>)</span>
+<span class='fu'>overview_heat</span><span class='op'>(</span><span class='va'>toydata</span>, <span class='va'>ccode</span>, <span class='va'>year</span>, perc <span class='op'>=</span> <span class='cn'>TRUE</span>, exp_total <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
 </div><div class='img'><img src='overview_heat-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -227,7 +234,7 @@ for time unit.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">overviewR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7.999</span>
       </span>
     </div>
 
@@ -87,28 +87,28 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../articles/overviewR_vignette.html">
-    <span class="fa fa-rocket"></span>
+    <span class="fas fa-rocket"></span>
      
     Getting Started
   </a>
 </li>
 <li>
   <a href="../reference/index.html">
-    <span class="fa fa-project-diagram"></span>
+    <span class="fas fa-project-diagram"></span>
      
     Functions
   </a>
 </li>
 <li>
   <a href="https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf">
-    <span class="fa fa-sticky-note"></span>
+    <span class="fas fa-sticky-note"></span>
      
     CheatSheet
   </a>
 </li>
 <li>
   <a href="../news/index.html">
-    <span class="fa fa-lightbulb"></span>
+    <span class="fas fa-lightbulb"></span>
      
     News
   </a>
@@ -117,7 +117,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/cosimameyer/overviewR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -138,9 +138,90 @@
       <small>Source: <a href='https://github.com/cosimameyer/overviewR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="overviewr-0-0-6" class="section level1">
+    <div id="overviewr-007999" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.7.999">
+<a href="#overviewr-007999" class="anchor"></a>overviewR 0.0.7.999<small> Unreleased </small>
+</h1>
+<ul>
+<li>This development version adds bugs fixes and extensions for
+<ul>
+<li>
+<code>overview_plot</code>
+<ul>
+<li>some consecutive years were not correctly connected before)</li>
+<li>
+<code>color</code> argument to color parts of the time lines</li>
+</ul>
+</li>
+<li>
+<code>overview_print</code>
+<ul>
+<li>
+<code>label</code> to add a cross-reference label</li>
+<li>
+<code>fontsize</code> to change the font size</li>
+</ul>
+</li>
+<li>
+<code>overview_crossplot</code>
+<ul>
+<li>a new function that visualizes basically the same output as <code>overview_crosstab</code>
+</li>
+</ul>
+</li>
+<li>
+<code>overview_tab</code>
+<ul>
+<li>if there is a <code>NA</code> in the <code>id</code> variable this observation will be automatically deleted. The user receives a warning.</li>
+</ul>
+</li>
+<li>
+<code>overview_crosstab</code>
+<ul>
+<li>if there is a <code>NA</code> in the <code>id</code> variable this observation will be automatically deleted. The user receives a warning.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+</div>
+    <div id="overviewr-007" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.7">
+<a href="#overviewr-007" class="anchor"></a>overviewR 0.0.7<small> 2020-11-23 </small>
+</h1>
+<ul>
+<li>CRAN resubmission We fixed the following bugs:</li>
+<li>Fixed bug in overview_plot function
+<ul>
+<li>Time line was not correctly displayed when a consecutive time variable was present for two different id variables</li>
+</ul>
+</li>
+<li>Fixed bug in vignette
+<ul>
+<li>Loaded package dplyr to follow CRAN policies: “Packages which use Internet resources should fail gracefully with an informative message if the resource is not available or has changed (and not give a check warning nor error). CRAN versions of packages should work with the current CRAN and Bioconductor releases of packages they depend on and not anticipate nor recommend development versions of such packages (or themselves) on other repositories.”</li>
+</ul>
+</li>
+</ul>
+<p>And added the following new features:</p>
+<ul>
+<li>Added function for overview_plot function
+<ul>
+<li>Y axis is now automatically ordered in ascending order</li>
+</ul>
+</li>
+<li>Extended the overview_heat function
+<ul>
+<li>Y axis is now automatically ordered in ascending order</li>
+<li>Introduced “label” argument to overview_heat that allows the user to select whether the percentage/total number of observations should be displayed or not</li>
+</ul>
+</li>
+</ul>
+<hr>
+</div>
+    <div id="overviewr-006" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.6">
-<a href="#overviewr-0-0-6" class="anchor"></a>overviewR 0.0.6<small> 2020-08-24 </small>
+<a href="#overviewr-006" class="anchor"></a>overviewR 0.0.6<small> 2020-08-24 </small>
 </h1>
 <ul>
 <li>CRAN resubmission</li>
@@ -155,9 +236,9 @@
 </ul>
 <hr>
 </div>
-    <div id="overviewr-0-0-5-900" class="section level1">
+    <div id="overviewr-005900" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.5.900">
-<a href="#overviewr-0-0-5-900" class="anchor"></a>overviewR 0.0.5.900<small> Unreleased </small>
+<a href="#overviewr-005900" class="anchor"></a>overviewR 0.0.5.900<small> Unreleased </small>
 </h1>
 <ul>
 <li>This development version adds the following functions:
@@ -170,9 +251,9 @@
 </ul>
 <hr>
 </div>
-    <div id="overviewr-0-0-4" class="section level1">
+    <div id="overviewr-004" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.4">
-<a href="#overviewr-0-0-4" class="anchor"></a>overviewR 0.0.4<small> 2020-06-30 </small>
+<a href="#overviewr-004" class="anchor"></a>overviewR 0.0.4<small> 2020-06-30 </small>
 </h1>
 <ul>
 <li>CRAN release</li>
@@ -180,27 +261,27 @@
 </ul>
 <hr>
 </div>
-    <div id="overviewr-0-0-3" class="section level1">
+    <div id="overviewr-003" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.3">
-<a href="#overviewr-0-0-3" class="anchor"></a>overviewR 0.0.3<small> Unreleased </small>
+<a href="#overviewr-003" class="anchor"></a>overviewR 0.0.3<small> Unreleased </small>
 </h1>
 <ul>
 <li>Adjusted examples and tests based on CRAN’s standards</li>
 </ul>
 <hr>
 </div>
-    <div id="overviewr-0-0-2" class="section level1">
+    <div id="overviewr-002" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.2">
-<a href="#overviewr-0-0-2" class="anchor"></a>overviewR 0.0.2<small> Unreleased </small>
+<a href="#overviewr-002" class="anchor"></a>overviewR 0.0.2<small> Unreleased </small>
 </h1>
 <ul>
 <li>Bug fixes in overview_tab that affected overview_crosstab</li>
 </ul>
 <hr>
 </div>
-    <div id="overviewr-0-0-1" class="section level1">
+    <div id="overviewr-001" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.1">
-<a href="#overviewr-0-0-1" class="anchor"></a>overviewR 0.0.1<small> Unreleased </small>
+<a href="#overviewr-001" class="anchor"></a>overviewR 0.0.1<small> Unreleased </small>
 </h1>
 </div>
   </div>
@@ -220,7 +301,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
