@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">overviewR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7.999</span>
       </span>
     </div>
 
@@ -92,21 +92,28 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../articles/overviewR_vignette.html">
-    <span class="fa fa-rocket"></span>
+    <span class="fas fa-rocket"></span>
      
     Getting Started
   </a>
 </li>
 <li>
   <a href="../reference/index.html">
-    <span class="fa fa-project-diagram"></span>
+    <span class="fas fa-project-diagram"></span>
      
     Functions
   </a>
 </li>
 <li>
+  <a href="https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf">
+    <span class="fas fa-sticky-note"></span>
+     
+    CheatSheet
+  </a>
+</li>
+<li>
   <a href="../news/index.html">
-    <span class="fa fa-lightbulb"></span>
+    <span class="fas fa-lightbulb"></span>
      
     News
   </a>
@@ -115,7 +122,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/cosimameyer/overviewR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -145,7 +152,7 @@
     this information using the mean.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>overview_crosstab</span>(<span class='no'>dat</span>, <span class='no'>cond1</span>, <span class='no'>cond2</span>, <span class='no'>threshold1</span>, <span class='no'>threshold2</span>, <span class='no'>id</span>, <span class='no'>time</span>)</pre>
+    <pre class="usage"><span class='fu'>overview_crosstab</span><span class='op'>(</span><span class='va'>dat</span>, <span class='va'>cond1</span>, <span class='va'>cond2</span>, <span class='va'>threshold1</span>, <span class='va'>threshold2</span>, <span class='va'>id</span>, <span class='va'>time</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,16 +193,17 @@
       later be converted to a 'LaTeX' output using <code>overview_print</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>toydata</span>)
-<span class='fu'>overview_crosstab</span>(
-  <span class='kw'>dat</span> <span class='kw'>=</span> <span class='no'>toydata</span>,
-  <span class='kw'>cond1</span> <span class='kw'>=</span> <span class='no'>gdp</span>,
-  <span class='kw'>cond2</span> <span class='kw'>=</span> <span class='no'>population</span>,
-  <span class='kw'>threshold1</span> <span class='kw'>=</span> <span class='fl'>25000</span>,
-  <span class='kw'>threshold2</span> <span class='kw'>=</span> <span class='fl'>27000</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>ccode</span>,
-  <span class='kw'>time</span> <span class='kw'>=</span> <span class='no'>year</span>
-)</div><div class='output co'>#&gt;                                      part1
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>toydata</span><span class='op'>)</span>
+<span class='fu'>overview_crosstab</span><span class='op'>(</span>
+  dat <span class='op'>=</span> <span class='va'>toydata</span>,
+  cond1 <span class='op'>=</span> <span class='va'>gdp</span>,
+  cond2 <span class='op'>=</span> <span class='va'>population</span>,
+  threshold1 <span class='op'>=</span> <span class='fl'>25000</span>,
+  threshold2 <span class='op'>=</span> <span class='fl'>27000</span>,
+  id <span class='op'>=</span> <span class='va'>ccode</span>,
+  time <span class='op'>=</span> <span class='va'>year</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt;                                      part1
 #&gt; 1 AGO (1990, 1992), FRA (1993), GBR (1997)
 #&gt; 2                   BEN (1997), RWA (1990)
 #&gt;                                                                                      part2
@@ -216,7 +224,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

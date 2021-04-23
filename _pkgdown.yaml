@@ -1,23 +1,52 @@
 template:
-  params:
-    bootswatch: cosmo
-authors:
-  Cosima Meyer:
-    href: http://cosimameyer.github.io
-  Dennis Hammerschmidt:
-    href: http://dennis-hammerschmidt.rbind.io
+  package: themepkgdown
+
+development:
+  mode: auto
+
+home:
+  strip_header: false
+
+
 navbar:
-  left:
-    - icon: fa-rocket
-      text: "Getting Started"
-      href: articles/overviewR_vignette.html
-    - text: "Functions"
-      icon: fa-project-diagram
+  title: "overviewR"
+  type: inverse
+  structure:
+    left:
+    - tabular
+    - plot
+    right:
+    - reference
+    - news
+    - github
+  components:
+    reference:
+      text: Reference
       href: reference/index.html
-    - icon: fa-sticky-note
-      text: "CheatSheet"
-      href:  https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf
-    - icon: fa-lightbulb
-      text: "News"
-      href: news/index.html
-      
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/cosimameyer/reproducr
+    tabular:
+      text: Tabular overview
+      menu:
+        - text: The basics
+        - text: overview_tab
+          href: articles/overview_tab.html
+    plot:
+      text: Visual overview
+      menu:
+        - text: The basics
+        - text: overview_plot
+          href: articles/overview_plot.html
+
+
+
+reference:
+- title: Output formats
+
+
+authors:
+  "Cosima Meyer":
+    href: http://cosimameyer.rbind.io
+  "Dennis Hammerschmidt":
+    href: http://dennis-hammerschmidt.rbind.io
