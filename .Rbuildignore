@@ -13,3 +13,5 @@
 ^docs$
 ^pkgdown$
 ^index\.md$
+^_pkgdown\.yaml$
+^_pkgdown\.yml$
