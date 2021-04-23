@@ -66,7 +66,11 @@ library(devtools)
 devtools::install_github("cosimameyer/overviewR")
 ```
 
-## Example
+
+
+# overview_tab
+
+
 
 First, load the package.
 ```{r, include = FALSE, eval = FALSE}
@@ -98,7 +102,6 @@ There are 264 observations for 5 countries (Angola, Benin, France, Rwanda, and U
 The following functions work best on data sets that have an id-time-structure, in the case of `toydata` this corresponds to country-year with `ccode` and `year`. 
 If the data set does not have this format yet, consider using [```pivot_wider()``` or ```pivot_longer()```](https://tidyr.tidyverse.org/reference/pivot_longer.html) to get to the format.
 
-### ```overview_tab```
 Generate some general overview of the data set using the time and scope conditions with ```overview_tab```.
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
@@ -289,7 +292,7 @@ overview_print(obj = output_table, save_out = TRUE, path = "SET-YOUR-PATH",
                file = "output.tex")
 ```
 
-### ```overview_plot```
+# overview_plot
 
 In addition to tables, `overviewR` also provides plots to illustrate the structure of your data. 
 `overview_plot` illustrates the information that is generated in `overview_table` in a ggplot graphic. All scope objects (e.g., countries) are listed on the y-axis where horizontal lines indicate the coverage across the entire time frame of the data (x-axis). This helps to spot gaps in the data for specific scope objects and outlines at what time point they occur. 

@@ -35,19 +35,19 @@ navbar:
       href: https://github.com/cosimameyer/overviewR/blob/master/man/figures/
     github:
       icon: fab fa-github fa-lg
-      href: https://github.com/cosimameyer/reproducr
+      href: https://github.com/cosimameyer/overviewR/
     tabular:
       text: Tabular overview
       menu:
         - text: The basics
         - text: overview_tab
-          href: articles/overview_tab.html
+          href: articles/overviewR_vignette.html#overview_tab
     plot:
       text: Visual overview
       menu:
         - text: The basics
         - text: overview_plot
-          href: articles/overview_plot.html
+          href: articles/overviewR_vignette.html#overview_plot
 
 
 authors:

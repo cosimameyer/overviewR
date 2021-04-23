@@ -1,6 +1,0 @@
----
-title: "overview_plot"
-author: "Cosima Meyer and Dennis Hammerschmidt"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
----
