@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
 ^\.gitlab-ci\.yml$
 ^\.circleci$
 ^\.circleci/config\.yml$
