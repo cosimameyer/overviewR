@@ -485,12 +485,12 @@
 <p><img src="reference/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;"></p>
 <p>Using mutate to generate meaningful country names</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span> <span class="co"># Convert Country Names and Country Codes</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vincentarelbundock/countrycode">countrycode</a></span><span class="op">)</span> <span class="co"># Convert Country Names and Country Codes</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># A Grammar of Data Manipulation # A Grammar of Data Manipulation</span>
 
 <span class="va">toydata</span> <span class="op">%&gt;%</span> 
   <span class="co"># Transform the country code (ISO3 character code) into a country name using the `countrycode` package</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu">countrycode</span><span class="fu">::</span><span class="fu">countrycode</span><span class="op">(</span><span class="va">ccode</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu">countrycode</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">ccode</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">country</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;"></p>
 <p>Using different <code>overviewR</code> functions after each other to generate a workflow</p>
@@ -527,7 +527,7 @@
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cosimameyer/overviewR">overviewR</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">xtable</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://xtable.r-forge.r-project.org/">xtable</a></span><span class="op">)</span>
 
 <span class="co"># Load data</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">toydata</span><span class="op">)</span>
@@ -559,7 +559,7 @@
 <span id="cb34-9"><a href="#cb34-9"></a><span class="co">#&gt; 5 RWA   1990 - 1995                  1993 - 1995</span></span></code></pre></div>
 <p><code>overview_print</code> cannot handle this object (yet), so we use <code>xtable</code> instead which gives us the LaTeX output.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">xtable</span><span class="op">(</span><span class="va">dat_full</span><span class="op">)</span>, include.rownames<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/xtable/man/xtable.html">xtable</a></span><span class="op">(</span><span class="va">dat_full</span><span class="op">)</span>, include.rownames<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>% latex table generated <span class="cf">in</span> R <span class="dv">4</span>.<span class="fl">0.2</span> by xtable <span class="fl">1.8</span><span class="dv">-4</span> package</span>
 <span id="cb36-2"><a href="#cb36-2"></a>% Tue Feb <span class="dv">16</span> <span class="dv">18</span><span class="op">:</span><span class="dv">20</span><span class="op">:</span><span class="dv">51</span> <span class="dv">2021</span></span>
 <span id="cb36-3"><a href="#cb36-3"></a>\begin{table}[ht]</span>
