@@ -8,3 +8,10 @@
 ^revdep$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^docs$
+^pkgdown$
+^index\.md$
+^_pkgdown\.yaml$
+^_pkgdown\.yml$
+^README\.Rmd$
+^LICENSE\.md$
