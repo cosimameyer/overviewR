@@ -1,4 +1,18 @@
 ---
+# overviewR 0.0.7.999.1
+
+- This development version adds the following extensions
+   - `overview_plot`
+      - Adjustable `dot_size` (default is 2)
+   - `overview_na`
+      - Option to generate `row_wise` NA values
+   - `overview_overlap`
+      - New function to compare (at the moment) two data sets using bar graphs (`plot_type = "bar"`) or Venn diagrams (`plot_type = "venn"`)
+   - `overview_print`
+      - Fixed a small issue that can cause problems with large (and complex) TeX documents 
+
+
+---
 # overviewR 0.0.7.999
 
 - This development version adds bugs fixes and extensions for 
