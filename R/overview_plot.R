@@ -11,6 +11,7 @@
 #' @param yaxis Label of the y axis ("Sample" is default)
 #' @param asc Sorting the y axis in ascending order ("TRUE" is default)
 #' @param color Optional argument that defines the color
+#' @param dot_size Option argument that defines the dot size (default is 2)
 #' @return A ggplot figure that presents the sample information visually
 #' @examples
 #' data(toydata)
@@ -26,7 +27,8 @@ overview_plot <-
            xaxis = "Time frame",
            yaxis = "Sample",
            asc = TRUE,
-           color) {
+           color,
+           dot_size = 2) {
     # Create a theme for the plot
     theme_plot <- ggplot2::theme(
       # get rid of panel grids
@@ -107,7 +109,7 @@ overview_plot <-
           dplyr::group_by(!!id) %>%
           ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
           ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
-          ggplot2::geom_point(pch = 15, size = 2) +
+          ggplot2::geom_point(pch = 15, size = dot_size) +
           # ggplot2::scale_color_manual(factor(!!color)) +
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
@@ -185,7 +187,7 @@ overview_plot <-
             col = factor(!!color)
           )) +
           ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
-          ggplot2::geom_point(pch = 15, size = 2) +
+          ggplot2::geom_point(pch = 15, size = dot_size) +
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           ggplot2::scale_y_discrete(limits = rev) +
