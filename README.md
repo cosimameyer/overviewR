@@ -20,7 +20,7 @@ badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://gi
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2021--02--16-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2021--06--04-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -47,6 +47,8 @@ the following functions:
     way to present results from `overview_crosstab`)
 -   `overview_heat` plots a heat map of your time line
 -   `overview_na` plots an overview of missing values by variable
+-   `overview_overlap` plots comparison plots (bar graph and Venn
+    diagram) to compare to data frames
 
 The plots can be saved using the `ggsave()` command. The output of
 `overview_tab` and `overview_crosstab` are also compatible with other
@@ -365,10 +367,24 @@ overview_plot(dat = toydata, id = ccode, time = year, color = before)
 
 <img src="man/figures/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
 
+The development version also allows to change the dot size using the
+`dot_size` argument. The default is “2”. *Note, this argument is
+currently only implemented in the development version that can be
+accessed from GitHub.*
+
+``` r
+# Plot using the `color` argument
+overview_plot(dat = toydata, id = ccode, time = year, dot_size = 5)
+```
+
+<p align="center">
+<img src='man/figures/dot.png' height="200"/>
+</p>
+
 ### `overview_crossplot`
 
 To visualize also the cross table, `overview_crossplot` does the job.
-*Note, this argument is currently only implemented in the development
+*Note, this function is currently only implemented in the development
 version that can be accessed from GitHub.*
 
 ``` r
@@ -390,7 +406,7 @@ overview_crossplot(
 )
 ```
 
-<img src="man/figures/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_heat`
 
@@ -415,7 +431,7 @@ overview_heat(toydata_red,
                 exp_total = 12)
 ```
 
-<img src="man/figures/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_na`
 
@@ -430,13 +446,57 @@ in percentage (the default) or the total number of NAs.
 overview_na(toydata_with_na)
 ```
 
-<img src="man/figures/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 overview_na(toydata_with_na, perc = FALSE)
 ```
 
-<img src="man/figures/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-29-1.png" width="50%" style="display: block; margin: auto;" />
+
+### `overview_overlap`
+
+This function allows to compare two data sets. We are currently working
+on an extended version that allows comparing &gt;2 data sets. *Note,
+this function is currently only implemented in the development version
+that can be accessed from GitHub.*
+
+At the current development stage, the function works as follows:
+
+``` r
+library(dplyr)
+
+# Subset one data set for comparison
+toydata2 <- toydata %>% dplyr::filter(year > 1992)
+
+overview_overlap(
+  dat1 = toydata,
+  dat2 = toydata2,
+  dat1_id = ccode,
+  dat2_id = ccode,
+  plot_type = "bar" # This is the default
+)
+```
+
+<p align="center">
+<img src='man/figures/bar.png' height="200"/>
+</p>
+
+Or a Venn diagram
+
+``` r
+overview_overlap(
+  dat1 = toydata,
+  dat2 = toydata2,
+  dat1_id = ccode,
+  dat2_id = ccode,
+  plot_type = "venn"
+)
+```
+
+<p align="center">
+<img src='man/figures/venn.png' height="200"/>
+</p>
 
 ## Compatibilities with other packages
 
@@ -492,7 +552,7 @@ overview_na(toydata_with_na) +
   ggplot2::theme_minimal() 
 ```
 
-<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-35-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### Workflow: `tidyverse`
 
@@ -509,7 +569,7 @@ toydata_with_na %>%
   overview_na()
 ```
 
-<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-36-1.png" width="50%" style="display: block; margin: auto;" />
 
 Using mutate to generate meaningful country names
 
@@ -523,7 +583,7 @@ toydata %>%
   overview_plot(id = country, time = year)
 ```
 
-<img src="man/figures/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-37-1.png" width="50%" style="display: block; margin: auto;" />
 
 Using different `overviewR` functions after each other to generate a
 workflow

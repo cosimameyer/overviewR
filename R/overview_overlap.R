@@ -14,7 +14,7 @@
 #'     It is important that both ID variables are exactly the same to generate
 #'     the perfect match.
 #' @param dat1_name Name of dat1 ("Data set 1" is the default)
-#' @param dat1_name Name of dat2 ("Data set 2" is the default)
+#' @param dat2_name Name of dat2 ("Data set 2" is the default)
 #' @param plot_type Type of plot ("bar" and "venn" are the two options) "venn"
 #'     relies on the ggvenn function
 #' @return A ggplot2 object (bar chart) that shows the overlap of two data sets.

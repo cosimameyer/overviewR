@@ -5,6 +5,8 @@ utils::globalVariables(
     "time_frame",
     "toydata",
     "count",
+    "value",
+    "count2",
     "grp",
     "n",
     "percentage",

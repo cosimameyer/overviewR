@@ -58,6 +58,7 @@ The goal of overviewR is to make it easy to get an overview of a data set by dis
 - `overview_crossplot` is an alternative to visualize a cross table (a way to present results from `overview_crosstab`)
 - `overview_heat` plots a heat map of your time line
 - `overview_na` plots an overview of missing values by variable
+- `overview_overlap` plots comparison plots (bar graph and Venn diagram) to compare to data frames
 
 The plots can be saved using the `ggsave()` command. The output of `overview_tab` and `overview_crosstab` are also compatible with other packages such as [```xtable```](https://CRAN.R-project.org/package=xtable), [```flextable```](https://CRAN.R-project.org/package=flextable), or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
 
@@ -332,10 +333,21 @@ toydata %<>%
 overview_plot(dat = toydata, id = ccode, time = year, color = before)
 ```
 
+The development version also allows to change the dot size using the `dot_size` argument. The default is "2". *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+
+```{r, eval = FALSE}
+# Plot using the `color` argument
+overview_plot(dat = toydata, id = ccode, time = year, dot_size = 5)
+```
+
+
+<p align="center">
+<img src='man/figures/dot.png' height="200"/>
+</p>
 
 ### ```overview_crossplot```
 
-To visualize also the cross table, `overview_crossplot` does the job. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+To visualize also the cross table, `overview_crossplot` does the job. *Note, this function is currently only implemented in the development version that can be accessed from GitHub.*
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
 # Load the GitHub version
@@ -390,6 +402,49 @@ overview_na(toydata_with_na)
 ```{r, out.width = '50%', fig.align='center'}
 overview_na(toydata_with_na, perc = FALSE)
 ```
+
+### ```overview_overlap```
+
+This function allows to compare two data sets. We are currently working on an extended version that allows comparing >2 data sets. *Note, this function is currently only implemented in the development version that can be accessed from GitHub.*
+
+At the current development stage, the function works as follows:
+
+```{r, eval=FALSE}
+library(dplyr)
+
+# Subset one data set for comparison
+toydata2 <- toydata %>% dplyr::filter(year > 1992)
+
+overview_overlap(
+  dat1 = toydata,
+  dat2 = toydata2,
+  dat1_id = ccode,
+  dat2_id = ccode,
+  plot_type = "bar" # This is the default
+)
+```
+
+
+<p align="center">
+<img src='man/figures/bar.png' height="200"/>
+</p>
+
+Or a Venn diagram
+```{r, eval = FALSE}
+
+overview_overlap(
+  dat1 = toydata,
+  dat2 = toydata2,
+  dat1_id = ccode,
+  dat2_id = ccode,
+  plot_type = "venn"
+)
+```
+
+
+<p align="center">
+<img src='man/figures/venn.png' height="200"/>
+</p>
 
 ## Compatibilities with other packages 
 
