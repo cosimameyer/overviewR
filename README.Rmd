@@ -342,7 +342,7 @@ overview_plot(dat = toydata, id = ccode, time = year, dot_size = 5)
 
 
 <p align="center">
-<img src='man/figures/dot.png' height="200"/>
+<img src='man/figures/dot.png' height="400"/>
 </p>
 
 ### ```overview_crossplot```

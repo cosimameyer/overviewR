@@ -355,7 +355,7 @@ development version that can be accessed from GitHub.*
 library(devtools) # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
 #> 
-#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/Rtmp1OLrcD/remotesbb616de2d0bf/cosimameyer-overviewR-0033722/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/Rtmp1OLrcD/remotesbb616de2d0bf/cosimameyer-overviewR-0033722/DESCRIPTION’
+#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/Rtmpn9zPqU/remotesbc8c1543222f/cosimameyer-overviewR-c07706e/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/Rtmpn9zPqU/remotesbc8c1543222f/cosimameyer-overviewR-c07706e/DESCRIPTION’
 #>   ─  preparing ‘overviewR’:
 #>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
 #>   ─  checking for LF line-endings in source and make files and shell scripts
@@ -387,7 +387,7 @@ overview_plot(dat = toydata, id = ccode, time = year, dot_size = 5)
 ```
 
 <p align="center">
-<img src='man/figures/dot.png' height="200"/>
+<img src='man/figures/dot.png' height="400"/>
 </p>
 
 ### `overview_crossplot`
