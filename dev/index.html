@@ -154,6 +154,8 @@
 <code>overview_heat</code> plots a heat map of your time line</li>
 <li>
 <code>overview_na</code> plots an overview of missing values by variable</li>
+<li>
+<code>overview_overlap</code> plots comparison plots (bar graph and Venn diagram) to compare to data frames</li>
 </ul>
 <p>The plots can be saved using the <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code> command. The output of <code>overview_tab</code> and <code>overview_crosstab</code> are also compatible with other packages such as <a href="https://CRAN.R-project.org/package=xtable"><code>xtable</code></a>, <a href="https://CRAN.R-project.org/package=flextable"><code>flextable</code></a>, or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html"><code>knitr</code></a>.</p>
 <p>We present a short step-by-step guide as well as the functions in more detail below.</p>
@@ -354,13 +356,19 @@
 <span class="co"># Plot using the `color` argument</span>
 <span class="fu"><a href="reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">toydata</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span>, color <span class="op">=</span> <span class="va">before</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p>The development version also allows to change the dot size using the <code>dot_size</code> argument. The default is “2”. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Plot using the `color` argument</span>
+<span class="fu"><a href="reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">toydata</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span>, dot_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<p align="center">
+<img src="reference/figures/dot.png" height="200"></p>
 </div>
 <div id="overview_crossplot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview_crossplot" class="anchor"></a><code>overview_crossplot</code>
 </h3>
-<p>To visualize also the cross table, <code>overview_crossplot</code> does the job. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<p>To visualize also the cross table, <code>overview_crossplot</code> does the job. <em>Note, this function is currently only implemented in the development version that can be accessed from GitHub.</em></p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load the GitHub version</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span> <span class="co"># Tools to Make Developing R Packages Easier</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"cosimameyer/overviewR"</span><span class="op">)</span>
@@ -377,32 +385,65 @@
   color <span class="op">=</span> <span class="cn">TRUE</span>,
   label <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="overview_heat" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview_heat" class="anchor"></a><code>overview_heat</code>
 </h3>
 <p><code>overview_heat</code> takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. <code>overview_heat</code> intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola (“AGO”) in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/overview_heat.html">overview_heat</a></span><span class="op">(</span><span class="va">toydata_red</span>,
                 <span class="va">ccode</span>,
                 <span class="va">year</span>,
                 perc <span class="op">=</span> <span class="cn">TRUE</span>,
                 exp_total <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="overview_na" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview_na" class="anchor"></a><code>overview_na</code>
 </h3>
 <p><code>overview_na</code> is a simple function that provides information about the content of all variables in your data, not only the time and scope conditions. It returns a horizontal ggplot bar plot that indicates the amount of missing data (NAs) for each variable (on the y-axis). You can choose whether to display the relative amount of NAs for each variable in percentage (the default) or the total number of NAs.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span>, perc <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span>, perc <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-29-1.png" width="50%" style="display: block; margin: auto;"></p>
+</div>
+<div id="overview_overlap" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview_overlap" class="anchor"></a><code>overview_overlap</code>
+</h3>
+<p>This function allows to compare two data sets. We are currently working on an extended version that allows comparing &gt;2 data sets. <em>Note, this function is currently only implemented in the development version that can be accessed from GitHub.</em></p>
+<p>At the current development stage, the function works as follows:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="co"># Subset one data set for comparison</span>
+<span class="va">toydata2</span> <span class="op">&lt;-</span> <span class="va">toydata</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">&gt;</span> <span class="fl">1992</span><span class="op">)</span>
+
+<span class="fu"><a href="reference/overview_overlap.html">overview_overlap</a></span><span class="op">(</span>
+  dat1 <span class="op">=</span> <span class="va">toydata</span>,
+  dat2 <span class="op">=</span> <span class="va">toydata2</span>,
+  dat1_id <span class="op">=</span> <span class="va">ccode</span>,
+  dat2_id <span class="op">=</span> <span class="va">ccode</span>,
+  plot_type <span class="op">=</span> <span class="st">"bar"</span> <span class="co"># This is the default</span>
+<span class="op">)</span></code></pre></div>
+<p align="center">
+<img src="reference/figures/bar.png" height="200"></p>
+<p>Or a Venn diagram</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/overview_overlap.html">overview_overlap</a></span><span class="op">(</span>
+  dat1 <span class="op">=</span> <span class="va">toydata</span>,
+  dat2 <span class="op">=</span> <span class="va">toydata2</span>,
+  dat1_id <span class="op">=</span> <span class="va">ccode</span>,
+  dat2_id <span class="op">=</span> <span class="va">ccode</span>,
+  plot_type <span class="op">=</span> <span class="st">"venn"</span>
+<span class="op">)</span></code></pre></div>
+<p align="center">
+<img src="reference/figures/venn.png" height="200"></p>
 </div>
 </div>
 <div id="compatibilities-with-other-packages" class="section level2">
@@ -414,7 +455,7 @@
 </h3>
 <p>The outputs of <code>overview_tab</code> and <code>overview_crosstab</code> are also compatible with other functions such as <a href="https://CRAN.R-project.org/package=xtable"><code>xtable</code></a>, <a href="https://CRAN.R-project.org/package=flextable"><code>flextable</code></a>, or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html"><code>kable</code></a> from <a href="https://yihui.org/knitr/"><code>knitr</code></a>.</p>
 <p>Two examples are shown below:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">flextable</span><span class="op">)</span> <span class="co"># not installed on this machine</span>
 <span class="va">table_output</span> <span class="op">&lt;-</span> <span class="fu">qflextable</span><span class="op">(</span><span class="va">output_table</span><span class="op">)</span>
 <span class="va">table_output</span> <span class="op">&lt;-</span>
@@ -426,7 +467,7 @@
   width <span class="op">=</span> <span class="fl">.4</span>,
   layout <span class="op">=</span> <span class="st">"autofit"</span>
 <span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span> <span class="co"># A General-Purpose Package for Dynamic Report Generation in R</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">output_table</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -463,12 +504,12 @@
 <a href="#customizing-plots-ggplot2-and-other-packages" class="anchor"></a>Customizing plots: <code>ggplot2</code> and other packages</h3>
 <p>The plot functions are fully <code>ggplot2</code> based. While a theme is pre-defined, this can easily be overwritten.</p>
 <p>A classical <code>ggplot2</code> theme alternative</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span> <span class="co"># Create Elegant Data Visualisations Using the Grammar of Graphics</span>
 
 <span class="fu"><a href="reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="va">toydata_with_na</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/unnamed-chunk-35-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="workflow-tidyverse" class="section level3">
 <h3 class="hasAnchor">
@@ -476,15 +517,15 @@
 </h3>
 <p>All functions are further easily accessible using a common <code>tidyverse</code> workflow. Here are just three examples – the possibilities are endless.</p>
 <p>Using a filter function</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># A Grammar of Data Manipulation # A Grammar of Data Manipulation</span>
 
 <span class="va">toydata_with_na</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">&gt;</span> <span class="fl">1993</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/overview_na.html">overview_na</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/unnamed-chunk-36-1.png" width="50%" style="display: block; margin: auto;"></p>
 <p>Using mutate to generate meaningful country names</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vincentarelbundock/countrycode">countrycode</a></span><span class="op">)</span> <span class="co"># Convert Country Names and Country Codes</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># A Grammar of Data Manipulation # A Grammar of Data Manipulation</span>
 
@@ -492,39 +533,39 @@
   <span class="co"># Transform the country code (ISO3 character code) into a country name using the `countrycode` package</span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu">countrycode</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">ccode</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">country</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/unnamed-chunk-37-1.png" width="50%" style="display: block; margin: auto;"></p>
 <p>Using different <code>overviewR</code> functions after each other to generate a workflow</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Produces a printable LaTeX output</span>
 <span class="va">toydata</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/overview_tab.html">overview_tab</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/overview_print.html">overview_print</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>% Overview table generated <span class="cf">in</span> R version <span class="dv">4</span>.<span class="fl">0.2</span> (<span class="dv">2020-06-22</span>) using overviewR </span>
-<span id="cb31-2"><a href="#cb31-2"></a>% Table created on <span class="dv">2020-12-30</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>\begin{table}[ht] </span>
-<span id="cb31-4"><a href="#cb31-4"></a> \centering </span>
-<span id="cb31-5"><a href="#cb31-5"></a> \caption{Time and scope of the sample} </span>
-<span id="cb31-6"><a href="#cb31-6"></a>\label{tab<span class="op">:</span>tab1} </span>
-<span id="cb31-7"><a href="#cb31-7"></a></span>
-<span id="cb31-8"><a href="#cb31-8"></a>\begin{tabular}{ll} </span>
-<span id="cb31-9"><a href="#cb31-9"></a> \hline </span>
-<span id="cb31-10"><a href="#cb31-10"></a>Sample <span class="op">&amp;</span><span class="st"> </span>Time frame \\ </span>
-<span id="cb31-11"><a href="#cb31-11"></a>\hline </span>
-<span id="cb31-12"><a href="#cb31-12"></a> AGO <span class="op">&amp;</span><span class="st"> </span><span class="dv">1990</span> <span class="op">-</span><span class="st"> </span><span class="dv">1992</span> \\ </span>
-<span id="cb31-13"><a href="#cb31-13"></a> BEN <span class="op">&amp;</span><span class="st"> </span><span class="dv">1995</span> <span class="op">-</span><span class="st"> </span><span class="dv">1999</span> \\ </span>
-<span id="cb31-14"><a href="#cb31-14"></a> FRA <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span>, <span class="dv">1996</span>, <span class="dv">1999</span> \\ </span>
-<span id="cb31-15"><a href="#cb31-15"></a> GBR <span class="op">&amp;</span><span class="st"> </span><span class="dv">1991</span>, <span class="dv">1993</span>, <span class="dv">1995</span>, <span class="dv">1997</span>, <span class="dv">1999</span> \\ </span>
-<span id="cb31-16"><a href="#cb31-16"></a> RWA <span class="op">&amp;</span><span class="st"> </span><span class="dv">1990</span> <span class="op">-</span><span class="st"> </span><span class="dv">1995</span> \\ </span>
-<span id="cb31-17"><a href="#cb31-17"></a> \hline </span>
-<span id="cb31-18"><a href="#cb31-18"></a> \end{tabular} </span>
-<span id="cb31-19"><a href="#cb31-19"></a> \end{table} </span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>% Overview table generated <span class="cf">in</span> R version <span class="dv">4</span>.<span class="fl">0.2</span> (<span class="dv">2020-06-22</span>) using overviewR </span>
+<span id="cb34-2"><a href="#cb34-2"></a>% Table created on <span class="dv">2020-12-30</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>\begin{table}[ht] </span>
+<span id="cb34-4"><a href="#cb34-4"></a> \centering </span>
+<span id="cb34-5"><a href="#cb34-5"></a> \caption{Time and scope of the sample} </span>
+<span id="cb34-6"><a href="#cb34-6"></a>\label{tab<span class="op">:</span>tab1} </span>
+<span id="cb34-7"><a href="#cb34-7"></a></span>
+<span id="cb34-8"><a href="#cb34-8"></a>\begin{tabular}{ll} </span>
+<span id="cb34-9"><a href="#cb34-9"></a> \hline </span>
+<span id="cb34-10"><a href="#cb34-10"></a>Sample <span class="op">&amp;</span><span class="st"> </span>Time frame \\ </span>
+<span id="cb34-11"><a href="#cb34-11"></a>\hline </span>
+<span id="cb34-12"><a href="#cb34-12"></a> AGO <span class="op">&amp;</span><span class="st"> </span><span class="dv">1990</span> <span class="op">-</span><span class="st"> </span><span class="dv">1992</span> \\ </span>
+<span id="cb34-13"><a href="#cb34-13"></a> BEN <span class="op">&amp;</span><span class="st"> </span><span class="dv">1995</span> <span class="op">-</span><span class="st"> </span><span class="dv">1999</span> \\ </span>
+<span id="cb34-14"><a href="#cb34-14"></a> FRA <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span>, <span class="dv">1996</span>, <span class="dv">1999</span> \\ </span>
+<span id="cb34-15"><a href="#cb34-15"></a> GBR <span class="op">&amp;</span><span class="st"> </span><span class="dv">1991</span>, <span class="dv">1993</span>, <span class="dv">1995</span>, <span class="dv">1997</span>, <span class="dv">1999</span> \\ </span>
+<span id="cb34-16"><a href="#cb34-16"></a> RWA <span class="op">&amp;</span><span class="st"> </span><span class="dv">1990</span> <span class="op">-</span><span class="st"> </span><span class="dv">1995</span> \\ </span>
+<span id="cb34-17"><a href="#cb34-17"></a> \hline </span>
+<span id="cb34-18"><a href="#cb34-18"></a> \end{tabular} </span>
+<span id="cb34-19"><a href="#cb34-19"></a> \end{table} </span></code></pre></div>
 </div>
 </div>
 <div id="extensions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extensions" class="anchor"></a>Extensions</h2>
 <p>If you wish to compare two data sets using <code>overview_tab</code>, this is not (yet) implemented in <code>overviewR</code> but there is currently a workaround.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cosimameyer/overviewR">overviewR</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://xtable.r-forge.r-project.org/">xtable</a></span><span class="op">)</span>
@@ -546,36 +587,36 @@
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>time_dat1 <span class="op">=</span> <span class="va">time_frame.x</span>,
                 time_dat2 <span class="op">=</span> <span class="va">time_frame.y</span><span class="op">)</span></code></pre></div>
 <p>Having a look at the output, we see that this is exactly what we wanted to have:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat_full</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">#&gt; # A tibble: 5 x 3</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="co">#&gt; # Groups:   ccode [5]</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="co">#&gt;   ccode time_dat1                    time_dat2             </span></span>
-<span id="cb34-4"><a href="#cb34-4"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                        &lt;chr&gt;                 </span></span>
-<span id="cb34-5"><a href="#cb34-5"></a><span class="co">#&gt; 1 AGO   1990 - 1992                  &lt;NA&gt;                  </span></span>
-<span id="cb34-6"><a href="#cb34-6"></a><span class="co">#&gt; 2 BEN   1995 - 1999                  1995 - 1999           </span></span>
-<span id="cb34-7"><a href="#cb34-7"></a><span class="co">#&gt; 3 FRA   1993, 1996, 1999             1993, 1996, 1999      </span></span>
-<span id="cb34-8"><a href="#cb34-8"></a><span class="co">#&gt; 4 GBR   1991, 1993, 1995, 1997, 1999 1993, 1995, 1997, 1999</span></span>
-<span id="cb34-9"><a href="#cb34-9"></a><span class="co">#&gt; 5 RWA   1990 - 1995                  1993 - 1995</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co">#&gt; # A tibble: 5 x 3</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="co">#&gt; # Groups:   ccode [5]</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="co">#&gt;   ccode time_dat1                    time_dat2             </span></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                        &lt;chr&gt;                 </span></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="co">#&gt; 1 AGO   1990 - 1992                  &lt;NA&gt;                  </span></span>
+<span id="cb37-6"><a href="#cb37-6"></a><span class="co">#&gt; 2 BEN   1995 - 1999                  1995 - 1999           </span></span>
+<span id="cb37-7"><a href="#cb37-7"></a><span class="co">#&gt; 3 FRA   1993, 1996, 1999             1993, 1996, 1999      </span></span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="co">#&gt; 4 GBR   1991, 1993, 1995, 1997, 1999 1993, 1995, 1997, 1999</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a><span class="co">#&gt; 5 RWA   1990 - 1995                  1993 - 1995</span></span></code></pre></div>
 <p><code>overview_print</code> cannot handle this object (yet), so we use <code>xtable</code> instead which gives us the LaTeX output.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/xtable/man/xtable.html">xtable</a></span><span class="op">(</span><span class="va">dat_full</span><span class="op">)</span>, include.rownames<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>% latex table generated <span class="cf">in</span> R <span class="dv">4</span>.<span class="fl">0.2</span> by xtable <span class="fl">1.8</span><span class="dv">-4</span> package</span>
-<span id="cb36-2"><a href="#cb36-2"></a>% Tue Feb <span class="dv">16</span> <span class="dv">18</span><span class="op">:</span><span class="dv">20</span><span class="op">:</span><span class="dv">51</span> <span class="dv">2021</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a>\begin{table}[ht]</span>
-<span id="cb36-4"><a href="#cb36-4"></a>\centering</span>
-<span id="cb36-5"><a href="#cb36-5"></a>\begin{tabular}{lll}</span>
-<span id="cb36-6"><a href="#cb36-6"></a>  \hline</span>
-<span id="cb36-7"><a href="#cb36-7"></a>ccode <span class="op">&amp;</span><span class="st"> </span>time\_dat1 <span class="op">&amp;</span><span class="st"> </span>time\_dat2 \\ </span>
-<span id="cb36-8"><a href="#cb36-8"></a>  \hline</span>
-<span id="cb36-9"><a href="#cb36-9"></a>AGO <span class="op">&amp;</span><span class="st"> </span><span class="dv">1990</span> <span class="op">-</span><span class="st"> </span><span class="dv">1992</span> <span class="op">&amp;</span><span class="st">  </span>\\ </span>
-<span id="cb36-10"><a href="#cb36-10"></a>  BEN <span class="op">&amp;</span><span class="st"> </span><span class="dv">1995</span> <span class="op">-</span><span class="st"> </span><span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">1995</span> <span class="op">-</span><span class="st"> </span><span class="dv">1999</span> \\ </span>
-<span id="cb36-11"><a href="#cb36-11"></a>  FRA <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span>, <span class="dv">1996</span>, <span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span>, <span class="dv">1996</span>, <span class="dv">1999</span> \\ </span>
-<span id="cb36-12"><a href="#cb36-12"></a>  GBR <span class="op">&amp;</span><span class="st"> </span><span class="dv">1991</span>, <span class="dv">1993</span>, <span class="dv">1995</span>, <span class="dv">1997</span>, <span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span>, <span class="dv">1995</span>, <span class="dv">1997</span>, <span class="dv">1999</span> \\ </span>
-<span id="cb36-13"><a href="#cb36-13"></a>  RWA <span class="op">&amp;</span><span class="st"> </span><span class="dv">1990</span> <span class="op">-</span><span class="st"> </span><span class="dv">1995</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span> <span class="op">-</span><span class="st"> </span><span class="dv">1995</span> \\ </span>
-<span id="cb36-14"><a href="#cb36-14"></a>   \hline</span>
-<span id="cb36-15"><a href="#cb36-15"></a>\end{tabular}</span>
-<span id="cb36-16"><a href="#cb36-16"></a>\end{table}</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>% latex table generated <span class="cf">in</span> R <span class="dv">4</span>.<span class="fl">0.2</span> by xtable <span class="fl">1.8</span><span class="dv">-4</span> package</span>
+<span id="cb39-2"><a href="#cb39-2"></a>% Tue Feb <span class="dv">16</span> <span class="dv">18</span><span class="op">:</span><span class="dv">20</span><span class="op">:</span><span class="dv">51</span> <span class="dv">2021</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>\begin{table}[ht]</span>
+<span id="cb39-4"><a href="#cb39-4"></a>\centering</span>
+<span id="cb39-5"><a href="#cb39-5"></a>\begin{tabular}{lll}</span>
+<span id="cb39-6"><a href="#cb39-6"></a>  \hline</span>
+<span id="cb39-7"><a href="#cb39-7"></a>ccode <span class="op">&amp;</span><span class="st"> </span>time\_dat1 <span class="op">&amp;</span><span class="st"> </span>time\_dat2 \\ </span>
+<span id="cb39-8"><a href="#cb39-8"></a>  \hline</span>
+<span id="cb39-9"><a href="#cb39-9"></a>AGO <span class="op">&amp;</span><span class="st"> </span><span class="dv">1990</span> <span class="op">-</span><span class="st"> </span><span class="dv">1992</span> <span class="op">&amp;</span><span class="st">  </span>\\ </span>
+<span id="cb39-10"><a href="#cb39-10"></a>  BEN <span class="op">&amp;</span><span class="st"> </span><span class="dv">1995</span> <span class="op">-</span><span class="st"> </span><span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">1995</span> <span class="op">-</span><span class="st"> </span><span class="dv">1999</span> \\ </span>
+<span id="cb39-11"><a href="#cb39-11"></a>  FRA <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span>, <span class="dv">1996</span>, <span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span>, <span class="dv">1996</span>, <span class="dv">1999</span> \\ </span>
+<span id="cb39-12"><a href="#cb39-12"></a>  GBR <span class="op">&amp;</span><span class="st"> </span><span class="dv">1991</span>, <span class="dv">1993</span>, <span class="dv">1995</span>, <span class="dv">1997</span>, <span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span>, <span class="dv">1995</span>, <span class="dv">1997</span>, <span class="dv">1999</span> \\ </span>
+<span id="cb39-13"><a href="#cb39-13"></a>  RWA <span class="op">&amp;</span><span class="st"> </span><span class="dv">1990</span> <span class="op">-</span><span class="st"> </span><span class="dv">1995</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">1993</span> <span class="op">-</span><span class="st"> </span><span class="dv">1995</span> \\ </span>
+<span id="cb39-14"><a href="#cb39-14"></a>   \hline</span>
+<span id="cb39-15"><a href="#cb39-15"></a>\end{tabular}</span>
+<span id="cb39-16"><a href="#cb39-16"></a>\end{table}</span></code></pre></div>
 
 <p align="center">
 <img src="reference/figures/extension1.png" height="150"></p>
