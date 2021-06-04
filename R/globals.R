@@ -10,6 +10,12 @@ utils::globalVariables(
     "percentage",
     "total",
     "variable",
-    "idx"
+    "idx",
+    "text",
+    "quart4",
+    "quart3",
+    "quart2",
+    "quart1",
+    "."
   )
 )
