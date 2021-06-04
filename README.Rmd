@@ -426,7 +426,7 @@ overview_overlap(
 
 
 <p align="center">
-<img src='man/figures/bar.png' height="200"/>
+<img src='man/figures/bar.png' height="400"/>
 </p>
 
 Or a Venn diagram
@@ -443,7 +443,7 @@ overview_overlap(
 
 
 <p align="center">
-<img src='man/figures/venn.png' height="200"/>
+<img src='man/figures/venn.png' height="400"/>
 </p>
 
 ## Compatibilities with other packages 

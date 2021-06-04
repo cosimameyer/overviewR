@@ -354,6 +354,15 @@ development version that can be accessed from GitHub.*
 # Load the GitHub version
 library(devtools) # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
+#> 
+#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/Rtmp1OLrcD/remotesbb616de2d0bf/cosimameyer-overviewR-0033722/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/Rtmp1OLrcD/remotesbb616de2d0bf/cosimameyer-overviewR-0033722/DESCRIPTION’
+#>   ─  preparing ‘overviewR’:
+#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘overviewR_0.0.7.999.1.tar.gz’
+#>      
+#> 
 library(overviewR) # Easily Extracting Information About Your Data
 library(magrittr) # A Forward-Pipe Operator for R
 
@@ -479,7 +488,7 @@ overview_overlap(
 ```
 
 <p align="center">
-<img src='man/figures/bar.png' height="200"/>
+<img src='man/figures/bar.png' height="400"/>
 </p>
 
 Or a Venn diagram
@@ -495,7 +504,7 @@ overview_overlap(
 ```
 
 <p align="center">
-<img src='man/figures/venn.png' height="200"/>
+<img src='man/figures/venn.png' height="400"/>
 </p>
 
 ## Compatibilities with other packages
