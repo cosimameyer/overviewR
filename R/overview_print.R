@@ -115,8 +115,7 @@ overview_print <-
             id,
             " & ",
             time,
-            " \\\\ \n",
-            "\\hline \n"
+            " \\\\ \\hline \n"
           )
         out <- paste0(obj[, 1], " & ", obj[, 2], " \\\\ \n")
         end_tab <-
