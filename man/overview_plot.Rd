@@ -11,7 +11,8 @@ overview_plot(
   xaxis = "Time frame",
   yaxis = "Sample",
   asc = TRUE,
-  color
+  color,
+  dot_size = 2
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ variable contains NAs, they will not be included in the plot.}
 \item{asc}{Sorting the y axis in ascending order ("TRUE" is default)}
 
 \item{color}{Optional argument that defines the color}
+
+\item{dot_size}{Option argument that defines the dot size (default is 2)}
 }
 \value{
 A ggplot figure that presents the sample information visually
