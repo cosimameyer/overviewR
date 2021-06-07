@@ -1,6 +1,5 @@
 template:
-  params:
-    bootswatch: cosmo
+  bootstrap: 4
 
 development:
   mode: auto
@@ -16,12 +15,22 @@ navbar:
     left:
     - tabular
     - plot
+    - workflow
     - cheatsheet
+    - articles
     right:
     - reference
     - news
     - github
+    - home
   components:
+    articles:
+      text: Articles
+      menu:
+        - text: Getting started
+          href: articles/getting-started.html
+        - text: overviewR
+          href: articles/overviewR_vignette.html
     reference:
       text: Reference
       href: reference/index.html
@@ -32,22 +41,46 @@ navbar:
     cheatsheet:
       icon: fa-sticky-note
       text: CheatSheet
-      href: https://github.com/cosimameyer/overviewR/blob/master/man/figures/
+      href: https://github.com/rstudio/cheatsheets/raw/master/overviewR.pdf
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/cosimameyer/overviewR/
     tabular:
+      icon: fa-table
       text: Tabular overview
       menu:
-        - text: The basics
         - text: overview_tab
           href: articles/overviewR_vignette.html#overview_tab
+        - text: overview_crosstab
+          href: articles/overviewR_vignette.html#overview_crosstab
+        - text: Export results
+          href: articles/overviewR_vignette.html#overview_print
     plot:
+      icon: fa-chart-bar
       text: Visual overview
       menu:
-        - text: The basics
         - text: overview_plot
           href: articles/overviewR_vignette.html#overview_plot
+        - text: overview_crossplot
+          href: articles/overviewR_vignette.html#overview_crossplot
+        - text: overview_heat
+          href: articles/overviewR_vignette.html#overview_heat
+        - text: overview_na
+          href: articles/overviewR_vignette.html#overview_na
+        - text: overview_overlap
+          href: articles/overviewR_vignette.html#overview_overlap
+        - text: Customize plots
+          href: articles/overviewR_vignette.html#customizing-plots-ggplot2-1
+    workflow:
+      icon: fa-project-diagram
+      text: Workflow
+      menu:
+        - text: Using the tidyverse
+          href: articles/overviewR_vignette.html#workflow-tidyverse-1
+        - text: Presenting tables
+          href: articles/overviewR_vignette.html#presenting-tables-flextable-xtable-and-kable-1
+        - text: Extension
+          href: articles/overviewR_vignette.html#extension-1
 
 
 authors:
