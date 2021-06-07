@@ -19,8 +19,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -89,41 +89,78 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-table"></span>
+     
     Tabular overview
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">The basics</li>
     <li>
       <a href="../articles/overviewR_vignette.html#overview_tab">overview_tab</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#overview_crosstab">overview_crosstab</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#overview_print">Export results</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-chart-bar"></span>
+     
     Visual overview
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">The basics</li>
     <li>
       <a href="../articles/overviewR_vignette.html#overview_plot">overview_plot</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#overview_crossplot">overview_crossplot</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#overview_heat">overview_heat</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#overview_na">overview_na</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#overview_overlap">overview_overlap</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#customizing-plots-ggplot2-1">Customize plots</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-project-diagram"></span>
+     
+    Workflow
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/overviewR_vignette.html#workflow-tidyverse-1">Using the tidyverse</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#presenting-tables-flextable-xtable-and-kable-1">Presenting tables</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#extension-1">Extension</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="https://github.com/cosimameyer/overviewR/blob/master/man/figures/">
+  <a href="https://github.com/rstudio/cheatsheets/raw/master/overviewR.pdf">
     <span class="fas fa-sticky-note"></span>
      
     CheatSheet
-  </a>
-</li>
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
   </a>
 </li>
 <li class="dropdown">
@@ -134,7 +171,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/overviewR_vignette.html">overviewR: Easily Extracting Information About Your Data</a>
+      <a href="../articles/getting-started.html">Getting started</a>
+    </li>
+    <li>
+      <a href="../articles/overviewR_vignette.html">overviewR</a>
     </li>
   </ul>
 </li>
@@ -153,6 +193,12 @@
 <li>
   <a href="https://github.com/cosimameyer/overviewR/">
     <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
