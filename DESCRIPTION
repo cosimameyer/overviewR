@@ -26,7 +26,8 @@ Imports:
     ggplot2 (>= 3.3.2),
     tibble (>= 3.0.1),
     ggrepel (>= 0.8.2),
-    ggvenn(>= 0.1.8)
+    ggvenn (>= 0.1.8),
+    tidyr
 Suggests:
     covr,
     devtools,
