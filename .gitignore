@@ -59,7 +59,3 @@ vignettes/*.pdf
 
 .Renviron
 
-# pkgdown docs folder
-
-docs/*
-docs
