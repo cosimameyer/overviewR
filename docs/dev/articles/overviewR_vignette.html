@@ -176,7 +176,7 @@
       <h1 data-toc-skip>overviewR: Easily Extracting Information About Your Data</h1>
                         <h4 class="author">Cosima Meyer and Dennis Hammerschmidt</h4>
             
-            <h4 class="date">2021-06-07</h4>
+            <h4 class="date">2021-06-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/cosimameyer/overviewR/blob/master/vignettes/overviewR_vignette.Rmd"><code>vignettes/overviewR_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>overviewR_vignette.Rmd</code></div>
@@ -308,7 +308,7 @@ Sample &amp; Time frame \\
  \end{tabular} 
  \end{table}</code></pre>
 </details><p align="center">
-<img src="../../../stats%202/overviewR/vignettes/ex1.png" height="150"></p>
+<img src="ex1.png" height="150"></p>
 <p>The default already provides a title (“Time and scope of the sample”) that can be modified in the argument <code>title</code>. The same holds for the column names (“Sample” and “Time frame” are set by default but can be modified as shown below).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span>obj <span class="op">=</span> <span class="va">output_table</span>, id <span class="op">=</span> <span class="st">"Countries"</span>, time <span class="op">=</span> <span class="st">"Years"</span>,
@@ -333,7 +333,7 @@ Countries &amp; Years \\
  \end{tabular} 
  \end{table} </code></pre>
 </details><p align="center">
-<img src="../../../stats%202/overviewR/vignettes/ex2.png" height="150"></p>
+<img src="ex2.png" height="150"></p>
 <p>The same function can also be used for outputs from the <code>overview_crosstab</code> function by using the argument <code>crosstab = TRUE</code>. There are also options to label the respective conditions (<code>cond1</code> and <code>cond2</code>). Note that this should correspond to the conditions (<code>cond1</code> and <code>cond2</code>) specified in the <code>overview_crosstab</code> function.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span>
@@ -365,7 +365,7 @@ LaTeX output
  \end{tabularx} 
  \end{table} </code></pre>
 </details><p align="center">
-<img src="../../../stats%202/overviewR/vignettes/ex3.png" height="200"></p>
+<img src="ex3.png" height="200"></p>
 <p><code>overview_print</code> further allows more specifications such as the font size or a a label. <em>These functions are currently supported only in the development version of the package.</em></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span>obj <span class="op">=</span> <span class="va">output_table</span>,
@@ -400,11 +400,11 @@ LaTeX output
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; cpp11 (0.2.6 -&gt; 0.2.7) [CRAN]</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The downloaded binary packages are in</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  /var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T//RtmpHe3ExJ/downloaded_packages</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  /var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T//RtmpqVzfaZ/downloaded_packages</span></span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   </span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>   checking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span><span class="dv">23</span><span class="sc">/</span>l11m8s8s42x85pmh6100kf180000gn<span class="sc">/</span>T<span class="sc">/</span>RtmpHe3ExJ<span class="sc">/</span>remotes120eb2faff11e<span class="sc">/</span>cosimameyer<span class="sc">-</span>overviewR<span class="sc">-</span>beb2ced<span class="sc">/</span>DESCRIPTION’ ...</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>   checking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span><span class="dv">23</span><span class="sc">/</span>l11m8s8s42x85pmh6100kf180000gn<span class="sc">/</span>T<span class="sc">/</span>RtmpqVzfaZ<span class="sc">/</span>remotes2e4363a43165<span class="sc">/</span>cosimameyer<span class="sc">-</span>overviewR<span class="sc">-</span>490a0be<span class="sc">/</span>DESCRIPTION’ ...</span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>✓  checking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span><span class="dv">23</span><span class="sc">/</span>l11m8s8s42x85pmh6100kf180000gn<span class="sc">/</span>T<span class="sc">/</span>RtmpHe3ExJ<span class="sc">/</span>remotes120eb2faff11e<span class="sc">/</span>cosimameyer<span class="sc">-</span>overviewR<span class="sc">-</span>beb2ced<span class="sc">/</span>DESCRIPTION’</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>✓  checking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span><span class="dv">23</span><span class="sc">/</span>l11m8s8s42x85pmh6100kf180000gn<span class="sc">/</span>T<span class="sc">/</span>RtmpqVzfaZ<span class="sc">/</span>remotes2e4363a43165<span class="sc">/</span>cosimameyer<span class="sc">-</span>overviewR<span class="sc">-</span>490a0be<span class="sc">/</span>DESCRIPTION’</span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>─  preparing ‘overviewR’<span class="sc">:</span></span>
@@ -446,47 +446,22 @@ LaTeX output
 <a href="#overview_crossplot" class="anchor"></a><code>overview_crossplot</code>
 </h2>
 <p>To visualize also the cross table, <code>overview_crossplot</code> does the job. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the GitHub version</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools) <span class="co"># Tools to Make Developing R Packages Easier </span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"cosimameyer/overviewR"</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   </span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>   checking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span><span class="dv">23</span><span class="sc">/</span>l11m8s8s42x85pmh6100kf180000gn<span class="sc">/</span>T<span class="sc">/</span>RtmpHe3ExJ<span class="sc">/</span>remotes120eb4271180c<span class="sc">/</span>cosimameyer<span class="sc">-</span>overviewR<span class="sc">-</span>beb2ced<span class="sc">/</span>DESCRIPTION’ ...</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>✓  checking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span><span class="dv">23</span><span class="sc">/</span>l11m8s8s42x85pmh6100kf180000gn<span class="sc">/</span>T<span class="sc">/</span>RtmpHe3ExJ<span class="sc">/</span>remotes120eb4271180c<span class="sc">/</span>cosimameyer<span class="sc">-</span>overviewR<span class="sc">-</span>beb2ced<span class="sc">/</span>DESCRIPTION’</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>─  preparing ‘overviewR’<span class="sc">:</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>   checking DESCRIPTION meta<span class="sc">-</span>information ...</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>✓  checking DESCRIPTION meta<span class="sc">-</span>information</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>─  checking <span class="cf">for</span> LF line<span class="sc">-</span>endings <span class="cf">in</span> source and make files and shell scripts</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>─  checking <span class="cf">for</span> empty or unneeded directories</span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>─  building ‘overviewR_0.<span class="dv">0</span>.<span class="dv">7</span>.<span class="dv">999</span>.<span class="fl">1.</span>tar.gz’</span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(overviewR) <span class="co"># Easily Extracting Information About Your Data </span></span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="fu">overview_crossplot</span>(</span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  toydata,</span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> ccode,</span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> year,</span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond1 =</span> gdp,</span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond2 =</span> population,</span>
-<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold1 =</span> <span class="dv">25000</span>,</span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold2 =</span> <span class="dv">27000</span>,</span>
-<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">TRUE</span></span>
-<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Load the GitHub version</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span> <span class="co"># Tools to Make Developing R Packages Easier </span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"cosimameyer/overviewR"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cosimameyer/overviewR">overviewR</a></span><span class="op">)</span> <span class="co"># Easily Extracting Information About Your Data </span>
+<span class="fu"><a href="../reference/overview_crossplot.html">overview_crossplot</a></span><span class="op">(</span>
+  <span class="va">toydata</span>,
+  id <span class="op">=</span> <span class="va">ccode</span>,
+  time <span class="op">=</span> <span class="va">year</span>,
+  cond1 <span class="op">=</span> <span class="va">gdp</span>,
+  cond2 <span class="op">=</span> <span class="va">population</span>,
+  threshold1 <span class="op">=</span> <span class="fl">25000</span>,
+  threshold2 <span class="op">=</span> <span class="fl">27000</span>,
+  color <span class="op">=</span> <span class="cn">TRUE</span>,
+  label <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="overview_heat" class="section level2">
@@ -732,7 +707,7 @@ AGO &amp; 1990 - 1992 &amp;  \\
 \end{table}</code></pre>
 
 <p align="center">
-<img src="../../../stats%202/overviewR/vignettes/extension1.png" height="150"></p>
+<img src="extension1.png" height="150"></p>
 </div>
 </div>
   </div>
