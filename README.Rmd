@@ -57,7 +57,7 @@ The goal of overviewR is to make it easy to get an overview of a data set by dis
 - `overview_plot` is an alternative to visualize the sample (a way to present results from `overview_tab`)
 - `overview_crossplot` is an alternative to visualize a cross table (a way to present results from `overview_crosstab`)
 - `overview_heat` plots a heat map of your time line
-- `overview_na` plots an overview of missing values by variable
+- `overview_na` plots an overview of missing values by variable (both by row and by column)
 - `overview_overlap` plots comparison plots (bar graph and Venn diagram) to compare to data frames
 
 The plots can be saved using the `ggsave()` command. The output of `overview_tab` and `overview_crosstab` are also compatible with other packages such as [```xtable```](https://CRAN.R-project.org/package=xtable), [```flextable```](https://CRAN.R-project.org/package=flextable), or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
