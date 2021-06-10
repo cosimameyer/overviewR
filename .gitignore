@@ -60,3 +60,5 @@ vignettes/*.pdf
 
 .Renviron
 
+doc
+Meta
