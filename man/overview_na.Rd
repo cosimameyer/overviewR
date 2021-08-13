@@ -4,7 +4,13 @@
 \alias{overview_na}
 \title{overview_na}
 \usage{
-overview_na(dat, yaxis = "Variables", perc = TRUE)
+overview_na(
+  dat,
+  yaxis = "Variables",
+  perc = TRUE,
+  row_wise = FALSE,
+  add = FALSE
+)
 }
 \arguments{
 \item{dat}{Your data set}
@@ -12,10 +18,17 @@ overview_na(dat, yaxis = "Variables", perc = TRUE)
 \item{yaxis}{Label of your y axis ("Variables" is default)}
 
 \item{perc}{If TRUE (default) plot returns the number of NAs in percentage}
+
+\item{row_wise}{If TRUE (FALSE is default) plot return the number of NAs
+per row}
+
+\item{add}{If TRUE (FALSE is default) it generates a new data frame with
+na_count and percentage share of NAs for each row}
 }
 \value{
-A ggplot figure that presents the distribution of NAs in the
-    data set
+Depending on the selection, the function returns a ggplot figure that
+    presents the distribution of NAs in the data set or adds the information
+    on the row-wise NA share
 }
 \description{
 This function plots a ggplot to visualize the distribution of

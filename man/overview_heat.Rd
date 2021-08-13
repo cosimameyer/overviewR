@@ -13,18 +13,20 @@ overview_heat(
   xaxis = "Time frame",
   yaxis = "Sample",
   col_low = "#dceaf2",
-  col_high = "#2A5773"
+  col_high = "#2A5773",
+  label = TRUE
 )
 }
 \arguments{
-\item{dat}{Your data set}
+\item{dat}{The data set}
 
-\item{id}{Your scope (e.g., country codes or individual IDs)}
+\item{id}{The scope (e.g., country codes or individual IDs). The axis is
+ordered in ascending order by default.}
 
-\item{time}{Your time (e.g., time periods given by years, months, ...)}
+\item{time}{The time (e.g., time periods given by years, months, ...)}
 
 \item{perc}{If FALSE (default) plot returns the total number of observations
-per time-scope-unit. If TRUE it returns the number of observations per
+per time-scope-unit. If TRUE, it returns the number of observations per
 time-scope-unit in percentage}
 
 \item{exp_total}{Expected total number of observations (i.e. maximum)
@@ -37,6 +39,9 @@ for time unit.}
 \item{col_low}{Hex color code for the lowest value (default is "#dceaf2")}
 
 \item{col_high}{Hex color code for the lowest value (default is "#2A5773")}
+
+\item{label}{If TRUE (default), the total number of observations/percentages
+of observations are displayed. If FALSE, it returns no labels.}
 }
 \value{
 A ggplot figure that presents sample coverage visually

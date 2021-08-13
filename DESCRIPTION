@@ -1,7 +1,7 @@
 Type: Package
 Package: overviewR
 Title: Easily Extracting Information About Your Data
-Version: 0.0.7
+Version: 0.0.7.999.1
 Authors@R: 
     c(person(given = "Cosima",
              family = "Meyer",
@@ -24,7 +24,10 @@ Depends:
 Imports:
     dplyr (>= 1.0.0),
     ggplot2 (>= 3.3.2),
-    tibble (>= 3.0.1)
+    tibble (>= 3.0.1),
+    ggrepel (>= 0.8.2),
+    ggvenn (>= 0.1.8),
+    tidyr
 Suggests:
     covr,
     devtools,
@@ -32,7 +35,10 @@ Suggests:
     pkgdown,
     rmarkdown,
     spelling,
-    testthat
+    testthat,
+    countrycode,
+    magrittr,
+    xtable
 VignetteBuilder: 
     knitr,
     rmarkdown

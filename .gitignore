@@ -1,6 +1,7 @@
 # Standard
 .Rproj.user
 .DS_Store
+.DS_Store?
 
 # History files
 
@@ -59,6 +60,5 @@ vignettes/*.pdf
 
 .Renviron
 
-# pkgdown docs folder
-
-docs/*
+doc
+Meta

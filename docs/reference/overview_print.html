@@ -52,7 +52,7 @@
 <meta property="og:image" content="/logo.png" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -70,7 +70,7 @@
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -81,38 +81,78 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">overviewR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.7.999</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="../articles/overviewR_vignette.html">
-    <span class="fa fa-rocket"></span>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tabular overview
      
-    Getting Started
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">The basics</li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#overview_tab">overview_tab</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Visual overview
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">The basics</li>
+    <li>
+      <a href="../articles/overviewR_vignette.html#overview_plot">overview_plot</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://github.com/cosimameyer/overviewR/blob/master/man/figures/">
+    <span class="fas fa-sticky-note"></span>
+     
+    CheatSheet
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">
-    <span class="fa fa-project-diagram"></span>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
      
-    Functions
   </a>
 </li>
-<li>
-  <a href="../news/index.html">
-    <span class="fa fa-lightbulb"></span>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
      
-    News
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/overviewR_vignette.html">overviewR: Easily Extracting Information About Your Data</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">
+    <span class="fas fa-lightbulb"></span>
+     
+    News
+  </a>
+</li>
+<li>
   <a href="https://github.com/cosimameyer/overviewR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -139,18 +179,20 @@
    <code>overview_tab</code> and <code>overview_crosstab</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>overview_print</span>(
-  <span class='no'>obj</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Time and scope of the sample"</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"Sample"</span>,
-  <span class='kw'>time</span> <span class='kw'>=</span> <span class='st'>"Time frame"</span>,
-  <span class='kw'>crosstab</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>cond1</span> <span class='kw'>=</span> <span class='st'>"Condition 1"</span>,
-  <span class='kw'>cond2</span> <span class='kw'>=</span> <span class='st'>"Condition 2"</span>,
-  <span class='kw'>save_out</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>path</span>,
-  <span class='no'>file</span>
-)</pre>
+    <pre class="usage"><span class='fu'>overview_print</span><span class='op'>(</span>
+  <span class='va'>obj</span>,
+  title <span class='op'>=</span> <span class='st'>"Time and scope of the sample"</span>,
+  id <span class='op'>=</span> <span class='st'>"Sample"</span>,
+  time <span class='op'>=</span> <span class='st'>"Time frame"</span>,
+  crosstab <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  cond1 <span class='op'>=</span> <span class='st'>"Condition 1"</span>,
+  cond2 <span class='op'>=</span> <span class='st'>"Condition 2"</span>,
+  save_out <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>path</span>,
+  <span class='va'>file</span>,
+  label <span class='op'>=</span> <span class='st'>"tab:tab1"</span>,
+  <span class='va'>fontsize</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,7 +203,7 @@
     </tr>
     <tr>
       <th>title</th>
-      <td><p>Title of the table (default is "Time and scope of the sample")</p></td>
+      <td><p>Caption of the table (default is "Time and scope of the sample")</p></td>
     </tr>
     <tr>
       <th>id</th>
@@ -203,6 +245,15 @@ file, default is FALSE</p></td>
       <th>file</th>
       <td><p>Specifies name and file type (.tex)</p></td>
     </tr>
+    <tr>
+      <th>label</th>
+      <td><p>Specifies the label (default is "tab:tab1")</p></td>
+    </tr>
+    <tr>
+      <th>fontsize</th>
+      <td><p>Specifies the font size (all 'LaTeX' font sizes such as
+"scriptsize" or "small" work)</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -211,47 +262,51 @@ file, default is FALSE</p></td>
     exported directed as a .tex file</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>toydata</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>toydata</span><span class='op'>)</span>
 
-<span class='no'>overview_object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='overview_tab.html'>overview_tab</a></span>(<span class='kw'>dat</span> <span class='kw'>=</span> <span class='no'>toydata</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>ccode</span>, <span class='kw'>time</span> <span class='kw'>=</span> <span class='no'>year</span>)
-<span class='fu'>overview_print</span>(
-  <span class='kw'>obj</span> <span class='kw'>=</span> <span class='no'>overview_object</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Some nice title"</span>,
-  <span class='kw'>crosstab</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
-#&gt; % Table created on 2020-07-02
+<span class='va'>overview_object</span> <span class='op'>&lt;-</span> <span class='fu'><a href='overview_tab.html'>overview_tab</a></span><span class='op'>(</span>dat <span class='op'>=</span> <span class='va'>toydata</span>, id <span class='op'>=</span> <span class='va'>ccode</span>, time <span class='op'>=</span> <span class='va'>year</span><span class='op'>)</span>
+<span class='fu'>overview_print</span><span class='op'>(</span>
+  obj <span class='op'>=</span> <span class='va'>overview_object</span>,
+  title <span class='op'>=</span> <span class='st'>"Some nice title"</span>,
+  crosstab <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
+#&gt; % Table created on 2021-04-24
 #&gt; \begin{table}[ht] 
 #&gt;  \centering 
 #&gt;  \caption{Some nice title} 
-#&gt;  \begin{tabular}{ll} 
+#&gt; \label{tab:tab1} 
+#&gt; 
+#&gt; \begin{tabular}{ll} 
 #&gt;  \hline 
 #&gt; Sample &amp; Time frame \\ 
 #&gt; \hline 
-#&gt;  RWA &amp; 1990 - 1995 \\ 
 #&gt;  AGO &amp; 1990 - 1992 \\ 
 #&gt;  BEN &amp; 1995 - 1999 \\ 
-#&gt;  GBR &amp; 1991, 1993, 1995, 1997, 1999 \\ 
 #&gt;  FRA &amp; 1993, 1996, 1999 \\ 
+#&gt;  GBR &amp; 1991, 1993, 1995, 1997, 1999 \\ 
+#&gt;  RWA &amp; 1990 - 1995 \\ 
 #&gt;  \hline 
 #&gt;  \end{tabular} 
 #&gt;  \end{table} </div><div class='input'>
-<span class='no'>overview_ct_object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='overview_crosstab.html'>overview_crosstab</a></span>(
-  <span class='kw'>dat</span> <span class='kw'>=</span> <span class='no'>toydata</span>,
-  <span class='kw'>cond1</span> <span class='kw'>=</span> <span class='no'>gdp</span>,
-  <span class='kw'>cond2</span> <span class='kw'>=</span> <span class='no'>population</span>,
-  <span class='kw'>threshold1</span> <span class='kw'>=</span> <span class='fl'>25000</span>,
-  <span class='kw'>threshold2</span> <span class='kw'>=</span> <span class='fl'>27000</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>ccode</span>,
-  <span class='kw'>time</span> <span class='kw'>=</span> <span class='no'>year</span>
-)
-<span class='fu'>overview_print</span>(
-  <span class='kw'>obj</span> <span class='kw'>=</span> <span class='no'>overview_ct_object</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Some nice title for a cross tab"</span>,
-  <span class='kw'>crosstab</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>cond1</span> <span class='kw'>=</span> <span class='st'>"Name of first condition"</span>,
-  <span class='kw'>cond2</span> <span class='kw'>=</span> <span class='st'>"Name of second condition"</span>
-)</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
-#&gt; % Table created on 2020-07-02
+<span class='va'>overview_ct_object</span> <span class='op'>&lt;-</span> <span class='fu'><a href='overview_crosstab.html'>overview_crosstab</a></span><span class='op'>(</span>
+  dat <span class='op'>=</span> <span class='va'>toydata</span>,
+  cond1 <span class='op'>=</span> <span class='va'>gdp</span>,
+  cond2 <span class='op'>=</span> <span class='va'>population</span>,
+  threshold1 <span class='op'>=</span> <span class='fl'>25000</span>,
+  threshold2 <span class='op'>=</span> <span class='fl'>27000</span>,
+  id <span class='op'>=</span> <span class='va'>ccode</span>,
+  time <span class='op'>=</span> <span class='va'>year</span>
+<span class='op'>)</span>
+<span class='fu'>overview_print</span><span class='op'>(</span>
+  obj <span class='op'>=</span> <span class='va'>overview_ct_object</span>,
+  title <span class='op'>=</span> <span class='st'>"Some nice title for a cross tab"</span>,
+  crosstab <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  cond1 <span class='op'>=</span> <span class='st'>"Name of first condition"</span>,
+  cond2 <span class='op'>=</span> <span class='st'>"Name of second condition"</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
+#&gt; % Table created on 2021-04-24
 #&gt; % Please add the following packages to your document preamble: 
 #&gt; % \usepackage{multirow} 
 #&gt; % \usepackage{tabularx} 
@@ -259,7 +314,9 @@ file, default is FALSE</p></td>
 #&gt; % \newcolumntype{s}{&gt;{\hsize=.5\hsize}X} 
 #&gt; \begin{table}[ht] 
 #&gt; \caption{Some nice title for a cross tab} 
-#&gt;  \begin{tabularx}{\textwidth}{ssbb} 
+#&gt; \label{tab:tab1} 
+#&gt; 
+#&gt; \begin{tabularx}{\textwidth}{ssbb} 
 #&gt; \hline &amp; &amp; \multicolumn{2}{c}{\textbf{Name of first condition}} \\ 
 #&gt;  &amp; &amp; \textbf{Fulfilled} &amp; \textbf{Not fulfilled} \\ 
 #&gt;  \hline \\ 
@@ -280,11 +337,11 @@ file, default is FALSE</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://cosimameyer.github.io'>Cosima Meyer</a>, <a href='http://dennis-hammerschmidt.rbind.io'>Dennis Hammerschmidt</a>.</p>
+  <p>Developed by <a href='http://cosimameyer.rbind.io'>Cosima Meyer</a>, <a href='http://dennis-hammerschmidt.rbind.io'>Dennis Hammerschmidt</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

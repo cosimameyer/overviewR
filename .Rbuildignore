@@ -1,8 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
-^README\.Rmd$
-^\.travis\.yml$
 ^\.gitlab-ci\.yml$
 ^\.circleci$
 ^\.circleci/config\.yml$
@@ -11,8 +8,12 @@
 ^revdep$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
-^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^_pkgdown\.yaml$
 ^index\.md$
+^_pkgdown\.yaml$
+^_pkgdown\.yml$
+^README\.Rmd$
+^LICENSE\.md$
+^doc$
+^Meta$

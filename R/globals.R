@@ -5,11 +5,19 @@ utils::globalVariables(
     "time_frame",
     "toydata",
     "count",
+    "value",
+    "count2",
     "grp",
     "n",
     "percentage",
     "total",
     "variable",
-    "idx"
+    "idx",
+    "text",
+    "quart4",
+    "quart3",
+    "quart2",
+    "quart1",
+    "."
   )
 )

@@ -34,63 +34,133 @@ overview_tab <- function(dat, id, time) {
   id <- dplyr::enquo(id)
   time <- dplyr::enquo(time)
 
-  # Check the length of unique observations (based on time and id) in the
-  # data set
-  # We need this for the next check
-  length_nodup <- dat %>%
-    dplyr::distinct(!!id, !!time, .keep_all = TRUE)
+  # Check if there are NAs in the time or id variable
+  # (and drop them but warn the user about it)
+  dat2 <- dat %>%
+    dplyr::filter(!is.na(!!id))
 
-  # Check if data set only has unique observations
-  if (nrow(length_nodup) == nrow(dat)) {
-    # Apply it to the data
-    tab <- dat %>%
-      # Select important variables
-      dplyr::select(!!id, !!time) %>%
-      # Group data
-      dplyr::group_by(!!id, !!time) %>%
-      # Arrange the data
-      dplyr::arrange(!!id, !!time) %>%
-      # Only get distinct IDs
-      dplyr::distinct(!!id) %>%
-      # Group by ID
-      dplyr::group_by(!!id) %>%
-      # Apply function generated above
-      dplyr::mutate(time_frame = paste(find_int_runs(!!time),
-        collapse = ", "
-      )) %>%
-      # Subset it to only one distinct country
-      dplyr::distinct(!!id, time_frame)
+  if (nrow(dat2) == nrow(dat)) {
+    # Check the length of unique observations (based on time and id) in the
+    # data set
+    # We need this for the next check
+    length_nodup <- dat %>%
+      dplyr::distinct(!!id, !!time, .keep_all = TRUE)
 
-    # Return object
-    return(tab)
+    # Check if data set only has unique observations
+    if (nrow(length_nodup) == nrow(dat)) {
+      # Apply it to the data
+      tab <- dat %>%
+        # Select important variables
+        dplyr::select(!!id, !!time) %>%
+        # Group data
+        dplyr::group_by(!!id, !!time) %>%
+        # Arrange the data
+        dplyr::arrange(!!id, !!time) %>%
+        # Only get distinct IDs
+        dplyr::distinct(!!id) %>%
+        # Group by ID
+        dplyr::group_by(!!id) %>%
+        # Apply function generated above
+        dplyr::mutate(time_frame = paste(find_int_runs(!!time),
+                                         collapse = ", ")) %>%
+        # Subset it to only one distinct country
+        dplyr::distinct(!!id, time_frame)
+
+      # Return object
+      return(tab)
+    }
+    # If this is not the case, we need to aggregate the data
+    else {
+      dat2 <- dat %>%
+        dplyr::select(!!id, !!time) %>%
+        dplyr::group_by(!!id, !!time) %>%
+        dplyr::distinct(!!id, !!time)
+
+      # Apply code from above to the new data
+      # Apply it to the data
+      tab2 <- dat2 %>%
+        # Select important variables
+        dplyr::select(!!id, !!time) %>%
+        # # Group data
+        dplyr::group_by(!!id, !!time) %>%
+        # Arrange the data
+        dplyr::arrange(!!id, !!time) %>%
+        # Only get distinct IDs
+        dplyr::distinct(!!id) %>%
+        # Group by ID
+        dplyr::group_by(!!id) %>%
+        # Apply function generated above
+        dplyr::mutate(time_frame = paste(find_int_runs(!!time),
+                                         collapse = ", ")) %>%
+        # Subset it to only one distinct country
+        dplyr::distinct(!!id, time_frame)
+
+      return(tab2)
+    }
   }
-  # If this is not the case, we need to aggregate the data
-  else {
-    dat2 <- dat %>%
-      dplyr::select(!!id, !!time) %>%
-      dplyr::group_by(!!id, !!time) %>%
-      dplyr::distinct(!!id, !!time)
+  else{
+    warning(
+      "There is a missing value in your id variable. The missing value is automatically deleted."
+    )
 
-    # Apply code from above to the new data
-    # Apply it to the data
-    tab2 <- dat2 %>%
-      # Select important variables
-      dplyr::select(!!id, !!time) %>%
-      # # Group data
-      dplyr::group_by(!!id, !!time) %>%
-      # Arrange the data
-      dplyr::arrange(!!id, !!time) %>%
-      # Only get distinct IDs
-      dplyr::distinct(!!id) %>%
-      # Group by ID
-      dplyr::group_by(!!id) %>%
-      # Apply function generated above
-      dplyr::mutate(time_frame = paste(find_int_runs(!!time),
-        collapse = ", "
-      )) %>%
-      # Subset it to only one distinct country
-      dplyr::distinct(!!id, time_frame)
+    dat <- dat %>%
+      dplyr::filter(!is.na(!!id))
+    # Check the length of unique observations (based on time and id) in the
+    # data set
+    # We need this for the next check
+    length_nodup <- dat %>%
+      dplyr::distinct(!!id, !!time, .keep_all = TRUE)
 
-    return(tab2)
+    # Check if data set only has unique observations
+    if (nrow(length_nodup) == nrow(dat)) {
+      # Apply it to the data
+      tab <- dat %>%
+        # Select important variables
+        dplyr::select(!!id, !!time) %>%
+        # Group data
+        dplyr::group_by(!!id, !!time) %>%
+        # Arrange the data
+        dplyr::arrange(!!id, !!time) %>%
+        # Only get distinct IDs
+        dplyr::distinct(!!id) %>%
+        # Group by ID
+        dplyr::group_by(!!id) %>%
+        # Apply function generated above
+        dplyr::mutate(time_frame = paste(find_int_runs(!!time),
+                                         collapse = ", ")) %>%
+        # Subset it to only one distinct country
+        dplyr::distinct(!!id, time_frame)
+
+      # Return object
+      return(tab)
+    }
+    # If this is not the case, we need to aggregate the data
+    else {
+      dat2 <- dat %>%
+        dplyr::select(!!id, !!time) %>%
+        dplyr::group_by(!!id, !!time) %>%
+        dplyr::distinct(!!id, !!time)
+
+      # Apply code from above to the new data
+      # Apply it to the data
+      tab2 <- dat2 %>%
+        # Select important variables
+        dplyr::select(!!id, !!time) %>%
+        # # Group data
+        dplyr::group_by(!!id, !!time) %>%
+        # Arrange the data
+        dplyr::arrange(!!id, !!time) %>%
+        # Only get distinct IDs
+        dplyr::distinct(!!id) %>%
+        # Group by ID
+        dplyr::group_by(!!id) %>%
+        # Apply function generated above
+        dplyr::mutate(time_frame = paste(find_int_runs(!!time),
+                                         collapse = ", ")) %>%
+        # Subset it to only one distinct country
+        dplyr::distinct(!!id, time_frame)
+
+      return(tab2)
+    }
   }
 }

@@ -50,7 +50,7 @@
 <meta property="og:image" content="/logo.png" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -68,7 +68,7 @@
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-title-body">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -79,38 +79,78 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">overviewR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.7.999</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="articles/overviewR_vignette.html">
-    <span class="fa fa-rocket"></span>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tabular overview
      
-    Getting Started
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">The basics</li>
+    <li>
+      <a href="articles/overviewR_vignette.html#overview_tab">overview_tab</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Visual overview
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">The basics</li>
+    <li>
+      <a href="articles/overviewR_vignette.html#overview_plot">overview_plot</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://github.com/cosimameyer/overviewR/blob/master/man/figures/">
+    <span class="fas fa-sticky-note"></span>
+     
+    CheatSheet
   </a>
 </li>
 <li>
-  <a href="reference/index.html">
-    <span class="fa fa-project-diagram"></span>
+  <a href="index.html">
+    <span class="fas fa-home fa-lg"></span>
      
-    Functions
   </a>
 </li>
-<li>
-  <a href="news/index.html">
-    <span class="fa fa-lightbulb"></span>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
      
-    News
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="articles/overviewR_vignette.html">overviewR: Easily Extracting Information About Your Data</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">
+    <span class="fas fa-lightbulb"></span>
+     
+    News
+  </a>
+</li>
+<li>
   <a href="https://github.com/cosimameyer/overviewR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -146,11 +186,11 @@ Content not found. Please use links in the navbar.
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://cosimameyer.github.io'>Cosima Meyer</a>, <a href='http://dennis-hammerschmidt.rbind.io'>Dennis Hammerschmidt</a>.</p>
+  <p>Developed by <a href='http://cosimameyer.rbind.io'>Cosima Meyer</a>, <a href='http://dennis-hammerschmidt.rbind.io'>Dennis Hammerschmidt</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
