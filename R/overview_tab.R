@@ -13,20 +13,27 @@
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 #' @export
 #' @importFrom dplyr "%>%"
+#' @importFrom dplyr ".."
 
-overview_tab <- function(dat = NULL,
-                         id = NULL,
-                         time = NULL) {
+overview_tab <- function(dat,
+                         id,
+                         time) {
   if (any(class(dat) == "data.table")) {
+
+    # Start with the data
+    id <- rlang::ensym(id)
+    time <- rlang::ensym(time)
 
     # Check if there are NAs in the time or id variable
     # (and drop them but warn the user about it)
-    if(sum(is.na(dat[["id"]]))>0){
-      warning("There is a missing value in your id variable. The missing value is automatically deleted.")
+    if (sum(is.na(dat[[id]])) > 0) {
+      warning(
+        "There is a missing value in your id variable. The missing value is automatically deleted."
+      )
     }
 
-    # TODO: DOES NOT WORK YET - Needs to be fixed.
-    dat[c(id, ccode)][!is.na(id)]
+    # TODO: FIX
+    dat[, ..(id, time)][!is.na(id)]
 
     output <- overview_tab_dt(
       dat = dat,
@@ -44,8 +51,10 @@ overview_tab <- function(dat = NULL,
     dat2 <- dat %>%
       dplyr::filter(!is.na(!!id))
 
-    if(length(dat2)!= length(dat)){
-      warning("There is a missing value in your id variable. The missing value is automatically deleted.")
+    if (length(dat2) != length(dat)) {
+      warning(
+        "There is a missing value in your id variable. The missing value is automatically deleted."
+      )
     }
 
     output <- overview_tab_df(
