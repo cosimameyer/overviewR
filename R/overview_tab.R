@@ -6,7 +6,7 @@
 #'
 #' @param dat A data frame or data table object
 #' @param id Scope (e.g., country codes or individual IDs)
-#' @param time Time (e.g., time periods given by years, months, ...)
+#' @param time Time (e.g., time periods given by years, months, ...). Time can be a character vector containing multiple time variables.
 #' @return A data frame object that contains a summary of a sample that
 #'     can later be converted to a 'LaTeX' output using \code{overview_print}
 #' @examples
@@ -14,12 +14,27 @@
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 #' @export
 #' @importFrom dplyr "%>%"
-#' @importFrom dplyr ".."
+#' @importFrom data.table ".."
 
 overview_tab <- function(dat,
                          id,
                          time) {
 
+  # # Check whether time contains multiple objects
+  # if (length(time) > 0) {
+  #   # If there are multiple objects, identify which object belongs to year, month, or day
+  #   mapply(X = time, MoreArgs = dat, function(x) {
+  #     browser()
+  #     dat[, colnames(dat) == time[[1]]]
+  #   })
+  #   for (i in colnames(dat)) {
+  #     for (j in time) {
+  #       time_1 <-
+  #       browser()
+  #     }
+  #
+  #   }
+  # }
 
   if (any(class(dat) == "data.table")) {
     # Start with the data

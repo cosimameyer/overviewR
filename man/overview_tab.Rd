@@ -7,11 +7,11 @@
 overview_tab(dat, id, time)
 }
 \arguments{
-\item{dat}{A data set object}
+\item{dat}{A data frame or data table object}
 
 \item{id}{Scope (e.g., country codes or individual IDs)}
 
-\item{time}{Time (e.g., time periods given by years, months, ...)}
+\item{time}{Time (e.g., time periods given by years, months, ...). Time can be a character vector containing multiple time variables.}
 }
 \value{
 A data frame object that contains a summary of a sample that
@@ -19,7 +19,8 @@ A data frame object that contains a summary of a sample that
 }
 \description{
 Provides an overview table for the time and scope conditions of
-    a data set
+    a data set. If a data.table object is provided, the function uses
+    data.table's syntax to perform the evaluation
 }
 \examples{
 data(toydata)
