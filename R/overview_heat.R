@@ -37,12 +37,21 @@ overview_heat <-
            col_low = "#dceaf2",
            col_high = "#2A5773",
            label = TRUE) {
-    dat <- dat
-    id <- dplyr::enquo(id)
-    time <- dplyr::enquo(time)
 
     # Set theme ---------------------------------------------------------------
     theme_plot <- theme_heat_plot()
+
+    # Start with the data
+    dat <- dat
+
+    if (any(class(dat) == "data.table")) {
+      id <- deparse(substitute(id))
+      time <- deparse(substitute(time))
+      col_names <- c(id, time)
+    } else {
+      id <- dplyr::enquo(id)
+      time <- dplyr::enquo(time)
+    }
 
     # Plot
     plot <-
@@ -57,7 +66,8 @@ overview_heat <-
         xaxis = xaxis,
         yaxis = yaxis,
         theme_plot = theme_plot,
-        exp_total = exp_total
+        exp_total = exp_total,
+        col_names = col_names
       )
 
     return(plot)
