@@ -28,8 +28,9 @@ Imports:
     tibble (>= 3.0.1),
     ggrepel (>= 0.8.2),
     ggvenn (>= 0.1.8),
-    data.table(>= 1.14.2),
-    tidyr
+    data.table (>= 1.14.2),
+    tidyr,
+    rlang
 Suggests:
     covr,
     devtools,
