@@ -49,8 +49,8 @@ test_that("overview_tab() works on a dataframe that is already in the correct
 
 
 test_that("Get a warning message from overview_tab", {
-  data_test <- data.frame(countries  = c("RWA", NA),
-                          years = c(1990, 2000))
+  data_test <- data.frame(countries  = c("RWA", NA, NA),
+                          years = c(1990, 2000, 2001))
   expect_warning(overview_tab(data_test, id = countries, time = years))
 })
 

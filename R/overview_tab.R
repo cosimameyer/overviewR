@@ -53,7 +53,7 @@ overview_tab <- function(dat,
     dat2 <- dat %>%
       dplyr::filter(!is.na(!!id))
 
-    if (length(dat2) != length(dat)) {
+    if (nrow(dat2) != nrow(dat)) {
       warning(
         "There is a missing value in your id variable. The missing value is automatically deleted."
       )
