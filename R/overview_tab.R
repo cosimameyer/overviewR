@@ -14,7 +14,6 @@
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 #' @export
 #' @importFrom dplyr "%>%"
-#' @importFrom data.table ".."
 
 overview_tab <- function(dat,
                          id,
