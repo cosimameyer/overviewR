@@ -1,9 +1,10 @@
 #' @title overview_tab
 #'
 #' @description Provides an overview table for the time and scope conditions of
-#'     a data set
+#'     a data set. If a data.table object is provided, the function uses
+#'     data.table's syntax to perform the evaluation
 #'
-#' @param dat A data set object
+#' @param dat A data frame or data table object
 #' @param id Scope (e.g., country codes or individual IDs)
 #' @param time Time (e.g., time periods given by years, months, ...)
 #' @return A data frame object that contains a summary of a sample that
@@ -18,11 +19,13 @@
 overview_tab <- function(dat,
                          id,
                          time) {
-  if (any(class(dat) == "data.table")) {
 
+
+  if (any(class(dat) == "data.table")) {
     # Start with the data
-    id <- rlang::ensym(id)
-    time <- rlang::ensym(time)
+    id <- deparse(substitute(id))
+    time <- deparse(substitute(time))
+    col_names <- c(id, time)
 
     # Check if there are NAs in the time or id variable
     # (and drop them but warn the user about it)
@@ -30,21 +33,20 @@ overview_tab <- function(dat,
       warning(
         "There is a missing value in your id variable. The missing value is automatically deleted."
       )
+      dat <- dat[!is.na(get(id)), col_names, with = FALSE]
     }
-
-    # TODO: FIX
-    dat[, ..(id, time)][!is.na(id)]
 
     output <- overview_tab_dt(
       dat = dat,
       id = id,
-      time = time
+      time = time,
+      col_names = col_names
     )
 
   } else {
     # Start with the data
-    id <- dplyr::enquo(id)
-    time <- dplyr::enquo(time)
+    id <- rlang::ensym(id)
+    time <- rlang::ensym(time)
 
     # Check if there are NAs in the time or id variable
     # (and drop them but warn the user about it)
