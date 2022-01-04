@@ -1,6 +1,6 @@
 ---
 # overviewR 0.0.7.999.2
-- This development version adds the possibility to use a data.table object with `overview_tab`, `overview_na`, `overview_cross_tab`
+- This development version adds the possibility to use a data.table object with `overview_tab` ans `overview_na`
 
 # overviewR 0.0.7.999.1
 
