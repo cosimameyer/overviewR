@@ -6,7 +6,7 @@
 #'
 #' @param dat A data frame or data table object
 #' @param id Scope (e.g., country codes or individual IDs)
-#' @param time Time (e.g., time periods given by years, months, ...). Time can be a character vector containing multiple time variables.
+#' @param time Time (e.g., time periods given by years, months, ...). There are three options to add a date variable: 1) Time can be a character vector containing **one** time variable, 2) a time variable following the YYYY-MM-DD format, or 3) or a list containing multiple time variables (`time = list(year = NULL, month = NULL, day = NULL)`).
 #' @return A data frame object that contains a summary of a sample that
 #'     can later be converted to a 'LaTeX' output using \code{overview_print}
 #' @examples
@@ -17,22 +17,54 @@
 
 overview_tab <- function(dat,
                          id,
-                         time) {
+                         time = list(year = NULL, month = NULL, day = NULL)) {
+  # Check whether time contains multiple objects
+  if (is.list(time)) {
 
-  # # Check whether time contains multiple objects
-  # if (length(time) > 0) {
-  #   # If there are multiple objects, identify which object belongs to year, month, or day
-  #   mapply(X = time, MoreArgs = dat, function(x) {
-  #     browser()
-  #     dat[, colnames(dat) == time[[1]]]
-  #   })
-  #   for (i in colnames(dat)) {
-  #     for (j in time) {
-  #       time_1 <-
-  #       browser()
-  #     }
+    # Identify non-empty objects
+    time <- time[lapply(time, length) > 0]
+
+    if (is.null(time$day)) {
+      stop(
+        "The current version requires a day if you are providing multiple time arguments. Please also add a `day` in `time = list(year = ..., month = ..., day = ...)`."
+      )
+    }
+    # If month object is a character, convert it into numbers
+    if (!is.null(time$month) & !is.numeric(time$month)) {
+      date <- paste(time$year, time$month, time$day, sep = "-")
+
+      if (any(grepl("-$", date))) {
+        date <- gsub("-$", replacement = "", date)
+      } else if (any(grepl("--$", date))) {
+        date <- gsub("--$", replacement = "", date)
+      }
+
+      # Convert a possible non-numeric month to a numeric month
+      if (!is.null(time$year) &
+          !is.null(time$month) & !is.null(time$day)) {
+        # TODO: Make sure that this works
+        dat$time <- strftime(as.POSIXlt(date, format = "%Y-%b-%d"))
+        time <- dat$time
+
+      }
+      # else if (!is.null(time$year) &
+      #            !is.null(time$month) & is.null(time$day)) {
+      #   # Convert month into a numeric variable
+      #   month <-
+      #     if (any(time$month %in% month.name)) {
+      #       match(time$month, month.name)
+      #     } else if (any(time$month %in% month.abb)) {
+      #       match(time$month, month.abb)
+      #     }
+      #   dat$time <- as.Date(paste(time$year, month, sep = "-"), format = "%Y-%m")
+      #   }
+
+    }
+  }
+
+  # # Also check if the time variable already has more info (e.g., YYYY-MM-DD format)
+  # if (is.Date(time)) {
   #
-  #   }
   # }
 
   if (any(class(dat) == "data.table")) {

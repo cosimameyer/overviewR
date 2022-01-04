@@ -4,14 +4,14 @@
 \alias{overview_tab}
 \title{overview_tab}
 \usage{
-overview_tab(dat, id, time)
+overview_tab(dat, id, time = list(year = NULL, month = NULL, day = NULL))
 }
 \arguments{
 \item{dat}{A data frame or data table object}
 
 \item{id}{Scope (e.g., country codes or individual IDs)}
 
-\item{time}{Time (e.g., time periods given by years, months, ...). Time can be a character vector containing multiple time variables.}
+\item{time}{Time (e.g., time periods given by years, months, ...). There are three options to add a date variable: 1) Time can be a character vector containing **one** time variable, 2) a time variable following the YYYY-MM-DD format, or 3) or a list containing multiple time variables (`time = list(year = NULL, month = NULL, day = NULL)`).}
 }
 \value{
 A data frame object that contains a summary of a sample that
