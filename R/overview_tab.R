@@ -10,17 +10,23 @@
 #' @return A data frame object that contains a summary of a sample that
 #'     can later be converted to a 'LaTeX' output using \code{overview_print}
 #' @examples
+#' # With version 1 (and also 2):
+#'
 #' data(toydata)
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+#'
+#' # With version 3:
+#' overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year, month = toydata$month, day = toydata$day))
+#'
 #' @export
 #' @importFrom dplyr "%>%"
 
 overview_tab <- function(dat,
                          id,
-                         time = list(year = NULL, month = NULL, day = NULL)) {
+                         time = list(year = NULL, month = NULL, day = NULL),
+                         date_time = date_time) {
   # Check whether time contains multiple objects
   if (is.list(time)) {
-
     # Identify non-empty objects
     time <- time[lapply(time, length) > 0]
 
@@ -42,10 +48,7 @@ overview_tab <- function(dat,
       # Convert a possible non-numeric month to a numeric month
       if (!is.null(time$year) &
           !is.null(time$month) & !is.null(time$day)) {
-        # TODO: Make sure that this works
-        dat$time <- strftime(as.POSIXlt(date, format = "%Y-%b-%d"))
-        time <- dat$time
-
+        dat$date_time <- as.Date(strftime(as.POSIXlt(date, format = "%Y-%b-%d")))
       }
       # else if (!is.null(time$year) &
       #            !is.null(time$month) & is.null(time$day)) {
@@ -69,8 +72,12 @@ overview_tab <- function(dat,
 
   if (any(class(dat) == "data.table")) {
     # Start with the data
+    if (!is.list(time)) {
+      time <- deparse(substitute(time))
+    } else {
+      time <- deparse(substitute(date_time))
+    }
     id <- deparse(substitute(id))
-    time <- deparse(substitute(time))
     col_names <- c(id, time)
 
     # Check if there are NAs in the time or id variable
@@ -91,8 +98,13 @@ overview_tab <- function(dat,
 
   } else {
     # Start with the data
-    id <- rlang::ensym(id)
+    if (!is.list(time)) {
     time <- rlang::ensym(time)
+    } else {
+      time <- rlang::ensym(date_time)
+    }
+    id <- rlang::ensym(id)
+
 
     # Check if there are NAs in the time or id variable
     # (and drop them but warn the user about it)

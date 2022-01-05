@@ -4,7 +4,12 @@
 \alias{overview_tab}
 \title{overview_tab}
 \usage{
-overview_tab(dat, id, time = list(year = NULL, month = NULL, day = NULL))
+overview_tab(
+  dat,
+  id,
+  time = list(year = NULL, month = NULL, day = NULL),
+  date_time = date_time
+)
 }
 \arguments{
 \item{dat}{A data frame or data table object}
@@ -23,6 +28,12 @@ Provides an overview table for the time and scope conditions of
     data.table's syntax to perform the evaluation
 }
 \examples{
+# With version 1 (and also 2):
+
 data(toydata)
 output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+
+# With version 3:
+overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year, month = toydata$month, day = toydata$day))
+
 }
