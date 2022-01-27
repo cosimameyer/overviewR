@@ -556,13 +556,13 @@ Sample & Time frame \\
 ## Overview of functional add-ons
 |                       | Works with `data.frame` objects | Works with `data.table` | Can take multiple time arguments (year, month, day) |
 |-----------------------|---------------------------------|-------------------------|-----------------------------------------------------|
-| `overview_tab`        | ✓                               | ✓                       | ✓                                                   |
-| `overview_na`         | ✓                               | ✓                       |                                                     |
-| `overview_plot`       | ✓                               |                         |                                                     |
-| `overview_crossplot`  | ✓                               |                         |                                                     |
-| `overview_crosstab`   | ✓                               |                         |                                                     |
-| `overview_heat`       | ✓                               |                         |                                                     |
-| `overview_overlap`    | ✓                               |                         |                                                     |
+| `overview_tab`        | yes                               | yes                       | yes                                                   |
+| `overview_na`         | yes                               | yes                       |                                                     |
+| `overview_plot`       | yes                               |                         |                                                     |
+| `overview_crossplot`  | yes                               |                         |                                                     |
+| `overview_crosstab`   | yes                               |                         |                                                     |
+| `overview_heat`       | yes                               |                         |                                                     |
+| `overview_overlap`    | yes                               |                         |                                                     |
 
 ## Extensions
 
