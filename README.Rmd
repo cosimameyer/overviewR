@@ -553,7 +553,7 @@ Sample & Time frame \\
 ```
 
 
-## Overview of functional add-ons
+<!--## Overview of functional add-ons
 |                       | Works with `data.frame` objects | Works with `data.table` | Can take multiple time arguments (year, month, day) |
 |-----------------------|---------------------------------|-------------------------|-----------------------------------------------------|
 | `overview_tab`        | yes                               | yes                       | yes                                                   |
@@ -563,7 +563,7 @@ Sample & Time frame \\
 | `overview_crosstab`   | yes                               |                         |                                                     |
 | `overview_heat`       | yes                               |                         |                                                     |
 | `overview_overlap`    | yes                               |                         |                                                     |
-
+-->
 ## Extensions
 
 If you wish to compare two data sets using `overview_tab`, this is not (yet) implemented in `overviewR` but there is currently a workaround. 
