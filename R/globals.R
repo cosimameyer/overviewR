@@ -18,6 +18,9 @@ utils::globalVariables(
     "quart3",
     "quart2",
     "quart1",
-    "."
+    ".",
+    "na_count",
+    "..col_names",
+    "..return_cols"
   )
 )

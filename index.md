@@ -69,7 +69,7 @@ overview_crossplot is an alternative to visualize a cross table (a way to presen
 - **overview_na** graphically illustrates the total number of NAs across all variables in your data set as a horizontal bar plot. Similar to the other plot objects, overview_na returns a ggplot object and can be modified and adjusted accordingly.
 - **overview_overlap** plots the overlap between two data sets.
 
-There is also a [CheatSheet](https://github.com/rstudio/cheatsheets/raw/master/overviewR.pdf) available here that showcases the functions of overviewR.
+There is also a [CheatSheet](https://github.com/rstudio/cheatsheets/blob/main/overviewR.pdf) available here that showcases the functions of overviewR.
 
 
 ## <i class="fas fa-people-carry"></i> Get involved!

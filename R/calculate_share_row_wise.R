@@ -1,13 +1,17 @@
 calculate_share_row_wise <- function(dat = NULL) {
   if (any(class(dat) == "data.table")) {
-    dat <- copy(dat)
-    dat_result <- dat[, `:=` (na_count = rowSums(is.na(dat)), total = ncol(dat))][, .(na_count, total)]
+    dat <- data.table::copy(dat)
+    dat_result <-
+      dat[, `:=` (na_count = rowSums(is.na(dat)), total = ncol(dat))][, .(na_count, total)]
 
     # Add rownames as variable and get the percentage
-    dat_result <- dat_result[, `:=`(variable = 1:nrow(dat_result), percentage = na_count/(total/100))]
+    dat_result <-
+      dat_result[, `:=`(variable = 1:nrow(dat_result),
+                        percentage = na_count / (total / 100))]
 
   } else {
-    apply(dat, MARGIN = 1, function(x) sum(is.na(x)))
+    apply(dat, MARGIN = 1, function(x)
+      sum(is.na(x)))
 
     dat_result <- dat %>%
       dplyr::rowwise() %>%
@@ -19,7 +23,7 @@ calculate_share_row_wise <- function(dat = NULL) {
       dplyr::select(na_count, total)
 
     # Add rownames as variable
-    dat_result$variable = 1:nrow(dat_result)
+    dat_result$variable <- 1:nrow(dat_result)
 
     # Get percentage
     dat_result <- dat_result %>%
