@@ -2,11 +2,11 @@ calculate_share_row_wise <- function(dat = NULL) {
   if (any(class(dat) == "data.table")) {
     dat <- data.table::copy(dat)
     dat_result <-
-      dat[, `:=` (na_count = rowSums(is.na(dat)), total = ncol(dat))][, .(na_count, total)]
+      dat[, list(na_count = rowSums(is.na(dat)), total = ncol(dat))][, .(na_count, total)]
 
     # Add rownames as variable and get the percentage
     dat_result <-
-      dat_result[, `:=`(variable = 1:nrow(dat_result),
+      dat_result[, list(variable = 1:nrow(dat_result),
                         percentage = na_count / (total / 100))]
 
   } else {

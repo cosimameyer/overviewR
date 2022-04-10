@@ -61,7 +61,7 @@ install.packages("overviewR", force = TRUE)
 
 To install the latest development version of `overviewR` directly from [GitHub](https://github.com/cosimameyer/overviewR) use: 
 
-```{r, message=FALSE, warning=FALSE, results = "hide", eval=FALSE}
+```{r, message=FALSE, warning=FALSE, results = "hide", eval=TRUE}
 library(devtools)
 devtools::install_github("cosimameyer/overviewR")
 ```
