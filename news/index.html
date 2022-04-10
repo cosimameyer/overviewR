@@ -54,7 +54,7 @@
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_heat">overview_heat</a>
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_na">overview_na</a>
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_overlap">overview_overlap</a>
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#customizing-plots-ggplot2-1">Customize plots</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#customizing-plots-ggplot2">Customize plots</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -64,9 +64,9 @@
     Workflow
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdown--workflow">
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#workflow-tidyverse-1">Using the tidyverse</a>
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#presenting-tables-flextable-xtable-and-kable-1">Presenting tables</a>
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#extension-1">Extension</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#workflow-tidyverse">Using the tidyverse</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#presenting-tables-flextable-xtable-and-kable">Presenting tables</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#extension">Extension</a>
   </div>
 </li>
 <li class="nav-item">
@@ -117,6 +117,38 @@
       <small>Source: <a href="https://github.com/cosimameyer/overviewR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.9" id="overviewr-009">overviewR 0.0.9<a class="anchor" aria-label="anchor" href="#overviewr-009"></a></h2>
+<ul><li>This version adds the possibility to use multiple time arguments for <code>overview_tab</code>
+</li>
+<li>It also adds an extended <code>toydata</code> dataframe (including variables for day)</li>
+</ul><hr></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.8.999" id="overviewr-008999">overviewR 0.0.8.999<a class="anchor" aria-label="anchor" href="#overviewr-008999"></a></h2>
+<ul><li>This development version adds the possibility to use a data.table object with <code>overview_tab</code> ans <code>overview_na</code>
+</li>
+</ul><hr></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.7.999.1" id="overviewr-0079991">overviewR 0.0.7.999.1<a class="anchor" aria-label="anchor" href="#overviewr-0079991"></a></h2>
+<ul><li>This development version adds the following extensions
+<ul><li>
+<code>overview_plot</code>
+<ul><li>Adjustable <code>dot_size</code> (default is 2)</li>
+</ul></li>
+<li>
+<code>overview_na</code>
+<ul><li>Option to generate <code>row_wise</code> NA values</li>
+</ul></li>
+<li>
+<code>overview_overlap</code>
+<ul><li>New function to compare (at the moment) two data sets using bar graphs (<code>plot_type = "bar"</code>) or Venn diagrams (<code>plot_type = "venn"</code>)</li>
+</ul></li>
+<li>
+<code>overview_print</code>
+<ul><li>Fixed a small issue that can cause problems with large (and complex) TeX documents</li>
+</ul></li>
+</ul></li>
+</ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.7.999" id="overviewr-007999">overviewR 0.0.7.999<a class="anchor" aria-label="anchor" href="#overviewr-007999"></a></h2>
 <ul><li>This development version adds bugs fixes and extensions for

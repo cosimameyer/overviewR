@@ -58,7 +58,7 @@
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_heat">overview_heat</a>
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_na">overview_na</a>
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_overlap">overview_overlap</a>
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#customizing-plots-ggplot2-1">Customize plots</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#customizing-plots-ggplot2">Customize plots</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -68,9 +68,9 @@
     Workflow
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdown--workflow">
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#workflow-tidyverse-1">Using the tidyverse</a>
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#presenting-tables-flextable-xtable-and-kable-1">Presenting tables</a>
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#extension-1">Extension</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#workflow-tidyverse">Using the tidyverse</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#presenting-tables-flextable-xtable-and-kable">Presenting tables</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#extension">Extension</a>
   </div>
 </li>
 <li class="nav-item">
@@ -130,7 +130,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">overview_tab</span><span class="op">(</span><span class="va">dat</span>, <span class="va">id</span>, <span class="va">time</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">overview_tab</span><span class="op">(</span>
+  <span class="va">dat</span>,
+  <span class="va">id</span>,
+  time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>year <span class="op">=</span> <span class="cn">NULL</span>, month <span class="op">=</span> <span class="cn">NULL</span>, day <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,
+  complex_date <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -140,7 +145,9 @@
 <dt>id</dt>
 <dd><p>Scope (e.g., country codes or individual IDs)</p></dd>
 <dt>time</dt>
-<dd><p>Time (e.g., time periods given by years, months, ...). Time can be a character vector containing multiple time variables.</p></dd>
+<dd><p>Time (e.g., time periods given by years, months, ...). There are three options to add a date variable: 1) Time can be a character vector containing **one** time variable, 2) a time variable following the YYYY-MM-DD format, or 3) or a list containing multiple time variables (`time = list(year = NULL, month = NULL, day = NULL)`).</p></dd>
+<dt>complex_date</dt>
+<dd><p>Boolean argument identifying if there is a more complex (list-wise) date_time parameter (FALSE is the default)</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -150,8 +157,24 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">toydata</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># With version 1 (and also 2):</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">toydata</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">output_table</span> <span class="op">&lt;-</span> <span class="fu">overview_tab</span><span class="op">(</span>dat <span class="op">=</span> <span class="va">toydata</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># With version 3:</span></span>
+<span class="r-in"><span class="fu">overview_tab</span><span class="op">(</span>dat <span class="op">=</span> <span class="va">toydata</span>, id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">toydata</span><span class="op">$</span><span class="va">year</span>,</span>
+<span class="r-in">             month <span class="op">=</span> <span class="va">toydata</span><span class="op">$</span><span class="va">month</span>, day <span class="op">=</span> <span class="va">toydata</span><span class="op">$</span><span class="va">day</span><span class="op">)</span>, complex_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   ccode [5]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ccode time_frame                                                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> AGO   1990-01-01, 1990-02-02, 1990-03-03, 1990-04-04, 1990-05-05, 1990-06-06,…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> BEN   1995-01-01, 1995-02-02, 1995-03-03, 1995-04-04, 1995-05-05, 1995-06-06,…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> FRA   1993-01-01, 1993-02-02, 1993-03-03, 1993-04-04, 1993-05-05, 1993-06-06,…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> GBR   1991-01-01, 1991-02-02, 1991-03-03, 1991-04-04, 1991-05-05, 1991-06-06,…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> RWA   1990-01-01 - 1990-01-12, 1991-01-01 - 1991-01-12, 1992-01-01 - 1992-01-…</span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
