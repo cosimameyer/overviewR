@@ -15,8 +15,7 @@ calculate_share_non_row_wise <- function(dat = NULL) {
       data.table::setDT(dat_result, keep.rownames = "variable")[]
 
     # Get percentage
-    dat_result <-
-      dat_result[, `:=`(percentage = na_count / (total / 100))]
+    dat_result <- dat_result[, list(percentage = na_count / (total / 100))]
   } else {
     # Generate necessary variables --------------------------------------------
     na_count <- vapply(dat, function(y)

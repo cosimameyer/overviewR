@@ -21,6 +21,7 @@
 #' @importFrom tibble "rownames_to_column"
 #' @importFrom ggplot2 ggplot
 #' @importFrom stats reorder
+#' @importFrom data.table data.table
 
 overview_na <- function(dat,
                         yaxis = "Variables",

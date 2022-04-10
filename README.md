@@ -5,7 +5,7 @@
 
 [![R-CMD-check](https://github.com/cosimameyer/overviewR/workflows/R-CMD-check/badge.svg)](https://github.com/cosimameyer/overviewR/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.svg)](https://codecov.io/gh/cosimameyer/overviewR?branch=master)
+coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/cosimameyer/overviewR?branch=master)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -13,7 +13,10 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](https://github.com/cosimameyer/overviewR)
 [![R
 badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)
+<!--[![downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://www.r-pkg.org/badges/version/overviewR)-->
+[![total_downloads](https://cranlogs.r-pkg.org/badges/grand-total/overviewR)](https://www.r-pkg.org/badges/version/overviewR)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/overviewR)](https://cran.r-project.org/package=overviewR)
+[![DOI](https://zenodo.org/badge/269955026.svg)](https://zenodo.org/badge/latestdoi/269955026)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 <!-- [![Rdoc](https://www.rdocumentation.org/badges/version/overviewR)](https://www.rdocumentation.org/packages/overviewR) -->
 <!-- [![metacran downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://cran.r-project.org/package=overviewR) -->

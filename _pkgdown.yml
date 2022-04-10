@@ -41,7 +41,7 @@ navbar:
     cheatsheet:
       icon: fa-sticky-note
       text: CheatSheet
-      href: https://github.com/rstudio/cheatsheets/raw/master/overviewR.pdf
+      href: https://github.com/rstudio/cheatsheets/blob/main/overviewR.pdf
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/cosimameyer/overviewR/

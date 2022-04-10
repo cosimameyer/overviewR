@@ -61,7 +61,7 @@ install.packages("overviewR", force = TRUE)
 
 To install the latest development version of `overviewR` directly from [GitHub](https://github.com/cosimameyer/overviewR) use: 
 
-```{r, message=FALSE, warning=FALSE, results = "hide", eval=FALSE}
+```{r, message=FALSE, warning=FALSE, results = "hide", eval=TRUE}
 library(devtools)
 devtools::install_github("cosimameyer/overviewR")
 ```
@@ -460,11 +460,11 @@ Using mutate to generate meaningful country names
 library(countrycode) # Convert Country Names and Country Codes
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
 
-toydata %>% 
-  # Transform the country code (ISO3 character code) into a country name using 
+toydata %>%
+  # Transform the country code (ISO3 character code) into a country name using
   # the `countrycode` package
-  dplyr::mutate(country = 
-                  countrycode::countrycode(ccode, "iso3c", "country.name")) %>% 
+  dplyr::mutate(country =
+                  countrycode::countrycode(ccode, "iso3c", "country.name")) %>%
   overview_plot(id = country, time = year)
 ```
 
@@ -472,7 +472,7 @@ Using different `overviewR` functions after each other to generate a workflow
 ```{r, eval = FALSE}
 # Produces a printable LaTeX output
 toydata %>% 
-  overview_tab(id = ccode, time = year) %>% 
+  overview_tab(id = ccode, time = year) %>%
   overview_print()
 
 
@@ -540,11 +540,11 @@ knitr::kable(output_table)
 
 A classical `ggplot2` theme alternative
 ```{r, out.width = '50%', fig.align='center'}
-library(ggplot2) # Create Elegant Data Visualisations Using the 
+library(ggplot2) # Create Elegant Data Visualisations Using the
                  # Grammar of Graphics
 
 overview_na(toydata_with_na) +
-  ggplot2::theme_minimal() 
+  ggplot2::theme_minimal()
 ```
 
 
@@ -561,7 +561,7 @@ library(xtable)
 data(toydata)
 
 # Restrict the data so that we have something to compare :-)
-toydata_res <- toydata %>% 
+toydata_res <- toydata %>%
   dplyr::filter(year > 1992)
 
 # Generate two overview_tab objects
@@ -569,8 +569,8 @@ dat1 <- overview_tab(toydata, id = ccode, time = year)
 dat2 <- overview_tab(toydata_res, id = ccode, time = year)
 
 # And now we use full_join to combine both
-dat_full <- dat1 %>% 
-  dplyr::full_join(dat2, by = "ccode") %>% 
+dat_full <- dat1 %>%
+  dplyr::full_join(dat2, by = "ccode") %>%
   dplyr::rename(time_dat1 = time_frame.x,
                 time_dat2 = time_frame.y)
 ```
@@ -594,7 +594,7 @@ head(dat_full)
 `overview_print` cannot handle this object (yet), so we use `xtable` instead which gives us the LaTeX output.
 
 ```{r, eval=FALSE}
-print(xtable(dat_full), include.rownames=FALSE)
+print(xtable(dat_full), include.rownames = FALSE)
 ```
 
 ```

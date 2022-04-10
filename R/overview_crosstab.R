@@ -51,7 +51,7 @@ overview_crosstab <-
       # (based on time and id) in the data set
       # We need this for the next check
       length_nodup <- dat %>%
-        dplyr::distinct(!!id,!!time, .keep_all = TRUE)
+        dplyr::distinct(!!id, !!time, .keep_all = TRUE)
 
       # Check if data set only has unique observations
       if (nrow(length_nodup) == nrow(dat)) {
@@ -61,7 +61,7 @@ overview_crosstab <-
             c2 = ifelse(!!cond2 >= threshold2, 1, 0)
           ) %>%
           dplyr::group_by(c1, c2) %>%
-          dplyr::select(!!id,!!time,!!cond1,!!cond2, c1, c2) %>%
+          dplyr::select(!!id, !!time, !!cond1, !!cond2, c1, c2) %>%
           dplyr::mutate(
             quart1 = ifelse(c1 == 1 & c2 == 1, 1, 0),
             quart2 = ifelse(c1 == 0 & c2 == 1, 1, 0),
@@ -73,39 +73,39 @@ overview_crosstab <-
         quart1 <-
           red %>%
           dplyr::filter(quart1 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart2 <-
           red %>%
           dplyr::filter(quart2 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart3 <-
           red %>%
           dplyr::filter(quart3 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart4 <-
           red %>%
           dplyr::filter(quart4 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
 
-        quart1_1 <- overview_tab(quart1,!!id,!!time)
+        quart1_1 <- overview_tab(quart1, !!id, !!time)
         quart1_1 <- as.data.frame(quart1_1)
         part1 <-
           paste(paste0(quart1_1[, 1], " (", as.character(quart1_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart2_1 <- overview_tab(quart2,!!id,!!time)
+        quart2_1 <- overview_tab(quart2, !!id, !!time)
         quart2_1 <- as.data.frame(quart2_1)
         part2 <-
           paste(paste0(quart2_1[, 1], " (", as.character(quart2_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart3_1 <- overview_tab(quart3,!!id,!!time)
+        quart3_1 <- overview_tab(quart3, !!id, !!time)
         quart3_1 <- as.data.frame(quart3_1)
         part3 <-
           paste(paste0(quart3_1[, 1], " (", as.character(quart3_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart4_1 <- overview_tab(quart4,!!id,!!time)
+        quart4_1 <- overview_tab(quart4, !!id, !!time)
         quart4_1 <- as.data.frame(quart4_1)
         part4 <-
           paste(paste0(quart4_1[, 1], " (", as.character(quart4_1[, 2]), ")"),
@@ -126,7 +126,7 @@ overview_crosstab <-
       else {
         red <- dat %>%
           dplyr::ungroup() %>%
-          dplyr::group_by(!!id,!!time) %>%
+          dplyr::group_by(!!id, !!time) %>%
           dplyr::summarise(cond1_mean = mean(!!cond1),
                            cond2_mean = mean(!!cond2)) %>%
           dplyr::ungroup()
@@ -155,39 +155,39 @@ overview_crosstab <-
         quart1 <-
           red %>%
           dplyr::filter(quart1 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart2 <-
           red %>%
           dplyr::filter(quart2 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart3 <-
           red %>%
           dplyr::filter(quart3 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart4 <-
           red %>%
           dplyr::filter(quart4 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
 
-        quart1_1 <- overview_tab(quart1,!!id,!!time)
+        quart1_1 <- overview_tab(quart1, !!id, !!time)
         quart1_1 <- as.data.frame(quart1_1)
         part1 <-
           paste(paste0(quart1_1[, 1], " (", as.character(quart1_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart2_1 <- overview_tab(quart2,!!id,!!time)
+        quart2_1 <- overview_tab(quart2, !!id, !!time)
         quart2_1 <- as.data.frame(quart2_1)
         part2 <-
           paste(paste0(quart2_1[, 1], " (", as.character(quart2_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart3_1 <- overview_tab(quart3,!!id,!!time)
+        quart3_1 <- overview_tab(quart3, !!id, !!time)
         quart3_1 <- as.data.frame(quart3_1)
         part3 <-
           paste(paste0(quart3_1[, 1], " (", as.character(quart3_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart4_1 <- overview_tab(quart4,!!id,!!time)
+        quart4_1 <- overview_tab(quart4, !!id, !!time)
         quart4_1 <- as.data.frame(quart4_1)
         part4 <-
           paste(paste0(quart4_1[, 1], " (", as.character(quart4_1[, 2]), ")"),
@@ -215,7 +215,7 @@ overview_crosstab <-
       # (based on time and id) in the data set
       # We need this for the next check
       length_nodup <- dat %>%
-        dplyr::distinct(!!id,!!time, .keep_all = TRUE)
+        dplyr::distinct(!!id, !!time, .keep_all = TRUE)
 
       # Check if data set only has unique observations
       if (nrow(length_nodup) == nrow(dat)) {
@@ -225,7 +225,7 @@ overview_crosstab <-
             c2 = ifelse(!!cond2 >= threshold2, 1, 0)
           ) %>%
           dplyr::group_by(c1, c2) %>%
-          dplyr::select(!!id,!!time,!!cond1,!!cond2, c1, c2) %>%
+          dplyr::select(!!id, !!time, !!cond1, !!cond2, c1, c2) %>%
           dplyr::mutate(
             quart1 = ifelse(c1 == 1 & c2 == 1, 1, 0),
             quart2 = ifelse(c1 == 0 & c2 == 1, 1, 0),
@@ -237,39 +237,39 @@ overview_crosstab <-
         quart1 <-
           red %>%
           dplyr::filter(quart1 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart2 <-
           red %>%
           dplyr::filter(quart2 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart3 <-
           red %>%
           dplyr::filter(quart3 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart4 <-
           red %>%
           dplyr::filter(quart4 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
 
-        quart1_1 <- overview_tab(quart1,!!id,!!time)
+        quart1_1 <- overview_tab(quart1, !!id, !!time)
         quart1_1 <- as.data.frame(quart1_1)
         part1 <-
           paste(paste0(quart1_1[, 1], " (", as.character(quart1_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart2_1 <- overview_tab(quart2,!!id,!!time)
+        quart2_1 <- overview_tab(quart2, !!id, !!time)
         quart2_1 <- as.data.frame(quart2_1)
         part2 <-
           paste(paste0(quart2_1[, 1], " (", as.character(quart2_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart3_1 <- overview_tab(quart3,!!id,!!time)
+        quart3_1 <- overview_tab(quart3, !!id, !!time)
         quart3_1 <- as.data.frame(quart3_1)
         part3 <-
           paste(paste0(quart3_1[, 1], " (", as.character(quart3_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart4_1 <- overview_tab(quart4,!!id,!!time)
+        quart4_1 <- overview_tab(quart4, !!id, !!time)
         quart4_1 <- as.data.frame(quart4_1)
         part4 <-
           paste(paste0(quart4_1[, 1], " (", as.character(quart4_1[, 2]), ")"),
@@ -290,7 +290,7 @@ overview_crosstab <-
       else {
         red <- dat %>%
           dplyr::ungroup() %>%
-          dplyr::group_by(!!id,!!time) %>%
+          dplyr::group_by(!!id, !!time) %>%
           dplyr::summarise(cond1_mean = mean(!!cond1),
                            cond2_mean = mean(!!cond2)) %>%
           dplyr::ungroup()
@@ -319,39 +319,39 @@ overview_crosstab <-
         quart1 <-
           red %>%
           dplyr::filter(quart1 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart2 <-
           red %>%
           dplyr::filter(quart2 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart3 <-
           red %>%
           dplyr::filter(quart3 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
         quart4 <-
           red %>%
           dplyr::filter(quart4 == 1) %>%
-          dplyr::select(!!id,!!time)
+          dplyr::select(!!id, !!time)
 
-        quart1_1 <- overview_tab(quart1,!!id,!!time)
+        quart1_1 <- overview_tab(quart1, !!id, !!time)
         quart1_1 <- as.data.frame(quart1_1)
         part1 <-
           paste(paste0(quart1_1[, 1], " (", as.character(quart1_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart2_1 <- overview_tab(quart2,!!id,!!time)
+        quart2_1 <- overview_tab(quart2, !!id, !!time)
         quart2_1 <- as.data.frame(quart2_1)
         part2 <-
           paste(paste0(quart2_1[, 1], " (", as.character(quart2_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart3_1 <- overview_tab(quart3,!!id,!!time)
+        quart3_1 <- overview_tab(quart3, !!id, !!time)
         quart3_1 <- as.data.frame(quart3_1)
         part3 <-
           paste(paste0(quart3_1[, 1], " (", as.character(quart3_1[, 2]), ")"),
                 collapse = ", ")
 
-        quart4_1 <- overview_tab(quart4,!!id,!!time)
+        quart4_1 <- overview_tab(quart4, !!id, !!time)
         quart4_1 <- as.data.frame(quart4_1)
         part4 <-
           paste(paste0(quart4_1[, 1], " (", as.character(quart4_1[, 2]), ")"),
