@@ -399,7 +399,7 @@ This function allows to compare two data sets. We are currently working on an ex
   
   At the current development stage, the function works as follows:
   
-```{r, out.width = '50%', fig.align='center'}
+```{r, out.width = '50%', fig.align='center', eval = TRUE}
 library(dplyr)
 
 # Subset one data set for comparison
@@ -416,8 +416,7 @@ overview_overlap(
 
   
   Or a Venn diagram
-```{r, out.width = '50%', fig.align='center'}
-
+```{r_venn, out.width = '50%', fig.align='center', eval = FALSE}
 overview_overlap(
   dat1 = toydata,
   dat2 = toydata2,
