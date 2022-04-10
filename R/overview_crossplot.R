@@ -47,8 +47,7 @@ overview_crossplot <-
            xaxis = "Condition 1",
            yaxis = "Condition 2",
            label = FALSE,
-           color = FALSE
-           ) {
+           color = FALSE) {
     # Create a theme for the plot
     theme_plot <- ggplot2::theme(
       # get rid of panel grids
@@ -106,15 +105,21 @@ overview_crossplot <-
         ) %>%
         dplyr::ungroup() %>%
         dplyr::mutate(grp = ifelse(quart1 == 1, 1,
-                                     ifelse(quart2 == 1, 2,
-                                            ifelse(quart3 == 1, 3,
-                                                   ifelse(quart4 == 1, 4, 0)))),
+                                   ifelse(
+                                     quart2 == 1, 2,
+                                     ifelse(quart3 == 1, 3,
+                                            ifelse(quart4 == 1, 4, 0))
+                                   )),
                       text = paste0(!!id, !!time))
 
 
       if (color == TRUE & label == TRUE) {
         plot <- dat_red %>%
-          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
+          ggplot2::ggplot(ggplot2::aes(
+            x = !!cond1_mean,
+            y = !!cond2_mean,
+            label = text
+          )) +
           ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
@@ -122,7 +127,7 @@ overview_crossplot <-
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
-          ggplot2:: theme(legend.position = "none")
+          ggplot2::theme(legend.position = "none")
 
         return(plot)
       }
@@ -141,7 +146,11 @@ overview_crossplot <-
       }
       if (label == TRUE) {
         plot <- dat_red %>%
-          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
+          ggplot2::ggplot(ggplot2::aes(
+            x = !!cond1_mean,
+            y = !!cond2_mean,
+            label = text
+          )) +
           ggplot2::geom_point(alpha = 0.5) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
@@ -174,10 +183,8 @@ overview_crossplot <-
       red <- dat %>%
         dplyr::ungroup() %>%
         dplyr::group_by(!!id, !!time) %>%
-        dplyr::summarise(
-          cond1_mean = mean(!!cond1),
-          cond2_mean = mean(!!cond2)
-        ) %>%
+        dplyr::summarise(cond1_mean = mean(!!cond1),
+                         cond2_mean = mean(!!cond2)) %>%
         dplyr::ungroup()
 
       cond1_mean <- red$cond1_mean
@@ -201,24 +208,30 @@ overview_crossplot <-
         ) %>%
         dplyr::ungroup() %>%
         dplyr::mutate(grp = ifelse(quart1 == 1, 1,
-                                     ifelse(quart2 == 1, 2,
-                                            ifelse(quart3 == 1, 3,
-                                                   ifelse(quart4 == 1, 4, 0)))),
+                                   ifelse(
+                                     quart2 == 1, 2,
+                                     ifelse(quart3 == 1, 3,
+                                            ifelse(quart4 == 1, 4, 0))
+                                   )),
                       text = paste0(!!id, !!time))
 
       if (color == TRUE & label == TRUE) {
-      plot <- dat_red %>%
-        ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
-        ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
-        ggplot2::geom_vline(xintercept = threshold1) +
-        ggplot2::geom_hline(yintercept = threshold2) +
-        ggrepel::geom_text_repel(size = 2.5) +
-        ggplot2::ylab(yaxis) +
-        ggplot2::xlab(xaxis) +
-        theme_plot +
-        ggplot2::theme(legend.position = "none")
+        plot <- dat_red %>%
+          ggplot2::ggplot(ggplot2::aes(
+            x = !!cond1_mean,
+            y = !!cond2_mean,
+            label = text
+          )) +
+          ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
+          ggplot2::geom_vline(xintercept = threshold1) +
+          ggplot2::geom_hline(yintercept = threshold2) +
+          ggrepel::geom_text_repel(size = 2.5) +
+          ggplot2::ylab(yaxis) +
+          ggplot2::xlab(xaxis) +
+          theme_plot +
+          ggplot2::theme(legend.position = "none")
 
-      return(plot)
+        return(plot)
       }
       if (color == TRUE) {
         plot <- dat_red %>%
@@ -235,7 +248,11 @@ overview_crossplot <-
       }
       if (label == TRUE) {
         plot <- dat_red %>%
-          ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean, label = text)) +
+          ggplot2::ggplot(ggplot2::aes(
+            x = !!cond1_mean,
+            y = !!cond2_mean,
+            label = text
+          )) +
           ggplot2::geom_point(alpha = 0.5) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +

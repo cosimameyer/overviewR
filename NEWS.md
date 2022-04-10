@@ -1,4 +1,7 @@
 ---
+# overviewR 0.0.8.999
+- This development version adds the possibility to use a data.table object with `overview_tab` and `overview_na`
+
 # overviewR 0.0.7.999.1
 
 - This development version adds the following extensions

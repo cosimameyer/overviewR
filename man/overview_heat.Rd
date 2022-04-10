@@ -9,7 +9,7 @@ overview_heat(
   id,
   time,
   perc = FALSE,
-  exp_total,
+  exp_total = NULL,
   xaxis = "Time frame",
   yaxis = "Sample",
   col_low = "#dceaf2",
