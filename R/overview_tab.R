@@ -7,6 +7,7 @@
 #' @param dat A data frame or data table object
 #' @param id Scope (e.g., country codes or individual IDs)
 #' @param time Time (e.g., time periods given by years, months, ...). There are three options to add a date variable: 1) Time can be a character vector containing **one** time variable, 2) a time variable following the YYYY-MM-DD format, or 3) or a list containing multiple time variables (`time = list(year = NULL, month = NULL, day = NULL)`).
+#' @param complex_date Boolean argument identifying if there is a more complex (list-wise) date_time parameter (FALSE is the default)
 #' @return A data frame object that contains a summary of a sample that
 #'     can later be converted to a 'LaTeX' output using \code{overview_print}
 #' @examples
@@ -16,7 +17,8 @@
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 #'
 #' # With version 3:
-#' overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year, month = toydata$month, day = toydata$day))
+#' overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year,
+#'              month = toydata$month, day = toydata$day), complex_date = TRUE)
 #'
 #' @export
 #' @importFrom dplyr "%>%"
@@ -26,9 +28,10 @@
 overview_tab <- function(dat,
                          id,
                          time = list(year = NULL, month = NULL, day = NULL),
-                         date_time = date_time) {
+                         complex_date = FALSE) {
+
   # Check whether time contains multiple objects
-  if (is.list(time)) {
+  if (complex_date) {
     # Identify non-empty objects
     time <- time[lapply(time, length) > 0]
 
@@ -75,7 +78,7 @@ overview_tab <- function(dat,
 
   if (any(class(dat) == "data.table")) {
     # Start with the data
-    if (!is.list(time)) {
+    if (!complex_date) {
       time <- deparse(substitute(time))
     } else {
       time <- deparse(substitute(date_time))
@@ -101,10 +104,11 @@ overview_tab <- function(dat,
 
   } else {
     # Start with the data
-    if (!is.list(time)) {
+    if (!complex_date) {
       time <- rlang::ensym(time)
     } else {
-      time <- rlang::ensym(date_time)
+      time <- "date_time"
+      time <- rlang::ensym(time)
     }
     id <- rlang::ensym(id)
 
