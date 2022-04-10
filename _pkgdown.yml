@@ -71,17 +71,17 @@ navbar:
         - text: overview_overlap
           href: articles/overviewR_vignette.html#overview_overlap
         - text: Customize plots
-          href: articles/overviewR_vignette.html#customizing-plots-ggplot2-1
+          href: articles/overviewR_vignette.html#customizing-plots-ggplot2
     workflow:
       icon: fa-project-diagram
       text: Workflow
       menu:
         - text: Using the tidyverse
-          href: articles/overviewR_vignette.html#workflow-tidyverse-1
+          href: articles/overviewR_vignette.html#workflow-tidyverse
         - text: Presenting tables
-          href: articles/overviewR_vignette.html#presenting-tables-flextable-xtable-and-kable-1
+          href: articles/overviewR_vignette.html#presenting-tables-flextable-xtable-and-kable
         - text: Extension
-          href: articles/overviewR_vignette.html#extension-1
+          href: articles/overviewR_vignette.html#extension
 
 
 authors:
