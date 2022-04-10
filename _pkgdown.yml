@@ -1,6 +1,6 @@
 template:
   bootstrap: 5
-  theme: flatly
+  bootswatch: flatly
 
 development:
   mode: auto
