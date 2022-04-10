@@ -23,7 +23,6 @@ jobs:
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-          remotes::install_github("amirmasoudabdol/preferably", type = "source")
         shell: Rscript {0}
 
       - name: Cache R packages
@@ -36,8 +35,13 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
-          install.packages("pkgdown", type = "binary")
+          install.packages("pkgdown")
+          remotes::install_github("amirmasoudabdol/preferably")
         shell: Rscript {0}
+
+      - name: Install package
+        run: R CMD INSTALL .
+
 
       - name: Install package
         run: R CMD INSTALL .
