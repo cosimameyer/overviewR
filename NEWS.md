@@ -1,9 +1,17 @@
 ---
+
+# overviewR 0.0.9
+- This version adds the possibility to use multiple time arguments for `overview_tab`
+- It also adds an extended `toydata` dataframe (including variables for day)
+
+---
+
 # overviewR 0.0.8.999
-- This development version adds the possibility to use a data.table object with `overview_tab` and `overview_na`
+- This development version adds the possibility to use a data.table object with `overview_tab` ans `overview_na`
+
+---
 
 # overviewR 0.0.7.999.1
-
 - This development version adds the following extensions
    - `overview_plot`
       - Adjustable `dot_size` (default is 2)
@@ -16,8 +24,8 @@
 
 
 ---
-# overviewR 0.0.7.999
 
+# overviewR 0.0.7.999
 - This development version adds bugs fixes and extensions for 
    - `overview_plot`
       - some consecutive years were not correctly connected before)

@@ -4,14 +4,21 @@
 \alias{overview_tab}
 \title{overview_tab}
 \usage{
-overview_tab(dat, id, time)
+overview_tab(
+  dat,
+  id,
+  time = list(year = NULL, month = NULL, day = NULL),
+  complex_date = FALSE
+)
 }
 \arguments{
 \item{dat}{A data frame or data table object}
 
 \item{id}{Scope (e.g., country codes or individual IDs)}
 
-\item{time}{Time (e.g., time periods given by years, months, ...). Time can be a character vector containing multiple time variables.}
+\item{time}{Time (e.g., time periods given by years, months, ...). There are three options to add a date variable: 1) Time can be a character vector containing **one** time variable, 2) a time variable following the YYYY-MM-DD format, or 3) or a list containing multiple time variables (`time = list(year = NULL, month = NULL, day = NULL)`).}
+
+\item{complex_date}{Boolean argument identifying if there is a more complex (list-wise) date_time parameter (FALSE is the default)}
 }
 \value{
 A data frame object that contains a summary of a sample that
@@ -23,6 +30,13 @@ Provides an overview table for the time and scope conditions of
     data.table's syntax to perform the evaluation
 }
 \examples{
+# With version 1 (and also 2):
+
 data(toydata)
 output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+
+# With version 3:
+overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year,
+             month = toydata$month, day = toydata$day), complex_date = TRUE)
+
 }
