@@ -50,7 +50,8 @@ overview_tab <- function(dat,
       # Convert a possible non-numeric month to a numeric month
       if (!is.null(time$year) &
           !is.null(time$month) & !is.null(time$day)) {
-        dat$date_time <- as.Date(strftime(as.POSIXlt(date, format = "%Y-%b-%d")))
+        dat$date_time <-
+          as.Date(strftime(as.POSIXlt(date, format = "%Y-%b-%d")))
       }
       # else if (!is.null(time$year) &
       #            !is.null(time$month) & is.null(time$day)) {
@@ -101,7 +102,7 @@ overview_tab <- function(dat,
   } else {
     # Start with the data
     if (!is.list(time)) {
-    time <- rlang::ensym(time)
+      time <- rlang::ensym(time)
     } else {
       time <- rlang::ensym(date_time)
     }
