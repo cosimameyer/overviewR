@@ -25,6 +25,12 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
+      - name: Install dependencies
+        run: |
+          # ⚠️ leave other commands intact,
+          # and add the following command to the end of the list 👇🏼
+        remotes::install_github("amirmasoudabdol/preferably", type = "source")
+
       - name: Cache R packages
         uses: actions/cache@v2
         with:

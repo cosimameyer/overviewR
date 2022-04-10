@@ -1,6 +1,6 @@
 template:
+  package: preferably
   bootstrap: 5
-  bootswatch: flatly
 
 development:
   mode: auto
