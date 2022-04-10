@@ -2,9 +2,23 @@ context("check-output")
 library(testthat)
 library(overviewR)
 
+
 test_that("overview_tab() returns a data frame", {
   output_table <- overview_tab(dat = toydata, id = ccode, time = year)
   expect_is(output_table, "data.frame")
+
+  output_table_complex <-
+    overview_tab(
+      dat = toydata,
+      id = ccode,
+      time = list(
+        year = toydata$year,
+        month = toydata$month,
+        day = toydata$day
+      ),
+      complex_date = TRUE
+    )
+  expect_is(output_table_complex, "data.frame")
 })
 
 test_that("overview_tab() returns a dataframe with correct number of rows", {
@@ -202,42 +216,42 @@ test_that("overview_crosstab() returns a data frame", {
 
 test_that("overview_crosstab() works on a dataframe that is already in the
 correct format",
-{
-  df_com <- data.frame(
-    # Countries
-    ccode  = c(
-      rep("RWA", 4),
-      rep("AGO", 8),
-      rep("BEN", 2),
-      rep("GBR", 5),
-      rep("FRA", 3)
-    ),
-    # Time frame
-    year =
-      c(
-        seq(1990, 1993),
-        seq(1990, 1997),
-        seq(1995, 1996),
-        seq(1991, 1995),
-        seq(1993, 1999, by = 3)
-      ),
-    population =
-      seq(1, 44, by = 2),
-    gdp =
-      seq(1, 44, by = 2)
-  )
-  output_cross <-
-    overview_crosstab(
-      dat = df_com,
-      id = ccode,
-      time = year,
-      cond1 = population,
-      cond2 = gdp,
-      threshold1 = 20,
-      threshold2 = 10
-    )
-  expect_equal(nrow(output_cross), 2)
-})
+          {
+            df_com <- data.frame(
+              # Countries
+              ccode  = c(
+                rep("RWA", 4),
+                rep("AGO", 8),
+                rep("BEN", 2),
+                rep("GBR", 5),
+                rep("FRA", 3)
+              ),
+              # Time frame
+              year =
+                c(
+                  seq(1990, 1993),
+                  seq(1990, 1997),
+                  seq(1995, 1996),
+                  seq(1991, 1995),
+                  seq(1993, 1999, by = 3)
+                ),
+              population =
+                seq(1, 44, by = 2),
+              gdp =
+                seq(1, 44, by = 2)
+            )
+            output_cross <-
+              overview_crosstab(
+                dat = df_com,
+                id = ccode,
+                time = year,
+                cond1 = population,
+                cond2 = gdp,
+                threshold1 = 20,
+                threshold2 = 10
+              )
+            expect_equal(nrow(output_cross), 2)
+          })
 
 test_that("check output of overview_na", {
   plot_na <- overview_na(dat = toydata)
@@ -255,6 +269,29 @@ test_that("check output of overview_na with row_wise", {
                 row_wise = TRUE)
   testthat::expect_is(plot_na_abs_row, "ggplot")
 })
+
+test_that("check output of overview_overlap", {
+  toydata2 <- toydata
+  plot_overlap_bar <-
+    overview_overlap(
+      dat1 = toydata,
+      dat2 = toydata2,
+      dat1_id = ccode,
+      dat2_id = ccode,
+      plot_type = "bar"
+    )
+  testthat::expect_is(plot_overlap_bar, "ggplot")
+  plot_overlap_venn <-
+    overview_overlap(
+      dat1 = toydata,
+      dat2 = toydata2,
+      dat1_id = ccode,
+      dat2_id = ccode,
+      plot_type = "venn"
+    )
+  testthat::expect_is(plot_overlap_venn, "ggplot")
+})
+
 
 test_that("overview_na() returns a data frame", {
   overview_na_df <- overview_na(dat = toydata,
@@ -337,10 +374,12 @@ test_that("check output of overview_crossplot", {
     overview_crossplot(toydata, ccode, year, gdp, population, 25000, 27000)
   testthat::expect_is(plot_cross, "ggplot")
   plot_cross_col <-
-    overview_crossplot(toydata, ccode, year, gdp, population, 25000, 27000, color = TRUE)
+    overview_crossplot(toydata, ccode, year, gdp, population, 25000, 27000,
+                       color = TRUE)
   testthat::expect_is(plot_cross_col, "ggplot")
   plot_cross_lab <-
-    overview_crossplot(toydata, ccode, year, gdp, population, 25000, 27000, label = TRUE)
+    overview_crossplot(toydata, ccode, year, gdp, population, 25000, 27000,
+                       label = TRUE)
   testthat::expect_is(plot_cross_lab, "ggplot")
   plot_cross_lab_col <-
     overview_crossplot(
@@ -398,7 +437,8 @@ test_that("check output of overview_crossplot with no color", {
     )
   testthat::expect_is(plot_cross_no_lab_no_col, "ggplot")
   plot_cross_no_col <-
-    overview_crossplot(toydata, ccode, year, gdp, population, 25000, 27000, color = FALSE)
+    overview_crossplot(toydata, ccode, year, gdp, population, 25000, 27000,
+                       color = FALSE)
   testthat::expect_is(plot_cross_no_col, "ggplot")
 })
 

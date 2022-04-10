@@ -47,5 +47,7 @@ Provides an overview of the overlap of two data sets.
 \dontrun{
 data(toydata)
 toydata2 <- toydata[which(toydata$year > 1992), ]
-overview_overlap(dat1 = toydata, dat2 = toydata2, dat1_id = ccode, dat2_id = ccode)}
+overview_overlap(dat1 = toydata, dat2 = toydata2, dat1_id = ccode,
+                 dat2_id = ccode)
+}
 }

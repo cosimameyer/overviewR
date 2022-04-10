@@ -1,4 +1,5 @@
-test_that("overview_tab() returns same results regardless of using data.table or data.frame",
+test_that("overview_tab() returns same results regardless of using
+          data.table or data.frame",
           {
             output_table <- overview_tab(dat = toydata, id = ccode, time = year)
             toydata <- data.table::copy(toydata)
@@ -8,7 +9,8 @@ test_that("overview_tab() returns same results regardless of using data.table or
             expect_equal(nrow(output_table2), nrow(output_table))
           })
 
-test_that("overview_na() returns same results regardless of using data.table or data.frame",
+test_that("overview_na() returns same results regardless of using data.table
+          or data.frame",
           {
             output <- overview_na(dat = toydata)
             toydata <- data.table::copy(toydata)

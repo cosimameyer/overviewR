@@ -22,7 +22,9 @@
 #' \dontrun{
 #' data(toydata)
 #' toydata2 <- toydata[which(toydata$year > 1992), ]
-#' overview_overlap(dat1 = toydata, dat2 = toydata2, dat1_id = ccode, dat2_id = ccode)}
+#' overview_overlap(dat1 = toydata, dat2 = toydata2, dat1_id = ccode,
+#'                  dat2_id = ccode)
+#' }
 #' @export
 #' @importFrom dplyr "%>%"
 #' @importFrom ggplot2 ggplot
@@ -48,7 +50,7 @@ overview_overlap <-
         # Group by ID
         dplyr::group_by(!!dat1_id) %>%
         # Count occurences of each ID
-        count() %>%
+        dplyr::count() %>%
         # Rename the count variable
         dplyr::rename(count = n)
 
@@ -58,7 +60,7 @@ overview_overlap <-
         # Group by ID
         dplyr::group_by(!!dat2_id) %>%
         # Count occurences of each ID
-        count() %>%
+        dplyr::count() %>%
         # Rename the count variable
         dplyr::rename(count2 = n)
 
