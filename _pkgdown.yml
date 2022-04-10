@@ -1,5 +1,6 @@
 template:
-  bootstrap: 4
+  package: preferably
+  bootstrap: 5
 
 development:
   mode: auto
