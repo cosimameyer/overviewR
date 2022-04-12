@@ -21,17 +21,13 @@ if (!require(knitr))
 if (!require(devtools))
   install.packages("devtools", repos = "http://cran.us.r-project.org")
 if (!require(dplyr))
-  install.packages("dplyr", repos = "http://cran.us.r-project.org"
-  )
+  install.packages("dplyr", repos = "http://cran.us.r-project.org")
 if (!require(magrittr))
-  install.packages("magrittr", repos = "http://cran.us.r-project.org"
-  )
+  install.packages("magrittr", repos = "http://cran.us.r-project.org")
 if (!require(ggplot2))
-  install.packages("ggplot2", repos = "http://cran.us.r-project.org"
-  )
+  install.packages("ggplot2", repos = "http://cran.us.r-project.org")
 if (!require(countrycode))
-  install.packages("countrycode", repos = "http://cran.us.r-project.org"
-  )
+  install.packages("countrycode", repos = "http://cran.us.r-project.org")
 if (!require(xtable))
   install.packages("xtable", repos = "http://cran.us.r-project.org"
   )
@@ -126,14 +122,14 @@ To generate a cross table that divides the data based on two conditions, for ins
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 output_crosstab <- overview_crosstab(
-    dat = toydata,
-    cond1 = gdp,
-    cond2 = population,
-    threshold1 = 25000,
-    threshold2 = 27000,
-    id = ccode,
-    time = year
-  )
+  dat = toydata,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000,
+  id = ccode,
+  time = year
+)
 ```
 
 The data frame output looks as follows:
@@ -190,14 +186,22 @@ Sample & Time frame \\
 The default already provides a title ("Time and scope of the sample") that can be modified in the argument `title`. The same holds for the column names ("Sample" and "Time frame" are set by default but can be modified as shown below). 
 
 ```{r, eval = FALSE, eval=FALSE}
-overview_print(obj = output_table, id = "Countries", time = "Years",
-               title = "Cool new title for our awesome table")
+overview_print(
+  obj = output_table,
+  id = "Countries",
+  time = "Years",
+  title = "Cool new title for our awesome table"
+)
 ```
 <details>
   <summary>LaTeX output</summary>
 ```{r, eval=FALSE, include=FALSE}
-overview_print(obj = output_table, id = "Countries",
-               time = "Years", title = "Cool new title for our awesome table")
+overview_print(
+  obj = output_table,
+  id = "Countries",
+  time = "Years",
+  title = "Cool new title for our awesome table"
+)
 ```
 
 ```
@@ -286,8 +290,12 @@ overview_print(obj = output_table,
 With ```save_out = TRUE``` the function exports the output as a ```.tex``` file and stores it on the device.
 
 ```{r, eval = FALSE}
-overview_print(obj = output_table, save_out = TRUE, path = "SET-YOUR-PATH",
-               file = "output.tex")
+overview_print(
+  obj = output_table,
+  save_out = TRUE,
+  path = "SET-YOUR-PATH",
+  file = "output.tex"
+)
 ```
 
 # Visual overview
@@ -305,16 +313,21 @@ overview_plot(dat = toydata, id = ccode, time = year)
 The results are sorted alphabetically by default. The order can also be reversed by setting `asc` to `FALSE`.
 
 ```{r, out.width = '50%', fig.align='center'}
-overview_plot(dat = toydata, id = ccode, time = year, asc = FALSE)
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  asc = FALSE
+)
 ```
 
 There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the `color` argument. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
 # Load the GitHub version
-library(devtools) # Tools to Make Developing R Packages Easier 
+library(devtools) # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
-library(overviewR) # Easily Extracting Information About Your Data 
+library(overviewR) # Easily Extracting Information About Your Data
 library(magrittr) # A Forward-Pipe Operator for R
 
 # Code whether a year was before 1995
@@ -322,7 +335,12 @@ toydata %<>%
   dplyr::mutate(before = ifelse(year < 1995, 1, 0))
 
 # Plot using the `color` argument
-overview_plot(dat = toydata, id = ccode, time = year, color = before)
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  color = before
+)
 ```
 
 
@@ -330,7 +348,12 @@ The development version also allows to change the dot size using the `dot_size` 
   
 ```{r, eval = FALSE}
 # Plot using the `color` argument
-overview_plot(dat = toydata, id = ccode, time = year, dot_size = 5)
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  dot_size = 5
+)
 ```
 
 
@@ -340,9 +363,9 @@ To visualize also the cross table, `overview_crossplot` does the job. *Note, thi
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
 # Load the GitHub version
-library(devtools) # Tools to Make Developing R Packages Easier 
+library(devtools) # Tools to Make Developing R Packages Easier
 devtools::install_github("cosimameyer/overviewR")
-library(overviewR) # Easily Extracting Information About Your Data 
+library(overviewR) # Easily Extracting Information About Your Data
 overview_crossplot(
   toydata,
   id = ccode,
@@ -362,15 +385,15 @@ overview_crossplot(
 `overview_heat` takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. `overview_heat` intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola ("AGO") in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.
 
 ```{r, include = FALSE}
-toydata_red <- toydata[-sample(seq_len(nrow(toydata)), 64), ]
+toydata_red <- toydata[-sample(seq_len(nrow(toydata)), 64),]
 ```
 
 ```{r, out.width = '50%', fig.align='center'}
 overview_heat(toydata_red,
-                ccode,
-                year,
-                perc = TRUE,
-                exp_total = 12)
+              ccode,
+              year,
+              perc = TRUE,
+              exp_total = 12)
 ```
 
 
@@ -380,9 +403,11 @@ overview_heat(toydata_red,
 
 ```{r, include=FALSE}
 toydata_with_na <- toydata %>%
-  dplyr::mutate(year = ifelse(year < 1992, NA, year),
-                month = ifelse(month %in% c("Jan", "Jun", "Aug"), NA, month),
-                gdp = ifelse(gdp < 20000, NA, gdp))
+  dplyr::mutate(
+    year = ifelse(year < 1992, NA, year),
+    month = ifelse(month %in% c("Jan", "Jun", "Aug"), NA, month),
+    gdp = ifelse(gdp < 20000, NA, gdp)
+  )
 ```
 
 ```{r, out.width = '50%', fig.align='center'}
@@ -416,7 +441,7 @@ overview_overlap(
 
   
   Or a Venn diagram
-```{r_venn, out.width = '50%', fig.align='center', eval = FALSE}
+```{r_venn, out.width = '50%', fig.align='center', eval = TRUE}
 overview_overlap(
   dat1 = toydata,
   dat2 = toydata2,
@@ -449,8 +474,8 @@ Using a filter function
 ```{r, out.width = '50%', fig.align='center'}
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
 
-toydata_with_na %>% 
-  dplyr::filter(year > 1993) %>% 
+toydata_with_na %>%
+  dplyr::filter(year > 1993) %>%
   overview_na()
 ```
 
@@ -470,12 +495,11 @@ toydata %>%
 Using different `overviewR` functions after each other to generate a workflow
 ```{r, eval = FALSE}
 # Produces a printable LaTeX output
-toydata %>% 
+toydata %>%
   overview_tab(id = ccode, time = year) %>%
   overview_print()
-
-
 ```
+
 ```
 % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
 % Table created on 2020-12-30
@@ -510,11 +534,9 @@ table_output <-
   set_header_labels(table_output,
                     ccode = "Countries",
                     time_frame = "Time frame")
-set_table_properties(
-  table_output,
-  width = .4,
-  layout = "autofit"
-)
+set_table_properties(table_output,
+                     width = .4,
+                     layout = "autofit")
 ```
 
 ```{r, echo=FALSE, include=FALSE}
@@ -540,7 +562,7 @@ knitr::kable(output_table)
 A classical `ggplot2` theme alternative
 ```{r, out.width = '50%', fig.align='center'}
 library(ggplot2) # Create Elegant Data Visualisations Using the
-                 # Grammar of Graphics
+# Grammar of Graphics
 
 overview_na(toydata_with_na) +
   ggplot2::theme_minimal()

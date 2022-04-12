@@ -1,29 +1,45 @@
 ## Resubmission
 
-This is a resubmission for an updated version of this package (overviewR 0.0.6 is already available on CRAN).
+This is a (re)submission for an updated version of this package (overviewR 0.0.7 is already available on CRAN).
 
-We fixed the following bugs:
-- Fixed bug in vignette
-   - Loaded package dplyr to follow CRAN policies: "Packages which use Internet resources should fail gracefully with an informative message if the resource is not available or has changed (and not give a check warning nor error). CRAN versions of packages should work with the current CRAN and Bioconductor releases of packages they depend on and not anticipate nor recommend development versions of such packages (or themselves) on other repositories."
-- Fixed bug in overview_plot function
-   - Time line was not correctly displayed when a consecutive time variable was present for two different id variables
-
-And added the following new features:
-- Added function for overview_plot function
-   - Y axis is now automatically ordered in ascending order
-- Extended the overview_heat function
-   - Y axis is now automatically ordered in ascending order
-   - Introduced "label" argument to overview_heat that allows the user to select whether the percentage/total number of observations should be displayed or not
-
+- This version adds the following extensions
+   - `overview_plot`
+      - Adjustable `dot_size` (default is 2)
+   - `overview_na`
+      - Option to generate `row_wise` NA values
+      - Possibility to use data.table
+   - `overview_overlap`
+      - New function to compare (at the moment) two data sets using bar graphs (`plot_type = "bar"`) or Venn diagrams (`plot_type = "venn"`)
+   - `overview_print`
+      - Fixed a small issue that can cause problems with large (and complex) TeX documents 
+   - `overview_tab`
+      - Possibility to use data.table
+      - Multiple time argument 
+   - Excetended `toydata` data.frame (including variables for day)
+   
+- This version adds bugs fixes and extensions for 
+   - `overview_plot`
+      - some consecutive years were not correctly connected before)
+      - `color` argument to color parts of the time lines
+   - `overview_print`
+      - `label` to add a cross-reference label
+      - `fontsize` to change the font size
+   - `overview_crossplot`
+      - a new function that visualizes basically the same output as `overview_crosstab`
+   - `overview_tab`
+      - if there is a `NA` in the `id` variable this observation will be automatically deleted. The user gets a warning.
+   - `overview_crosstab`
+      - if there is a `NA` in the `id` variable this observation will be automatically deleted. The user gets a warning.
+      
 ## Test environments
 
-* Debian Linux, R-release, GCC (on rhub)
-* Windows Server 2008 R2 SP1, R-devel, 32/64 bit (on rhub)
-* macOS Big Sur 11.0.1, R 4.0.2 (local machine)
+* Windows Server 2022, R-devel, 64 bit  (on win-devel)
+* Ubuntu Linux 20.04.1 LTS, R-release, GCC  (on rhub)
+* macOS Monterey 12.1, R 4.1.3 (local machine)
 * Fedora Linux, R-devel, clang, gfortran (on rhub)
 
 ## R CMD check results
-There were no ERRORs, WARNINGs, or NOTES
+There were no ERRORs, WARNINGs or NOTEs.
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.

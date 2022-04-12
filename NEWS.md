@@ -1,13 +1,11 @@
----
-
 # overviewR 0.0.9
 - This version adds the possibility to use multiple time arguments for `overview_tab`
-- It also adds an extended `toydata` dataframe (including variables for day)
+- It also adds an extended `toydata` data.frame (including variables for day)
 
 ---
 
 # overviewR 0.0.8.999
-- This development version adds the possibility to use a data.table object with `overview_tab` ans `overview_na`
+- This development version adds the possibility to use a data.table object with `overview_tab` and `overview_na`
 
 ---
 

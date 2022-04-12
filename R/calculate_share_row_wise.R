@@ -15,7 +15,7 @@ calculate_share_row_wise <- function(dat = NULL) {
 
     dat_result <- dat %>%
       dplyr::rowwise() %>%
-      dplyr::summarise(dplyr::across(dplyr::everything(), dplyr::funs(sum(is.na(
+      dplyr::summarise(dplyr::across(dplyr::everything(), list(~sum(is.na(
         .
       ))))) %>%
       dplyr::mutate(na_count = rowSums(.),
