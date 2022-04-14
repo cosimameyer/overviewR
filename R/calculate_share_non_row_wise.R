@@ -1,3 +1,11 @@
+#' @title calculate_share_non_row_wise
+#'
+#' @description Function used in `overview_na` to calculate the column-wise share of NA
+#'
+#' @param dat Data frame
+#' @return The function returns a data set that has the information
+#'     on the column-wise NA share
+#'
 calculate_share_non_row_wise <- function(dat = NULL) {
   if (any(class(dat) == "data.table")) {
     # Generate necessary variables --------------------------------------------

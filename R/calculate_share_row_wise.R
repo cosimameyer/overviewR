@@ -1,3 +1,11 @@
+#' @title calculate_sahre_row_wise
+#'
+#' @description Function used in `overview_na` to calculate the share of NA row-wise
+#'
+#' @param dat Data frame
+#' @return The function returns a data set that has the information
+#'     on the row-wise NA share
+
 calculate_share_row_wise <- function(dat = NULL) {
   if (any(class(dat) == "data.table")) {
     dat <- data.table::copy(dat)

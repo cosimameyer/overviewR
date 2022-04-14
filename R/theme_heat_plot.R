@@ -1,3 +1,10 @@
+#' @title theme_heat_plot
+#'
+#' @description Defines the theme for the `overview_heat` plot function
+#'
+#' @return A theme for the `overview_heat` plot
+#'
+
 theme_heat_plot <- function() {
   theme_plot <- ggplot2::theme(
     # get rid of panel grids

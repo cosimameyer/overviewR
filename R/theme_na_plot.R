@@ -1,3 +1,9 @@
+#' @title theme_na_plot
+#'
+#' @description Defines the theme for the `overview_na` plot function
+#'
+#' @return A theme for the `overview_na` plot
+#'
 theme_na_plot <- function() {
   plot_theme <- ggplot2::theme(
     # get rid of panel grids
