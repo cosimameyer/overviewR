@@ -59,7 +59,7 @@ To install the latest development version of `overviewR` directly from [GitHub](
 
 ```{r, message=FALSE, warning=FALSE, results = "hide", eval=TRUE}
 library(devtools)
-devtools::install_github("cosimameyer/overviewR")
+devtools::install_github("cosimameyer/overviewR", build_vignettes=FALSE)
 ```
 
 
@@ -321,7 +321,7 @@ overview_plot(
 )
 ```
 
-There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the `color` argument. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the `color` argument.
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
 # Load the GitHub version
@@ -344,7 +344,7 @@ overview_plot(
 ```
 
 
-The development version also allows to change the dot size using the `dot_size` argument. The default is "2". *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+The development version also allows to change the dot size using the `dot_size` argument. The default is "2".
   
 ```{r, eval = FALSE}
 # Plot using the `color` argument
@@ -359,7 +359,7 @@ overview_plot(
 
 ## `overview_crossplot`
 
-To visualize also the cross table, `overview_crossplot` does the job. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+To visualize also the cross table, `overview_crossplot` does the job. 
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
 # Load the GitHub version
@@ -420,7 +420,7 @@ overview_na(toydata_with_na, perc = FALSE)
 
 ## `overview_overlap`
 
-This function allows to compare two data sets. We are currently working on an extended version that allows comparing >2 data sets. *Note, this function is currently only implemented in the development version that can be accessed from GitHub.*
+This function allows to compare two data sets. We are currently working on an extended version that allows comparing >2 data sets. 
   
   At the current development stage, the function works as follows:
   

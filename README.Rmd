@@ -331,7 +331,7 @@ overview_plot(
 )
 ```
 
-There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the `color` argument. *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the `color` argument.
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
 # Load the GitHub version
@@ -353,7 +353,7 @@ overview_plot(
 )
 ```
 
-The development version also allows to change the dot size using the `dot_size` argument. The default is "2". *Note, this argument is currently only implemented in the development version that can be accessed from GitHub.*
+The development version also allows to change the dot size using the `dot_size` argument. The default is "2".
 
 ```{r, eval = FALSE}
 # Plot using the `color` argument
@@ -575,7 +575,7 @@ Sample & Time frame \\
 ```
 
 
-<!--## Overview of functional add-ons
+## Overview of functional add-ons
 |                       | Works with `data.frame` objects | Works with `data.table` | Can take multiple time arguments (year, month, day) |
 |-----------------------|---------------------------------|-------------------------|-----------------------------------------------------|
 | `overview_tab`        | yes                               | yes                       | yes                                                   |
@@ -585,7 +585,7 @@ Sample & Time frame \\
 | `overview_crosstab`   | yes                               |                         |                                                     |
 | `overview_heat`       | yes                               |                         |                                                     |
 | `overview_overlap`    | yes                               |                         |                                                     |
--->
+
 ## Extensions
 
 If you wish to compare two data sets using `overview_tab`, this is not (yet) implemented in `overviewR` but there is currently a workaround. 
