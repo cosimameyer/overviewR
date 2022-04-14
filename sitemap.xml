@@ -25,10 +25,25 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/calculate_share_non_row_wise.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calculate_share_row_wise.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-overview_heat.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-overview_tab.html</loc>
+  </url>
+  <url>
+    <loc>/reference/find_int_runs.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/is.Date.html</loc>
+    <loc>/reference/overview_add_na_output.html</loc>
   </url>
   <url>
     <loc>/reference/overview_crossplot.html</loc>
@@ -49,10 +64,28 @@
     <loc>/reference/overview_plot.html</loc>
   </url>
   <url>
+    <loc>/reference/overview_plot_absolute.html</loc>
+  </url>
+  <url>
+    <loc>/reference/overview_plot_percentage.html</loc>
+  </url>
+  <url>
     <loc>/reference/overview_print.html</loc>
   </url>
   <url>
     <loc>/reference/overview_tab.html</loc>
+  </url>
+  <url>
+    <loc>/reference/overview_tab_df.html</loc>
+  </url>
+  <url>
+    <loc>/reference/overview_tab_dt.html</loc>
+  </url>
+  <url>
+    <loc>/reference/theme_heat_plot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/theme_na_plot.html</loc>
   </url>
   <url>
     <loc>/reference/toydata.html</loc>
