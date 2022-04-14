@@ -188,7 +188,7 @@
 <p>To install the latest development version of <code>overviewR</code> directly from <a href="https://github.com/cosimameyer/overviewR" class="external-link">GitHub</a> use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"cosimameyer/overviewR"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"cosimameyer/overviewR"</span>, build_vignettes<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="tabular-overview">Tabular overview<a class="anchor" aria-label="anchor" href="#tabular-overview"></a>
@@ -378,7 +378,7 @@ Countries &amp; Years \\
   asc <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;"></p>
-<p>There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the <code>color</code> argument. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
+<p>There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the <code>color</code> argument.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load the GitHub version</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span> <span class="co"># Tools to Make Developing R Packages Easier</span>
@@ -398,7 +398,7 @@ Countries &amp; Years \\
   color <span class="op">=</span> <span class="va">before</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="overviewR_vignette_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;"></p>
-<p>The development version also allows to change the dot size using the <code>dot_size</code> argument. The default is “2”. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
+<p>The development version also allows to change the dot size using the <code>dot_size</code> argument. The default is “2”.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot using the `color` argument</span>
 <span class="fu"><a href="../reference/overview_plot.html">overview_plot</a></span><span class="op">(</span>
@@ -412,7 +412,7 @@ Countries &amp; Years \\
 <h3 id="overview_crossplot">
 <code>overview_crossplot</code><a class="anchor" aria-label="anchor" href="#overview_crossplot"></a>
 </h3>
-<p>To visualize also the cross table, <code>overview_crossplot</code> does the job. <em>Note, this argument is currently only implemented in the development version that can be accessed from GitHub.</em></p>
+<p>To visualize also the cross table, <code>overview_crossplot</code> does the job.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load the GitHub version</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span> <span class="co"># Tools to Make Developing R Packages Easier</span>
@@ -460,7 +460,7 @@ Countries &amp; Years \\
 <h3 id="overview_overlap">
 <code>overview_overlap</code><a class="anchor" aria-label="anchor" href="#overview_overlap"></a>
 </h3>
-<p>This function allows to compare two data sets. We are currently working on an extended version that allows comparing &gt;2 data sets. <em>Note, this function is currently only implemented in the development version that can be accessed from GitHub.</em></p>
+<p>This function allows to compare two data sets. We are currently working on an extended version that allows comparing &gt;2 data sets.</p>
 <p>At the current development stage, the function works as follows:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
