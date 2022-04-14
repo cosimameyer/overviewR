@@ -164,6 +164,7 @@ test_that("check output of overview_print for crosstab with save_out", {
 
 
 test_that("Get a warning message from overview_crosstab", {
+  testthat::skip_on_cran()
   data_test <- toydata %>%
     dplyr::mutate(ccode = ifelse(ccode == "RWA", NA, ccode))
   expect_warning(
@@ -196,6 +197,7 @@ test_that("Get an error message", {
 })
 
 test_that("check output of for crosstab", {
+  testthat::skip_on_cran()
   toydata_no_dup <-
     toydata %>%
     dplyr::select(ccode, year, population, gdp) %>%

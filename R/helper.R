@@ -1,6 +1,6 @@
 #' @title find_int_runs
 #'
-#' @description Function used in `ovoerview_tab` to find running integers
+#' @description Function used in `overview_tab` to find running integers
 #'
 #' @param run Variable (integer) that should be checked for consecutive values
 #' @return The function returns a data set

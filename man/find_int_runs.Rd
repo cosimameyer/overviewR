@@ -13,5 +13,5 @@ find_int_runs(run = NULL)
 The function returns a data set
 }
 \description{
-Function used in `ovoerview_tab` to find running integers
+Function used in `overview_tab` to find running integers
 }
