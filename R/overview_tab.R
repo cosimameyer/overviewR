@@ -30,12 +30,13 @@ overview_tab <- function(dat,
                          time = list(year = NULL, month = NULL, day = NULL),
                          complex_date = FALSE) {
 
+
   # Check whether time contains multiple objects
   if (complex_date) {
     # Identify non-empty objects
     time <- time[lapply(time, length) > 0]
 
-    if (is.null(time$day)) {
+    if(is.null(time$day)) {
       stop(
         "The current version requires a day if you are providing multiple time arguments. Please also add a `day` in `time = list(year = ..., month = ..., day = ...)`."
       )
@@ -44,11 +45,11 @@ overview_tab <- function(dat,
     if (!is.null(time$month) & !is.numeric(time$month)) {
       date <- paste(time$year, time$month, time$day, sep = "-")
 
-      if (any(grepl("-$", date))) {
-        date <- gsub("-$", replacement = "", date)
-      } else if (any(grepl("--$", date))) {
-        date <- gsub("--$", replacement = "", date)
-      }
+      # if (any(grepl("-$", date))) {
+      #   date <- gsub("-$", replacement = "", date)
+      # } else if (any(grepl("--$", date))) {
+      #   date <- gsub("--$", replacement = "", date)
+      # }
 
       # Convert a possible non-numeric month to a numeric month
       if (!is.null(time$year) &
@@ -56,25 +57,9 @@ overview_tab <- function(dat,
         dat$date_time <-
           as.Date(strftime(as.POSIXlt(date, format = "%Y-%b-%d")))
       }
-      # else if (!is.null(time$year) &
-      #            !is.null(time$month) & is.null(time$day)) {
-      #   # Convert month into a numeric variable
-      #   month <-
-      #     if (any(time$month %in% month.name)) {
-      #       match(time$month, month.name)
-      #     } else if (any(time$month %in% month.abb)) {
-      #       match(time$month, month.abb)
-      #     }
-      #   dat$time <- as.Date(paste(time$year, month, sep = "-"), format = "%Y-%m")
-      #   }
 
     }
   }
-
-  # # Also check if the time variable already has more info (e.g., YYYY-MM-DD format)
-  # if (is.Date(time)) {
-  #
-  # }
 
   if (any(class(dat) == "data.table")) {
     # Start with the data

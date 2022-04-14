@@ -90,6 +90,19 @@ overview_crossplot <-
 
     # Check if data set only has unique observations
     if (nrow(length_nodup) == nrow(dat)) {
+      red <- dat %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(!!id, !!time) %>%
+        dplyr::summarise(cond1_mean = mean(!!cond1),
+                         cond2_mean = mean(!!cond2)) %>%
+        dplyr::ungroup()
+
+      cond1_mean <- red$cond1_mean
+      cond1_mean <- dplyr::enquo(cond1_mean)
+
+      cond2_mean <- red$cond2_mean
+      cond2_mean <- dplyr::enquo(cond2_mean)
+
       dat_red <- dat %>%
         dplyr::mutate(
           c1 = ifelse(!!cond1 >= threshold1, 1, 0),

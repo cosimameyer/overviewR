@@ -6,7 +6,7 @@ calculate_share_row_wise <- function(dat = NULL) {
 
     # Add rownames as variable and get the percentage
     dat_result <-
-      dat_result[, list(variable = 1:nrow(dat_result),
+      dat_result[, list(na_count = 1:nrow(dat_result),
                         percentage = na_count / (total / 100))]
 
   } else {
