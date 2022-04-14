@@ -14,8 +14,6 @@ overview_tab_dt(dat = NULL, id = NULL, time = NULL, col_names = NULL)
 \item{time}{Time (e.g., time periods given by years, months, ...). There are three options to add a date variable: 1) Time can be a character vector containing **one** time variable, 2) a time variable following the YYYY-MM-DD format, or 3) or a list containing multiple time variables (`time = list(year = NULL, month = NULL, day = NULL)`).}
 
 \item{col_names}{The column names (containing id and time)}
-
-\item{dat2}{Your data set}
 }
 \value{
 A data.table
