@@ -130,6 +130,31 @@ output_table
 # FRA	    1993, 1996, 1999
 ```
 
+### Multiple time arguments
+
+As of overviewR version 0.0.7 you can also use multiple time objects in `overview_tab`. You can now pass a list containing multiple time variables with the following format: `time = list(year = NULL, month = NULL, day = NULL)`.
+
+```{r, message=FALSE, eval=FALSE}
+output_table_complex <- overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year,
+             month = toydata$month, day = toydata$day), complex_date = TRUE)
+```
+
+
+The resulting data frame collapses again the time condition for each id by taking into account potential gaps in the time frame. Note that the column name for the time frame is set by default to `time_frame` and internally generated when using `overview_tab`. The output resembles something like this:
+
+```{r, message=FALSE, eval=FALSE}
+output_table_complex
+```
+
+```
+ ccode time_frame                                                                                                      # AGO   1990-01-01, 1990-02-02, 1990-03-03, 1990-04-04, 1990-05-05, 1990-06-06, ...
+# BEN   1995-01-01, 1995-02-02, 1995-03-03, 1995-04-04, 1995-05-05, 1995-06-06, ...
+# FRA   1993-01-01, 1993-02-02, 1993-03-03, 1993-04-04, 1993-05-05, 1993-06-06, ...
+# GBR   1991-01-01, 1991-02-02, 1991-03-03, 1991-04-04, 1991-05-05, 1991-06-06, ...
+# RWA   1990-01-01 - 1990-01-12, 1991-01-01 - 1991-01-12, 1992-01-01 - 1992-01-12, 1993-01-01 - 1993-01-12, 1994-01-01 
+```
+
+
 ### ```overview_crosstab```
 To generate a cross table that divides the data based on two conditions, for instance GDP and population size, ```overview_crosstab``` can be used. `threshold1` and `threshold2` thereby indicate the cut point for the two conditions (`cond1` and `cond2`), respectively.
 
@@ -372,14 +397,9 @@ overview_plot(
 
 ### ```overview_crossplot```
 
-To visualize also the cross table, `overview_crossplot` does the job. *Note, this function is currently only implemented in the development version that can be accessed from GitHub.*
+To visualize also the cross table, `overview_crossplot` does the job.
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
-# Load the GitHub version
-library(devtools) # Tools to Make Developing R Packages Easier
-devtools::install_github("cosimameyer/overviewR")
-library(overviewR) # Easily Extracting Information About Your Data
-
 overview_crossplot(
   toydata,
   id = ccode,

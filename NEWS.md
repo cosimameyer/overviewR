@@ -1,5 +1,19 @@
 ---
 
+# overviewR 0.0.10
+- CRAN resubmission
+We fixed the following bugs and issues:
+- Fixed bug in `overview_tab` function
+   - Internal function returned an integer instead of a date when using multiple time options (also updated the vignettes)
+- Fixed bug in vignette
+  - "Having package code which is run as part of the checks and attempts to write to the user library violates the CRAN Policy's"
+  - "Packages should not write in the user’s home filespace (including
+ clipboards), nor anywhere else on the file system apart from the R
+ session’s temporary directory (or during installation in the location
+ pointed to by TMPDIR: and such usage should be cleaned up)."
+- Increased the code coverage of units tests to 100%
+---
+
 # overviewR 0.0.9
 - This version adds the possibility to use multiple time arguments for `overview_tab`
 - It also adds an extended `toydata` data.frame (including variables for day)

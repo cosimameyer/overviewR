@@ -17,6 +17,4 @@ find_int_runs <- function(run = NULL) {
       paste(x[1], "-", x[length(x)])
     }
   }), use.names = FALSE)
-
-  return(difflist)
 }

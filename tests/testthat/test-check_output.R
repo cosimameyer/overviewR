@@ -198,6 +198,7 @@ test_that("Get an error message", {
 
 test_that("check output of for crosstab", {
   testthat::skip_on_cran()
+
   toydata_no_dup <-
     toydata %>%
     dplyr::select(ccode, year, population, gdp) %>%
@@ -212,7 +213,7 @@ test_that("check output of for crosstab", {
     dplyr::ungroup() %>%
     dplyr::distinct()
 
-  output_crosstab <-
+  expect_warning(
     overview_crosstab(
       dat = toydata_no_dup,
       id = ccode,
@@ -222,7 +223,7 @@ test_that("check output of for crosstab", {
       threshold1 = 27000,
       threshold2 = 25000
     )
-  expect_is(output_crosstab, "data.frame")
+    )
 })
 
 
