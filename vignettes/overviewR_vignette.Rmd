@@ -121,10 +121,12 @@ output_table
 As of overviewR version 0.0.7 you can also use multiple time objects in `overview_tab`. You can now pass a list containing multiple time variables with the following format: `time = list(year = NULL, month = NULL, day = NULL)`.
 
 ```{r, message=FALSE, eval=FALSE}
-output_table_complex <- overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year,
-             month = toydata$month, day = toydata$day), complex_date = TRUE)
+output_table_complex <- overview_tab(dat = toydata, id = ccode, 
+                                     time = list(year = toydata$year,
+                                                 month = toydata$month, 
+                                                 day = toydata$day), 
+                                     complex_date = TRUE)
 ```
-
 
 The resulting data frame collapses again the time condition for each id by taking into account potential gaps in the time frame. Note that the column name for the time frame is set by default to `time_frame` and internally generated when using `overview_tab`. The output resembles something like this:
 
@@ -401,7 +403,7 @@ overview_crossplot(
 `overview_heat` takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. `overview_heat` intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola ("AGO") in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.
 
 ```{r, include = FALSE}
-toydata_red <- toydata[-sample(seq_len(nrow(toydata)), 64),]
+toydata_red <- toydata[-sample(seq_len(nrow(toydata)), 64), ]
 ```
 
 ```{r, out.width = '50%', fig.align='center'}
@@ -474,10 +476,11 @@ The plot functions are fully `ggplot2` based. While a theme is pre-defined, this
 
 A classical `ggplot2` theme alternative
 ```{r, out.width = '50%', fig.align='center'}
-library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(ggplot2) # Create Elegant Data Visualisations 
+                 # Using the Grammar of Graphics
 
 overview_na(toydata_with_na) +
-  ggplot2::theme_minimal() 
+  ggplot2::theme_minimal()
 ```
 
 # Compatibilities with other packages 

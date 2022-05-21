@@ -1,4 +1,6 @@
 ---
+# overviewR 0.0.11
+- CRAN resubmission to fix bug in `overview_overlap` which did not return the correct percentages in the visualization
 
 # overviewR 0.0.10
 - CRAN resubmission

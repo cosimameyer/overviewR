@@ -452,7 +452,7 @@ overview_na(toydata_with_na, perc = FALSE)
 
 ### ```overview_overlap```
 
-This function allows to compare two data sets. We are currently working on an extended version that allows comparing >2 data sets. *Note, this function is currently only implemented in the development version that can be accessed from GitHub.*
+This function allows to compare two data sets. We are currently working on an extended version that allows comparing >2 data sets.
 
 At the current development stage, the function works as follows:
 

@@ -102,10 +102,8 @@ overview_overlap <-
     }
     if (plot_type == "venn") {
       # Subset the id to a vector
-      dat1_sub <-
-        dat1 %>% dplyr::select(!!dat1_id) %>% as.character %>% as.vector
-      dat2_sub <-
-        dat2 %>% dplyr::select(!!dat2_id) %>% as.character %>% as.vector
+      dat1_sub <- dplyr::select(dat1, !!dat1_id) %>% unlist() %>% as.vector()
+      dat2_sub <- dplyr::select(dat2, !!dat2_id) %>% unlist() %>% as.vector
 
       # Generate a list
       x <- list(`Data set 1` = dat1_sub,

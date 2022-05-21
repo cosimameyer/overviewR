@@ -1,4 +1,4 @@
-#' @title calculate_sahre_row_wise
+#' @title calculate_share_row_wise
 #'
 #' @description Function used in `overview_na` to calculate the share of NA row-wise
 #'

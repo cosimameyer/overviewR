@@ -1,6 +1,6 @@
 ## Resubmission
 
-This is a (re)submission for an updated version of this package. It includes the requested changes for overviewR 0.0.9.
+This is a (re)submission for an updated version of this package. It includes an essential bugfix in `overview_overlap` to make the function work. 
       
 ## Test environments
 

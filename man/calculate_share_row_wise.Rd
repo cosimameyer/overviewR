@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculate_share_row_wise.R
 \name{calculate_share_row_wise}
 \alias{calculate_share_row_wise}
-\title{calculate_sahre_row_wise}
+\title{calculate_share_row_wise}
 \usage{
 calculate_share_row_wise(dat = NULL)
 }
