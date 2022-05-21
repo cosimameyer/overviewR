@@ -22,7 +22,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">overviewR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.11</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,18 +118,6 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.10" id="overviewr-0010">overviewR 0.0.10<a class="anchor" aria-label="anchor" href="#overviewr-0010"></a></h2>
-<ul><li>CRAN resubmission We fixed the following bugs and issues:</li>
-<li>Fixed bug in <code>overview_tab</code> function
-<ul><li>Internal function returned an integer instead of a date when using multiple time options (also updated the vignettes)</li>
-</ul></li>
-<li>Fixed bug in vignette
-<ul><li>“Having package code which is run as part of the checks and attempts to write to the user library violates the CRAN Policy’s”</li>
-<li>“Packages should not write in the user’s home filespace (including clipboards), nor anywhere else on the file system apart from the R session’s temporary directory (or during installation in the location pointed to by TMPDIR: and such usage should be cleaned up).”</li>
-</ul></li>
-<li><h3 id="increased-the-code-coverage-of-units-tests-to-100">Increased the code coverage of units tests to 100%</h3></li>
-</ul></div>
-    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.9" id="overviewr-009">overviewR 0.0.9<a class="anchor" aria-label="anchor" href="#overviewr-009"></a></h2><p class="text-muted">CRAN release: 2022-04-12</p>
 <ul><li>This version adds the possibility to use multiple time arguments for <code>overview_tab</code>
 </li>
@@ -138,65 +126,43 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.8.999" id="overviewr-008999">overviewR 0.0.8.999<a class="anchor" aria-label="anchor" href="#overviewr-008999"></a></h2>
 <ul><li>This development version adds the possibility to use a data.table object with <code>overview_tab</code> and <code>overview_na</code>
-</li>
-</ul><hr></div>
+</li></ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.7.999.1" id="overviewr-0079991">overviewR 0.0.7.999.1<a class="anchor" aria-label="anchor" href="#overviewr-0079991"></a></h2>
-<ul><li>This development version adds the following extensions
-<ul><li>
-<code>overview_plot</code>
-<ul><li>Adjustable <code>dot_size</code> (default is 2)</li>
-</ul></li>
+<ul><li>This development version adds the following extensions<ul><li>
+<code>overview_plot</code><ul><li>Adjustable <code>dot_size</code> (default is 2)</li></ul></li>
 <li>
-<code>overview_na</code>
-<ul><li>Option to generate <code>row_wise</code> NA values</li>
-</ul></li>
+<code>overview_na</code><ul><li>Option to generate <code>row_wise</code> NA values</li></ul></li>
 <li>
-<code>overview_overlap</code>
-<ul><li>New function to compare (at the moment) two data sets using bar graphs (<code>plot_type = "bar"</code>) or Venn diagrams (<code>plot_type = "venn"</code>)</li>
-</ul></li>
+<code>overview_overlap</code><ul><li>New function to compare (at the moment) two data sets using bar graphs (<code>plot_type = "bar"</code>) or Venn diagrams (<code>plot_type = "venn"</code>)</li></ul></li>
 <li>
-<code>overview_print</code>
-<ul><li>Fixed a small issue that can cause problems with large (and complex) TeX documents</li>
-</ul></li>
-</ul></li>
-</ul><hr></div>
+<code>overview_print</code><ul><li>Fixed a small issue that can cause problems with large (and complex) TeX documents</li></ul></li>
+</ul></li></ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.7.999" id="overviewr-007999">overviewR 0.0.7.999<a class="anchor" aria-label="anchor" href="#overviewr-007999"></a></h2>
-<ul><li>This development version adds bugs fixes and extensions for
-<ul><li>
-<code>overview_plot</code>
-<ul><li>some consecutive years were not correctly connected before)</li>
+<ul><li>This development version adds bugs fixes and extensions for<ul><li>
+<code>overview_plot</code><ul><li>some consecutive years were not correctly connected before)</li>
 <li>
 <code>color</code> argument to color parts of the time lines</li>
 </ul></li>
 <li>
-<code>overview_print</code>
-<ul><li>
+<code>overview_print</code><ul><li>
 <code>label</code> to add a cross-reference label</li>
 <li>
 <code>fontsize</code> to change the font size</li>
 </ul></li>
 <li>
-<code>overview_crossplot</code>
-<ul><li>a new function that visualizes basically the same output as <code>overview_crosstab</code>
-</li>
-</ul></li>
+<code>overview_crossplot</code><ul><li>a new function that visualizes basically the same output as <code>overview_crosstab</code>
+</li></ul></li>
 <li>
-<code>overview_tab</code>
-<ul><li>if there is a <code>NA</code> in the <code>id</code> variable this observation will be automatically deleted. The user receives a warning.</li>
-</ul></li>
+<code>overview_tab</code><ul><li>if there is a <code>NA</code> in the <code>id</code> variable this observation will be automatically deleted. The user receives a warning.</li></ul></li>
 <li>
-<code>overview_crosstab</code>
-<ul><li>if there is a <code>NA</code> in the <code>id</code> variable this observation will be automatically deleted. The user receives a warning.</li>
-</ul></li>
-</ul></li>
-</ul></div>
+<code>overview_crosstab</code><ul><li>if there is a <code>NA</code> in the <code>id</code> variable this observation will be automatically deleted. The user receives a warning.</li></ul></li>
+</ul></li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.6" id="overviewr-006">overviewR 0.0.6<a class="anchor" aria-label="anchor" href="#overviewr-006"></a></h2><p class="text-muted">CRAN release: 2020-08-24</p>
 <ul><li>CRAN resubmission</li>
-<li>Added new functions:
-<ul><li>overview_plot</li>
+<li>Added new functions:<ul><li>overview_plot</li>
 <li>overview_na</li>
 <li>overview_heat</li>
 </ul></li>
@@ -204,12 +170,10 @@
 </ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.5.900" id="overviewr-005900">overviewR 0.0.5.900<a class="anchor" aria-label="anchor" href="#overviewr-005900"></a></h2>
-<ul><li>This development version adds the following functions:
-<ul><li>overview_plot</li>
+<ul><li>This development version adds the following functions:<ul><li>overview_plot</li>
 <li>overview_na</li>
 <li>overview_heat</li>
-</ul></li>
-</ul><hr></div>
+</ul></li></ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.4" id="overviewr-004">overviewR 0.0.4<a class="anchor" aria-label="anchor" href="#overviewr-004"></a></h2><p class="text-muted">CRAN release: 2020-06-30</p>
 <ul><li>CRAN release</li>
@@ -217,15 +181,11 @@
 </ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.3" id="overviewr-003">overviewR 0.0.3<a class="anchor" aria-label="anchor" href="#overviewr-003"></a></h2>
-<ul><li>Adjusted examples and tests based on CRAN’s standards</li>
-</ul><hr></div>
+<ul><li>Adjusted examples and tests based on CRAN’s standards</li></ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.2" id="overviewr-002">overviewR 0.0.2<a class="anchor" aria-label="anchor" href="#overviewr-002"></a></h2>
-<ul><li>Bug fixes in overview_tab that affected overview_crosstab</li>
-</ul><hr></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.1" id="overviewr-001">overviewR 0.0.1<a class="anchor" aria-label="anchor" href="#overviewr-001"></a></h2>
-</div>
+<ul><li>Bug fixes in overview_tab that affected overview_crosstab</li></ul><hr></div>
+    <div class="section level2"><h2 class="pkg-version" data-toc-text="0.0.1" id="overviewr-001">overviewR 0.0.1<a class="anchor" aria-label="anchor" href="#overviewr-001"></a></h2></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -235,7 +195,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 
