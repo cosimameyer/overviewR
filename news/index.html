@@ -118,6 +118,18 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.11" id="overviewr-0011">overviewR 0.0.11<a class="anchor" aria-label="anchor" href="#overviewr-0011"></a></h2>
+<ul><li>CRAN resubmission to fix bug in <code>overview_overlap</code> which did not return the correct percentages in the visualization</li></ul><hr></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.10" id="overviewr-0010">overviewR 0.0.10<a class="anchor" aria-label="anchor" href="#overviewr-0010"></a></h2><p class="text-muted">CRAN release: 2022-04-15</p>
+<ul><li>CRAN resubmission We fixed the following bugs and issues:</li>
+<li>Fixed bug in <code>overview_tab</code> function<ul><li>Internal function returned an integer instead of a date when using multiple time options (also updated the vignettes)</li></ul></li>
+<li>Fixed bug in vignette<ul><li>“Having package code which is run as part of the checks and attempts to write to the user library violates the CRAN Policy’s”</li>
+<li>“Packages should not write in the user’s home filespace (including clipboards), nor anywhere else on the file system apart from the R session’s temporary directory (or during installation in the location pointed to by TMPDIR: and such usage should be cleaned up).”</li>
+</ul></li>
+<li>Increased the code coverage of units tests to 100%</li>
+</ul><hr></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.9" id="overviewr-009">overviewR 0.0.9<a class="anchor" aria-label="anchor" href="#overviewr-009"></a></h2><p class="text-muted">CRAN release: 2022-04-12</p>
 <ul><li>This version adds the possibility to use multiple time arguments for <code>overview_tab</code>
 </li>
@@ -158,7 +170,14 @@
 <code>overview_tab</code><ul><li>if there is a <code>NA</code> in the <code>id</code> variable this observation will be automatically deleted. The user receives a warning.</li></ul></li>
 <li>
 <code>overview_crosstab</code><ul><li>if there is a <code>NA</code> in the <code>id</code> variable this observation will be automatically deleted. The user receives a warning.</li></ul></li>
-</ul></li></ul></div>
+</ul></li></ul><hr></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.7" id="overviewr-007">overviewR 0.0.7<a class="anchor" aria-label="anchor" href="#overviewr-007"></a></h2><p class="text-muted">CRAN release: 2020-11-23</p>
+<ul><li>CRAN resubmission We fixed the following bugs:</li>
+<li>Fixed bug in overview_plot function<ul><li>Time line was not correctly displayed when a consecutive time variable was present for two different id variables</li></ul></li>
+<li>Fixed bug in vignette<ul><li>Loaded package dplyr to follow CRAN policies: “Packages which use Internet resources should fail gracefully with an informative message if the resource is not available or has changed (and not give a check warning nor error). CRAN versions of packages should work with the current CRAN and Bioconductor releases of packages they depend on and not anticipate nor recommend development versions of such packages (or themselves) on other repositories.”</li></ul></li>
+</ul><p>And added the following new features: - Added function for overview_plot function - Y axis is now automatically ordered in ascending order - Extended the overview_heat function - Y axis is now automatically ordered in ascending order - Introduced “label” argument to overview_heat that allows the user to select whether the percentage/total number of observations should be displayed or not</p>
+<hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.6" id="overviewr-006">overviewR 0.0.6<a class="anchor" aria-label="anchor" href="#overviewr-006"></a></h2><p class="text-muted">CRAN release: 2020-08-24</p>
 <ul><li>CRAN resubmission</li>
