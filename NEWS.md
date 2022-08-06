@@ -1,8 +1,11 @@
----
-# overviewR 0.0.11
+## overviewR 0.0.11
+
 - CRAN resubmission to fix bug in `overview_overlap` which did not return the correct percentages in the visualization
 
-# overviewR 0.0.10
+---
+
+## overviewR 0.0.10
+
 - CRAN resubmission
 We fixed the following bugs and issues:
 - Fixed bug in `overview_tab` function
@@ -14,20 +17,24 @@ We fixed the following bugs and issues:
  session’s temporary directory (or during installation in the location
  pointed to by TMPDIR: and such usage should be cleaned up)."
 - Increased the code coverage of units tests to 100%
+
 ---
 
-# overviewR 0.0.9
+## overviewR 0.0.9
+
 - This version adds the possibility to use multiple time arguments for `overview_tab`
 - It also adds an extended `toydata` data.frame (including variables for day)
 
 ---
 
-# overviewR 0.0.8.999
+## overviewR 0.0.8.999
+
 - This development version adds the possibility to use a data.table object with `overview_tab` and `overview_na`
 
 ---
 
-# overviewR 0.0.7.999.1
+## overviewR 0.0.7.999.1
+
 - This development version adds the following extensions
    - `overview_plot`
       - Adjustable `dot_size` (default is 2)
@@ -41,7 +48,8 @@ We fixed the following bugs and issues:
 
 ---
 
-# overviewR 0.0.7.999
+## overviewR 0.0.7.999
+
 - This development version adds bugs fixes and extensions for 
    - `overview_plot`
       - some consecutive years were not correctly connected before)
@@ -58,7 +66,9 @@ We fixed the following bugs and issues:
    
 
 ---
-# overviewR 0.0.7
+
+## overviewR 0.0.7
+
 - CRAN resubmission
 We fixed the following bugs:
 - Fixed bug in overview_plot function
@@ -74,7 +84,9 @@ And added the following new features:
    - Introduced "label" argument to overview_heat that allows the user to select whether the percentage/total number of observations should be displayed or not
 
 ---
-# overviewR 0.0.6
+
+## overviewR 0.0.6
+
 - CRAN resubmission
 - Added new functions:
   - overview_plot
@@ -84,7 +96,7 @@ And added the following new features:
 
 ---
 
-# overviewR 0.0.5.900
+##  overviewR 0.0.5.900
 
 - This development version adds the following functions:
    - overview_plot
@@ -93,24 +105,24 @@ And added the following new features:
 
 ---
 
-# overviewR 0.0.4
+## overviewR 0.0.4
 
 - CRAN release
 - Further adjustments to new CRAN comments to avoid writing on the user's home file space
 
 ---
 
-# overviewR 0.0.3
+## overviewR 0.0.3
 
 - Adjusted examples and tests based on CRAN's standards
 
 ---
 
-# overviewR 0.0.2
+## overviewR 0.0.2
 
 - Bug fixes in overview_tab that affected overview_crosstab
 
 ---
 
-# overviewR 0.0.1
+## overviewR 0.0.1
 
