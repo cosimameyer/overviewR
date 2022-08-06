@@ -14,20 +14,24 @@ calculate_share_row_wise <- function(dat = NULL) {
 
     # Add rownames as variable and get the percentage
     dat_result <-
-      dat_result[, list(na_count = 1:nrow(dat_result),
-                        percentage = na_count / (total / 100))]
-
+      dat_result[, list(
+        na_count = 1:nrow(dat_result),
+        percentage = na_count / (total / 100)
+      )]
   } else {
-    apply(dat, MARGIN = 1, function(x)
-      sum(is.na(x)))
+    apply(dat, MARGIN = 1, function(x) {
+      sum(is.na(x))
+    })
 
     dat_result <- dat %>%
       dplyr::rowwise() %>%
-      dplyr::summarise(dplyr::across(dplyr::everything(), list(~sum(is.na(
+      dplyr::summarise(dplyr::across(dplyr::everything(), list(~ sum(is.na(
         .
       ))))) %>%
-      dplyr::mutate(na_count = rowSums(.),
-                    total = length(colnames(.))) %>%
+      dplyr::mutate(
+        na_count = rowSums(.),
+        total = length(colnames(.))
+      ) %>%
       dplyr::select(na_count, total)
 
     # Add rownames as variable

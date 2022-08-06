@@ -22,8 +22,10 @@
 #' \dontrun{
 #' data(toydata)
 #' toydata2 <- toydata[which(toydata$year > 1992), ]
-#' overview_overlap(dat1 = toydata, dat2 = toydata2, dat1_id = ccode,
-#'                  dat2_id = ccode)
+#' overview_overlap(
+#'   dat1 = toydata, dat2 = toydata2, dat1_id = ccode,
+#'   dat2_id = ccode
+#' )
 #' }
 #' @export
 #' @importFrom dplyr "%>%"
@@ -84,9 +86,11 @@ overview_overlap <-
           y = value,
           fill = count
         )) +
-        ggplot2::geom_bar(stat = "identity",
-                          width = .5,
-                          position = "dodge") +
+        ggplot2::geom_bar(
+          stat = "identity",
+          width = .5,
+          position = "dodge"
+        ) +
         ggplot2::scale_fill_grey(
           name = "Data set",
           breaks = c("count", "count2"),
@@ -102,12 +106,18 @@ overview_overlap <-
     }
     if (plot_type == "venn") {
       # Subset the id to a vector
-      dat1_sub <- dplyr::select(dat1, !!dat1_id) %>% unlist() %>% as.vector()
-      dat2_sub <- dplyr::select(dat2, !!dat2_id) %>% unlist() %>% as.vector
+      dat1_sub <- dplyr::select(dat1, !!dat1_id) %>%
+        unlist() %>%
+        as.vector()
+      dat2_sub <- dplyr::select(dat2, !!dat2_id) %>%
+        unlist() %>%
+        as.vector()
 
       # Generate a list
-      x <- list(`Data set 1` = dat1_sub,
-                `Data set 2` = dat2_sub)
+      x <- list(
+        `Data set 1` = dat1_sub,
+        `Data set 2` = dat2_sub
+      )
 
       # Plot list
       plot <- ggvenn::ggvenn(

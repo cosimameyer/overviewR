@@ -15,10 +15,12 @@ overview_tab_dt <- function(dat = NULL,
 
   # Check if data set only has unique observations
   if (nrow(unique(dat, by = c(id, time))) == nrow(dat)) {
-    tab <- .overview_tab(dat = dat,
-                         id = id,
-                         time = time,
-                         col_names = col_names)
+    tab <- .overview_tab(
+      dat = dat,
+      id = id,
+      time = time,
+      col_names = col_names
+    )
 
     # Return object
     return(tab)
@@ -29,10 +31,12 @@ overview_tab_dt <- function(dat = NULL,
 
     # Apply code from above to the new data
     # Apply it to the data
-    tab <- .overview_tab(dat = dat,
-                         id = id,
-                         time = time,
-                         col_names = col_names)
+    tab <- .overview_tab(
+      dat = dat,
+      id = id,
+      time = time,
+      col_names = col_names
+    )
 
     return(tab)
   }

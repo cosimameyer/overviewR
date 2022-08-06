@@ -29,9 +29,10 @@ theme_heat_plot <- function() {
       color = "black",
       size = 8
     ),
-    text = ggplot2::element_text(size = 8,
-                                 face = "plain")
-
+    text = ggplot2::element_text(
+      size = 8,
+      face = "plain"
+    )
   )
 
   return(theme_plot)

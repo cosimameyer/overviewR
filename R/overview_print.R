@@ -69,13 +69,12 @@ overview_print <-
            file,
            label = "tab:tab1",
            fontsize) {
-
     obj <- as.matrix(obj)
 
-  # Add a fontsize (if defined)
-   if (missing(fontsize)==FALSE) {
-     fontsize_mod <- paste0("\\", fontsize)}
-    else {
+    # Add a fontsize (if defined)
+    if (missing(fontsize) == FALSE) {
+      fontsize_mod <- paste0("\\", fontsize)
+    } else {
       fontsize_mod <- ""
     }
 
@@ -173,21 +172,25 @@ overview_print <-
         end_crosstab <-
           paste0("\\hline \\\\ \n \\end{tabularx} \n \\end{table} \n")
         if (save_out == FALSE) {
-          cat(begin_crosstab,
-              cross_out1,
-              mid_crosstab,
-              cross_out2,
-              end_crosstab)
+          cat(
+            begin_crosstab,
+            cross_out1,
+            mid_crosstab,
+            cross_out2,
+            end_crosstab
+          )
         }
       }
       if (save_out == TRUE) {
         save_dir <- paste0(path, file)
         sink(save_dir)
-        cat(begin_crosstab,
-            cross_out1,
-            mid_crosstab,
-            cross_out2,
-            end_crosstab)
+        cat(
+          begin_crosstab,
+          cross_out1,
+          mid_crosstab,
+          cross_out2,
+          end_crosstab
+        )
         sink()
       }
     }

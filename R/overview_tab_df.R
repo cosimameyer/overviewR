@@ -12,7 +12,6 @@ overview_tab_df <- function(dat2 = NULL,
                             dat = NULL,
                             id = NULL,
                             time = NULL) {
-
   if (nrow(dat2) == nrow(dat)) {
     # Check the length of unique observations (based on time and id) in the
     # data set
@@ -36,7 +35,8 @@ overview_tab_df <- function(dat2 = NULL,
         dplyr::group_by(!!id) %>%
         # Apply function generated above
         dplyr::mutate(time_frame = paste(find_int_runs(!!time),
-                                         collapse = ", ")) %>%
+          collapse = ", "
+        )) %>%
         # Subset it to only one distinct country
         dplyr::distinct(!!id, time_frame)
 
@@ -65,7 +65,8 @@ overview_tab_df <- function(dat2 = NULL,
         dplyr::group_by(!!id) %>%
         # Apply function generated above
         dplyr::mutate(time_frame = paste(find_int_runs(!!time),
-                                         collapse = ", ")) %>%
+          collapse = ", "
+        )) %>%
         # Subset it to only one distinct country
         dplyr::distinct(!!id, time_frame)
 

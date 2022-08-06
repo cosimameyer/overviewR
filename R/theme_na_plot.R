@@ -28,8 +28,10 @@ theme_na_plot <- function() {
       color = "black",
       size = 8
     ),
-    text = ggplot2::element_text(size = 10,
-                                 face = "plain")
+    text = ggplot2::element_text(
+      size = 10,
+      face = "plain"
+    )
   )
 
   return(plot_theme)

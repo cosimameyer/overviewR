@@ -55,8 +55,10 @@ overview_crossplot <-
       axis.ticks.y = ggplot2::element_blank(),
       axis.ticks.x = ggplot2::element_blank(),
       panel.border = ggplot2::element_blank(),
-      panel.grid.major.x = ggplot2::element_line(color = "grey90",
-                                                 linetype = "dashed"),
+      panel.grid.major.x = ggplot2::element_line(
+        color = "grey90",
+        linetype = "dashed"
+      ),
       # Change plot and panel background
       plot.background = ggplot2::element_rect(fill = "white"),
       panel.background = ggplot2::element_rect(fill = "white"),
@@ -73,8 +75,10 @@ overview_crossplot <-
         color = "black",
         size = 8
       ),
-      text = ggplot2::element_text(size = 10,
-                                   face = "plain")
+      text = ggplot2::element_text(
+        size = 10,
+        face = "plain"
+      )
     )
 
     id <- dplyr::enquo(id)
@@ -93,8 +97,10 @@ overview_crossplot <-
       red <- dat %>%
         dplyr::ungroup() %>%
         dplyr::group_by(!!id, !!time) %>%
-        dplyr::summarise(cond1_mean = mean(!!cond1),
-                         cond2_mean = mean(!!cond2)) %>%
+        dplyr::summarise(
+          cond1_mean = mean(!!cond1),
+          cond2_mean = mean(!!cond2)
+        ) %>%
         dplyr::ungroup()
 
       cond1_mean <- red$cond1_mean
@@ -117,13 +123,17 @@ overview_crossplot <-
           quart4 = ifelse(c1 == 0 & c2 == 0, 1, 0)
         ) %>%
         dplyr::ungroup() %>%
-        dplyr::mutate(grp = ifelse(quart1 == 1, 1,
-                                   ifelse(
-                                     quart2 == 1, 2,
-                                     ifelse(quart3 == 1, 3,
-                                            ifelse(quart4 == 1, 4, 0))
-                                   )),
-                      text = paste0(!!id, !!time))
+        dplyr::mutate(
+          grp = ifelse(quart1 == 1, 1,
+            ifelse(
+              quart2 == 1, 2,
+              ifelse(quart3 == 1, 3,
+                ifelse(quart4 == 1, 4, 0)
+              )
+            )
+          ),
+          text = paste0(!!id, !!time)
+        )
 
 
       if (color == TRUE & label == TRUE) {
@@ -174,8 +184,7 @@ overview_crossplot <-
           ggplot2::theme(legend.position = "none")
 
         return(plot)
-      }
-      else {
+      } else {
         plot <- dat_red %>%
           ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
           ggplot2::geom_point(alpha = 0.5) +
@@ -188,7 +197,6 @@ overview_crossplot <-
 
         return(plot)
       }
-
     }
 
     # If this is not the case, we need to aggregate the data
@@ -196,8 +204,10 @@ overview_crossplot <-
       red <- dat %>%
         dplyr::ungroup() %>%
         dplyr::group_by(!!id, !!time) %>%
-        dplyr::summarise(cond1_mean = mean(!!cond1),
-                         cond2_mean = mean(!!cond2)) %>%
+        dplyr::summarise(
+          cond1_mean = mean(!!cond1),
+          cond2_mean = mean(!!cond2)
+        ) %>%
         dplyr::ungroup()
 
       cond1_mean <- red$cond1_mean
@@ -220,13 +230,17 @@ overview_crossplot <-
           quart4 = ifelse(c1 == 0 & c2 == 0, 1, 0)
         ) %>%
         dplyr::ungroup() %>%
-        dplyr::mutate(grp = ifelse(quart1 == 1, 1,
-                                   ifelse(
-                                     quart2 == 1, 2,
-                                     ifelse(quart3 == 1, 3,
-                                            ifelse(quart4 == 1, 4, 0))
-                                   )),
-                      text = paste0(!!id, !!time))
+        dplyr::mutate(
+          grp = ifelse(quart1 == 1, 1,
+            ifelse(
+              quart2 == 1, 2,
+              ifelse(quart3 == 1, 3,
+                ifelse(quart4 == 1, 4, 0)
+              )
+            )
+          ),
+          text = paste0(!!id, !!time)
+        )
 
       if (color == TRUE & label == TRUE) {
         plot <- dat_red %>%
@@ -276,8 +290,7 @@ overview_crossplot <-
           ggplot2::theme(legend.position = "none")
 
         return(plot)
-      }
-      else {
+      } else {
         plot <- dat_red %>%
           ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
           ggplot2::geom_point(alpha = 0.5) +

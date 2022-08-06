@@ -36,7 +36,9 @@ data(toydata)
 output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 
 # With version 3:
-overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year,
-             month = toydata$month, day = toydata$day), complex_date = TRUE)
+overview_tab(dat = toydata, id = ccode, time = list(
+  year = toydata$year,
+  month = toydata$month, day = toydata$day
+), complex_date = TRUE)
 
 }

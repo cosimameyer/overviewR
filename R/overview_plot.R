@@ -36,8 +36,10 @@ overview_plot <-
       axis.ticks.y = ggplot2::element_blank(),
       axis.ticks.x = ggplot2::element_blank(),
       panel.border = ggplot2::element_blank(),
-      panel.grid.major.x = ggplot2::element_line(color = "grey90",
-                                                 linetype = "dashed"),
+      panel.grid.major.x = ggplot2::element_line(
+        color = "grey90",
+        linetype = "dashed"
+      ),
       # Change plot and panel background
       plot.background = ggplot2::element_rect(fill = "white"),
       panel.background = ggplot2::element_rect(fill = "white"),
@@ -54,8 +56,10 @@ overview_plot <-
         color = "black",
         size = 8
       ),
-      text = ggplot2::element_text(size = 10,
-                                   face = "plain")
+      text = ggplot2::element_text(
+        size = 10,
+        face = "plain"
+      )
     )
 
     # First: Evaluate whether we have a color argument given or not
@@ -85,8 +89,8 @@ overview_plot <-
       dat_red <-
         dat_red %>% dplyr::mutate(
           grp = ifelse(dplyr::lead(!!id) !=
-                         !!id &
-                         dplyr::lead(idx) == 1, idx + 1, grp),
+            !!id &
+            dplyr::lead(idx) == 1, idx + 1, grp),
           grp = ifelse(
             is.na(grp) &
               dplyr::lag(!!id) == !!id & idx == 1,
@@ -117,22 +121,20 @@ overview_plot <-
           theme_plot
 
         return(plot)
-      }
-      else {
+      } else {
         plot <- dat_red %>%
           dplyr::group_by(!!id) %>%
           ggplot2::ggplot(ggplot2::aes(x = factor(!!time), y = !!id)) +
           ggplot2::geom_line(size = 1.5, ggplot2::aes(group = grp)) +
           ggplot2::geom_point(pch = 15, size = 2) +
-          #ggplot2::scale_color_manual() +
+          # ggplot2::scale_color_manual() +
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot
 
         return(plot)
       }
-    }
-    else {
+    } else {
       # Start with the data
       dat <- dat
       id <- dplyr::enquo(id)
@@ -159,8 +161,8 @@ overview_plot <-
       dat_red <-
         dat_red %>% dplyr::mutate(
           grp = ifelse(dplyr::lead(!!id) !=
-                         !!id &
-                         dplyr::lead(idx) == 1, idx + 1, grp),
+            !!id &
+            dplyr::lead(idx) == 1, idx + 1, grp),
           grp = ifelse(
             is.na(grp) &
               dplyr::lag(!!id) == !!id & idx == 1,
@@ -194,8 +196,7 @@ overview_plot <-
           theme_plot
 
         return(plot)
-      }
-      else {
+      } else {
         plot <- dat_red %>%
           dplyr::group_by(!!id) %>%
           ggplot2::ggplot(ggplot2::aes(

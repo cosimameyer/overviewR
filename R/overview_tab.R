@@ -17,8 +17,10 @@
 #' output_table <- overview_tab(dat = toydata, id = ccode, time = year)
 #'
 #' # With version 3:
-#' overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year,
-#'              month = toydata$month, day = toydata$day), complex_date = TRUE)
+#' overview_tab(dat = toydata, id = ccode, time = list(
+#'   year = toydata$year,
+#'   month = toydata$month, day = toydata$day
+#' ), complex_date = TRUE)
 #'
 #' @export
 #' @importFrom dplyr "%>%"
@@ -36,7 +38,7 @@ overview_tab <- function(dat,
     # Identify non-empty objects
     time <- time[lapply(time, length) > 0]
 
-    if(is.null(time$day)) {
+    if (is.null(time$day)) {
       stop(
         "The current version requires a day if you are providing multiple time arguments. Please also add a `day` in `time = list(year = ..., month = ..., day = ...)`."
       )
@@ -53,11 +55,10 @@ overview_tab <- function(dat,
 
       # Convert a possible non-numeric month to a numeric month
       if (!is.null(time$year) &
-          !is.null(time$month) & !is.null(time$day)) {
+        !is.null(time$month) & !is.null(time$day)) {
         dat$date_time <-
           as.Date(strftime(as.POSIXlt(date, format = "%Y-%b-%d")))
       }
-
     }
   }
 
@@ -86,7 +87,6 @@ overview_tab <- function(dat,
       time = time,
       col_names = col_names
     )
-
   } else {
     # Start with the data
     if (!complex_date) {

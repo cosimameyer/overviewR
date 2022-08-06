@@ -18,5 +18,4 @@
   data.table::setnames(x = dat, old = "get", new = id)
 
   return(dat)
-
 }

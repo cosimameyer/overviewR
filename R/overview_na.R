@@ -64,7 +64,6 @@ overview_na <- function(dat,
 
       return(plot_absolute)
     }
-
   }
 
   if (row_wise == TRUE) {
@@ -73,7 +72,7 @@ overview_na <- function(dat,
 
     # Absolute numbers --------------------------------------------------------
     if (add == FALSE && perc == FALSE) {
-      plot_absolute <-  overview_plot_absolute(
+      plot_absolute <- overview_plot_absolute(
         dat_result = dat_result,
         theme_plot = theme_plot,
         yaxis = yaxis,
@@ -85,7 +84,7 @@ overview_na <- function(dat,
 
     # Percentage --------------------------------------------------------------
     if (add == FALSE && perc == TRUE) {
-      plot_perc <-  overview_plot_percentage(
+      plot_perc <- overview_plot_percentage(
         dat_result = dat_result,
         theme_plot = theme_plot,
         yaxis = yaxis,
