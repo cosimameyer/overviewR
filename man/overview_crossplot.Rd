@@ -15,7 +15,9 @@ overview_crossplot(
   xaxis = "Condition 1",
   yaxis = "Condition 2",
   label = FALSE,
-  color = FALSE
+  color = FALSE,
+  dot_size = 2,
+  text_size = 2.5
 )
 }
 \arguments{
@@ -42,6 +44,10 @@ variable contains NAs, they will not be included in the plot.}
 avoided by using 'ggrepel'}
 
 \item{color}{Color of the different observation groups}
+
+\item{dot_size}{Option argument that defines the dot size (default is 2)}
+
+\item{text_size}{If label is TRUE, the text_size arguments allows to define the text of the labels (the default is 2.5)}
 }
 \value{
 A ggplot figure that presents the sample information visually
