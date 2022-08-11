@@ -17,7 +17,7 @@ overview_crossplot(
   label = FALSE,
   color = FALSE,
   dot_size = 2,
-  text_size = 2.5
+  fontsize = 2.5
 )
 }
 \arguments{
@@ -47,7 +47,7 @@ avoided by using 'ggrepel'}
 
 \item{dot_size}{Option argument that defines the dot size (default is 2)}
 
-\item{text_size}{If label is TRUE, the text_size arguments allows to define the text of the labels (the default is 2.5)}
+\item{fontsize}{If label is TRUE, the fontsize arguments allows to define the text of the labels (the default is 2.5)}
 }
 \value{
 A ggplot figure that presents the sample information visually
