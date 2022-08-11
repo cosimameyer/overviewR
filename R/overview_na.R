@@ -34,6 +34,10 @@ overview_na <- function(dat,
 
   # Perform calculations ----------------------------------------------------
 
+  if(row_wise) {
+    yaxis <- "Observations"
+  }
+
   # Start with the data
   dat <- dat
 

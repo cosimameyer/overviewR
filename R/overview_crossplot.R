@@ -15,6 +15,8 @@
 #' @param label Label of the observations. Overlapping labels are
 #'     avoided by using 'ggrepel'
 #' @param color Color of the different observation groups
+#' @param dot_size Option argument that defines the dot size (default is 2)
+#' @param fontsize If label is TRUE, the fontsize arguments allows to define the text of the labels (the default is 2.5)
 #' @return A ggplot figure that presents the sample information visually
 #'     in a cross table
 #' @examples
@@ -47,7 +49,9 @@ overview_crossplot <-
            xaxis = "Condition 1",
            yaxis = "Condition 2",
            label = FALSE,
-           color = FALSE) {
+           color = FALSE,
+           dot_size = 2,
+           fontsize = 2.5) {
     # Create a theme for the plot
     theme_plot <- ggplot2::theme(
       # get rid of panel grids
@@ -143,10 +147,10 @@ overview_crossplot <-
             y = !!cond2_mean,
             label = text
           )) +
-          ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
+          ggplot2::geom_point(alpha = 0.5, size = dot_size, ggplot2::aes(color = factor(grp))) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
-          ggrepel::geom_text_repel(size = 2.5) +
+          ggrepel::geom_text_repel(size = fontsize) +
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
@@ -157,7 +161,7 @@ overview_crossplot <-
       if (color == TRUE) {
         plot <- dat_red %>%
           ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
-          ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
+          ggplot2::geom_point(alpha = 0.5, size = dot_size, ggplot2::aes(color = factor(grp))) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
           ggplot2::ylab(yaxis) +
@@ -174,10 +178,10 @@ overview_crossplot <-
             y = !!cond2_mean,
             label = text
           )) +
-          ggplot2::geom_point(alpha = 0.5) +
+          ggplot2::geom_point(alpha = 0.5, size = dot_size) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
-          ggrepel::geom_text_repel(size = 2.5) +
+          ggrepel::geom_text_repel(size = fontsize) +
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
@@ -187,7 +191,7 @@ overview_crossplot <-
       } else {
         plot <- dat_red %>%
           ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
-          ggplot2::geom_point(alpha = 0.5) +
+          ggplot2::geom_point(alpha = 0.5, size = dot_size) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
           ggplot2::ylab(yaxis) +
@@ -249,10 +253,10 @@ overview_crossplot <-
             y = !!cond2_mean,
             label = text
           )) +
-          ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
+          ggplot2::geom_point(alpha = 0.5, size = dot_size, ggplot2::aes(color = factor(grp))) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
-          ggrepel::geom_text_repel(size = 2.5) +
+          ggrepel::geom_text_repel(size = fontsize) +
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
@@ -263,7 +267,7 @@ overview_crossplot <-
       if (color == TRUE) {
         plot <- dat_red %>%
           ggplot2::ggplot(ggplot2::aes(x = !!cond1_mean, y = !!cond2_mean)) +
-          ggplot2::geom_point(alpha = 0.5, ggplot2::aes(color = factor(grp))) +
+          ggplot2::geom_point(alpha = 0.5, size = dot_size, ggplot2::aes(color = factor(grp))) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
           ggplot2::ylab(yaxis) +
@@ -280,10 +284,10 @@ overview_crossplot <-
             y = !!cond2_mean,
             label = text
           )) +
-          ggplot2::geom_point(alpha = 0.5) +
+          ggplot2::geom_point(alpha = 0.5, size = dot_size) +
           ggplot2::geom_vline(xintercept = threshold1) +
           ggplot2::geom_hline(yintercept = threshold2) +
-          ggrepel::geom_text_repel(size = 2.5) +
+          ggrepel::geom_text_repel(size = fontsize) +
           ggplot2::ylab(yaxis) +
           ggplot2::xlab(xaxis) +
           theme_plot +
