@@ -305,7 +305,7 @@ overview_print(
 <img src='ex3.png' height="200"/>
 </p>
 
-`overview_print` further allows more specifications such as the font size or a a label. *These functions are currently supported only in the development version of the package.*
+`overview_print` further allows more specifications such as the font size or a a label. 
 ```{r, eval = FALSE}
 overview_print(obj = output_table,
                fontsize = "scriptsize",
@@ -368,7 +368,7 @@ overview_plot(
 
 The development version also allows to change the dot size using the `dot_size` argument. The default is "2".
   
-```{r, eval = FALSE}
+```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
 # Plot using the `color` argument
 overview_plot(
   dat = toydata,
@@ -378,6 +378,17 @@ overview_plot(
 )
 ```
 
+If you want to change the color in your plot, follow `ggplot2`'s layering logic and add a new layer to it. 
+
+```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
+library(ggplot2)
+
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year
+) + ggplot2::scale_color_brewer(palette="Dark2")
+```
 
 ## `overview_crossplot`
 
