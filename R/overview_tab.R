@@ -9,7 +9,7 @@
 #' @param time Time (e.g., time periods given by years, months, ...). There are three options to add a date variable: 1) Time can be a character vector containing **one** time variable, 2) a time variable following the YYYY-MM-DD format, or 3) or a list containing multiple time variables (`time = list(year = NULL, month = NULL, day = NULL)`).
 #' @param complex_date Boolean argument identifying if there is a more complex (list-wise) date_time parameter (FALSE is the default)
 #' @return A data frame object that contains a summary of a sample that
-#'     can later be converted to a 'LaTeX' output using \code{overview_print}
+#'     can later be converted to a 'LaTeX' output using \code{overview_latex}
 #' @examples
 #' # With version 1 (and also 2):
 #'
