@@ -353,7 +353,7 @@ library(overviewR) # Easily Extracting Information About Your Data
 library(magrittr) # A Forward-Pipe Operator for R
 
 # Code whether a year was before 1995
-toydata %<>%
+toydata <- toydata %>%
   dplyr::mutate(before = ifelse(year < 1995, 1, 0))
 
 # Plot using the `color` argument
@@ -413,7 +413,9 @@ overview_crossplot(
 
 `overview_heat` takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. `overview_heat` intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola ("AGO") in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.
 
-```{r, include = FALSE}
+For this purpose, we first artificially reduced the `toydata`.
+
+```{r, include = TRUE}
 toydata_red <- toydata[-sample(seq_len(nrow(toydata)), 64), ]
 ```
 
@@ -430,7 +432,9 @@ overview_heat(toydata_red,
 
 `overview_na` is a simple function that provides information about the content of all variables in your data, not only the time and scope conditions. It returns a horizontal ggplot bar plot that indicates the amount of missing data (NAs) for each variable (on the y-axis). You can choose whether to display the relative amount of NAs for each variable in percentage (the default) or the total number of NAs. 
 
-```{r, include=FALSE}
+For this purpose, we first artificially reduced our `toydata`.
+
+```{r, include=TRUE}
 toydata_with_na <- toydata %>%
   dplyr::mutate(
     year = ifelse(year < 1992, NA, year),
