@@ -55,7 +55,7 @@ navbar:
         - text: overview_crosstab
           href: articles/overviewR_vignette.html#overview_crosstab
         - text: Export results
-          href: articles/overviewR_vignette.html#overview_print
+          href: articles/overviewR_vignette.html#overview_latex
     plot:
       icon: fa-chart-bar
       text: Visual overview

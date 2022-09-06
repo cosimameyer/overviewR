@@ -41,7 +41,7 @@ overviewR can be used by everyone who works with data that have time-and-scope c
 ![Comparing the functions of overviewR\label{comparison}](figures/overviewr_overview.png)
 
 
-As Figure \ref{comparison} shows, the key functions of overviewR can be divided into its type of presentation (tabular or visual). They may, however, also be categorized along their functionalities: 1) a general overview of the units of observation (`overview_tab`, `overview_plot`, `overview_heatmap`), 2) a logical cluster within the data (`overview_crosstab`, `overview_crossplot`), 3) key information about the data sets (`overview_overlap`, `overview_na`), and 4) export functions (`overview_print`).
+As Figure \ref{comparison} shows, the key functions of overviewR can be divided into its type of presentation (tabular or visual). They may, however, also be categorized along their functionalities: 1) a general overview of the units of observation (`overview_tab`, `overview_plot`, `overview_heatmap`), 2) a logical cluster within the data (`overview_crosstab`, `overview_crossplot`), 3) key information about the data sets (`overview_overlap`, `overview_na`), and 4) export functions (`overview_latex`).
 
 # Visualization of a workflow
 To visualize a typical workflow, we rely on the internal data provided by overviewR.

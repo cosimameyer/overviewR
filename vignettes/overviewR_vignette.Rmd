@@ -37,7 +37,7 @@ The goal of overviewR is to make it easy to get an overview of a data set by dis
 
 - `overview_tab` generates a tabular overview of the sample.  The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. 
 - `overview_crosstab` generates a cross table. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set.
-- `overview_print` converts the output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
+- `overview_latex` converts the output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
 - `overview_plot` is an alternative to visualize the sample (a way to present results from `overview_tab`)
 - `overview_crossplot` is an alternative to visualize a cross table (a way to present results from `overview_crosstab`)
 - `overview_heat` plots a heat map of your time line
@@ -170,18 +170,20 @@ output_crosstab
 
 Note, if a data set is used that has multiple observations on the id-time unit, the function automatically aggregates the data set using the mean of condition 1 (`cond1`) and condition 2 (`cond2`). 
 
-## `overview_print`
+## `overview_latex`
 
-To generate an easily usable LaTeX output for the generated `overview_tab` and `overview_crosstab` objects, `overviewR` offers the function `overview_print`. 
+> With overviewR v 0.0.11.999 we introduced `overview_latex` instead of `overview_print`
+
+To generate an easily usable LaTeX output for the generated `overview_tab` and `overview_crosstab` objects, `overviewR` offers the function `overview_latex`. 
 The following illustrate this using the `output_table` object from `overview_tab`.
 
 ```{r, eval=FALSE}
-overview_print(obj = output_table)
+overview_latex(obj = output_table)
 ```
 <details>
   <summary>LaTeX output</summary>
 ```{r, eval=FALSE, include=FALSE}
-overview_print(obj = output_table)
+overview_latex(obj = output_table)
 ```
 ```
 % Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
@@ -211,7 +213,7 @@ Sample & Time frame \\
 The default already provides a title ("Time and scope of the sample") that can be modified in the argument `title`. The same holds for the column names ("Sample" and "Time frame" are set by default but can be modified as shown below). 
 
 ```{r, eval = FALSE, eval=FALSE}
-overview_print(
+overview_latex(
   obj = output_table,
   id = "Countries",
   time = "Years",
@@ -221,7 +223,7 @@ overview_print(
 <details>
   <summary>LaTeX output</summary>
 ```{r, eval=FALSE, include=FALSE}
-overview_print(
+overview_latex(
   obj = output_table,
   id = "Countries",
   time = "Years",
@@ -259,7 +261,7 @@ Countries & Years \\
 The same function can also be used for outputs from the `overview_crosstab` function by using the argument `crosstab = TRUE`. There are also options to label the respective conditions (```cond1``` and ```cond2```). Note that this should correspond to the conditions (```cond1``` and ```cond2```) specified in the `overview_crosstab` function.
 
 ```{r, eval = FALSE}
-overview_print(
+overview_latex(
   obj = output_crosstab,
   title = "Cross table of the sample",
   crosstab = TRUE,
@@ -270,7 +272,7 @@ overview_print(
 <details>
   <summary>LaTeX output</summary>
 ```{r, eval=FALSE, include=FALSE}
-overview_print(
+overview_latex(
   obj = output_crosstab,
   title = "Cross table of the sample",
   crosstab = TRUE,
@@ -305,9 +307,9 @@ overview_print(
 <img src='ex3.png' height="200"/>
 </p>
 
-`overview_print` further allows more specifications such as the font size or a a label. 
+`overview_latex` further allows more specifications such as the font size or a a label. 
 ```{r, eval = FALSE}
-overview_print(obj = output_table,
+overview_latex(obj = output_table,
                fontsize = "scriptsize",
                label = "tab:overview")
 ```
@@ -315,7 +317,7 @@ overview_print(obj = output_table,
 With ```save_out = TRUE``` the function exports the output as a ```.tex``` file and stores it on the device.
 
 ```{r, eval = FALSE}
-overview_print(
+overview_latex(
   obj = output_table,
   save_out = TRUE,
   path = "SET-YOUR-PATH",
@@ -531,7 +533,7 @@ Using different `overviewR` functions after each other to generate a workflow
 # Produces a printable LaTeX output
 toydata %>%
   overview_tab(id = ccode, time = year) %>%
-  overview_print()
+  overview_latex()
 ```
 
 ```
@@ -646,7 +648,7 @@ head(dat_full)
 #> 5 RWA   1990 - 1995                  1993 - 1995
 ```
 
-`overview_print` cannot handle this object (yet), so we use `xtable` instead which gives us the LaTeX output.
+`overview_latex` cannot handle this object (yet), so we use `xtable` instead which gives us the LaTeX output.
 
 ```{r, eval=FALSE}
 print(xtable(dat_full), include.rownames = FALSE)

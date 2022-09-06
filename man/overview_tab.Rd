@@ -22,7 +22,7 @@ overview_tab(
 }
 \value{
 A data frame object that contains a summary of a sample that
-    can later be converted to a 'LaTeX' output using \code{overview_print}
+    can later be converted to a 'LaTeX' output using \code{overview_latex}
 }
 \description{
 Provides an overview table for the time and scope conditions of
