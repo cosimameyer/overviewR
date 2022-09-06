@@ -13,17 +13,15 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](https://github.com/cosimameyer/overviewR)
 [![R
 badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)
-<!--[![downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://www.r-pkg.org/badges/version/overviewR)-->
-[![total_downloads](https://cranlogs.r-pkg.org/badges/grand-total/overviewR)](https://cranlogs.r-pkg.org/badges/grand-total/overviewR)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/overviewR)](https://cran.r-project.org/package=overviewR)
-[![DOI](https://zenodo.org/badge/269955026.svg)](https://zenodo.org/badge/latestdoi/269955026)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/overviewR)](https://cran.r-project.org/package=overviewR)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![metacran
+downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://cran.r-project.org/package=overviewR)
 <!-- [![Rdoc](https://www.rdocumentation.org/badges/version/overviewR)](https://www.rdocumentation.org/packages/overviewR) -->
-<!-- [![metacran downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://cran.r-project.org/package=overviewR) -->
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2021--06--04-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2022--09--06-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -49,7 +47,8 @@ the following functions:
 -   `overview_crossplot` is an alternative to visualize a cross table (a
     way to present results from `overview_crosstab`)
 -   `overview_heat` plots a heat map of your time line
--   `overview_na` plots an overview of missing values by variable
+-   `overview_na` plots an overview of missing values by variable (both
+    by row and by column)
 -   `overview_overlap` plots comparison plots (bar graph and Venn
     diagram) to compare to data frames
 
@@ -93,13 +92,13 @@ cross-sectional format on 5 countries, covering the period 1990-1999.
 ``` r
 data(toydata)
 head(toydata)
-#>   ccode year month      gdp population
-#> 1   RWA 1990   Jan 24180.77  14969.988
-#> 2   RWA 1990   Feb 23650.53  11791.464
-#> 3   RWA 1990   Mar 21860.14  30047.979
-#> 4   RWA 1990   Apr 20801.06  19853.556
-#> 5   RWA 1990   May 18702.84   5148.118
-#> 6   RWA 1990   Jun 30272.37  48625.140
+#>   ccode year month      gdp population day
+#> 1   RWA 1990   Jan 24180.77  14969.988   1
+#> 2   RWA 1990   Jan 23650.53  11791.464   2
+#> 3   RWA 1990   Jan 21860.14  30047.979   3
+#> 4   RWA 1990   Jan 20801.06  19853.556   4
+#> 5   RWA 1990   Jan 18702.84   5148.118   5
+#> 6   RWA 1990   Jan 30272.37  48625.140   6
 ```
 
 <!-- ``` -->
@@ -151,6 +150,34 @@ output_table
     # GBR       1991, 1993, 1995, 1997, 1999
     # FRA       1993, 1996, 1999
 
+### Multiple time arguments
+
+As of overviewR version 0.0.7 you can also use multiple time objects in
+`overview_tab`. You can now pass a list containing multiple time
+variables with the following format:
+`time = list(year = NULL, month = NULL, day = NULL)`.
+
+``` r
+output_table_complex <- overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year,
+             month = toydata$month, day = toydata$day), complex_date = TRUE)
+```
+
+The resulting data frame collapses again the time condition for each id
+by taking into account potential gaps in the time frame. Note that the
+column name for the time frame is set by default to `time_frame` and
+internally generated when using `overview_tab`. The output resembles
+something like this:
+
+``` r
+output_table_complex
+```
+
+     ccode time_frame                                                                                                      # AGO   1990-01-01, 1990-02-02, 1990-03-03, 1990-04-04, 1990-05-05, 1990-06-06, ...
+    # BEN   1995-01-01, 1995-02-02, 1995-03-03, 1995-04-04, 1995-05-05, 1995-06-06, ...
+    # FRA   1993-01-01, 1993-02-02, 1993-03-03, 1993-04-04, 1993-05-05, 1993-06-06, ...
+    # GBR   1991-01-01, 1991-02-02, 1991-03-03, 1991-04-04, 1991-05-05, 1991-06-06, ...
+    # RWA   1990-01-01 - 1990-01-12, 1991-01-01 - 1991-01-12, 1992-01-01 - 1992-01-12, 1993-01-01 - 1993-01-12, 1994-01-01 
+
 ### `overview_crosstab`
 
 To generate a cross table that divides the data based on two conditions,
@@ -160,14 +187,14 @@ conditions (`cond1` and `cond2`), respectively.
 
 ``` r
 output_crosstab <- overview_crosstab(
-    dat = toydata,
-    cond1 = gdp,
-    cond2 = population,
-    threshold1 = 25000,
-    threshold2 = 27000,
-    id = ccode,
-    time = year
-  )
+  dat = toydata,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000,
+  id = ccode,
+  time = year
+)
 ```
 
 The data frame output looks as follows:
@@ -225,8 +252,12 @@ column names (“Sample” and “Time frame” are set by default but can be
 modified as shown below).
 
 ``` r
-overview_print(obj = output_table, id = "Countries", time = "Years",
-               title = "Cool new title for our awesome table")
+overview_print(
+  obj = output_table,
+  id = "Countries",
+  time = "Years",
+  title = "Cool new title for our awesome table"
+)
 ```
 
 <details>
@@ -317,8 +348,12 @@ With `save_out = TRUE` the function exports the output as a `.tex` file
 and stores it on the device.
 
 ``` r
-overview_print(obj = output_table, save_out = TRUE, path = "SET-YOUR-PATH",
-               file = "output.tex")
+overview_print(
+  obj = output_table,
+  save_out = TRUE,
+  path = "SET-YOUR-PATH",
+  file = "output.tex"
+)
 ```
 
 ### `overview_plot`
@@ -336,57 +371,56 @@ data(toydata)
 overview_plot(dat = toydata, id = ccode, time = year)
 ```
 
-<img src="man/figures/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
 
 The results are sorted alphabetically by default. The order can also be
 reversed by setting `asc` to `FALSE`.
 
 ``` r
-overview_plot(dat = toydata, id = ccode, time = year, asc = FALSE)
+library(magrittr) # A Forward-Pipe Operator for R
+
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  asc = FALSE
+)
 ```
 
-<img src="man/figures/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
 
 There is also an option to color the time lines conditionally. Here, we
 introduce a dummy variable that indicates whether the year was before
 1995 or not. We use this dummy to color the time lines using the `color`
-argument. *Note, this argument is currently only implemented in the
-development version that can be accessed from GitHub.*
+argument.
 
 ``` r
-# Load the GitHub version
-library(devtools) # Tools to Make Developing R Packages Easier
-devtools::install_github("cosimameyer/overviewR")
-#> 
-#>      checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/Rtmpn9zPqU/remotesbc8c1543222f/cosimameyer-overviewR-c07706e/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/23/l11m8s8s42x85pmh6100kf180000gn/T/Rtmpn9zPqU/remotesbc8c1543222f/cosimameyer-overviewR-c07706e/DESCRIPTION’
-#>   ─  preparing ‘overviewR’:
-#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
-#>   ─  checking for LF line-endings in source and make files and shell scripts
-#>   ─  checking for empty or unneeded directories
-#>   ─  building ‘overviewR_0.0.7.999.1.tar.gz’
-#>      
-#> 
-library(overviewR) # Easily Extracting Information About Your Data
-library(magrittr) # A Forward-Pipe Operator for R
-
 # Code whether a year was before 1995
-toydata %<>%
+toydata <- toydata %>%
   dplyr::mutate(before = ifelse(year < 1995, 1, 0))
 
 # Plot using the `color` argument
-overview_plot(dat = toydata, id = ccode, time = year, color = before)
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  color = before
+)
 ```
 
-<img src="man/figures/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
 
 The development version also allows to change the dot size using the
-`dot_size` argument. The default is “2”. *Note, this argument is
-currently only implemented in the development version that can be
-accessed from GitHub.*
+`dot_size` argument. The default is “2”.
 
 ``` r
 # Plot using the `color` argument
-overview_plot(dat = toydata, id = ccode, time = year, dot_size = 5)
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  dot_size = 5
+)
 ```
 
 <p align="center">
@@ -396,15 +430,8 @@ overview_plot(dat = toydata, id = ccode, time = year, dot_size = 5)
 ### `overview_crossplot`
 
 To visualize also the cross table, `overview_crossplot` does the job.
-*Note, this function is currently only implemented in the development
-version that can be accessed from GitHub.*
 
 ``` r
-# Load the GitHub version
-library(devtools) # Tools to Make Developing R Packages Easier
-devtools::install_github("cosimameyer/overviewR")
-library(overviewR) # Easily Extracting Information About Your Data
-
 overview_crossplot(
   toydata,
   id = ccode,
@@ -418,7 +445,7 @@ overview_crossplot(
 )
 ```
 
-<img src="man/figures/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_heat`
 
@@ -435,15 +462,21 @@ absolute coverage of each cell. For instance, Angola (“AGO”) in 1991
 shows the coverage of 75%. This means that of all potential 12 months of
 coverage (12 months for one year), only 9 are covered.
 
+For this purpose, we first artificially reduced the `toydata`.
+
 ``` r
-overview_heat(toydata_red,
-                ccode,
-                year,
-                perc = TRUE,
-                exp_total = 12)
+toydata_red <- toydata[-sample(seq_len(nrow(toydata)), 64),]
 ```
 
-<img src="man/figures/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
+``` r
+overview_heat(toydata_red,
+              ccode,
+              year,
+              perc = TRUE,
+              exp_total = 12)
+```
+
+<img src="man/figures/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_na`
 
@@ -454,24 +487,33 @@ amount of missing data (NAs) for each variable (on the y-axis). You can
 choose whether to display the relative amount of NAs for each variable
 in percentage (the default) or the total number of NAs.
 
+For this purpose, we first artificially reduced our `toydata`.
+
+``` r
+toydata_with_na <- toydata %>%
+  dplyr::mutate(
+    year = ifelse(year < 1992, NA, year),
+    month = ifelse(month %in% c("Jan", "Jun", "Aug"), NA, month),
+    gdp = ifelse(gdp < 20000, NA, gdp)
+  )
+```
+
 ``` r
 overview_na(toydata_with_na)
 ```
 
-<img src="man/figures/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 overview_na(toydata_with_na, perc = FALSE)
 ```
 
-<img src="man/figures/unnamed-chunk-29-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `overview_overlap`
 
 This function allows to compare two data sets. We are currently working
-on an extended version that allows comparing &gt;2 data sets. *Note,
-this function is currently only implemented in the development version
-that can be accessed from GitHub.*
+on an extended version that allows comparing \>2 data sets.
 
 At the current development stage, the function works as follows:
 
@@ -488,11 +530,15 @@ overview_overlap(
   dat2_id = ccode,
   plot_type = "bar" # This is the default
 )
+#> Joining, by = "ccode"
+#> Warning: Removed 1 rows containing missing values (geom_bar).
 ```
 
-<p align="center">
+<img src="man/figures/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" />
+
+<!--<p align="center">
 <img src='man/figures/bar.png' height="400"/>
-</p>
+</p>-->
 
 Or a Venn diagram
 
@@ -506,9 +552,12 @@ overview_overlap(
 )
 ```
 
-<p align="center">
+<img src="man/figures/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" />
+
+<!--<p align="center">
 <img src='man/figures/venn.png' height="400"/>
 </p>
+-->
 
 ## Compatibilities with other packages
 
@@ -530,11 +579,9 @@ table_output <-
   set_header_labels(table_output,
                     ccode = "Countries",
                     time_frame = "Time frame")
-set_table_properties(
-  table_output,
-  width = .4,
-  layout = "autofit"
-)
+set_table_properties(table_output,
+                     width = .4,
+                     layout = "autofit")
 ```
 
 ``` r
@@ -542,7 +589,7 @@ library(knitr) # A General-Purpose Package for Dynamic Report Generation in R
 knitr::kable(output_table)
 ```
 
-| ccode | time\_frame                  |
+| ccode | time_frame                   |
 |:------|:-----------------------------|
 | RWA   | 1990-1995                    |
 | AGO   | 1990-1992                    |
@@ -564,7 +611,7 @@ overview_na(toydata_with_na) +
   ggplot2::theme_minimal() 
 ```
 
-<img src="man/figures/unnamed-chunk-35-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-37-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### Workflow: `tidyverse`
 
@@ -576,12 +623,12 @@ Using a filter function
 ``` r
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
 
-toydata_with_na %>% 
-  dplyr::filter(year > 1993) %>% 
+toydata_with_na %>%
+  dplyr::filter(year > 1993) %>%
   overview_na()
 ```
 
-<img src="man/figures/unnamed-chunk-36-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-38-1.png" width="50%" style="display: block; margin: auto;" />
 
 Using mutate to generate meaningful country names
 
@@ -589,21 +636,21 @@ Using mutate to generate meaningful country names
 library(countrycode) # Convert Country Names and Country Codes
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
 
-toydata %>% 
+toydata %>%
   # Transform the country code (ISO3 character code) into a country name using the `countrycode` package
-  dplyr::mutate(country = countrycode::countrycode(ccode, "iso3c", "country.name")) %>% 
+  dplyr::mutate(country = countrycode::countrycode(ccode, "iso3c", "country.name")) %>%
   overview_plot(id = country, time = year)
 ```
 
-<img src="man/figures/unnamed-chunk-37-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/unnamed-chunk-39-1.png" width="50%" style="display: block; margin: auto;" />
 
 Using different `overviewR` functions after each other to generate a
 workflow
 
 ``` r
 # Produces a printable LaTeX output
-toydata %>% 
-  overview_tab(id = ccode, time = year) %>% 
+toydata %>%
+  overview_tab(id = ccode, time = year) %>%
   overview_print()
 ```
 
@@ -627,6 +674,18 @@ toydata %>%
      \end{tabular} 
      \end{table} 
 
+## Overview of functional add-ons
+
+|                      | Works with `data.frame` objects | Works with `data.table` | Can take multiple time arguments (year, month, day) |
+|----------------------|---------------------------------|-------------------------|-----------------------------------------------------|
+| `overview_tab`       | yes                             | yes                     | yes                                                 |
+| `overview_na`        | yes                             | yes                     |                                                     |
+| `overview_plot`      | yes                             |                         |                                                     |
+| `overview_crossplot` | yes                             |                         |                                                     |
+| `overview_crosstab`  | yes                             |                         |                                                     |
+| `overview_heat`      | yes                             |                         |                                                     |
+| `overview_overlap`   | yes                             |                         |                                                     |
+
 ## Extensions
 
 If you wish to compare two data sets using `overview_tab`, this is not
@@ -641,7 +700,7 @@ library(xtable)
 data(toydata)
 
 # Restrict the data so that we have something to compare :-)
-toydata_res <- toydata %>% 
+toydata_res <- toydata %>%
   dplyr::filter(year > 1992)
 
 # Generate two overview_tab objects
@@ -649,8 +708,8 @@ dat1 <- overview_tab(toydata, id = ccode, time = year)
 dat2 <- overview_tab(toydata_res, id = ccode, time = year)
 
 # And now we use full_join to combine both
-dat_full <- dat1 %>% 
-  dplyr::full_join(dat2, by = "ccode") %>% 
+dat_full <- dat1 %>%
+  dplyr::full_join(dat2, by = "ccode") %>%
   dplyr::rename(time_dat1 = time_frame.x,
                 time_dat2 = time_frame.y)
 ```
@@ -676,7 +735,7 @@ head(dat_full)
 instead which gives us the LaTeX output.
 
 ``` r
-print(xtable(dat_full), include.rownames=FALSE)
+print(xtable(dat_full), include.rownames = FALSE)
 ```
 
     % latex table generated in R 4.0.2 by xtable 1.8-4 package
@@ -700,6 +759,26 @@ print(xtable(dat_full), include.rownames=FALSE)
 <p align="center">
 <img src='man/figures/extension1.png' height="150"/>
 </p>
+
+# How to reach out?
+
+### Where do I report bugs?
+
+Simply [open an
+issue](https://github.com/cosimameyer/overviewR/issues/new) on GitHub.
+
+### How do I contribute to the package?
+
+If you have an idea (but no code yet), [open an
+issue](https://github.com/cosimameyer/overviewR/issues/new) on GitHub.
+If you want to contribute with a specific feature and have the code
+ready, fork the repository, add your code, and create a pull request.
+
+### Do you need support?
+
+The easiest way is to [open an
+issue](https://github.com/cosimameyer/overviewR/issues/new) - this way,
+your question is also visible to others who may face similar problems.
 
 # Credits
 
