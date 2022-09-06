@@ -413,7 +413,9 @@ overview_crossplot(
 
 `overview_heat` takes a closer look at the time and scope conditions by visualizing the data coverage for each time and scope combination in a ggplot heat map. This function is best explained using an example. Suppose you have a dataset with monthly data for different countries and want to know if data is available for each country in every month. `overview_heat` intuitively does this by plotting a heat map where each cell indicates the coverage for that specific combination of time and scope (e,g., country-year). As illustrated below, the darker the cell is, the more coverage it has. The plot also indicates the relative or absolute coverage of each cell. For instance, Angola ("AGO") in 1991 shows the coverage of 75%. This means that of all potential 12 months of coverage (12 months for one year), only 9 are covered.
 
-```{r, include = FALSE}
+For this purpose, we first artificially reduced the `toydata`.
+
+```{r, include = TRUE}
 toydata_red <- toydata[-sample(seq_len(nrow(toydata)), 64),]
 ```
 
