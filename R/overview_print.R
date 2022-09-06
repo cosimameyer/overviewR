@@ -52,11 +52,12 @@
 #'   cond1 = "Name of first condition",
 #'   cond2 = "Name of second condition"
 #' )
-#' @export
+#' @export overview_print overview_latex
+#' @alias overview_print
 #' @importFrom dplyr "%>%"
 
 
-overview_print <-
+overview_latex <-
   function(obj,
            title = "Time and scope of the sample",
            id = "Sample",
@@ -195,3 +196,5 @@ overview_print <-
       }
     }
   }
+
+overview_print <- overview_latex
