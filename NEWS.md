@@ -1,3 +1,9 @@
+## overviewR 0.0.11.999
+
+- Following issue #24's excellent suggestion, we renamed `overview_print` to `overview_latex` (old code with `overview_print` still works but it is recommended to use `overview_latex` instead)
+
+---
+
 ## overviewR 0.0.11
 
 - CRAN resubmission to fix bug in `overview_overlap` which did not return the correct percentages in the visualization

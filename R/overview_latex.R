@@ -1,4 +1,4 @@
-#' @title overview_print
+#' @title overview_latex
 #'
 #' @description Produces a 'LaTeX' output for output obtained via
 #'    \code{overview_tab} and \code{overview_crosstab}
@@ -30,7 +30,7 @@
 #' data(toydata)
 #'
 #' overview_object <- overview_tab(dat = toydata, id = ccode, time = year)
-#' overview_print(
+#' overview_latex(
 #'   obj = overview_object,
 #'   title = "Some nice title",
 #'   crosstab = FALSE
@@ -45,18 +45,18 @@
 #'   id = ccode,
 #'   time = year
 #' )
-#' overview_print(
+#' overview_latex(
 #'   obj = overview_ct_object,
 #'   title = "Some nice title for a cross tab",
 #'   crosstab = TRUE,
 #'   cond1 = "Name of first condition",
 #'   cond2 = "Name of second condition"
 #' )
-#' @export
+#' @export overview_latex overview_latex
 #' @importFrom dplyr "%>%"
 
 
-overview_print <-
+overview_latex <-
   function(obj,
            title = "Time and scope of the sample",
            id = "Sample",
@@ -195,3 +195,5 @@ overview_print <-
       }
     }
   }
+
+overview_latex <- overview_latex

@@ -73,27 +73,27 @@ test_that("Get a warning message from overview_tab", {
 })
 
 
-test_that("check output of overview_print", {
+test_that("check output of overview_latex", {
   output_table <- overview_tab(dat = toydata, id = ccode, time = year)
-  input_output <- overview_print(output_table, save_out = FALSE)
+  input_output <- overview_latex(output_table, save_out = FALSE)
   testthat::expect_null(print(input_output))
 })
 
-test_that("check output of overview_print with font size", {
+test_that("check output of overview_latex with font size", {
   output_table <- overview_tab(dat = toydata, id = ccode, time = year)
   input_output <-
-    overview_print(output_table, save_out = FALSE, fontsize = "small")
+    overview_latex(output_table, save_out = FALSE, fontsize = "small")
   testthat::expect_null(print(input_output))
 })
 
-test_that("check output of overview_print with save_out", {
+test_that("check output of overview_latex with save_out", {
   testthat::skip_on_cran()
   output_table <-
     overview_tab(dat = toydata, id = ccode, time = year)
   temp <- tempfile()
   on.exit(unlink(temp), add = TRUE)
   tex_output <-
-    overview_print(output_table,
+    overview_latex(output_table,
       save_out = TRUE,
       path = temp,
       file = "output.tex"
@@ -101,7 +101,7 @@ test_that("check output of overview_print with save_out", {
   testthat::expect_null(print(tex_output))
 })
 
-test_that("check output of overview_print for crosstab", {
+test_that("check output of overview_latex for crosstab", {
   output_cross <-
     overview_crosstab(
       dat = toydata,
@@ -112,14 +112,14 @@ test_that("check output of overview_print for crosstab", {
       threshold1 = 27000,
       threshold2 = 25000
     )
-  input_output <- overview_print(output_cross,
+  input_output <- overview_latex(output_cross,
     crosstab = TRUE,
     save_out = FALSE
   )
   testthat::expect_null(print(input_output))
 })
 
-test_that("check output of overview_print for crosstab with unique ids", {
+test_that("check output of overview_latex for crosstab with unique ids", {
   modified <- toydata %>%
     dplyr::ungroup() %>%
     dplyr::group_by(ccode, year) %>%
@@ -139,14 +139,14 @@ test_that("check output of overview_print for crosstab with unique ids", {
       threshold1 = 27000,
       threshold2 = 25000
     )
-  input_output <- overview_print(output_cross,
+  input_output <- overview_latex(output_cross,
     crosstab = TRUE,
     save_out = FALSE
   )
   testthat::expect_null(print(input_output))
 })
 
-test_that("check output of overview_print for crosstab with save_out", {
+test_that("check output of overview_latex for crosstab with save_out", {
   testthat::skip_on_cran()
   output_cross <-
     overview_crosstab(
@@ -161,7 +161,7 @@ test_that("check output of overview_print for crosstab with save_out", {
   temp <- tempfile()
   on.exit(unlink(temp), add = TRUE)
   tex_output <-
-    overview_print(
+    overview_latex(
       output_cross,
       crosstab = TRUE,
       save_out = TRUE,
@@ -200,7 +200,7 @@ test_that("Get an error message", {
     )
   )
   expect_error(
-    overview_print(df_combined),
+    overview_latex(df_combined),
     "Data frame requires two columns that represent the time and
         scope dimension of the data"
   )
@@ -242,7 +242,7 @@ test_that("Get a warning message", {
     countries = c("RWA", "BDI"),
     years = c(1990, 2000)
   )
-  expect_warning(overview_print(data_test))
+  expect_warning(overview_latex(data_test))
 })
 
 test_that("overview_crosstab() returns a data frame", {
