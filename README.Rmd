@@ -348,6 +348,8 @@ overview_plot(dat = toydata, id = ccode, time = year)
 The results are sorted alphabetically by default. The order can also be reversed by setting `asc` to `FALSE`.
 
 ```{r, out.width = '50%', fig.align='center'}
+library(magrittr) # A Forward-Pipe Operator for R
+
 overview_plot(
   dat = toydata,
   id = ccode,
@@ -359,12 +361,6 @@ overview_plot(
 There is also an option to color the time lines conditionally. Here, we introduce a dummy variable that indicates whether the year was before 1995 or not. We use this dummy to color the time lines using the `color` argument.
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
-# Load the GitHub version
-library(devtools) # Tools to Make Developing R Packages Easier
-devtools::install_github("cosimameyer/overviewR")
-library(overviewR) # Easily Extracting Information About Your Data
-library(magrittr) # A Forward-Pipe Operator for R
-
 # Code whether a year was before 1995
 toydata <- toydata %>%
   dplyr::mutate(before = ifelse(year < 1995, 1, 0))
