@@ -353,7 +353,7 @@ library(overviewR) # Easily Extracting Information About Your Data
 library(magrittr) # A Forward-Pipe Operator for R
 
 # Code whether a year was before 1995
-toydata %<>%
+toydata <- toydata %>%
   dplyr::mutate(before = ifelse(year < 1995, 1, 0))
 
 # Plot using the `color` argument
