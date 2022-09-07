@@ -6,22 +6,19 @@
 [![R-CMD-check](https://github.com/cosimameyer/overviewR/workflows/R-CMD-check/badge.svg)](https://github.com/cosimameyer/overviewR/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/cosimameyer/overviewR?branch=master)
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![overviewR
-badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](https://github.com/cosimameyer/overviewR)
-[![R
-badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)
+<!--
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/overviewR)](https://cran.r-project.org/package=overviewR)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![metacran
-downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://cran.r-project.org/package=overviewR)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/overviewR)](https://cran.r-project.org/package=overviewR)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![overviewR badge](https://img.shields.io/badge/overviewR-ready%20to%20use-brightgreen)](https://github.com/cosimameyer/overviewR)
+[![R badge](https://img.shields.io/badge/Build%20with-♥%20and%20R-blue)](https://github.com/cosimameyer/overviewR)-->
+
 <!-- [![Rdoc](https://www.rdocumentation.org/badges/version/overviewR)](https://www.rdocumentation.org/packages/overviewR) -->
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2022--09--06-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2022--09--07-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -39,7 +36,7 @@ the following functions:
     conditions, hence resulting a 2x2 table. This way, it is easy to
     visualize the time and scope conditions as well as theoretical
     assumptions with examples from the data set.
--   `overview_print` converts the output of both `overview_tab` and
+-   `overview_latex` converts the output of both `overview_tab` and
     `overview_crosstab` into LaTeX code and/or directly into a .tex
     file.
 -   `overview_plot` is an alternative to visualize the sample (a way to
@@ -207,15 +204,18 @@ Note, if a data set is used that has multiple observations on the
 id-time unit, the function automatically aggregates the data set using
 the mean of condition 1 (`cond1`) and condition 2 (`cond2`).
 
-### `overview_print`
+### `overview_latex`
+
+> With overviewR v 0.0.11.999 we introduced `overview_latex` instead of
+> `overview_print`
 
 To generate an easily usable LaTeX output for the generated
 `overview_tab` and `overview_crosstab` objects, `overviewR` offers the
-function `overview_print`. The following illustrate this using the
+function `overview_latex`. The following illustrate this using the
 `output_table` object from `overview_tab`.
 
 ``` r
-overview_print(obj = output_table)
+overview_latex(obj = output_table)
 ```
 
 <details>
@@ -252,7 +252,7 @@ column names (“Sample” and “Time frame” are set by default but can be
 modified as shown below).
 
 ``` r
-overview_print(
+overview_latex(
   obj = output_table,
   id = "Countries",
   time = "Years",
@@ -295,7 +295,7 @@ There are also options to label the respective conditions (`cond1` and
 and `cond2`) specified in the `overview_crosstab` function.
 
 ``` r
-overview_print(
+overview_latex(
   obj = output_crosstab,
   title = "Cross table of the sample",
   crosstab = TRUE,
@@ -334,12 +334,12 @@ LaTeX output
 <img src='man/figures/ex3.png' height="200"/>
 </p>
 
-`overview_print` further allows more specifications such as the font
+`overview_latex` further allows more specifications such as the font
 size or a a label. *These functions are currently supported only in the
 development version of the package.*
 
 ``` r
-overview_print(obj = output_table,
+overview_latex(obj = output_table,
                fontsize = "scriptsize",
                label = "tab:overview")
 ```
@@ -348,7 +348,7 @@ With `save_out = TRUE` the function exports the output as a `.tex` file
 and stores it on the device.
 
 ``` r
-overview_print(
+overview_latex(
   obj = output_table,
   save_out = TRUE,
   path = "SET-YOUR-PATH",
@@ -651,7 +651,7 @@ workflow
 # Produces a printable LaTeX output
 toydata %>%
   overview_tab(id = ccode, time = year) %>%
-  overview_print()
+  overview_latex()
 ```
 
     % Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
@@ -678,13 +678,13 @@ toydata %>%
 
 |                      | Works with `data.frame` objects | Works with `data.table` | Can take multiple time arguments (year, month, day) |
 |----------------------|---------------------------------|-------------------------|-----------------------------------------------------|
-| `overview_tab`       | yes                             | yes                     | yes                                                 |
-| `overview_na`        | yes                             | yes                     |                                                     |
-| `overview_plot`      | yes                             |                         |                                                     |
-| `overview_crossplot` | yes                             |                         |                                                     |
-| `overview_crosstab`  | yes                             |                         |                                                     |
-| `overview_heat`      | yes                             |                         |                                                     |
-| `overview_overlap`   | yes                             |                         |                                                     |
+| `overview_tab`       | ✓                               | ✓                       | ✓                                                   |
+| `overview_na`        | ✓                               | ✓                       |                                                     |
+| `overview_plot`      | ✓                               |                         |                                                     |
+| `overview_crossplot` | ✓                               |                         |                                                     |
+| `overview_crosstab`  | ✓                               |                         |                                                     |
+| `overview_heat`      | ✓                               |                         |                                                     |
+| `overview_overlap`   | ✓                               |                         |                                                     |
 
 ## Extensions
 
@@ -731,7 +731,7 @@ head(dat_full)
     #> 4 GBR   1991, 1993, 1995, 1997, 1999 1993, 1995, 1997, 1999
     #> 5 RWA   1990 - 1995                  1993 - 1995
 
-`overview_print` cannot handle this object (yet), so we use `xtable`
+`overview_latex` cannot handle this object (yet), so we use `xtable`
 instead which gives us the LaTeX output.
 
 ``` r
@@ -759,6 +759,24 @@ print(xtable(dat_full), include.rownames = FALSE)
 <p align="center">
 <img src='man/figures/extension1.png' height="150"/>
 </p>
+
+# What’s unique about overviewR?
+
+With a specific focus on time-series cross-sectional data, it is unique
+in its coverage. The details are outlined in the table below:
+
+| Key functionalities                                                               | overviewR (0.0.11) | DataExplorer (0.8.2) | dlookR (0.6.0) | gtsummary (1.6.1) | Hmisc (4.7-1) | naniar (0.6.1) | skimr (2.1.4) | smartEDA (0.3.8) | summarytools (1.0.1) |
+|-----------------------------------------------------------------------------------|--------------------|----------------------|----------------|-------------------|---------------|----------------|---------------|------------------|----------------------|
+| Shows time-series cross-sectional data coverage                                   | ✓                  |                      |                |                   |               |                |               |                  |                      |
+| Allows to quickly report time-series cross-sectional data coverage (figure/table) | ✓                  |                      |                |                   |               |                |               |                  |                      |
+| Shows NAs                                                                         | ✓                  | ✓                    | ✓              | ✓                 | ✓             | ✓              | ✓             | ✓                | ✓                    |
+| Shows NAs (in a figure)                                                           | ✓                  | ✓                    | ✓              |                   |               | ✓              |               |                  |                      |
+| Shows overlap between two data frames (based on time and id)                      | ✓                  |                      |                |                   |               |                |               |                  |                      |
+| Shows cross-table                                                                 | ✓                  |                      |                | ✓                 |               |                |               | ✓                | ✓                    |
+| Shows cross-table based on country-year units                                     | ✓                  |                      |                |                   |               |                |               |                  |                      |
+| Shows cross-tables (in a figure)                                                  | ✓                  |                      |                |                   |               |                |               |                  |                      |
+| Reports descriptive statistics                                                    |                    | ✓                    | ✓              | ✓                 | ✓             | ✓              | ✓             | ✓                | ✓                    |
+| Shows value type                                                                  |                    | ✓                    | ✓              | ✓                 |               | ✓              | ✓             | ✓                | ✓                    |
 
 # How to reach out?
 
