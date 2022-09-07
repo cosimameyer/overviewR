@@ -32,14 +32,16 @@ The main advantages of overviewR are threefold: 1) it allows users to quickly un
 
 # Statement of need
 
-overviewR has already been used in the data wrangling process as well as to generate an illustrative overview of the sample in various academic publications and research [@hammerschmidt2021moving; @hammerschmidt2021foreign; @meyer2022power; @meyer2021power]. While not limited to these applications, we see its main advantage for researchers and practitioners working with time-series cross-sectional data and its power to illustratively visualize key information of the data. When comparing with other exploratory data analysis packages available (for instance smartEDA [@putatunda2019smarteda], dlookR [@ryu2021dlookr], or summarytools [@comtois2022package]), we do not see the key functions of overviewR covered.
-    
+overviewR has already been used in the data wrangling process as well as to generate an illustrative overview of the sample in various academic publications and research [@hammerschmidt2021moving; @hammerschmidt2021foreign; @meyer2022power; @meyer2021power]. While not limited to these applications, we see its main advantage for researchers and practitioners working with time-series cross-sectional data and its power to illustratively visualize key information of the data. When comparing with other exploratory data analysis packages available (for instance DataExplorer [@dataexplorer2020], gtsummary [@gtsummary2022], dlookR [@ryu2021dlookr], Hmisc [@hmisc2022], naniar [@naniar2021], smartEDA [@putatunda2019smarteda], skimr [@skimr2022], or summarytools [@comtois2022package]), we do not see the key functions of overviewR fully covered. A detailed comparison which contrasts the core functionalities and advantages of overviewR is outlined in  Figure \ref{overview} below.
+
+![Comparison of overviewR with available R packages\label{overview}](figures/overview_packages.png)
+
+
 # Key functions
 
 overviewR can be used by everyone who works with data that have time-and-scope characteristics. To get a quick overview of which units (i.e. countries, companies, test persons, etc.) are present or missing during a given time span (i.e. years, months, days, minutes, etc.), overviewR provides an easy and intuitive insight into the set-up of your data. But overviewR goes beyond this: It also allows users to investigate logical clusters of time-unit observations by using cross tables (or cross plots for visualization). It further allows the user to investigate the overlap between two data sets as well as the distribution of missing values across the data. overviewR relies on `ggplot2` [@ggplot2022] and  `ggvenn` [@ggvenn2021]  for visualization. It comes with example data containing a simple time-series cross-sectional data set. All functions work with `data.frame` objects while `overview_tab` and `overview_na` can also handle `data.table` objects to increase the performance.
 
 ![Comparing the functions of overviewR\label{comparison}](figures/overviewr_overview.png)
-
 
 As Figure \ref{comparison} shows, the key functions of overviewR can be divided into its type of presentation (tabular or visual). They may, however, also be categorized along their functionalities: 1) a general overview of the units of observation (`overview_tab`, `overview_plot`, `overview_heatmap`), 2) a logical cluster within the data (`overview_crosstab`, `overview_crossplot`), 3) key information about the data sets (`overview_overlap`, `overview_na`), and 4) export functions (`overview_latex`).
 
