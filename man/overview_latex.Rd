@@ -13,8 +13,7 @@ overview_latex(
   cond1 = "Condition 1",
   cond2 = "Condition 2",
   save_out = FALSE,
-  path,
-  file,
+  file_path,
   label = "tab:tab1",
   fontsize
 )
@@ -44,9 +43,7 @@ for \code{cond2} in \code{overview_crosstab}}
 \item{save_out}{Optional argument, exports the output table as a .tex
 file, default is FALSE}
 
-\item{path}{Specifies the path where the output should be saved}
-
-\item{file}{Specifies name and file type (.tex)}
+\item{file_path}{Specifies the path and file name (.tex) where you store your output}
 
 \item{label}{Specifies the label (default is "tab:tab1")}
 
@@ -69,6 +66,13 @@ overview_latex(
   obj = overview_object,
   title = "Some nice title",
   crosstab = FALSE
+)
+
+#' overview_object <- overview_tab(dat = toydata, id = ccode, time = year)
+overview_latex(
+  obj = overview_object,
+  title = "Some nice title",
+  file_path = "some/path_to/your_output_file.tex"
 )
 
 overview_ct_object <- overview_crosstab(
