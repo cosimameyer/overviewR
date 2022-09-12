@@ -320,8 +320,7 @@ With ```save_out = TRUE``` the function exports the output as a ```.tex``` file 
 overview_latex(
   obj = output_table,
   save_out = TRUE,
-  path = "SET-YOUR-PATH",
-  file = "output.tex"
+  file_path = "SET-YOUR-PATH/output.tex"
 )
 ```
 
