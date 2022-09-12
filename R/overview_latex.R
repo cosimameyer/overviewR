@@ -19,8 +19,7 @@
 #'     for \code{cond2} in \code{overview_crosstab}
 #' @param save_out Optional argument, exports the output table as a .tex
 #'     file, default is FALSE
-#' @param path Specifies the path where the output should be saved
-#' @param file Specifies name and file type (.tex)
+#' @param file_path Specifies the path and file name (.tex) where you store your output
 #' @param label Specifies the label (default is "tab:tab1")
 #' @param fontsize Specifies the font size (all 'LaTeX' font sizes such as
 #'     "scriptsize" or "small" work)
@@ -34,6 +33,13 @@
 #'   obj = overview_object,
 #'   title = "Some nice title",
 #'   crosstab = FALSE
+#' )
+#'
+#'#' overview_object <- overview_tab(dat = toydata, id = ccode, time = year)
+#' overview_latex(
+#'   obj = overview_object,
+#'   title = "Some nice title",
+#'   file_path = "some/path_to/your_output_file.tex"
 #' )
 #'
 #' overview_ct_object <- overview_crosstab(
@@ -65,8 +71,7 @@ overview_latex <-
            cond1 = "Condition 1",
            cond2 = "Condition 2",
            save_out = FALSE,
-           path,
-           file,
+           file_path,
            label = "tab:tab1",
            fontsize) {
     obj <- as.matrix(obj)
@@ -123,8 +128,7 @@ overview_latex <-
           cat(begin_tab, out, end_tab)
         }
         if (save_out == TRUE) {
-          save_dir <- paste0(path, file)
-          sink(save_dir)
+          sink(file_path)
           cat(begin_tab, out, end_tab)
           sink()
         }
@@ -182,8 +186,7 @@ overview_latex <-
         }
       }
       if (save_out == TRUE) {
-        save_dir <- paste0(path, file)
-        sink(save_dir)
+        sink(file_path)
         cat(
           begin_crosstab,
           cross_out1,
@@ -196,4 +199,4 @@ overview_latex <-
     }
   }
 
-overview_latex <- overview_latex
+overview_print <- overview_latex

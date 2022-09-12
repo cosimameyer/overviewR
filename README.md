@@ -18,7 +18,7 @@ coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.
 <!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2022--09--07-green.svg)](/commits/master) -->
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2022--09--12-green.svg)](/commits/master) -->
 <!-- badges: end -->
 
 [**You can access the CheatSheet for overviewR
@@ -351,8 +351,7 @@ and stores it on the device.
 overview_latex(
   obj = output_table,
   save_out = TRUE,
-  path = "SET-YOUR-PATH",
-  file = "output.tex"
+  file_path = "SET-YOUR-PATH/output.tex"
 )
 ```
 

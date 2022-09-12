@@ -95,8 +95,7 @@ test_that("check output of overview_latex with save_out", {
   tex_output <-
     overview_latex(output_table,
       save_out = TRUE,
-      path = temp,
-      file = "output.tex"
+      file_path = paste0(temp, "output.tex")
     )
   testthat::expect_null(print(tex_output))
 })
@@ -165,8 +164,7 @@ test_that("check output of overview_latex for crosstab with save_out", {
       output_cross,
       crosstab = TRUE,
       save_out = TRUE,
-      path = temp,
-      file = "output.tex"
+      file_path = paste0(temp, "output.tex")
     )
   testthat::expect_null(print(tex_output))
 })
