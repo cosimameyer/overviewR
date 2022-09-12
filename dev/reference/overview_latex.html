@@ -136,8 +136,7 @@
 <span>  cond1 <span class="op">=</span> <span class="st">"Condition 1"</span>,</span>
 <span>  cond2 <span class="op">=</span> <span class="st">"Condition 2"</span>,</span>
 <span>  save_out <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  <span class="va">path</span>,</span>
-<span>  <span class="va">file</span>,</span>
+<span>  <span class="va">file_path</span>,</span>
 <span>  label <span class="op">=</span> <span class="st">"tab:tab1"</span>,</span>
 <span>  <span class="va">fontsize</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -185,12 +184,8 @@ for <code>cond2</code> in <code>overview_crosstab</code></p></dd>
 file, default is FALSE</p></dd>
 
 
-<dt>path</dt>
-<dd><p>Specifies the path where the output should be saved</p></dd>
-
-
-<dt>file</dt>
-<dd><p>Specifies name and file type (.tex)</p></dd>
+<dt>file_path</dt>
+<dd><p>Specifies the path and file name (.tex) where you store your output</p></dd>
 
 
 <dt>label</dt>
@@ -221,7 +216,32 @@ file, default is FALSE</p></dd>
 <span class="r-in"><span>  crosstab <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % Overview table generated in R version 4.2.1 (2022-06-23) using overviewR </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> % Table created on 2022-09-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> % Table created on 2022-09-12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> \begin{table}[ht] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  \centering </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  \caption{Some nice title} </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> \label{tab:tab1} </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> \begin{tabular}{ll} </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  \hline </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sample &amp; Time frame \\ \hline </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  AGO &amp; 1990 - 1992 \\ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  BEN &amp; 1995 - 1999 \\ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  FRA &amp; 1993, 1996, 1999 \\ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  GBR &amp; 1991, 1993, 1995, 1997, 1999 \\ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  RWA &amp; 1990 - 1995 \\ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  \hline </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  \end{tabular} </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  \end{table} </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#' overview_object &lt;- overview_tab(dat = toydata, id = ccode, time = year)</span></span></span>
+<span class="r-in"><span><span class="fu">overview_latex</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  obj <span class="op">=</span> <span class="va">overview_object</span>,</span></span>
+<span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Some nice title"</span>,</span></span>
+<span class="r-in"><span>  file_path <span class="op">=</span> <span class="st">"some/path_to/your_output_file.tex"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> % Overview table generated in R version 4.2.1 (2022-06-23) using overviewR </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> % Table created on 2022-09-12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \begin{table}[ht] </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  \centering </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  \caption{Some nice title} </span>
@@ -256,7 +276,7 @@ file, default is FALSE</p></dd>
 <span class="r-in"><span>  cond2 <span class="op">=</span> <span class="st">"Name of second condition"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % Overview table generated in R version 4.2.1 (2022-06-23) using overviewR </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> % Table created on 2022-09-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> % Table created on 2022-09-12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % Please add the following packages to your document preamble: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % \usepackage{multirow} </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % \usepackage{tabularx} </span>
