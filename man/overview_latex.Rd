@@ -15,7 +15,9 @@ overview_latex(
   save_out = FALSE,
   file_path,
   label = "tab:tab1",
-  fontsize
+  fontsize,
+  file,
+  path
 )
 }
 \arguments{
@@ -49,6 +51,10 @@ file, default is FALSE}
 
 \item{fontsize}{Specifies the font size (all 'LaTeX' font sizes such as
 "scriptsize" or "small" work)}
+
+\item{file}{This argument is deprecated. Please use "file_path" instead and add the full path.}
+
+\item{path}{This argument is deprecated. Please use "file_path" instead and add the full path.}
 }
 \value{
 A 'LaTeX' output that can either be copy-pasted in a text document or

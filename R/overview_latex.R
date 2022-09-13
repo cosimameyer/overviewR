@@ -23,6 +23,8 @@
 #' @param label Specifies the label (default is "tab:tab1")
 #' @param fontsize Specifies the font size (all 'LaTeX' font sizes such as
 #'     "scriptsize" or "small" work)
+#' @param path This argument is deprecated. Please use "file_path" instead and add the full path.
+#' @param file This argument is deprecated. Please use "file_path" instead and add the full path.
 #' @return A 'LaTeX' output that can either be copy-pasted in a text document or
 #'     exported directed as a .tex file
 #' @examples
@@ -73,7 +75,16 @@ overview_latex <-
            save_out = FALSE,
            file_path,
            label = "tab:tab1",
-           fontsize) {
+           fontsize,
+           file,
+           path) {
+
+    if (!missing("file") & !missing("path")){
+      warning("Argument deprecated, use 'file_path' instead.
+              The parameter 'file' and 'path' are combined to become 'file_path'.")
+      file_path <- paste0(path, file)
+    }
+
     obj <- as.matrix(obj)
 
     # Add a fontsize (if defined)
