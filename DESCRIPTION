@@ -1,7 +1,7 @@
 Type: Package
 Package: overviewR
 Title: Easily Extracting Information About Your Data
-Version: 0.0.11.999
+Version: 0.0.12
 Authors@R: c(
     person("Cosima", "Meyer", , "cosima.meyer@gmail.com", role = c("cre", "aut")),
     person("Dennis", "Hammerschmidt", , "dennis_hammerschmidt@yahoo.com", role = "aut")
