@@ -50,7 +50,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">overviewR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.12</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown--tabular-overview">
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_tab">overview_tab</a>
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_crosstab">overview_crosstab</a>
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_print">Export results</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_latex">Export results</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -152,7 +152,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>overviewR: Easily Extracting Information About Your Data</h1>
                         <h4 data-toc-skip class="author">Cosima Meyer and Dennis Hammerschmidt</h4>
             
-            <h4 data-toc-skip class="date">2022-09-06</h4>
+            <h4 data-toc-skip class="date">2022-09-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/cosimameyer/overviewR/blob/HEAD/vignettes/overviewR_vignette.Rmd" class="external-link"><code>vignettes/overviewR_vignette.Rmd</code></a></small>
       <div class="d-none name"><code>overviewR_vignette.Rmd</code></div>
@@ -167,7 +167,7 @@
 <li>
 <code>overview_crosstab</code> generates a cross table. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set.</li>
 <li>
-<code>overview_print</code> converts the output of both <code>overview_tab</code> and <code>overview_crosstab</code> into LaTeX code and/or directly into a .tex file.</li>
+<code>overview_latex</code> converts the output of both <code>overview_tab</code> and <code>overview_crosstab</code> into LaTeX code and/or directly into a .tex file.</li>
 <li>
 <code>overview_plot</code> is an alternative to visualize the sample (a way to present results from <code>overview_tab</code>)</li>
 <li>
@@ -276,12 +276,15 @@
 <p>Note, if a data set is used that has multiple observations on the id-time unit, the function automatically aggregates the data set using the mean of condition 1 (<code>cond1</code>) and condition 2 (<code>cond2</code>).</p>
 </div>
 <div class="section level3">
-<h3 id="overview_print">
-<code>overview_print</code><a class="anchor" aria-label="anchor" href="#overview_print"></a>
+<h3 id="overview_latex">
+<code>overview_latex</code><a class="anchor" aria-label="anchor" href="#overview_latex"></a>
 </h3>
-<p>To generate an easily usable LaTeX output for the generated <code>overview_tab</code> and <code>overview_crosstab</code> objects, <code>overviewR</code> offers the function <code>overview_print</code>. The following illustrate this using the <code>output_table</code> object from <code>overview_tab</code>.</p>
+<blockquote>
+<p>With overviewR v 0.0.11.999 we introduced <code>overview_latex</code> instead of <code>overview_print</code></p>
+</blockquote>
+<p>To generate an easily usable LaTeX output for the generated <code>overview_tab</code> and <code>overview_crosstab</code> objects, <code>overviewR</code> offers the function <code>overview_latex</code>. The following illustrate this using the <code>output_table</code> object from <code>overview_tab</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span>obj <span class="op">=</span> <span class="va">output_table</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_latex.html">overview_latex</a></span><span class="op">(</span>obj <span class="op">=</span> <span class="va">output_table</span><span class="op">)</span></span></code></pre></div>
 <details><p><summary>LaTeX output</summary></p>
 <pre><code>% Overview table generated in R version 4.0.0 (2020-04-24) using overviewR 
 % Table created on 2020-06-21
@@ -304,7 +307,7 @@ Sample &amp; Time frame \\
 <img src="ex1.png" height="150"></p>
 <p>The default already provides a title (“Time and scope of the sample”) that can be modified in the argument <code>title</code>. The same holds for the column names (“Sample” and “Time frame” are set by default but can be modified as shown below).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_latex.html">overview_latex</a></span><span class="op">(</span></span>
 <span>  obj <span class="op">=</span> <span class="va">output_table</span>,</span>
 <span>  id <span class="op">=</span> <span class="st">"Countries"</span>,</span>
 <span>  time <span class="op">=</span> <span class="st">"Years"</span>,</span>
@@ -332,7 +335,7 @@ Countries &amp; Years \\
 <img src="ex2.png" height="150"></p>
 <p>The same function can also be used for outputs from the <code>overview_crosstab</code> function by using the argument <code>crosstab = TRUE</code>. There are also options to label the respective conditions (<code>cond1</code> and <code>cond2</code>). Note that this should correspond to the conditions (<code>cond1</code> and <code>cond2</code>) specified in the <code>overview_crosstab</code> function.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_latex.html">overview_latex</a></span><span class="op">(</span></span>
 <span>  obj <span class="op">=</span> <span class="va">output_crosstab</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Cross table of the sample"</span>,</span>
 <span>  crosstab <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -361,18 +364,17 @@ Countries &amp; Years \\
  \end{table} </code></pre>
 </details><p align="center">
 <img src="ex3.png" height="200"></p>
-<p><code>overview_print</code> further allows more specifications such as the font size or a a label.</p>
+<p><code>overview_latex</code> further allows more specifications such as the font size or a a label.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span>obj <span class="op">=</span> <span class="va">output_table</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_latex.html">overview_latex</a></span><span class="op">(</span>obj <span class="op">=</span> <span class="va">output_table</span>,</span>
 <span>               fontsize <span class="op">=</span> <span class="st">"scriptsize"</span>,</span>
 <span>               label <span class="op">=</span> <span class="st">"tab:overview"</span><span class="op">)</span></span></code></pre></div>
 <p>With <code>save_out = TRUE</code> the function exports the output as a <code>.tex</code> file and stores it on the device.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/overview_latex.html">overview_latex</a></span><span class="op">(</span></span>
 <span>  obj <span class="op">=</span> <span class="va">output_table</span>,</span>
 <span>  save_out <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  path <span class="op">=</span> <span class="st">"SET-YOUR-PATH"</span>,</span>
-<span>  file <span class="op">=</span> <span class="st">"output.tex"</span></span>
+<span>  file_path <span class="op">=</span> <span class="st">"SET-YOUR-PATH/output.tex"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -567,7 +569,7 @@ Countries &amp; Years \\
 <code class="sourceCode R"><span><span class="co"># Produces a printable LaTeX output</span></span>
 <span><span class="va">toydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/overview_tab.html">overview_tab</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">ccode</span>, time <span class="op">=</span> <span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/overview_print.html">overview_print</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/overview_latex.html">overview_latex</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>% Overview table generated in R version 4.0.2 (2020-06-22) using overviewR 
 % Table created on 2020-12-30
 \begin{table}[ht] 
@@ -680,7 +682,7 @@ Sample &amp; Time frame \\
 <span><span class="co">#&gt; 3 FRA   1993, 1996, 1999             1993, 1996, 1999      </span></span>
 <span><span class="co">#&gt; 4 GBR   1991, 1993, 1995, 1997, 1999 1993, 1995, 1997, 1999</span></span>
 <span><span class="co">#&gt; 5 RWA   1990 - 1995                  1993 - 1995</span></span></code></pre>
-<p><code>overview_print</code> cannot handle this object (yet), so we use <code>xtable</code> instead which gives us the LaTeX output.</p>
+<p><code>overview_latex</code> cannot handle this object (yet), so we use <code>xtable</code> instead which gives us the LaTeX output.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/xtable/man/xtable.html" class="external-link">xtable</a></span><span class="op">(</span><span class="va">dat_full</span><span class="op">)</span>, include.rownames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>% latex table generated in R 4.0.2 by xtable 1.8-4 package

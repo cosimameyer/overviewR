@@ -22,7 +22,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">overviewR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.12</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown--tabular-overview">
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_tab">overview_tab</a>
     <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_crosstab">overview_crosstab</a>
-    <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_print">Export results</a>
+    <a class="dropdown-item" href="../articles/overviewR_vignette.html#overview_latex">Export results</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -117,6 +117,12 @@
       <small>Source: <a href="https://github.com/cosimameyer/overviewR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.12" id="overviewr-0012">overviewR 0.0.12<a class="anchor" aria-label="anchor" href="#overviewr-0012"></a></h2>
+<ul><li>Following issue <a href="https://github.com/cosimameyer/overviewR/issues/24" class="external-link">#24</a>’s excellent suggestion, we renamed <code>overview_print</code> to <code>overview_latex</code> (old code with <code>overview_print</code> still works but it is recommended to use <code>overview_latex</code> instead)</li>
+<li>Following issue <a href="https://github.com/cosimameyer/overviewR/issues/29" class="external-link">#29</a>’s advice, we also deprecated the single argument <code>file</code> and <code>path</code> in <code>overview_latex</code> and added a new argument <code>file_path</code>
+</li>
+</ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.11" id="overviewr-0011">overviewR 0.0.11<a class="anchor" aria-label="anchor" href="#overviewr-0011"></a></h2><p class="text-muted">CRAN release: 2022-08-06</p>
 <ul><li>CRAN resubmission to fix bug in <code>overview_overlap</code> which did not return the correct percentages in the visualization</li></ul><hr></div>

@@ -55,6 +55,9 @@
     <loc>/reference/overview_heat.html</loc>
   </url>
   <url>
+    <loc>/reference/overview_latex.html</loc>
+  </url>
+  <url>
     <loc>/reference/overview_na.html</loc>
   </url>
   <url>
@@ -68,9 +71,6 @@
   </url>
   <url>
     <loc>/reference/overview_plot_percentage.html</loc>
-  </url>
-  <url>
-    <loc>/reference/overview_print.html</loc>
   </url>
   <url>
     <loc>/reference/overview_tab.html</loc>
