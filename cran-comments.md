@@ -1,6 +1,6 @@
 ## Resubmission
 
-This is a (re)submission for an updated version of this package. It includes a bugfix for `overview_overlap`. 
+This is a (re)submission for an updated version of this package. It includes a bugfix for `overview_overlap`.
       
 ## Test environments
 
