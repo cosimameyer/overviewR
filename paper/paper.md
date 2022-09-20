@@ -41,7 +41,7 @@ overviewR has already been used in the data wrangling process as well as to gene
 
 # Key functions
 
-overviewR can be used by everyone who works with data that have time-and-scope characteristics. To get a quick overview of which units (i.e. countries, companies, test persons, etc.) are present or missing during a given time span (i.e. years, months, days, minutes, etc.), overviewR provides an easy and intuitive insight into the set-up of your data. But overviewR goes beyond this: It also allows users to investigate logical clusters of time-unit observations by using cross tables (or cross plots for visualization). It further allows the user to investigate the overlap between two data sets as well as the distribution of missing values across the data. overviewR relies on `ggplot2` [@ggplot2022] and  `ggvenn` [@ggvenn2021]  for visualization. It comes with example data containing a simple time-series cross-sectional data set. All functions work with `data.frame` objects while `overview_tab` and `overview_na` can also handle `data.table` objects to increase the performance.
+overviewR can be used by everyone who works with data that have time-and-scope characteristics. To get a quick overview of which units (e.g., countries, companies, test persons) are present or missing during a given time span (e.g., years, months, days, minutes), overviewR provides an easy and intuitive insight into the set-up of your data. But overviewR goes beyond this: It also allows users to investigate logical clusters of time-unit observations by using cross tables (or cross plots for visualization). It further allows the user to investigate the overlap between two data sets as well as the distribution of missing values across the data. overviewR relies on `ggplot2` [@ggplot2022] and  `ggvenn` [@ggvenn2021]  for visualization. It comes with example data containing a simple time-series cross-sectional data set. All functions work with `data.frame` objects while `overview_tab` and `overview_na` can also handle `data.table` objects to increase the performance.
 
 ![Comparing the functions of overviewR\label{comparison}](figures/overviewr_overview.png)
 
@@ -66,7 +66,7 @@ head(toydata)
 # 6   RWA 1990   Jan 30272.37  48625.140   6
 ```
 
-There are 264 observations for 5 countries (Angola, Benin, France, Rwanda, and UK) stored in the`ccode`variable, over a time period between 1990 to 1999 (`year`) with additional information for the month (`month`). Additionally, two artificially generated fake variables for the gross domestic product (GDP, `gdp`) and population size (`population`) are included to illustrate conditions.
+There are 264 observations for five countries (Angola, Benin, France, Rwanda, and UK) stored in the`ccode`variable, over a time period between 1990 to 1999 (`year`) with additional information for the month (`month`). Additionally, two artificially generated fake variables for the gross domestic product (GDP, `gdp`) and population size (`population`) are included to illustrate conditions.
 
 We can now use `countrycode` [@countrycode2022] as well as `dplyr` [@dplyr2022] to transform the `ccode` into more meaningful information and plot a visualization using `overview_plot`:
 
