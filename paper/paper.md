@@ -8,13 +8,15 @@ authors:
   - name: Cosima Meyer
     orcid: 0000-0002-7472-2298
     corresponding: True
-    affiliation: 1
+    affiliation: 1, 2
   - name: Dennis Hammerschmidt
     orcid: 0000-0003-1224-1947
-    affiliation: 1
+    affiliation: 1, 2
 affiliations:
- - name: University of Mannheim, Germany^[Both authors are currently working as data scientists in the industry.]
+ - name: University of Mannheim, Germany
    index: 1
+ - name: Both authors are currently working as data scientists in the industry.
+   index: 2
 citation_author: Meyer & Hammerschmidt.
 date: 08 August 2022
 year: 2022
