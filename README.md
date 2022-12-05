@@ -15,7 +15,6 @@ coverage](https://codecov.io/gh/cosimameyer/overviewR/branch/master/graph/badge.
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.04740/status.svg)](https://doi.org/10.21105/joss.04740)
 [![cran checks](https://badges.cranchecks.info/worst/overviewR.svg)](https://cran.r-project.org/web/checks/check_results_overviewR.html)
 <!-- [![Rdoc](https://www.rdocumentation.org/badges/version/overviewR)](https://www.rdocumentation.org/packages/overviewR) -->
-<!-- [![cran checks](https://cranchecks.info/badges/summary/overviewR)](https://cran.r-project.org/web/checks/check_results_overviewR.html) -->
 <!-- [![](https://cranlogs.r-pkg.org/badges/version/overviewR)](https://www.r-pkg.org/badges/version/overviewR) -->
 <!-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) -->
 <!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2022--09--12-green.svg)](/commits/master) -->
