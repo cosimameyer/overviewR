@@ -69,13 +69,7 @@ overview_overlap <-
       # Merge both data sets to get a better idea of the overlap
       subset <-
         # Join both data sets
-        dplyr::full_join(
-          x = dat1_final,
-          y = dat2_final,
-          by.x = !!dat1_id,
-          by.y = !!dat2_id,
-          all = TRUE
-        )
+        dplyr::full_join(x = dat1_final, y = dat2_final)
 
       # Plot it
       plot <- subset %>%
