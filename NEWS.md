@@ -1,3 +1,7 @@
+## overviewR 0.0.13
+
+- Updates in `overview_overlap()` to comply with recent changes in dplyr v1.1.0
+
 ## overviewR 0.0.12
 
 - Following issue #24's excellent suggestion, we renamed `overview_print` to `overview_latex` (old code with `overview_print` still works but it is recommended to use `overview_latex` instead)

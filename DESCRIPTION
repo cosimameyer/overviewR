@@ -1,7 +1,7 @@
 Type: Package
 Package: overviewR
 Title: Easily Extracting Information About Your Data
-Version: 0.0.12
+Version: 0.0.13
 Authors@R: c(
     person("Cosima", "Meyer", , "cosima.meyer@gmail.com", role = c("cre", "aut")),
     person("Dennis", "Hammerschmidt", , "dennis_hammerschmidt@yahoo.com", role = "aut")
@@ -42,4 +42,4 @@ VignetteBuilder:
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
