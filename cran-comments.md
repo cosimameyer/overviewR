@@ -1,11 +1,11 @@
-## Resubmission
+## Submission
 
-This is a (re)submission for an updated version of this package. It includes a bugfix for `overview_overlap`.
+This is a submission for an updated version of this package. It includes a fix for `overview_overlap` that caused testing failures.
       
 ## Test environments
 
-* Windows Server 2022, R-devel, 64 bit  (on win-devel)
-* macOS Monterey 12.1, R 4.1.3 (local machine)
+* Windows Server 2022, R-devel, 64 bit (on win-devel)
+* macOS Ventura 13.1, R 4.1.3 (local machine)
 * Ubuntu Linux 20.04.1 LTS, R-release, GCC
 * Fedora Linux, R-devel, clang, gfortran
 
