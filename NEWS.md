@@ -18,19 +18,6 @@
 - `overview_na()` — emits a warning when `month` or `day` columns contain
   missing values, flagging potential gaps in time coverage (closes #14).
 
-### Documentation
-
-- Vignette: `overview_crossplot` section now demonstrates all four
-  `color`/`label` combinations (closes #16).
-- Vignette: `overview_na` section now documents `row_wise = TRUE`,
-  `perc = FALSE` with `row_wise`, and `add = TRUE` (closes #17).
-- Vignette: added `overview_markdown` section with usage examples.
-
-### Infrastructure
-
-- CI workflows migrated from `r-lib/actions` v1 to v2; Ubuntu runners updated
-  to `ubuntu-latest`.
-
 ---
 
 ## overviewR 0.0.13
