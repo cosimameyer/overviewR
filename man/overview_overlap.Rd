@@ -11,7 +11,8 @@ overview_overlap(
   dat2_id,
   dat1_name = "Data set 1",
   dat2_name = "Data set 2",
-  plot_type = "bar"
+  plot_type = "bar",
+  proportional = FALSE
 )
 }
 \arguments{
@@ -33,9 +34,16 @@ the perfect match.}
 
 \item{plot_type}{Type of plot ("bar" and "venn" are the two options) "venn"
 relies on the ggvenn function}
+
+\item{proportional}{Logical. If \code{TRUE} and \code{plot_type = "venn"},
+draws a proportional Euler diagram using the \pkg{eulerr} package
+(must be installed separately). The returned object is an
+\code{eulergram} (base-R graphics), not a ggplot2 object.
+Default is \code{FALSE}.}
 }
 \value{
-A ggplot2 object (bar chart) that shows the overlap of two data sets.
+A ggplot2 object (bar chart or standard Venn diagram), or an
+    \code{eulergram} object when \code{proportional = TRUE}.
 }
 \description{
 Provides an overview of the overlap of two data sets.

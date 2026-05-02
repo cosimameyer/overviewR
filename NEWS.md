@@ -1,3 +1,24 @@
+## overviewR 0.0.14
+
+### New features
+
+- `overview_markdown()` — new function that converts `overview_tab` and
+  `overview_crosstab` output to Markdown tables, mirroring `overview_latex()`.
+  Supports custom column headers, titles, and optional export to a `.md` file.
+- `overview_overlap()` — new `proportional = TRUE` argument for
+  `plot_type = "venn"` that draws an area-proportional Euler diagram via the
+  `eulerr` package.
+
+### Enhancements
+
+- `overview_plot()` — the `color` argument now accepts a literal color string
+  (e.g. `color = "steelblue"`) to paint all lines and points a fixed color, in
+  addition to the existing column-variable mapping.
+- `overview_na()` — emits a warning when `month` or `day` columns contain
+  missing values, flagging potential gaps in time coverage.
+
+---
+
 ## overviewR 0.0.13
 
 - Updates in `overview_overlap()` to comply with recent changes in dplyr v1.1.0

@@ -32,6 +32,28 @@ overview_na <- function(dat,
   # Create a theme for the plot
   theme_plot <- theme_na_plot()
 
+  # Check for missing values in month/day columns ---------------------------
+  # Warn users when typical time-unit columns (month, day) contain NAs,
+  # since gaps in these columns can silently distort time-coverage analyses.
+  time_cols <- intersect(tolower(names(dat)), c("month", "day"))
+  if (length(time_cols) > 0 && !row_wise) {
+    na_time <- vapply(time_cols, function(col) {
+      any(is.na(dat[[col]]))
+    }, logical(1))
+    if (any(na_time)) {
+      affected <- paste(
+        names(dat)[tolower(names(dat)) %in% time_cols[na_time]],
+        collapse = ", "
+      )
+      warning(
+        "Missing values detected in time-related column(s): ",
+        affected,
+        ". Consider using `row_wise = TRUE` or inspecting these columns ",
+        "before drawing conclusions about time coverage."
+      )
+    }
+  }
+
   # Perform calculations ----------------------------------------------------
 
   if(row_wise) {

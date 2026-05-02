@@ -35,13 +35,14 @@ if (!require(xtable))
 
 The goal of overviewR is to make it easy to get an overview of a data set by displaying relevant sample information. At the moment, there are the following functions:
 
-- `overview_tab` generates a tabular overview of the sample.  The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column. 
+- `overview_tab` generates a tabular overview of the sample.  The general sample plots a two-column table that provides information on an id in the left column and a the time frame on the right column.
 - `overview_crosstab` generates a cross table. The conditional column allows to disaggregate the overview table by specifying two conditions, hence resulting a 2x2 table. This way, it is easy to visualize the time and scope conditions as well as theoretical assumptions with examples from the data set.
-- `overview_latex` converts the output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file. 
+- `overview_latex` converts the output of both `overview_tab` and `overview_crosstab` into LaTeX code and/or directly into a .tex file.
+- `overview_markdown` converts the output of both `overview_tab` and `overview_crosstab` into Markdown and/or directly into a .md file.
 - `overview_plot` is an alternative to visualize the sample (a way to present results from `overview_tab`)
 - `overview_crossplot` is an alternative to visualize a cross table (a way to present results from `overview_crosstab`)
 - `overview_heat` plots a heat map of your time line
-- `overview_na` plots an overview of missing values by variable
+- `overview_na` plots an overview of missing values by variable (column-wise and row-wise)
 
 The plots can be saved using the `ggsave()` command. The output of `overview_tab` and `overview_crosstab` are also compatible with other packages such as [```xtable```](https://CRAN.R-project.org/package=xtable), [```flextable```](https://CRAN.R-project.org/package=flextable), or [`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
 
@@ -324,6 +325,57 @@ overview_latex(
 )
 ```
 
+## `overview_markdown`
+
+`overview_markdown` mirrors the functionality of `overview_latex` but produces Markdown output — useful for R Markdown documents, GitHub READMEs, or any Markdown-based workflow.
+
+```{r, eval=FALSE}
+overview_markdown(obj = output_table)
+```
+
+```
+## Time and scope of the sample
+| Sample | Time frame |
+|--------|------------|
+| RWA | 1990 - 1995 |
+| AGO | 1990 - 1992 |
+| BEN | 1995 - 1999 |
+| GBR | 1991, 1993, 1995, 1997, 1999 |
+| FRA | 1993, 1996, 1999 |
+```
+
+The column headers can be customised with `id` and `time`, and the title with `title`.
+
+```{r, eval=FALSE}
+overview_markdown(
+  obj = output_table,
+  id = "Countries",
+  time = "Years",
+  title = "My custom title"
+)
+```
+
+For cross-tab objects, set `crosstab = TRUE` and provide condition labels:
+
+```{r, eval=FALSE}
+overview_markdown(
+  obj = output_crosstab,
+  crosstab = TRUE,
+  cond1 = "GDP",
+  cond2 = "Population"
+)
+```
+
+Use `save_out = TRUE` together with `file_path` to write the table directly to a `.md` file:
+
+```{r, eval=FALSE}
+overview_markdown(
+  obj = output_table,
+  save_out = TRUE,
+  file_path = "output/overview.md"
+)
+```
+
 # Visual overview
 
 ## `overview_plot`
@@ -393,7 +445,53 @@ overview_plot(
 
 ## `overview_crossplot`
 
-To visualize also the cross table, `overview_crossplot` does the job. 
+To visualize the cross table, `overview_crossplot` does the job. It places each observation in one of four quadrants defined by `threshold1` (x-axis) and `threshold2` (y-axis).
+
+**Basic plot** — points only, no coloring or labels:
+
+```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
+overview_crossplot(
+  toydata,
+  id = ccode,
+  time = year,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000
+)
+```
+
+**With quadrant coloring** (`color = TRUE`) — each quadrant gets a distinct color, making it easy to see how observations cluster:
+
+```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
+overview_crossplot(
+  toydata,
+  id = ccode,
+  time = year,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000,
+  color = TRUE
+)
+```
+
+**With labels** (`label = TRUE`) — adds id–time labels to each point using `ggrepel` to avoid overlaps:
+
+```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
+overview_crossplot(
+  toydata,
+  id = ccode,
+  time = year,
+  cond1 = gdp,
+  cond2 = population,
+  threshold1 = 25000,
+  threshold2 = 27000,
+  label = TRUE
+)
+```
+
+**With both coloring and labels** — the most informative variant:
 
 ```{r, out.width = '50%', fig.align='center', include = TRUE, results = TRUE, message = FALSE, warning=FALSE}
 overview_crossplot(
@@ -431,7 +529,7 @@ overview_heat(toydata_red,
 
 ## `overview_na`
 
-`overview_na` is a simple function that provides information about the content of all variables in your data, not only the time and scope conditions. It returns a horizontal ggplot bar plot that indicates the amount of missing data (NAs) for each variable (on the y-axis). You can choose whether to display the relative amount of NAs for each variable in percentage (the default) or the total number of NAs. 
+`overview_na` is a simple function that provides information about the content of all variables in your data, not only the time and scope conditions. It returns a horizontal ggplot bar plot that indicates the amount of missing data (NAs) for each variable (on the y-axis). You can choose whether to display the relative amount of NAs for each variable in percentage (the default) or the total number of NAs.
 
 For this purpose, we first artificially reduced our `toydata`.
 
@@ -450,6 +548,25 @@ overview_na(toydata_with_na)
 
 ```{r, out.width = '50%', fig.align='center'}
 overview_na(toydata_with_na, perc = FALSE)
+```
+
+### Row-wise NA overview
+
+By default, `overview_na` summarises NAs *column-wise* (one bar per variable). Setting `row_wise = TRUE` switches to a *row-wise* perspective: each observation on the y-axis, NA count on the x-axis. This is useful to spot rows that are largely empty.
+
+```{r, out.width = '50%', fig.align='center'}
+overview_na(toydata_with_na, row_wise = TRUE)
+```
+
+```{r, out.width = '50%', fig.align='center'}
+overview_na(toydata_with_na, row_wise = TRUE, perc = FALSE)
+```
+
+You can also append the row-wise NA count and percentage directly to your original data frame with `add = TRUE`. This returns a data frame rather than a plot.
+
+```{r, eval=FALSE}
+toydata_extended <- overview_na(toydata_with_na, row_wise = TRUE, add = TRUE)
+head(toydata_extended)
 ```
 
 ## `overview_overlap`

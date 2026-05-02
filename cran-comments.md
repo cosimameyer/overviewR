@@ -1,35 +1,22 @@
 ## Submission
 
-This is a submission for an updated version of this package. It includes a fix for `overview_overlap` that caused testing failures.
-      
+This is a resubmission for v0.0.14. Changes since the last CRAN release (v0.0.13):
+
+- New function `overview_markdown()` to render `overview_tab`/`overview_crosstab`
+  output as Markdown tables- `overview_overlap()` gains `proportional = TRUE` for area-proportional Euler
+  diagrams via the suggested package `eulerr`- `overview_plot()` now accepts a literal color string (e.g. `color = "steelblue"`)
+  in addition to column-variable mapping- `overview_na()` warns when `month`/`day` columns contain NAs
 ## Test environments
 
-* Windows Server 2022, R-devel, 64 bit (on win-devel)
-* macOS Ventura 13.1, R 4.1.3 (local machine)
-* Ubuntu Linux 20.04.1 LTS, R-release, GCC
-* Fedora Linux, R-devel, clang, gfortran
+* macOS Sequoia 15.7.4 (aarch64), R 4.6.0 (2026-04-24)
+* Ubuntu 24.04.4 LTS (x86_64), R 4.6.0 (2026-04-24)
+* Ubuntu 24.04.4 LTS (x86_64), R Under development (unstable) (2026-04-30 r89987)
+* Windows Server 2022 x64 (build 26100), R 4.6.0 (2026-04-24 ucrt)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
 
-There is one NOTE that is only found on Windows (Server 2022, R-devel 64-bit): 
-
-```
-* checking for detritus in the temp directory ... NOTE
-Found the following files/directories:
-  'lastMiKTeXException'
-```
-
-As mentioned in the [R-hub issue #503](https://github.com/r-hub/rhub/issues/503), this warning could occur due to a bug in MiKTeX and can likely be ignored.
-
-There is one NOTE that is only found on (Fedora Linux, R-devel, clang, gfortran)
-
-```
-* checking HTML version of manual ... NOTE
-Skipping checking HTML validation: no command 'tidy' found
-```
-
-As described [here](https://groups.google.com/g/r-sig-mac/c/7u_ivEj4zhM), our understanding is that this is an old bug/issue which is located at the testing environment.
+There were no ERRORs, WARNINGs, or NOTEs.
 
 ## Downstream dependencies
+
 There are currently no downstream dependencies for this package.
