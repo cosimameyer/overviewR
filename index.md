@@ -11,10 +11,7 @@ the entire time frame** of your data set.
 
 A stable version of `overviewR` can be directly accessed on CRAN:
 
-``` r
-
-install.packages("overviewR", force = TRUE)
-```
+`{r, eval = FALSE} install.packages("overviewR", force = TRUE)`
 
 To install the latest development version of `overviewR` directly from
 [GitHub](https://github.com/cosimameyer/overviewR) use:
