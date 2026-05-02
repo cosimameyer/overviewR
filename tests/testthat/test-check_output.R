@@ -537,6 +537,101 @@ test_that("check output of overview_crossplot with no color", {
 test_that("for time$day in overview_tab", {
   expect_error(overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year, month = toydata$month, day = NULL), complex_date = TRUE))
 })
+
+# --- #11: overview_plot with literal color string ----------------------------
+
+test_that("overview_plot accepts a literal color string (asc = TRUE)", {
+  plot <- overview_plot(dat = toydata, id = ccode, time = year,
+                        color = "steelblue")
+  testthat::expect_is(plot, "ggplot")
+})
+
+test_that("overview_plot accepts a literal color string (asc = FALSE)", {
+  plot <- overview_plot(dat = toydata, id = ccode, time = year,
+                        color = "steelblue", asc = FALSE)
+  testthat::expect_is(plot, "ggplot")
+})
+
+# --- #14: overview_na warns on month/day NAs --------------------------------
+
+test_that("overview_na warns when month column contains NAs", {
+  dat_na <- toydata
+  dat_na$month[1:5] <- NA
+  expect_warning(
+    overview_na(dat_na),
+    regexp = "month"
+  )
+})
+
+test_that("overview_na does not warn when no month/day NAs present", {
+  expect_no_warning(overview_na(toydata))
+})
+
+# --- #35: overview_overlap proportional Venn --------------------------------
+
+test_that("overview_overlap proportional Venn requires eulerr", {
+  testthat::skip_if_not_installed("eulerr")
+  toydata2 <- toydata[toydata$year > 1992, ]
+  result <- overview_overlap(
+    dat1 = toydata, dat2 = toydata2,
+    dat1_id = ccode, dat2_id = ccode,
+    plot_type = "venn", proportional = TRUE
+  )
+  testthat::expect_s3_class(result, "eulergram")
+})
+
+test_that("overview_overlap errors informatively when eulerr missing", {
+  testthat::skip_if(requireNamespace("eulerr", quietly = TRUE),
+                    "eulerr is installed; skipping absence test")
+  toydata2 <- toydata[toydata$year > 1992, ]
+  expect_error(
+    overview_overlap(
+      dat1 = toydata, dat2 = toydata2,
+      dat1_id = ccode, dat2_id = ccode,
+      plot_type = "venn", proportional = TRUE
+    ),
+    regexp = "eulerr"
+  )
+})
+
+# --- #41: overview_markdown --------------------------------------------------
+
+test_that("overview_markdown returns an invisible character string (tab)", {
+  output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+  result <- overview_markdown(obj = output_table)
+  testthat::expect_is(result, "character")
+  testthat::expect_true(grepl("Sample", result))
+  testthat::expect_true(grepl("Time frame", result))
+})
+
+test_that("overview_markdown returns correct output for crosstab", {
+  output_cross <- overview_crosstab(
+    dat = toydata, id = ccode, time = year,
+    cond1 = gdp, cond2 = population,
+    threshold1 = 25000, threshold2 = 27000
+  )
+  result <- overview_markdown(obj = output_cross, crosstab = TRUE,
+                               cond1 = "GDP", cond2 = "Population")
+  testthat::expect_is(result, "character")
+  testthat::expect_true(grepl("GDP", result))
+  testthat::expect_true(grepl("Population", result))
+})
+
+test_that("overview_markdown writes to file with save_out = TRUE", {
+  testthat::skip_on_cran()
+  output_table <- overview_tab(dat = toydata, id = ccode, time = year)
+  temp <- tempfile(fileext = ".md")
+  on.exit(unlink(temp), add = TRUE)
+  overview_markdown(obj = output_table, save_out = TRUE, file_path = temp)
+  testthat::expect_true(file.exists(temp))
+  content <- readLines(temp)
+  testthat::expect_true(any(grepl("Sample", content)))
+})
+
+test_that("overview_markdown errors on wrong column count", {
+  bad_df <- data.frame(a = 1:3, b = 1:3, c = 1:3)
+  expect_error(overview_markdown(obj = bad_df), regexp = "two columns")
+})
 # test_that("check output of overview_crossplot with unique observations", {
 #   modified <- toydata %>%
 #     dplyr::ungroup() %>%
