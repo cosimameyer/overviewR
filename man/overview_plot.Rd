@@ -29,7 +29,9 @@ variable contains NAs, they will not be included in the plot.}
 
 \item{asc}{Sorting the y axis in ascending order ("TRUE" is default)}
 
-\item{color}{Optional argument that defines the color}
+\item{color}{Optional argument. Either a column variable (for conditional
+coloring) or a color string (e.g., \code{"steelblue"}) to paint all
+lines/points a fixed color.}
 
 \item{dot_size}{Option argument that defines the dot size (default is 2)}
 }
