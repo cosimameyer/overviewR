@@ -12,6 +12,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE,
                       comment = "#>")
+options(repos = c(CRAN = "[https://cloud.r-project.org](https://cloud.r-project.org)"))
 ```
 
 

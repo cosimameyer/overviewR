@@ -538,8 +538,6 @@ test_that("for time$day in overview_tab", {
   expect_error(overview_tab(dat = toydata, id = ccode, time = list(year = toydata$year, month = toydata$month, day = NULL), complex_date = TRUE))
 })
 
-# --- #11: overview_plot with literal color string ----------------------------
-
 test_that("overview_plot accepts a literal color string (asc = TRUE)", {
   plot <- overview_plot(dat = toydata, id = ccode, time = year,
                         color = "steelblue")
@@ -551,8 +549,6 @@ test_that("overview_plot accepts a literal color string (asc = FALSE)", {
                         color = "steelblue", asc = FALSE)
   testthat::expect_is(plot, "ggplot")
 })
-
-# --- #14: overview_na warns on month/day NAs --------------------------------
 
 test_that("overview_na warns when month column contains NAs", {
   dat_na <- toydata
@@ -566,8 +562,6 @@ test_that("overview_na warns when month column contains NAs", {
 test_that("overview_na does not warn when no month/day NAs present", {
   expect_no_warning(overview_na(toydata))
 })
-
-# --- #35: overview_overlap proportional Venn --------------------------------
 
 test_that("overview_overlap proportional Venn requires eulerr", {
   testthat::skip_if_not_installed("eulerr")
@@ -593,8 +587,6 @@ test_that("overview_overlap errors informatively when eulerr missing", {
     regexp = "eulerr"
   )
 })
-
-# --- #41: overview_markdown --------------------------------------------------
 
 test_that("overview_markdown returns an invisible character string (tab)", {
   output_table <- overview_tab(dat = toydata, id = ccode, time = year)

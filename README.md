@@ -63,7 +63,7 @@ detail below.
 
 A stable version of `overviewR` can be directly accessed on CRAN:
 
-``` r
+```{r, eval = FALSE}
 install.packages("overviewR", force = TRUE)
 ```
 
@@ -632,7 +632,7 @@ toydata_with_na %>%
 
 Using mutate to generate meaningful country names
 
-``` r
+```{r, eval = FALSE}
 library(countrycode) # Convert Country Names and Country Codes
 library(dplyr) # A Grammar of Data Manipulation # A Grammar of Data Manipulation
 

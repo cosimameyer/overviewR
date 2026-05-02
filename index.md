@@ -33,7 +33,7 @@ overviewR is a small yet powerful package that helps you to **get an overview** 
 
 A stable version of `overviewR` can be directly accessed on CRAN:
 
-``` r
+```{r, eval = FALSE}
 install.packages("overviewR", force = TRUE)
 ```
 
