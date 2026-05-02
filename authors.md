@@ -10,7 +10,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/cosimameyer/overviewR/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/cosimameyer/overviewR/blob/main/DESCRIPTION)
 
 Meyer C, Hammerschmidt D (2026). *overviewR: Easily Extracting
 Information About Your Data*. R package version 0.0.14,
