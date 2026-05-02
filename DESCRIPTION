@@ -29,6 +29,7 @@ Suggests:
     countrycode,
     covr,
     devtools,
+    eulerr,
     knitr,
     magrittr,
     pkgdown,

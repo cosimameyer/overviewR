@@ -17,7 +17,13 @@
 #' @param dat2_name Name of dat2 ("Data set 2" is the default)
 #' @param plot_type Type of plot ("bar" and "venn" are the two options) "venn"
 #'     relies on the ggvenn function
-#' @return A ggplot2 object (bar chart) that shows the overlap of two data sets.
+#' @param proportional Logical. If \code{TRUE} and \code{plot_type = "venn"},
+#'     draws a proportional Euler diagram using the \pkg{eulerr} package
+#'     (must be installed separately). The returned object is an
+#'     \code{eulergram} (base-R graphics), not a ggplot2 object.
+#'     Default is \code{FALSE}.
+#' @return A ggplot2 object (bar chart or standard Venn diagram), or an
+#'     \code{eulergram} object when \code{proportional = TRUE}.
 #' @examples
 #' \dontrun{
 #' data(toydata)
@@ -39,7 +45,8 @@ overview_overlap <-
            dat2_id,
            dat1_name = "Data set 1",
            dat2_name = "Data set 2",
-           plot_type = "bar") {
+           plot_type = "bar",
+           proportional = FALSE) {
     dat1 <- dat1
     dat2 <- dat2
     dat1_id <- dplyr::enquo(dat1_id)
@@ -107,11 +114,30 @@ overview_overlap <-
         unlist() %>%
         as.vector()
 
+      if (proportional) {
+        if (!requireNamespace("eulerr", quietly = TRUE)) {
+          stop(
+            "Package 'eulerr' is required for proportional Venn diagrams. ",
+            "Install it with: install.packages('eulerr')"
+          )
+        }
+        n1 <- length(unique(dat1_sub))
+        n2 <- length(unique(dat2_sub))
+        n_both <- length(intersect(unique(dat1_sub), unique(dat2_sub)))
+        combo <- c(n1 - n_both, n2 - n_both, n_both)
+        names(combo) <- c(dat1_name, dat2_name,
+                          paste0(dat1_name, "&", dat2_name))
+        fit <- eulerr::euler(combo)
+        plot <- plot(fit,
+                     fills = list(fill = c("#dceaf2", "#2A5773"),
+                                  alpha = 0.7),
+                     labels = list(font = 2))
+        return(plot)
+      }
+
       # Generate a list
-      x <- list(
-        `Data set 1` = dat1_sub,
-        `Data set 2` = dat2_sub
-      )
+      x <- list(dat1_sub, dat2_sub)
+      names(x) <- c(dat1_name, dat2_name)
 
       # Plot list
       plot <- ggvenn::ggvenn(
