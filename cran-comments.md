@@ -10,6 +10,7 @@ This is a resubmission for v0.0.14. Changes since the last CRAN release (v0.0.13
 
 * macOS Sequoia 15.7.4 (aarch64), R 4.6.0 (2026-04-24)
 * Ubuntu 24.04.4 LTS (x86_64), R 4.6.0 (2026-04-24)
+* Ubuntu 24.04.4 LTS (x86_64), R Under development (unstable) (2026-04-30 r89987)
 * Windows Server 2022 x64 (build 26100), R 4.6.0 (2026-04-24 ucrt)
 
 ## R CMD check results
