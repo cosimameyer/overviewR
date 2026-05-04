@@ -31,7 +31,10 @@ variable contains NAs, they will not be included in the plot.}
 
 \item{color}{Optional argument. Either a column variable (for conditional
 coloring) or a color string (e.g., \code{"steelblue"}) to paint all
-lines/points a fixed color.}
+lines/points a fixed color. When \code{color} is a column variable the
+returned ggplot object can be extended with
+\code{+ ggplot2::scale_color_manual()} or
+\code{+ ggplot2::scale_color_brewer()} to apply custom palettes.}
 
 \item{dot_size}{Option argument that defines the dot size (default is 2)}
 }

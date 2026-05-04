@@ -13,7 +13,10 @@
 
 - `overview_plot()` — the `color` argument now accepts a literal color string
   (e.g. `color = "steelblue"`) to paint all lines and points a fixed color, in
-  addition to the existing column-variable mapping.
+  addition to the existing column-variable mapping. When `color` maps a column
+  variable, custom palettes can be applied via ggplot2's layering (e.g.
+  `+ scale_color_manual(values = c("red", "blue"))` or
+  `+ scale_color_brewer(palette = "Set1")`).
 - `overview_na()` — emits a warning when `month` or `day` columns contain
   missing values, flagging potential gaps in time coverage.
 

@@ -54,7 +54,7 @@ The plots can be saved using the `ggsave()` command. The output of
 `overview_tab` and `overview_crosstab` are also compatible with other
 packages such as [`xtable`](https://CRAN.R-project.org/package=xtable),
 [`flextable`](https://CRAN.R-project.org/package=flextable), or
-[`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
+[`knitr`](https://yihui.org/rmarkdown-cookbook/kable.html).
 
 We present a short step-by-step guide as well as the functions in more
 detail below.
@@ -408,7 +408,35 @@ overview_plot(
 )
 ```
 
-<img src="man/figures/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
+<img src=”man/figures/unnamed-chunk-24-1.png” width=”50%” style=”display: block; margin: auto;” />
+
+Since `overview_plot` returns a ggplot object, you can apply any ggplot2
+color scale directly by adding a layer. This works for any number of
+categories.
+
+``` r
+library(ggplot2)
+
+# Explicit colors via scale_color_manual
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  color = before
+) +
+  ggplot2::scale_color_manual(values = c(“#E84646”, “#4E84C4”))
+```
+
+``` r
+# RColorBrewer palette via scale_color_brewer
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  color = before
+) +
+  ggplot2::scale_color_brewer(palette = “Set1”)
+```
 
 The development version also allows to change the dot size using the
 `dot_size` argument. The default is “2”.
@@ -567,7 +595,7 @@ The outputs of `overview_tab` and `overview_crosstab` are also
 compatible with other functions such as
 [`xtable`](https://CRAN.R-project.org/package=xtable),
 [`flextable`](https://CRAN.R-project.org/package=flextable), or
-[`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from
+[`kable`](https://yihui.org/rmarkdown-cookbook/kable.html) from
 [`knitr`](https://yihui.org/knitr/).
 
 Two examples are shown below:
