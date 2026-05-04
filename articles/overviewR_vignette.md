@@ -30,7 +30,7 @@ command. The output of `overview_tab` and `overview_crosstab` are also
 compatible with other packages such as
 [`xtable`](https://CRAN.R-project.org/package=xtable),
 [`flextable`](https://CRAN.R-project.org/package=flextable), or
-[`knitr`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
+[`knitr`](https://yihui.org/rmarkdown-cookbook/kable.html).
 
 We present a short step-by-step guide as well as the functions in more
 detail below.
@@ -445,12 +445,44 @@ overview_plot(
 
 ![](overviewR_vignette_files/figure-html/unnamed-chunk-27-1.png)
 
+Since `overview_plot` returns a ggplot object, you can apply any ggplot2
+color scale directly by adding a layer. This works for any number of
+categories.
+
+``` r
+
+library(ggplot2)
+
+# Explicit colors via scale_color_manual
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  color = before
+) +
+  ggplot2::scale_color_manual(values = c("#E84646", "#4E84C4"))
+```
+
+![](overviewR_vignette_files/figure-html/unnamed-chunk-28-1.png)
+
+``` r
+
+# RColorBrewer palette via scale_color_brewer
+overview_plot(
+  dat = toydata,
+  id = ccode,
+  time = year,
+  color = before
+) +
+  ggplot2::scale_color_brewer(palette = "Set1")
+```
+
 The development version also allows to change the dot size using the
 `dot_size` argument. The default is “2”.
 
 ``` r
 
-# Plot using the `color` argument
+# Plot using the `dot_size` argument
 overview_plot(
   dat = toydata,
   id = ccode,
@@ -459,23 +491,7 @@ overview_plot(
 )
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-28-1.png)
-
-If you want to change the color in your plot, follow `ggplot2`’s
-layering logic and add a new layer to it.
-
-``` r
-
-library(ggplot2)
-
-overview_plot(
-  dat = toydata,
-  id = ccode,
-  time = year
-) + ggplot2::scale_color_brewer(palette="Dark2")
-```
-
-![](overviewR_vignette_files/figure-html/unnamed-chunk-29-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-30-1.png)
 
 ### `overview_crossplot`
 
@@ -498,7 +514,7 @@ overview_crossplot(
 )
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-30-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-31-1.png)
 
 **With quadrant coloring** (`color = TRUE`) — each quadrant gets a
 distinct color, making it easy to see how observations cluster:
@@ -517,7 +533,7 @@ overview_crossplot(
 )
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-31-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-32-1.png)
 
 **With labels** (`label = TRUE`) — adds id–time labels to each point
 using `ggrepel` to avoid overlaps:
@@ -536,7 +552,7 @@ overview_crossplot(
 )
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-32-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-33-1.png)
 
 **With both coloring and labels** — the most informative variant:
 
@@ -555,7 +571,7 @@ overview_crossplot(
 )
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-33-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-34-1.png)
 
 ### `overview_heat`
 
@@ -588,7 +604,7 @@ overview_heat(toydata_red,
               exp_total = 12)
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-35-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-36-1.png)
 
 ### `overview_na`
 
@@ -619,7 +635,7 @@ overview_na(toydata_with_na)
 #> these columns before drawing conclusions about time coverage.
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-37-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-38-1.png)
 
 ``` r
 
@@ -629,7 +645,7 @@ overview_na(toydata_with_na, perc = FALSE)
 #> inspecting these columns before drawing conclusions about time coverage.
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-38-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-39-1.png)
 
 #### Row-wise NA overview
 
@@ -643,14 +659,14 @@ This is useful to spot rows that are largely empty.
 overview_na(toydata_with_na, row_wise = TRUE)
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-39-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-40-1.png)
 
 ``` r
 
 overview_na(toydata_with_na, row_wise = TRUE, perc = FALSE)
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-40-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-41-1.png)
 
 You can also append the row-wise NA count and percentage directly to
 your original data frame with `add = TRUE`. This returns a data frame
@@ -688,7 +704,7 @@ overview_overlap(
 #> (`geom_bar()`).
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-42-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-43-1.png)
 
 Or a Venn diagram
 
@@ -721,7 +737,7 @@ overview_na(toydata_with_na) +
 #> these columns before drawing conclusions about time coverage.
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-44-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-45-1.png)
 
 ## Compatibilities with other packages
 
@@ -744,7 +760,7 @@ toydata_with_na %>%
 #> drawing conclusions about time coverage.
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-45-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-46-1.png)
 
 Using mutate to generate meaningful country names
 
@@ -761,7 +777,7 @@ toydata %>%
   overview_plot(id = country, time = year)
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-46-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-47-1.png)
 
 Using different `overviewR` functions after each other to generate a
 workflow
@@ -800,7 +816,7 @@ The outputs of `overview_tab` and `overview_crosstab` are also
 compatible with other functions such as
 [`xtable`](https://CRAN.R-project.org/package=xtable),
 [`flextable`](https://CRAN.R-project.org/package=flextable), or
-[`kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) from
+[`kable`](https://yihui.org/rmarkdown-cookbook/kable.html) from
 [`knitr`](https://yihui.org/knitr/).
 
 Two examples are shown below:
@@ -846,7 +862,7 @@ overview_na(toydata_with_na) +
 #> these columns before drawing conclusions about time coverage.
 ```
 
-![](overviewR_vignette_files/figure-html/unnamed-chunk-51-1.png)
+![](overviewR_vignette_files/figure-html/unnamed-chunk-52-1.png)
 
 ### Extensions
 

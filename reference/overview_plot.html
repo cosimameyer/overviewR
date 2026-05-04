@@ -129,7 +129,10 @@ variable contains NAs, they will not be included in the plot.</p></dd>
 <dt id="arg-color">color<a class="anchor" aria-label="anchor" href="#arg-color"></a></dt>
 <dd><p>Optional argument. Either a column variable (for conditional
 coloring) or a color string (e.g., <code>"steelblue"</code>) to paint all
-lines/points a fixed color.</p></dd>
+lines/points a fixed color. When <code>color</code> is a column variable the
+returned ggplot object can be extended with
+<code>+ ggplot2::scale_color_manual()</code> or
+<code>+ ggplot2::scale_color_brewer()</code> to apply custom palettes.</p></dd>
 
 
 <dt id="arg-dot-size">dot_size<a class="anchor" aria-label="anchor" href="#arg-dot-size"></a></dt>

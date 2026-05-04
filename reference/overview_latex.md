@@ -105,7 +105,7 @@ overview_latex(
   crosstab = FALSE
 )
 #> % Overview table generated in R version 4.6.0 (2026-04-24) using overviewR 
-#> % Table created on 2026-05-02
+#> % Table created on 2026-05-04
 #> \begin{table}[ht] 
 #>  \centering 
 #>  \caption{Some nice title} 
@@ -130,7 +130,7 @@ overview_latex(
   file_path = "some/path_to/your_output_file.tex"
 )
 #> % Overview table generated in R version 4.6.0 (2026-04-24) using overviewR 
-#> % Table created on 2026-05-02
+#> % Table created on 2026-05-04
 #> \begin{table}[ht] 
 #>  \centering 
 #>  \caption{Some nice title} 
@@ -165,7 +165,7 @@ overview_latex(
   cond2 = "Name of second condition"
 )
 #> % Overview table generated in R version 4.6.0 (2026-04-24) using overviewR 
-#> % Table created on 2026-05-02
+#> % Table created on 2026-05-04
 #> % Please add the following packages to your document preamble: 
 #> % \usepackage{multirow} 
 #> % \usepackage{tabularx} 

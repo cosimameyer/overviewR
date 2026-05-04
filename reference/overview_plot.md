@@ -49,7 +49,9 @@ overview_plot(
 
   Optional argument. Either a column variable (for conditional coloring)
   or a color string (e.g., `"steelblue"`) to paint all lines/points a
-  fixed color.
+  fixed color. When `color` is a column variable the returned ggplot
+  object can be extended with `+ ggplot2::scale_color_manual()` or
+  `+ ggplot2::scale_color_brewer()` to apply custom palettes.
 
 - dot_size:
 

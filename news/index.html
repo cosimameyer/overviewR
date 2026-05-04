@@ -87,7 +87,7 @@
 <div class="section level3">
 <h3 id="enhancements-0-0-14">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-0-0-14"></a></h3>
 <ul><li>
-<code><a href="../reference/overview_plot.html">overview_plot()</a></code> — the <code>color</code> argument now accepts a literal color string (e.g. <code>color = "steelblue"</code>) to paint all lines and points a fixed color, in addition to the existing column-variable mapping.</li>
+<code><a href="../reference/overview_plot.html">overview_plot()</a></code> — the <code>color</code> argument now accepts a literal color string (e.g. <code>color = "steelblue"</code>) to paint all lines and points a fixed color, in addition to the existing column-variable mapping. When <code>color</code> maps a column variable, custom palettes can be applied via ggplot2’s layering (e.g. <code>+ scale_color_manual(values = c("red", "blue"))</code> or <code>+ scale_color_brewer(palette = "Set1")</code>).</li>
 <li>
 <code><a href="../reference/overview_na.html">overview_na()</a></code> — emits a warning when <code>month</code> or <code>day</code> columns contain missing values, flagging potential gaps in time coverage.</li>
 </ul><hr></div>
